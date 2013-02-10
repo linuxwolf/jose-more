@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc compact="yes"?>
+<?rfc strict="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<rfc category="std" docName="draft-miller-jose-pkix-key-00" ipr="trust200902">
+  <front>
+    <title abbrev="JWK for PKIX">JSON Web Key (JWK) for PKIX Certificates</title>
+    <author initials="M." surname="Miller" fullname="Matthew Miller">
+      <organization>Cisco Systems, Inc.</organization>
+      <address>
+        <postal>
+          <street>1899 Wynkoop Street, Suite 600</street>
+          <city>Denver</city>
+          <region>CO</region>
+          <code>80202</code>
+          <country>USA</country>
+        </postal>
+        <phone>+1-303-308-3204</phone>
+        <email>mamille2@cisco.com</email>
+      </address>
+    </author>
+    <author initials="B." surname="Campbell" fullname="Brian Campbell">
+      <organization>PingIdentity</organization>
+      <address>
+        <email>bcampbell@pingidentity.com</email>
+      </address>
+    </author>
+    <date month="February" day="10" year="2013"/>
+    <area>Security</area>
+    <workgroup>JOSE Working Group</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <abstract>
+      <t>This document defines a JSON Web Key (JWK) object to wrap PKIX certificate chains.</t>
+    </abstract>
+  </front>
+  <middle>
+    <section title="Introduction" anchor="intro">
+    </section>
+    <section title="Terminology" anchor="terms">
+      <t>This document inherits JSON Web Algorithms (JWA)-related terminology from <xref target="JWA"/>, JSON Web Encryption (JWE)-related terminology from <xref target="JWE"/>, and JSON Web Key (JWK)-related terminology from <xref target="JWK"/>.  Security-related terms are to be understood in the sense defined in <xref target="RFC4949"/>.</t>
+      <t>The capitalized key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+    </section>
+    <section title="JWK Parameters for PKIX Key" anchor="params">
+      <section title="'x5c' (X.509 Certificate Chain) Paramter" anchor="params-x5c">
+      </section>
+    </section>
+    <section title="IANA Considerations" anchor="iana">
+      <section title="JSON Web Key Type Registration" anchor="iana-jwk-types">
+        <t>
+          <list style="symbols">
+            <t>"kty" Paramater value: "PKIX"<vspace blankLines="1"/></t>
+            <t>Implementation Requirements: OPTIONAL<vspace blankLines="1"/></t>
+            <t>Change Controller: IETF<vspace blankLines="1"/></t>
+            <t>Specification Document(s): [[ this document ]]<vspace blankLines="1"/></t>
+          </list>
+        </t>
+      </section>
+      <section title="JSON Web Key Parameters Registration" anchor="iana-jwk-params">
+        <t>
+          <list style="symbols">
+            <t>Parameter Name: "x5c"<vspace blankLines="1"/></t>
+            <t>Change Controller: IETF<vspace blankLines="1"/></t>
+            <t>Specification Document(s): <xref target="params-x5c"/> of [[ this document ]]<vspace blankLines="1"/></t>
+          </list>
+        </t>
+      </section>
+    </section>
+    <section title="Security Considerations" anchor="security">
+      <t>This document does not introduce any new considerations beyond those specified by <xref target="JWK"/>.</t>
+    </section>
+  </middle>
+  <back>
+    <references title="Normative References">
+      <reference anchor="JWA">
+        <front>
+          <title>JSON Web Algorithms (JWA)</title>
+          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+            <organization>Microsoft</organization>
+            <address>
+              <email>mjb@microsoft.com</email>
+            </address>
+          </author>
+          <date year="2012" month="December"/>
+        </front>
+        <seriesInfo name="Internet-Draft" value="draft-ietf-jose-json-web-algorithms-08"/>
+        <format type="TXT" target="http://www.ietf.org/internet-drafts/draft-ietf-jose-json-web-algorithms-08.txt"/>
+      </reference>
+      <reference anchor="JWE">
+        <front>
+          <title>JSON Web Encryption (JWE)</title>
+          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+            <organization>Microsoft</organization>
+            <address>
+              <email>mjb@microsoft.com</email>
+            </address>
+          </author>
+          <author initials="E." surname="Rescola" fullname="Eric Rescola">
+            <organization>RTFM, Inc.</organization>
+            <address>
+              <email>ekr@rtfm.com</email>
+            </address>
+          </author>
+          <author initials="J." surname="Hildebrand" fullname="Joe Hildebrand">
+            <organization>Cisco Systems, Inc.</organization>
+            <address>
+              <email>jhildebr@cisco.com</email>
+            </address>
+          </author>
+          <date year="2012" month="December"/>
+        </front>
+        <seriesInfo name="Internet-Draft" value="draft-ietf-jose-json-web-encryption-08"/>
+        <format type="TXT" target="http://www.ietf.org/internet-drafts/draft-ietf-jose-json-web-encryption-08.txt"/>
+      </reference>
+      <reference anchor="JWK">
+        <front>
+          <title>JSON Web Key (JWK)</title>
+          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+            <organization>Microsoft</organization>
+            <address>
+              <email>mjb@microsoft.com</email>
+            </address>
+          </author>
+          <date year="2012" month="December"/>
+        </front>
+        <seriesInfo name="Internet-Draft" value="draft-ietf-jose-json-web-key-08"/>
+        <format type="TXT" target="http://www.ietf.org/internet-drafts/draft-ietf-jose-json-web-key-08.txt"/>
+      </reference>
+      <reference anchor="RFC2119">
+        <front>
+          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="S." surname="Bradner" fullname="Scott Bradner">
+            <organization>Harvard University</organization>
+            <address>
+              <postal>
+                <street>1350 Mass.  Ave.</street>
+                <street>Cambridge</street>
+                <street>MA 02138</street>
+              </postal>
+              <phone>+1 617 495 3864</phone>
+            </address>
+          </author>
+          <date month="March" year="1997"/>
+          <area>General</area>
+          <keyword>keyword</keyword>
+          <abstract>
+            <t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized.  This document defines these words as they should be interpreted in IETF documents.  Authors who follow these guidelines should incorporate this phrase near the beginning of their document: 
+              <list><t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.</t></list>
+            </t>
+            <t>Note that the force of these words is modified by the requirement level of the document in which they are used.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="BCP" value="14"/>
+        <seriesInfo name="RFC" value="2119"/>
+      </reference>
+      <reference anchor="RFC4686">
+        <front>
+          <title>The Base16, Base32, and Base64 Data Encodings</title>
+          <author initials="S." surname="Josefsson" fullname="S. Josefsson">
+            <organization/>
+          </author>
+          <date year="2006" month="October"/>
+          <abstract>
+            <t>This document describes the commonly used base 64, base 32, and base 16 encoding schemes. It also discusses the use of line-feeds in encoded data, use of padding in encoded data, use of non-alphabet characters in encoded data, use of different encoding alphabets, and canonical encodings. [STANDARDS TRACK]</t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="4648"/>
+        <format type="TXT" octets="35491" target="http://www.ietf.org/rfc/rfc4648.txt"/>
+      </reference>
+      <reference anchor="RFC4949">
+        <front>
+          <title>Internet Security Glossary, Version 2</title>
+          <author initials="R." surname="Shirey" fullname="R. Shirey">
+            <organization/>
+          </author>
+          <date year="2007" month="August"/>
+          <abstract>
+            <t>This Glossary provides definitions, abbreviations, and explanations of terminology for information system security.  The 334 pages of entries offer recommendations to improve the comprehensibility of written material that is generated in the Internet Standards Process (RFC 2026).  The recommendations follow the principles that such writing should (a) use the same term or definition whenever the same concept is mentioned; (b) use terms in their plainest, dictionary sense; (c) use terms that are already well-established in open publications; and (d) avoid terms that either favor a particular vendor or favor a particular technology or mechanism over other, competing techniques that already exist or could be developed.  This memo provides information for the Internet community.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="4949"/>
+        <format type="TXT" octets="867626" target="http://www.ietf.org/rfc/rfc4949.txt"/>
+      </reference>
+    </references>
+    <references title="Informative References">
+      <reference anchor="RFC3447">
+        <front>
+          <title>Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.1</title>
+          <author initials="J." surname="Jonsson" fullname="Jakob Jonsson">
+            <organization>Philipps-Universitaet Marburg</organization>
+          </author>
+          <author initials="B." surname="Kaliski" fullname="Burt Kaliski">
+            <organization>RSA Labratories</organization>
+          </author>
+          <date year="2003" month="February"/>
+          <abstract>
+            <t>This memo represents a republication of PKCS #1 v2.1 from RSA Laboratories' Public-Key Cryptography Standards (PKCS) series, and change control is retained within the PKCS process.  The body of this document is taken directly from the PKCS #1 v2.1 document, with certain corrections made during the publication process.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="2898"/>
+        <format type="TXT" target="http://www.ietf.org/rfc/rfc2898.txt"/>
+      </reference>
+    </references>
+    <section title="Acknowledgements" anchor="acknowledgements">
+    </section>
+    <section title="Document History" anchor="history">
+      <t>
+        <list style="hanging">
+          <t hangText="-00">Initial revision</t>
+        </list>
+      </t>
+    </section>
+  </back>
+</rfc>
