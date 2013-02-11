@@ -22,7 +22,7 @@
         <email>mamille2@cisco.com</email>
       </address>
     </author>
-    <date month="February" day="1" year="2013"/>
+    <date month="February" day="11" year="2013"/>
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -142,7 +142,7 @@ Thus from my lips, by yours, my sin is purged.
       </t>
       <t>
         <figure>
-          <preamble>Content Master Key (encoded as base64url per <xref target="RFC4686"/>):</preamble>
+          <preamble>Content Master Key (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
 1ICvnpc3zPRNS7JoJ9bnJ929eX7EnRwmc0CHNOF1zKc
           ]]></artwork>
@@ -151,7 +151,7 @@ Thus from my lips, by yours, my sin is purged.
       </t>
       <t>
         <figure>
-          <preamble>Initialization Vector (encoded as base64url per <xref target="RFC4686"/>):</preamble>
+          <preamble>Initialization Vector (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
 B9BVK3hIsEu9zUOWjKeOSg
           ]]></artwork>
@@ -249,7 +249,7 @@ big8BFT-dXJqoKGScpLk0ssjuyWn7fxDvJc7AN7ONPw
       </t>
       <t>
         <figure>
-          <preamble>Content Master Key (encoded as base64url per <xref target="RFC4686"/>):</preamble>
+          <preamble>Content Master Key (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
 ci5IlLIHnFLn-1lhL5CWOS3DdbXGU-BPuFCrLspXAkA
           ]]></artwork>
@@ -258,7 +258,7 @@ ci5IlLIHnFLn-1lhL5CWOS3DdbXGU-BPuFCrLspXAkA
       </t>
       <t>
         <figure>
-          <preamble>Initialization Vector (encoded as base64url per <xref target="RFC4686"/>):</preamble>
+          <preamble>Initialization Vector (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
 _dYbckd_xuJUBUNsxkT9yw
             ]]></artwork>
@@ -315,7 +315,7 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
       <section title="PBKDF2 Key Type" anchor="pbcrypto-pbkdf2-jwk">
         <t>The "PBKDF2" key type is used to contain the parameters necessary to derive a cipher key from a password using the PBKDF2 algorithm from <xref target="RFC2898"/>. The following parameters are defined:</t>
         <section title="'s' Parameter" anchor="pbcrypto-pbkdf2-jwk-S">
-          <t>The REQUIRED "s" parameter contains the PBKDF2 salt value (S), as a base64url encoded string (per <xref target="RFC4686"/>). This value MUST NOT be the empty string "".</t>
+          <t>The REQUIRED "s" parameter contains the PBKDF2 salt value (S), as a base64url encoded string (per <xref target="RFC4648"/>). This value MUST NOT be the empty string "".</t>
         </section>
         <section title="'c' Parameter" anchor="pbcrypto-pbkdf2-jwk-c">
           <t>The REQUIRED "c" parameter contains the PBKDF2 iteration count (c), as an integer. This value MUST NOT be less than 1, as per <xref target="RFC2898"/>.</t>
@@ -565,7 +565,7 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
         <seriesInfo name="RFC" value="4086"/>
         <format type="TXT" target="http://tools.ietf.org/rfc/rfc4086.txt"/>
       </reference>
-      <reference anchor="RFC4686">
+      <reference anchor="RFC4648">
         <front>
           <title>The Base16, Base32, and Base64 Data Encodings</title>
           <author initials="S." surname="Josefsson" fullname="S. Josefsson">

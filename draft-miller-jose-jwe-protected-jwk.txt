@@ -4,8 +4,8 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Standards Track                       February 01, 2013
-Expires: August 05, 2013
+Intended status: Standards Track                       February 11, 2013
+Expires: August 15, 2013
 
 
    Using JSON Web Encryption (JWE) for Protecting JSON Web Key (JWK)
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 05, 2013.
+   This Internet-Draft will expire on August 15, 2013.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                  Expires August 05, 2013                 [Page 1]
+Miller                  Expires August 15, 2013                 [Page 1]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Miller                  Expires August 05, 2013                 [Page 2]
+Miller                  Expires August 15, 2013                 [Page 2]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -165,7 +165,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 3]
+Miller                  Expires August 15, 2013                 [Page 3]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -221,7 +221,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 4]
+Miller                  Expires August 15, 2013                 [Page 4]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -277,7 +277,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 5]
+Miller                  Expires August 15, 2013                 [Page 5]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -300,13 +300,13 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-   Content Master Key (encoded as base64url per [RFC4686]):
+   Content Master Key (encoded as base64url per [RFC4648]):
 
    1ICvnpc3zPRNS7JoJ9bnJ929eX7EnRwmc0CHNOF1zKc
 
 
 
-   Initialization Vector (encoded as base64url per [RFC4686]):
+   Initialization Vector (encoded as base64url per [RFC4648]):
 
    B9BVK3hIsEu9zUOWjKeOSg
 
@@ -333,7 +333,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 6]
+Miller                  Expires August 15, 2013                 [Page 6]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -389,7 +389,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 7]
+Miller                  Expires August 15, 2013                 [Page 7]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -414,13 +414,13 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-   Content Master Key (encoded as base64url per [RFC4686]):
+   Content Master Key (encoded as base64url per [RFC4648]):
 
    ci5IlLIHnFLn-1lhL5CWOS3DdbXGU-BPuFCrLspXAkA
 
 
 
-   Initialization Vector (encoded as base64url per [RFC4686]):
+   Initialization Vector (encoded as base64url per [RFC4648]):
 
    _dYbckd_xuJUBUNsxkT9yw
 
@@ -445,7 +445,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 8]
+Miller                  Expires August 15, 2013                 [Page 8]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -493,7 +493,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 6.1.1.  's' Parameter
 
    The REQUIRED "s" parameter contains the PBKDF2 salt value (S), as a
-   base64url encoded string (per [RFC4686]).  This value MUST NOT be the
+   base64url encoded string (per [RFC4648]).  This value MUST NOT be the
    empty string "".
 
 6.1.2.  'c' Parameter
@@ -501,7 +501,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                 [Page 9]
+Miller                  Expires August 15, 2013                 [Page 9]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -557,7 +557,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                [Page 10]
+Miller                  Expires August 15, 2013                [Page 10]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -613,7 +613,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                [Page 11]
+Miller                  Expires August 15, 2013                [Page 11]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -669,7 +669,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                [Page 12]
+Miller                  Expires August 15, 2013                [Page 12]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -717,7 +717,7 @@ Internet-Draft             JWE Protected JWK               February 2013
    [RFC4086]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
               Requirements for Security", RFC 4086, June 2005.
 
-   [RFC4686]  Josefsson, S., "The Base16, Base32, and Base64 Data
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2", RFC
@@ -725,7 +725,7 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 
 
-Miller                  Expires August 05, 2013                [Page 13]
+Miller                  Expires August 15, 2013                [Page 13]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -780,4 +780,4 @@ Author's Address
 
 
 
-Miller                  Expires August 05, 2013                [Page 14]
+Miller                  Expires August 15, 2013                [Page 14]
