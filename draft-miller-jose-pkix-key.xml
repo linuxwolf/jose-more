@@ -28,7 +28,7 @@
         <email>bcampbell@pingidentity.com</email>
       </address>
     </author>
-    <date month="February" day="10" year="2013"/>
+    <date month="February" day="18" year="2013"/>
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -43,9 +43,14 @@
       <t>This document inherits JSON Web Algorithms (JWA)-related terminology from <xref target="JWA"/>, JSON Web Encryption (JWE)-related terminology from <xref target="JWE"/>, and JSON Web Key (JWK)-related terminology from <xref target="JWK"/>.  Security-related terms are to be understood in the sense defined in <xref target="RFC4949"/>.</t>
       <t>The capitalized key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
     </section>
-    <section title="JWK Parameters for PKIX Key" anchor="params">
+    <section title="PKIX Key Type" anchor="params">
+      <t>The "PKIX" key type is used to contain a chain of PKIX certificates. The following parameters are defined:</t>
       <section title="'x5c' (X.509 Certificate Chain) Paramter" anchor="params-x5c">
+        <t>The REQUIRED "x5c" parameter contains a chain of one or more PKIX certificates <xref target="RFC5280"/>. The certificate chain is represented as an array of certificate value strings. Each string in the array is a DER <xref target="ITU.X690.1994"/> PKIX certificate encoded as base64 <xref target="RFC4648"/> (not base64url). The array MUST have at least one value, which MUST be the PKIX certificate of the actor (e.g., the singer of a <xref target="JWS"/>, or a recipient of a <xref target="JWE"/>).  Each additional value of the array (if any) MUST be the PKIX certificate that certifies the previous certificate.</t>
       </section>
+    </section>
+    <section title="Examples" anchor="examples">
+      <t></t>
     </section>
     <section title="IANA Considerations" anchor="iana">
       <section title="JSON Web Key Type Registration" anchor="iana-jwk-types">
@@ -54,7 +59,7 @@
             <t>"kty" Paramater value: "PKIX"<vspace blankLines="1"/></t>
             <t>Implementation Requirements: OPTIONAL<vspace blankLines="1"/></t>
             <t>Change Controller: IETF<vspace blankLines="1"/></t>
-            <t>Specification Document(s): [[ this document ]]<vspace blankLines="1"/></t>
+            <t>Specification Document(s): <xref target="params"/> of [[ this document ]]<vspace blankLines="1"/></t>
           </list>
         </t>
       </section>
@@ -74,6 +79,16 @@
   </middle>
   <back>
     <references title="Normative References">
+      <reference anchor="ITU.X690.1994">
+        <front>
+          <title>Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)</title>
+          <author>
+            <organization>International Telecommunications Union</organization>
+          </author>
+          <date month="" year="1994" />
+        </front>
+        <seriesInfo name="ITU-T" value="Recommendation X.690" />
+      </reference>
       <reference anchor="JWA">
         <front>
           <title>JSON Web Algorithms (JWA)</title>
@@ -113,6 +128,20 @@
         </front>
         <seriesInfo name="Internet-Draft" value="draft-ietf-jose-json-web-encryption-08"/>
         <format type="TXT" target="http://www.ietf.org/internet-drafts/draft-ietf-jose-json-web-encryption-08.txt"/>
+      </reference>
+      <reference anchor="JWS">
+        <front>
+          <title>JSON Web Signature (JWS)</title>
+          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+            <organization>Microsoft</organization>
+            <address>
+              <email>mjb@microsoft.com</email>
+            </address>
+          </author>
+          <date year="2012" month="December"/>
+        </front>
+        <seriesInfo name="Internet-Draft" value="draft-ietf-jose-json-web-signature-08"/>
+        <format type="TXT" target="http://www.ietf.org/internet-drafts/draft-ietf-jose-json-web-signature-08.txt"/>
       </reference>
       <reference anchor="JWK">
         <front>
@@ -155,7 +184,7 @@
         <seriesInfo name="BCP" value="14"/>
         <seriesInfo name="RFC" value="2119"/>
       </reference>
-      <reference anchor="RFC4686">
+      <reference anchor="RFC4648">
         <front>
           <title>The Base16, Base32, and Base64 Data Encodings</title>
           <author initials="S." surname="Josefsson" fullname="S. Josefsson">
@@ -182,6 +211,35 @@
         </front>
         <seriesInfo name="RFC" value="4949"/>
         <format type="TXT" octets="867626" target="http://www.ietf.org/rfc/rfc4949.txt"/>
+      </reference>
+      <reference anchor="RFC5280">
+        <front>
+          <title>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</title>
+          <author initials="D." surname="Cooper" fullname="D. Cooper">
+            <organization/>
+          </author>
+          <author initials="S." surname="Santesson" fullname="S. Santesson">
+            <organization/>
+          </author>
+          <author initials="S." surname="Farrell" fullname="S. Farrell">
+            <organization/>
+          </author>
+          <author initials="S." surname="Boeyen" fullname="S. Boeyen">
+            <organization/>
+          </author>
+          <author initials="R." surname="Housley" fullname="R. Housley">
+            <organization/>
+          </author>
+          <author initials="W." surname="Polk" fullname="W. Polk">
+            <organization/>
+          </author>
+          <date year="2008" month="May"/>
+          <abstract>
+            <t>This memo profiles the X.509 v3 certificate and X.509 v2 certificate revocation list (CRL) for use in the Internet.  An overview of this approach and model is provided as an introduction.  The X.509 v3 certificate format is described in detail, with additional information regarding the format and semantics of Internet name forms.  Standard certificate extensions are described and two Internet-specific extensions are defined.  A set of required certificate extensions is specified.  The X.509 v2 CRL format is described in detail along with standard and Internet-specific extensions.  An algorithm for X.509 certification path validation is described.  An ASN.1 module and examples are provided in the appendices. [STANDARDS TRACK]</t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="5280"/>
+        <format type="TXT" octets="352580" target="ftp://ftp.isi.edu/in-notes/rfc5280.txt"/>
       </reference>
     </references>
     <references title="Informative References">
