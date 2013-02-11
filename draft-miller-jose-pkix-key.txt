@@ -51,7 +51,7 @@ Table of Contents
    1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  2
    2.  Terminology  . . . . . . . . . . . . . . . . . . . . . . . . .  2
    3.  PKIX Key Type  . . . . . . . . . . . . . . . . . . . . . . . .  2
-     3.1.  'x5c' (X.509 Certificate Chain) Paramter . . . . . . . . .  2
+     3.1.  'x5c' (X.509 Certificate Chain) Parameter  . . . . . . . .  2
    4.  Examples . . . . . . . . . . . . . . . . . . . . . . . . . . .  2
 
 Miller & Campbell       Expires August 20, 2013                 [Page 1]
@@ -88,7 +88,7 @@ Internet-Draft                JWK for PKIX                 February 2013
    The "PKIX" key type is used to contain a chain of PKIX certificates.
    The following parameters are defined:
 
-3.1.  'x5c' (X.509 Certificate Chain) Paramter
+3.1.  'x5c' (X.509 Certificate Chain) Parameter
 
    The REQUIRED "x5c" parameter contains a chain of one or more PKIX
    certificates [RFC5280].  The certificate chain is represented as an
