@@ -1,13 +1,11 @@
 
 
 
-
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
 Intended status: Standards Track                             B. Campbell
-Expires: August 15, 2013                                    PingIdentity
-                                                       February 11, 2013
-
+Expires: August 20, 2013                             Ping Identity Corp.
+                                                       February 18, 2013
 
                 JSON Web Key (JWK) for PKIX Certificates
                      draft-miller-jose-pkix-key-00
@@ -17,7 +15,7 @@ Abstract
    This document defines a JSON Web Key (JWK) object to wrap PKIX
    certificate chains.
 
-Status of This Memo
+Status of this Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
@@ -32,7 +30,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 15, 2013.
+   This Internet-Draft will expire on August 20, 2013.
 
 Copyright Notice
 
@@ -40,40 +38,36 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (http://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
+   Provisions Relating to IETF Documents (http://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Simplified BSD License text
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
 
 Table of Contents
 
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  2
+   2.  Terminology  . . . . . . . . . . . . . . . . . . . . . . . . .  2
+   3.  PKIX Key Type  . . . . . . . . . . . . . . . . . . . . . . . .  2
+     3.1.  'x5c' (X.509 Certificate Chain) Paramter . . . . . . . . .  2
+   4.  Examples . . . . . . . . . . . . . . . . . . . . . . . . . . .  2
 
-
-Miller & Campbell       Expires August 15, 2013                 [Page 1]
+Miller & Campbell       Expires August 20, 2013                 [Page 1]
 
 Internet-Draft                JWK for PKIX                 February 2013
 
-
-
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  PKIX Key Type . . . . . . . . . . . . . . . . . . . . . . . .   2
-     3.1.  'x5c' (X.509 Certificate Chain) Paramter  . . . . . . . .   2
-   4.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
-     5.1.  JSON Web Key Type Registration  . . . . . . . . . . . . .   3
-     5.2.  JSON Web Key Parameters Registration  . . . . . . . . . .   3
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   4
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   4
-   Appendix B.  Document History . . . . . . . . . . . . . . . . . .   4
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   4
+   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . .  2
+     5.1.  JSON Web Key Type Registration . . . . . . . . . . . . . .  2
+     5.2.  JSON Web Key Parameters Registration . . . . . . . . . . .  3
+   6.  Security Considerations  . . . . . . . . . . . . . . . . . . .  3
+   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . .  3
+     7.1.  Normative References . . . . . . . . . . . . . . . . . . .  3
+     7.2.  Informative References . . . . . . . . . . . . . . . . . .  3
+   Appendix A. Acknowledgements . . . . . . . . . . . . . . . . . . .  4
+   Appendix B. Document History . . . . . . . . . . . . . . . . . . .  4
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . .  4
 
 1.  Introduction
 
@@ -100,19 +94,10 @@ Internet-Draft                JWK for PKIX                 February 2013
    certificates [RFC5280].  The certificate chain is represented as an
    array of certificate value strings.  Each string in the array is a
    DER [ITU.X690.1994] PKIX certificate encoded as base64 [RFC4648] (not
-   base64url).  The array MUST have at least one value, which MUST be
-   the PKIX certificate of the actor (e.g., the singer of a [JWS], or a
+   base64url). The array MUST have at least one value, which MUST be the
+   PKIX certificate of the actor (e.g., the singer of a [JWS], or a
    recipient of a [JWE]).  Each additional value of the array (if any)
    MUST be the PKIX certificate that certifies the previous certificate.
-
-
-
-
-
-Miller & Campbell       Expires August 15, 2013                 [Page 2]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
 
 4.  Examples
 
@@ -122,23 +107,24 @@ Internet-Draft                JWK for PKIX                 February 2013
 
    o  "kty" Paramater value: "PKIX"
 
-
    o  Implementation Requirements: OPTIONAL
-
 
    o  Change Controller: IETF
 
-
    o  Specification Document(s): Section 3 of [[ this document ]]
+
+
+
+Miller & Campbell       Expires August 20, 2013                 [Page 2]
+
+Internet-Draft                JWK for PKIX                 February 2013
 
 
 5.2.  JSON Web Key Parameters Registration
 
    o  Parameter Name: "x5c"
 
-
    o  Change Controller: IETF
-
 
    o  Specification Document(s): Section 3.1 of [[ this document ]]
 
@@ -159,26 +145,18 @@ Internet-Draft                JWK for PKIX                 February 2013
               Distinguished Encoding Rules (DER)", ITU-T Recommendation
               X.690, 1994.
 
-   [JWA]      Jones, M., "JSON Web Algorithms (JWA)", draft-ietf-jose-
-              json-web-algorithms-08 (work in progress), December 2012.
+   [JWA]      Jones, M., "JSON Web Algorithms (JWA)", Internet-Draft
+              draft-ietf-jose-json-web-algorithms-08, December 2012.
 
+   [JWE]      Jones, M., Rescola, E. and J. Hildebrand, "JSON Web
+              Encryption (JWE)", Internet-Draft draft-ietf-jose-json-
+              web-encryption-08, December 2012.
 
+   [JWS]      Jones, M., "JSON Web Signature (JWS)", Internet-Draft
+              draft-ietf-jose-json-web-signature-08, December 2012.
 
-
-Miller & Campbell       Expires August 15, 2013                 [Page 3]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
-
-   [JWE]      Jones, M., Rescola, E., and J. Hildebrand, "JSON Web
-              Encryption (JWE)", draft-ietf-jose-json-web-encryption-08
-              (work in progress), December 2012.
-
-   [JWS]      Jones, M., "JSON Web Signature (JWS)", draft-ietf-jose-
-              json-web-signature-08 (work in progress), December 2012.
-
-   [JWK]      Jones, M., "JSON Web Key (JWK)", draft-ietf-jose-json-web-
-              key-08 (work in progress), December 2012.
+   [JWK]      Jones, M., "JSON Web Key (JWK)", Internet-Draft draft-
+              ietf-jose-json-web-key-08, December 2012.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -190,11 +168,16 @@ Internet-Draft                JWK for PKIX                 February 2013
               4949, August 2007.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
-              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Housley, R. and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, May 2008.
 
 7.2.  Informative References
+
+Miller & Campbell       Expires August 20, 2013                 [Page 3]
+
+Internet-Draft                JWK for PKIX                 February 2013
+
 
    [RFC3447]  Jonsson, J. and B. Kaliski, "Public-Key Cryptography
               Standards (PKCS) #1: RSA Cryptography Specifications
@@ -204,34 +187,24 @@ Appendix A.  Acknowledgements
 
 Appendix B.  Document History
 
-   -00  Initial revision
+   -00 Initial revision
 
 Authors' Addresses
 
    Matthew Miller
    Cisco Systems, Inc.
    1899 Wynkoop Street, Suite 600
-   Denver, CO  80202
+   Denver, CO 80202
    USA
-
+   
    Phone: +1-303-308-3204
    Email: mamille2@cisco.com
 
 
-
-
-
-Miller & Campbell       Expires August 15, 2013                 [Page 4]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
-
    Brian Campbell
-   PingIdentity
-
-   Email: bcampbell@pingidentity.com
-
-
+   Ping Identity Corp.
+   
+   Email: brian.d.campbell@gmail.com
 
 
 
@@ -259,21 +232,4 @@ Internet-Draft                JWK for PKIX                 February 2013
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Miller & Campbell       Expires August 15, 2013                 [Page 5]
+Miller & Campbell       Expires August 20, 2013                 [Page 4]
