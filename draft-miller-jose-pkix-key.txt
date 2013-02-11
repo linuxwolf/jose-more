@@ -102,8 +102,8 @@ Internet-Draft                JWK for PKIX                 February 2013
 4.  Examples
 
    The following is a non-normative example of a JWK Set containing a
-   single JWK, which uses the PKIX Key Type ("kty").
-
+   single JWK utilizing the PKIX Key Type ("kty") defined in this
+   document.
 
 
 
@@ -198,7 +198,7 @@ Internet-Draft                JWK for PKIX                 February 2013
       P7RfZHM047QSv4dk+NoS/zcnwbNDu+97bi5p9wIDAQABMA0GCSqGSIb3DQEBBQU
       AA4GBADt/UG9vUJSZSWI4OB9L+KXIPqeCgfYrx+jFzug6EILLGACOTb2oWH+heQ
       C1u+mNr0HZDzTuIYEZoDJJKPTEjlbVUjP9UNV+mWwD5MlM/Mtsq2azSiGM5bUMM
-      j4QssxsodyamEwCW/POuZ6lcg5Ktz885hZo+L7tdEy8W9ViH0Pd"]
+      j4QssxsodyamEwCW/POuZ6lcg5Ktz885hZo+L7tdEy8W9ViH0Pd"],
      "use":"sign",
      "kid":"somekey"}]
    }
