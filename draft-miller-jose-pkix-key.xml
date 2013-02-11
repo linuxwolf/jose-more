@@ -45,7 +45,7 @@
     </section>
     <section title="PKIX Key Type" anchor="params">
       <t>The "PKIX" key type is used to contain a chain of PKIX certificates. The following parameters are defined:</t>
-      <section title="'x5c' (X.509 Certificate Chain) Paramter" anchor="params-x5c">
+      <section title="'x5c' (X.509 Certificate Chain) Parameter" anchor="params-x5c">
         <t>The REQUIRED "x5c" parameter contains a chain of one or more PKIX certificates <xref target="RFC5280"/>. The certificate chain is represented as an array of certificate value strings. Each string in the array is a DER <xref target="ITU.X690.1994"/> PKIX certificate encoded as base64 <xref target="RFC4648"/> (not base64url). The array MUST have at least one value, which MUST be the PKIX certificate of the actor (e.g., the singer of a <xref target="JWS"/>, or a recipient of a <xref target="JWE"/>).  Each additional value of the array (if any) MUST be the PKIX certificate that certifies the previous certificate.</t>
       </section>
     </section>
