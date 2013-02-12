@@ -38,6 +38,8 @@
   </front>
   <middle>
     <section title="Introduction" anchor="intro">
+      <t>The JSON Web Algorithms (<xref target="JWA"/>) define various key representations for raw asymmetric keys, such as RSA <xref target="RFC3447"/> or Elliptic Curve <xref target="DSS"/>. However, there are times when it is desirable to associate JSON Web Encryption (<xref target="JWE"/>) or JSON Web Signature (<xref target="JWS"/>) object with a Public Key Infrastructure (X.509) certificate chain, or to transport a collection of PKIX certificate chains in an easily decipherable manner. This document specifies an approach which encodes a chain of PKIX certificates as an array of strings within a JWK object.</t>
+      <t>PKIX certificates have a number of advantages, such as an established process of certification and attribution of entities. It is also desirable for JSON-based cryptographic operations to support the existing and widespread deployment of PKIX-based technologies.</t>
     </section>
     <section title="Terminology" anchor="terms">
       <t>This document inherits JSON Web Algorithms (JWA)-related terminology from <xref target="JWA"/>, JSON Web Encryption (JWE)-related terminology from <xref target="JWE"/>, and JSON Web Key (JWK)-related terminology from <xref target="JWK"/>.  Security-related terms are to be understood in the sense defined in <xref target="RFC4949"/>.</t>
@@ -162,6 +164,17 @@
   </middle>
   <back>
     <references title="Normative References">
+      <reference anchor="DSS">
+        <front>
+          <title>Digital Signature Standard (DSS)</title>
+          <author>
+            <organization>National Institute of Standards and Technology</organization>
+          </author>
+          <date month="June" year="2009" />
+        </front>
+        <seriesInfo name="FIPS" value="PUB 186-3" />
+        <format target="http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf" type="PDF" />
+      </reference>
       <reference anchor="ITU.X690.1994">
         <front>
           <title>Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)</title>
