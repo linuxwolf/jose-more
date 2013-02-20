@@ -4,12 +4,12 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Standards Track                       February 11, 2013
-Expires: August 15, 2013
+Intended status: Standards Track                       February 19, 2013
+Expires: August 23, 2013
 
 
-   Using JSON Web Encryption (JWE) for Protecting JSON Web Key (JWK)
-                                Objects
+    Using JavaScript Object Notation (JSON) Web Encryption (JWE) for
+                 Protecting JSON Web Key (JWK) Objects
                  draft-miller-jose-jwe-protected-jwk-00
 
 Abstract
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 15, 2013.
+   This Internet-Draft will expire on August 23, 2013.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                  Expires August 15, 2013                 [Page 1]
+Miller                  Expires August 23, 2013                 [Page 1]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
@@ -70,55 +70,60 @@ Table of Contents
    6.  Using Password-Based Cryptography . . . . . . . . . . . . . .   9
      6.1.  PBKDF2 Key Type . . . . . . . . . . . . . . . . . . . . .   9
        6.1.1.  's' Parameter . . . . . . . . . . . . . . . . . . . .   9
-       6.1.2.  'c' Parameter . . . . . . . . . . . . . . . . . . . .   9
+       6.1.2.  'c' Parameter . . . . . . . . . . . . . . . . . . . .  10
+       6.1.3.  'hint' Parameter  . . . . . . . . . . . . . . . . . .  10
      6.2.  PBES2 Key Encryption Algorithms . . . . . . . . . . . . .  10
        6.2.1.  PBES2-HS256+A128KW  . . . . . . . . . . . . . . . . .  10
        6.2.2.  PBES2-HS512+A256KW  . . . . . . . . . . . . . . . . .  10
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-     7.1.  JSON Web Key Types Registration . . . . . . . . . . . . .  10
-     7.2.  JSON Web Key Parameters Registration  . . . . . . . . . .  10
-     7.3.  JSON Web Encryption Algorithms  . . . . . . . . . . . . .  11
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+     7.1.  JSON Web Key Types Registration . . . . . . . . . . . . .  11
+     7.2.  JSON Web Key Parameters Registration  . . . . . . . . . .  11
+     7.3.  JSON Web Encryption Algorithms  . . . . . . . . . . . . .  12
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
      8.1.  Re-using Keying Material  . . . . . . . . . . . . . . . .  12
-     8.2.  Lifetime of Protected Keys  . . . . . . . . . . . . . . .  12
-     8.3.  Password Considerations . . . . . . . . . . . . . . . . .  12
-   9.  Internationalization Considerations . . . . . . . . . . . . .  12
+     8.2.  Password Considerations . . . . . . . . . . . . . . . . .  13
+   9.  Internationalization Considerations . . . . . . . . . . . . .  13
    10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
      10.1.  Normative References . . . . . . . . . . . . . . . . . .  13
      10.2.  Informative References . . . . . . . . . . . . . . . . .  14
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  14
    Appendix B.  Document History . . . . . . . . . . . . . . . . . .  14
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  14
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  15
 
 
 1.  Introduction
 
-   There are times when it is necessary to transport or exchange a
-   private or symmetric key, but the transport mechanism might not
+   There are times when it is necessary to transport a private key,
+   whether the private component to an asymmetric public-private key-
+   pair or a symmetric key used for encryption or generating a message
+   authentication code (MAC), where the transport mechanism might not
    provide adequate content protection for the key.  For instance, end-
    to-end scenarios where the key holder and key recipient are linked
    through multiple network hops that might or might not employ
-   transport layer security (TLS, [RFC5246]), nor might exchange of a
-   key using physical media such as a USB drive that itself is not
+   transport layer security (TLS, [RFC5246]), or might exchange of a key
+   using physical media such as a USB drive that itself is not
    encrypted.
 
+   This document specifies an approach that uses [JWE] to encrypt a
+   private key that is formatted as [JWK].  While [JWE] provides
 
 
 
-
-
-
-
-Miller                  Expires August 15, 2013                 [Page 2]
+Miller                  Expires August 23, 2013                 [Page 2]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
 
-   This document specifies an approach that uses [JWE] to encrypt a
-   private or symmetric key that is formatted as [JWK].  This document
-   also specifies and registers JSON Web Key formats and JSON Web
-   Encryption algorithms based on [RFC2898] that allow for protecting
-   keys using a password.
+   protection of symmetric keys, this key is itself intended for the
+   protection of content, not as the content itself.  Further, [JWE]
+   does not itself provide protection of an asymmetric private key.
+
+   Ofttimes the transport of private keys involves direct interaction
+   with human beings.  In these scenarios the use of a human-
+   understandable password or passphrase to protect the private key is
+   desirable.  This document also specifies and registers JSON Web Key
+   formats and JSON Web Encryption algorithms based on [RFC2898] to
+   allow for these scenarios.
 
 2.  Terminology
 
@@ -139,7 +144,8 @@ Internet-Draft             JWE Protected JWK               February 2013
    identical.  The only differences are typically the algorithms used to
    protect the key.
 
-   To protect a key, the key holder performs the following steps:
+   To protect a private key, the key holder performs the following
+   steps:
 
 
    1.  Converts the JWK object to a UTF-8 encoded string (K').
@@ -156,18 +162,17 @@ Internet-Draft             JWE Protected JWK               February 2013
           below).
 
 
+
+
+
+Miller                  Expires August 23, 2013                 [Page 3]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
+
        *  Keying material appropriate for the selected key encryption
           algorithm (e.g., private key for "RSA-OAEP", or shared
           password, salt, and iteration count for "PBES2-HS512+A256KW").
-
-
-
-
-
-
-Miller                  Expires August 15, 2013                 [Page 3]
-
-Internet-Draft             JWE Protected JWK               February 2013
 
 
        *  The 'enc' property set to the intended content encryption
@@ -203,13 +208,23 @@ Internet-Draft             JWE Protected JWK               February 2013
    to simply encrypt the symmetric key directly with a public key, using
    the complete JWE process on complete JWK objects allows additional
    properties to be protected (e.g., expected lifetime, acceptable uses)
-   without exceeding the input limits inherent in most public-private
-   key operations.
+   without exceeding the very restrictive plaintext length limits in
+   most public-private key operations (e.g., 234 octects when using the
+   "RSA-OAEP" algorithm with a 2048-bit key).
 
 4.  Private Key Example
 
    NOTE: unless otherwise indicated, all line breaks are included for
    readability.
+
+
+
+
+
+Miller                  Expires August 23, 2013                 [Page 4]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
 
    The key holder begins with the [JWK] representation of the private
    key (here using a [RFC3447] RSA private key, formatted per [JPSK]):
@@ -218,14 +233,6 @@ Internet-Draft             JWE Protected JWK               February 2013
        "kty":"RSA",
        "kid":"juliet@capulet.lit",
        "n":"ALekPD1kotXZCY_YUz_ITWBZb2nTOw35VvZlnqTiYSeusO58qCtYDz
-
-
-
-Miller                  Expires August 15, 2013                 [Page 4]
-
-Internet-Draft             JWE Protected JWK               February 2013
-
-
             ahTEkEcjtduRqfkxJKHYVq9Iro4x1cewXFdJZUuMOQAhoD63AHemXE
             kdPiKqJvkBXDT_Eo4NPOjMKKkFPy2MsJQBmdtVknUvzxEchhYjZ490
             EJTvGJ7OYwrSwkcCxy9D29XxL-OQLkSLlH1XD8kgVmJw8hsb42Bg0j
@@ -267,20 +274,15 @@ Internet-Draft             JWE Protected JWK               February 2013
    The key holder uses the following [JWE] inputs:
 
 
-   JWE Header:
 
 
 
-
-
-
-
-
-
-Miller                  Expires August 15, 2013                 [Page 5]
+Miller                  Expires August 23, 2013                 [Page 5]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
+
+   JWE Header:
 
    {
      "alg":"PBES2-HS256+A128KW",
@@ -328,16 +330,16 @@ Internet-Draft             JWE Protected JWK               February 2013
    CgItofAOsdKKoxiSJvXPVxK-oqPFPlS0H5OLHw9tkjmPVZ0Ot-RLgoMPQJ0Yi47
    U0DBh_2-IQBcpPvwBnUzl8KcrLFh-NpTSoC_zIn6xos5r4JVXf5v1V79MKGvk3-
    evdQoEKtS9LnimKTP8YmeqAnU1Y3VoUkgeRTZikKhQ_kwpAxakaRuBzfaIOKjqY
-   X5J_jSJuuBQU_4fgHPkvrq1zJ3TnUAWZIqFcw27dKGMxXLMlz_sbW2YerZ0BULc
-   xbe8bJpbHkE64r7Nc86iZyL6e-8htkUvpGmdQGqno-q723Ry-u2Iz1-exjgjbNu
 
 
 
-Miller                  Expires August 15, 2013                 [Page 6]
+Miller                  Expires August 23, 2013                 [Page 6]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
 
+   X5J_jSJuuBQU_4fgHPkvrq1zJ3TnUAWZIqFcw27dKGMxXLMlz_sbW2YerZ0BULc
+   xbe8bJpbHkE64r7Nc86iZyL6e-8htkUvpGmdQGqno-q723Ry-u2Iz1-exjgjbNu
    z4tbSrf49Y0_VSFEuHLnCRChVQE8cgupCy8GioEpuC7v1hMNE7JZTVbG3Ud3QzZ
    Webr0sAYjWwqa2ySoJ7AaRfIiVgMdTAS2_gBdbYRSYI2pkQTHpyZ8D_lp5RvYFR
    FNsHWoEToXeL1P_csuKaGsikKbzgXdevrjmCJTOpByGYO5cb2O8xFyYy1VX_pM6
@@ -384,15 +386,15 @@ Internet-Draft             JWE Protected JWK               February 2013
    }
 
 
-   The key holder uses the following [JWE] inputs:
 
 
 
-
-Miller                  Expires August 15, 2013                 [Page 7]
+Miller                  Expires August 23, 2013                 [Page 7]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
+
+   The key holder uses the following [JWE] inputs:
 
    JWE Header:
 
@@ -440,16 +442,16 @@ Internet-Draft             JWE Protected JWK               February 2013
    zJPZmk5OXZwVW5tVHZqck9sTmVmMmw2NVBSc1BIRDFHbDlmeVBMQ3hya29sWGJk
    d3Z4WjlqMmQyZkl1LU9CVHhSaG5CdGFyTmxzX2siLCJlIjoiQVFBQiJ9fQ.
    UW26BTjbDGjgQ288JXJpGGpbZVV3WyZYJdm1Fvux8wM_t7bh6UbjbOdYXjL3rzD
-   phZteaD-DXiKrdGaVndTMLUmjg78H0R9K2WHxWNhTWiq8iMDGtw6BYnHW_r5DSf
-   vhojcDhCCBKWyO-QLXvTO1mfgo6UQwYY32Lvz-IrbxphrfBePsEXVYm75PLIIft
 
 
 
-Miller                  Expires August 15, 2013                 [Page 8]
+Miller                  Expires August 23, 2013                 [Page 8]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
 
+   phZteaD-DXiKrdGaVndTMLUmjg78H0R9K2WHxWNhTWiq8iMDGtw6BYnHW_r5DSf
+   vhojcDhCCBKWyO-QLXvTO1mfgo6UQwYY32Lvz-IrbxphrfBePsEXVYm75PLIIft
    PnRwN3fWDMkKLCq2AesvWDuRWtKVjsh7uu_AX2ky6dvov2Lw_xMiDshsNz62RES
    bNUW-ylMqNNn_VAYWKHK83k5CZppPlBb_8MDEUBPyGe_NDCa3118eo20tJGMn8v
    XRg8k7D0nJ051hGlzAkMQ0S_x9g.
@@ -496,18 +498,40 @@ Internet-Draft             JWE Protected JWK               February 2013
    base64url encoded string (per [RFC4648]).  This value MUST NOT be the
    empty string "".
 
-6.1.2.  'c' Parameter
 
 
 
-
-Miller                  Expires August 15, 2013                 [Page 9]
+Miller                  Expires August 23, 2013                 [Page 9]
 
 Internet-Draft             JWE Protected JWK               February 2013
 
 
+   The salt expands the possible keys that can be derived from a given
+   password.  [RFC2898] originally recommended a minimum salt length of
+   8 octets (since there is no concern here of a derived key being re-
+   used for different purposes).  The salt MUST be generated randomly;
+   see [RFC4086] for considerations on generating random values.
+
+6.1.2.  'c' Parameter
+
    The REQUIRED "c" parameter contains the PBKDF2 iteration count (c),
    as an integer.  This value MUST NOT be less than 1, as per [RFC2898].
+
+   The iteration count adds computational expense, ideally compounded by
+   the possible range of keys introduced by the salt.  [RFC2898]
+   originally recommended a minimum iteration count of 1000.
+
+6.1.3.  'hint' Parameter
+
+   The OPTIONAL "hint" parameter contains a description clue to the
+   password, as a string.  If present, this value SHOULD NOT be the
+   empty string "".
+
+   The hint is typically displayed to the user as a reminder or mnemonic
+   for the actual password used.  This parameter MUST NOT contain the
+   actual password, and implementations MAY use various heuristic
+   algorithms to prohibit hints that are alternate forms of the actual
+   password.
 
 6.2.  PBES2 Key Encryption Algorithms
 
@@ -529,6 +553,15 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 6.2.2.  PBES2-HS512+A256KW
 
+
+
+
+
+Miller                  Expires August 23, 2013                [Page 10]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
+
    The "PBES2-HS512+A256KW" algorithm uses "HMAC-SHA512" as the PRF "and
    "AES256-WRAP" as defined in [RFC3394] for the encryption scheme.  The
    salt (S) and iteration count (c) MUST be specified by the "s" and "c"
@@ -538,6 +571,9 @@ Internet-Draft             JWE Protected JWK               February 2013
 7.  IANA Considerations
 
 7.1.  JSON Web Key Types Registration
+
+   This document registers the following to the JSON Web Key Types
+   registry:
 
    o  "kty" Paramater value: "PBKDF2"
 
@@ -553,13 +589,10 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 7.2.  JSON Web Key Parameters Registration
 
+   This document registers the following to the JSON Web Key Parameters
+   registry:
+
    o  Parameter Name: "s"
-
-
-
-Miller                  Expires August 15, 2013                [Page 10]
-
-Internet-Draft             JWE Protected JWK               February 2013
 
 
    o  Change Controller: IETF
@@ -577,7 +610,27 @@ Internet-Draft             JWE Protected JWK               February 2013
    o  Specification Document(s): Section 6.1.2 of [[ this document ]]
 
 
+
+
+
+Miller                  Expires August 23, 2013                [Page 11]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
+
+   o  Parameter Name: "hint"
+
+
+   o  Change Controller: IETF
+
+
+   o  Specification Document(s): Section 6.1.3 of [[ this document ]]
+
+
 7.3.  JSON Web Encryption Algorithms
+
+   This document registers the following to the JSON Web Encryption
+   Algorithms registry:
 
    o  Algorithm Name: "PBES2-HS256+A128KW"
 
@@ -609,77 +662,48 @@ Internet-Draft             JWE Protected JWK               February 2013
 
 8.  Security Considerations
 
-
-
-
-
-Miller                  Expires August 15, 2013                [Page 11]
-
-Internet-Draft             JWE Protected JWK               February 2013
-
-
 8.1.  Re-using Keying Material
 
    It is NOT RECOMMENDED to re-use the same keying material (Key
    Encryption Key, Content Master Key, Initialization Vector, etc) to
+
+
+
+Miller                  Expires August 23, 2013                [Page 12]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
+
    protect multiple JWK objects, or to protect the same JWK object
-   multiple times.  When using "PBES2-HS256+A128KW" or
-   "PBES2-HS512+A256KW", implementations MUST NOT use the same Key
-   Encryption Key for a given password, and SHOULD take steps to prevent
-   the same Key Encryption Key being used by different passwords when
-   possible.
+   multiple times.  One suggestion for preventing re-use is to always
+   generate a new set keying material for each protection operation,
+   based on the considerations noted in this document as well as from
+   [RFC4086].
 
-8.2.  Lifetime of Protected Keys
-
-   Depending on the application, a protected JWK could potentially be
-   stored for an indefinite time, anywhere from milliseconds (e.g.,
-   broadcasted over a computer network) to years (e.g., stored as a
-   file).
-
-8.3.  Password Considerations
+8.2.  Password Considerations
 
    While convenient for end users, passwords have many drawbacks.  To
    help mitigate these limitations, this document applies principles
    from [RFC2898] to derive cryptographic keys from user-supplied
    passwords.
 
-   The salt expands the possible keys that can be derived from a given
-   password.  [RFC2898] originally recommended a minimum salt length of
-   8 octets (since there is no concern here of a derived key being re-
-   used for different purposes).  The salt MUST be generated randomly;
-   see [RFC4086] for considerations on generating random values.
-
-   The iteration count adds computational expense, ideally compounded by
-   the possible range of keys introduced by the salt.  [RFC2898]
-   originally recommended a minimum iteration count of 1000.
-
    An ideal password is one that is as large (or larger) than the
-   derived key length but less than the PRF's block size.  For
-   "PBES2-HS256+A128KW", the ideal password is between 16 and 64 octets
-   long; for "PBES2-HS512+A256KW", the ideal password is between 32 and
-   128 octets long.
+   derived key length but less than the PRF's block size.  Passwords
+   larger than the PRF's block size are first hashed, which reduces an
+   attacker's effective search space to the length of the hash algorithm
+   (32 octects for HMAC-SHA-256; 64 octets for HMAC-SHA-512).  For
+   "PBES2-HS256+A128KW", it is RECOMMENDED that the password be no
+   longer than 64 octets long; for "PBES2-HS512+A256KW", it is
+   RECOMMENDED that the password be no longer than 128 octets long.
 
 9.  Internationalization Considerations
-
-
-
-
-
-
-
-
-
-Miller                  Expires August 15, 2013                [Page 12]
-
-Internet-Draft             JWE Protected JWK               February 2013
-
 
    Passwords obtained from users are likely to require preparation and
    normalization to account for differences of octet sequences generated
    by different input devices, locales, etc.  It is RECOMMENDED for
    applications to perform the steps outlined in [SASLPREP] to prepare a
-   user-supplied password before performing key derivation and
-   encryption.
+   password supplied directly by a user before performing key derivation
+   and encryption.
 
 10.  References
 
@@ -698,6 +722,13 @@ Internet-Draft             JWE Protected JWK               February 2013
    [JPSK]     Jones, M., "JSON Private and Symmetric Key", draft-jones-
               jose-json-private-and-symmetric-key-00 (work in progress),
               December 2012.
+
+
+
+Miller                  Expires August 23, 2013                [Page 13]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
 
    [SASLPREP]
               Saint-Andre, P., "Preparation and Comparison of
@@ -723,13 +754,6 @@ Internet-Draft             JWE Protected JWK               February 2013
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2", RFC
               4949, August 2007.
 
-
-
-Miller                  Expires August 15, 2013                [Page 13]
-
-Internet-Draft             JWE Protected JWK               February 2013
-
-
 10.2.  Informative References
 
    [AES]      National Institute of Standards and Technology (NIST),
@@ -746,6 +770,41 @@ Internet-Draft             JWE Protected JWK               February 2013
 Appendix A.  Acknowledgements
 
 Appendix B.  Document History
+
+   -01  Incorporated changes suggested by Jim Schaad:
+
+
+      *  Expanded the acronym "JSON" on first use.
+
+      *  Expanded the introduction to explain how this document's
+         protection of symmetric keys differs from [JWE].
+
+
+
+Miller                  Expires August 23, 2013                [Page 14]
+
+Internet-Draft             JWE Protected JWK               February 2013
+
+
+      *  Expanded the introduction to better explain why password-based
+         encryption algorithms are needed.
+
+      *  Moved information on PBKDF2 salt from the security
+         considerations to the "s" JWK parameter definition.
+
+      *  Moved information on PBKDF2 iteration count from security
+         considerations to the "c" JWK parameter definition.
+
+      *  Added the "hint" JWK parameter.
+
+      *  Explicitly noted what registries are updated by the IANA
+         considerations.
+
+      *  Relaxed language around re-use of keying material.
+
+      *  Removed section discussing protected key lifetimes.
+
+      *  Improved explanation of manximum password lengths.
 
    -00  Initial revision
 
@@ -777,7 +836,4 @@ Author's Address
 
 
 
-
-
-
-Miller                  Expires August 15, 2013                [Page 14]
+Miller                  Expires August 23, 2013                [Page 15]

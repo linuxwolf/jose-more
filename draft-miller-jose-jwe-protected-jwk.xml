@@ -7,7 +7,7 @@
 <?rfc tocdepth="4"?>
 <rfc category="std" docName="draft-miller-jose-jwe-protected-jwk-00" ipr="trust200902">
   <front>
-    <title abbrev="JWE Protected JWK">Using JSON Web Encryption (JWE) for Protecting JSON Web Key (JWK) Objects</title>
+    <title abbrev="JWE Protected JWK">Using JavaScript Object Notation (JSON) Web Encryption (JWE) for Protecting JSON Web Key (JWK) Objects</title>
     <author initials="M." surname="Miller" fullname="Matthew Miller">
       <organization>Cisco Systems, Inc.</organization>
       <address>
@@ -32,8 +32,9 @@
   </front>
   <middle>
     <section title="Introduction" anchor="intro">
-      <t>There are times when it is necessary to transport or exchange a private or symmetric key, but the transport mechanism might not provide adequate content protection for the key. For instance, end-to-end scenarios where the key holder and key recipient are linked through multiple network hops that might or might not employ transport layer security (TLS, <xref target="RFC5246"/>), nor might exchange of a key using physical media such as a USB drive that itself is not encrypted.</t>
-      <t>This document specifies an approach that uses <xref target="JWE"/> to encrypt a private or symmetric key that is formatted as <xref target="JWK"/>. This document also specifies and registers JSON Web Key formats and JSON Web Encryption algorithms based on <xref target="RFC2898"/> that allow for protecting keys using a password.</t>
+      <t>There are times when it is necessary to transport a private key, whether the private component to an asymmetric public-private key-pair or a symmetric key used for encryption or generating a message authentication code (MAC), where the transport mechanism might not provide adequate content protection for the key. For instance, end-to-end scenarios where the key holder and key recipient are linked through multiple network hops that might or might not employ transport layer security (TLS, <xref target="RFC5246"/>), or might exchange of a key using physical media such as a USB drive that itself is not encrypted.</t>
+      <t>This document specifies an approach that uses <xref target="JWE"/> to encrypt a private key that is formatted as <xref target="JWK"/>. While <xref target="JWE"/> provides protection of symmetric keys, this key is itself intended for the protection of content, not as the content itself. Further, <xref target="JWE"/> does not itself provide protection of an asymmetric private key.</t>
+      <t>Ofttimes the transport of private keys involves direct interaction with human beings. In these scenarios the use of a human-understandable password or passphrase to protect the private key is desirable. This document also specifies and registers JSON Web Key formats and JSON Web Encryption algorithms based on <xref target="RFC2898"/> to allow for these scenarios.</t>
     </section>
     <section title="Terminology" anchor="terms">
       <t>This document inherits JSON Web Algorithms (JWA)-related terminology from <xref target="JWA"/>, JSON Web Encryption (JWE)-related terminology from <xref target="JWE"/>, JSON Web Key (JWK)-related terminology from <xref target="JWK"/>, and password-based cryptography-related terminology from <xref target="RFC2898"/>.  Security-related terms are to be understood in the sense defined in <xref target="RFC4949"/>.</t>
@@ -41,7 +42,7 @@
     </section>
     <section title="Protecting Keys" anchor="protect">
       <t>The process for protecting private keys and symmetric keys are identical. The only differences are typically the algorithms used to protect the key.</t>
-      <t>To protect a key, the key holder performs the following steps:<vspace blankLines="1"/>
+      <t>To protect a private key, the key holder performs the following steps:<vspace blankLines="1"/>
         <list style="numbers">
           <t>Converts the JWK object to a UTF-8 encoded string (K').<vspace blankLines="1"/></t>
           <t>Performs the message encryption steps from <xref target="JWE"/> to generate the JWE header H, JWE Encrypted Key E, JWE Initialization Vector IV, JWE Ciphertext C, and JWE Integrity Value I, using the following inputs:<vspace blankLines="1"/>
@@ -61,7 +62,7 @@
       </section>
       <section title="Details for Symmetric Keys" anchor="protect-symmetric">
         <t>Symmetric keys are typically protected using public-private key pairs. It is assumed the key holder has the appropriate public key(s) for the key recipient(s).</t>
-        <t>The process defined herein expects JWK objects. While more compact to simply encrypt the symmetric key directly with a public key, using the complete JWE process on complete JWK objects allows additional properties to be protected (e.g., expected lifetime, acceptable uses) without exceeding the input limits inherent in most public-private key operations.</t>
+        <t>The process defined herein expects JWK objects. While more compact to simply encrypt the symmetric key directly with a public key, using the complete JWE process on complete JWK objects allows additional properties to be protected (e.g., expected lifetime, acceptable uses) without exceeding the very restrictive plaintext length limits in most public-private key operations (e.g., 234 octects when using the "RSA-OAEP" algorithm with a 2048-bit key).</t>
       </section>
     </section>
     <section title="Private Key Example" anchor="example-privkey">
@@ -316,9 +317,15 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
         <t>The "PBKDF2" key type is used to contain the parameters necessary to derive a cipher key from a password using the PBKDF2 algorithm from <xref target="RFC2898"/>. The following parameters are defined:</t>
         <section title="'s' Parameter" anchor="pbcrypto-pbkdf2-jwk-S">
           <t>The REQUIRED "s" parameter contains the PBKDF2 salt value (S), as a base64url encoded string (per <xref target="RFC4648"/>). This value MUST NOT be the empty string "".</t>
+          <t>The salt expands the possible keys that can be derived from a given password. <xref target="RFC2898"/> originally recommended a minimum salt length of 8 octets (since there is no concern here of a derived key being re-used for different purposes). The salt MUST be generated randomly; see <xref target="RFC4086"/> for considerations on generating random values.</t>
         </section>
         <section title="'c' Parameter" anchor="pbcrypto-pbkdf2-jwk-c">
           <t>The REQUIRED "c" parameter contains the PBKDF2 iteration count (c), as an integer. This value MUST NOT be less than 1, as per <xref target="RFC2898"/>.</t>
+          <t>The iteration count adds computational expense, ideally compounded by the possible range of keys introduced by the salt. <xref target="RFC2898"/> originally recommended a minimum iteration count of 1000.</t>
+        </section>
+        <section title="'hint' Parameter" anchor="pbcrypto-pbkdf2-jwk-hint">
+          <t>The OPTIONAL "hint" parameter contains a description clue to the password, as a string. If present, this value SHOULD NOT be the empty string "".</t>
+          <t>The hint is typically displayed to the user as a reminder or mnemonic for the actual password used. This parameter MUST NOT contain the actual password, and implementations MAY use various heuristic algorithms to prohibit hints that are alternate forms of the actual password.</t>
         </section>
       </section>
       <section title="PBES2 Key Encryption Algorithms" anchor="pbcrypto-pbes2-jwe">
@@ -333,6 +340,7 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
     </section>
     <section title="IANA Considerations" anchor="iana">
       <section title="JSON Web Key Types Registration" anchor="iana-jwk-types">
+        <t>This document registers the following to the JSON Web Key Types registry:</t>
         <t>
           <list style="symbols">
             <t>"kty" Paramater value: "PBKDF2"<vspace blankLines="1"/></t>
@@ -343,6 +351,7 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
         </t>
       </section>
       <section title="JSON Web Key Parameters Registration" anchor="iana-jwk-params">
+        <t>This document registers the following to the JSON Web Key Parameters registry:</t>
         <t>
           <list style="symbols">
             <t>Parameter Name: "s"<vspace blankLines="1"/></t>
@@ -357,8 +366,16 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
             <t>Specification Document(s): <xref target="pbcrypto-pbkdf2-jwk-c"/> of [[ this document ]]<vspace blankLines="1"/></t>
           </list>
         </t>
+        <t>
+          <list style="symbols">
+            <t>Parameter Name: "hint"<vspace blankLines="1"/></t>
+            <t>Change Controller: IETF<vspace blankLines="1"/></t>
+            <t>Specification Document(s): <xref target="pbcrypto-pbkdf2-jwk-hint"/> of [[ this document ]]<vspace blankLines="1"/></t>
+          </list>
+        </t>
       </section>
       <section title="JSON Web Encryption Algorithms" anchor="iana-jwe-algs">
+        <t>This document registers the following to the JSON Web Encryption Algorithms registry:</t>
         <t>
           <list style="symbols">
             <t>Algorithm Name: "PBES2-HS256+A128KW"<vspace blankLines="1"/></t>
@@ -381,20 +398,20 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
     </section>
     <section title="Security Considerations" anchor="security">
       <section title="Re-using Keying Material" anchor="security-reuse">
-        <t>It is NOT RECOMMENDED to re-use the same keying material (Key Encryption Key, Content Master Key, Initialization Vector, etc) to protect multiple JWK objects, or to protect the same JWK object multiple times. When using "PBES2-HS256+A128KW" or "PBES2-HS512+A256KW", implementations MUST NOT use the same Key Encryption Key for a given password, and SHOULD take steps to prevent the same Key Encryption Key being used by different passwords when possible.</t>
+        <t>It is NOT RECOMMENDED to re-use the same keying material (Key Encryption Key, Content Master Key, Initialization Vector, etc) to protect multiple JWK objects, or to protect the same JWK object multiple times. One suggestion for preventing re-use is to always generate a new set keying material for each protection operation, based on the considerations noted in this document as well as from <xref target="RFC4086"/>.</t>
       </section>
+      <!--
       <section title="Lifetime of Protected Keys" anchor="security-store">
-        <t>Depending on the application, a protected JWK could potentially be stored for an indefinite time, anywhere from milliseconds (e.g., broadcasted over a computer network) to years (e.g., stored as a file).</t>
+        <t>Depending on the application, a protected JWK could potentially be stored for an indefinite time, anywhere from milliseconds (e.g., broadcasted over a computer network) to years (e.g., stored as a file). This lifetime can influence the factors used to protect the key; for a protected JWK that exists for as long as it takes to transit a network might use minimal-strength keys and algorithms, while longer term storage might necessitate stronger factors.</t>
       </section>
+    -->
       <section title="Password Considerations" anchor="security-pwd">
         <t>While convenient for end users, passwords have many drawbacks. To help mitigate these limitations, this document applies principles from <xref target="RFC2898"/> to derive cryptographic keys from user-supplied passwords.</t>
-        <t>The salt expands the possible keys that can be derived from a given password. <xref target="RFC2898"/> originally recommended a minimum salt length of 8 octets (since there is no concern here of a derived key being re-used for different purposes). The salt MUST be generated randomly; see <xref target="RFC4086"/> for considerations on generating random values.</t>
-        <t>The iteration count adds computational expense, ideally compounded by the possible range of keys introduced by the salt. <xref target="RFC2898"/> originally recommended a minimum iteration count of 1000.</t>
-        <t>An ideal password is one that is as large (or larger) than the derived key length but less than the PRF's block size. For "PBES2-HS256+A128KW", the ideal password is between 16 and 64 octets long; for "PBES2-HS512+A256KW", the ideal password is between 32 and 128 octets long.</t>
+        <t>An ideal password is one that is as large (or larger) than the derived key length but less than the PRF's block size. Passwords larger than the PRF's block size are first hashed, which reduces an attacker's effective search space to the length of the hash algorithm (32 octects for HMAC-SHA-256; 64 octets for HMAC-SHA-512). For "PBES2-HS256+A128KW", it is RECOMMENDED that the password be no longer than 64 octets long; for "PBES2-HS512+A256KW", it is RECOMMENDED that the password be no longer than 128 octets long.</t>
       </section>
     </section>
     <section title="Internationalization Considerations" anchor="i18n">
-      <t>Passwords obtained from users are likely to require preparation and normalization to account for differences of octet sequences generated by different input devices, locales, etc. It is RECOMMENDED for applications to perform the steps outlined in <xref target="SASLPREP"/> to prepare a user-supplied password before performing key derivation and encryption.</t>
+      <t>Passwords obtained from users are likely to require preparation and normalization to account for differences of octet sequences generated by different input devices, locales, etc. It is RECOMMENDED for applications to perform the steps outlined in <xref target="SASLPREP"/> to prepare a password supplied directly by a user before performing key derivation and encryption.</t>
     </section>
   </middle>
   <back>
@@ -642,6 +659,21 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
     <section title="Document History" anchor="history">
       <t>
         <list style="hanging">
+          <t hangText="-01">
+            Incorporated changes suggested by Jim Schaad:<vspace blankLines="1"/>
+            <list style="symbols">
+              <t>Expanded the acronym "JSON" on first use.</t>
+              <t>Expanded the introduction to explain how this document's protection of symmetric keys differs from <xref target="JWE"/>.</t>
+              <t>Expanded the introduction to better explain why password-based encryption algorithms are needed.</t>
+              <t>Moved information on PBKDF2 salt from the security considerations to the "s" JWK parameter definition.</t>
+              <t>Moved information on PBKDF2 iteration count from security considerations to the "c" JWK parameter definition.</t>
+              <t>Added the "hint" JWK parameter.</t>
+              <t>Explicitly noted what registries are updated by the IANA considerations.</t>
+              <t>Relaxed language around re-use of keying material.</t>
+              <t>Removed section discussing protected key lifetimes.</t>
+              <t>Improved explanation of manximum password lengths.</t>
+            </list>
+          </t>
           <t hangText="-00">Initial revision</t>
         </list>
       </t>
