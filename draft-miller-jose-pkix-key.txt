@@ -5,17 +5,20 @@
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
 Intended status: Standards Track                             B. Campbell
-Expires: August 16, 2013                             Ping Identity Corp.
-                                                       February 12, 2013
+Expires: August 25, 2013                             Ping Identity Corp.
+                                                       February 21, 2013
 
 
-                JSON Web Key (JWK) for PKIX Certificates
-                     draft-miller-jose-pkix-key-00
+     JavaScript Object Notation (JSON) Web Key (JWK) for Public Key
+               Infrastructure (X.509) (PKIX) Certificates
+                     draft-miller-jose-pkix-key-01
 
 Abstract
 
-   This document defines a JSON Web Key (JWK) object to wrap PKIX
-   certificate chains.
+   This document defines a JavaScript Object Notation (JSON) Web Key
+   (JWK) object to wrap Public Key Infrastructure (X.509) (PKIX)
+   certificate chains, to allow for some interoperability between
+   existing PKIX-based systems and newer JOSE-based systems.
 
 Status of This Memo
 
@@ -32,12 +35,28 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 16, 2013.
+   This Internet-Draft will expire on August 25, 2013.
 
 Copyright Notice
 
    Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+
+
+Miller & Campbell       Expires August 25, 2013                 [Page 1]
+
+Internet-Draft                JWK for PKIX                 February 2013
+
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
@@ -51,38 +70,30 @@ Copyright Notice
 
 Table of Contents
 
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 1]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
-
-
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  PKIX Key Type . . . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  'x5c' (X.509 Certificate Chain) Parameter . . . . . . . .   3
    4.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
      5.1.  JSON Web Key Type Registration  . . . . . . . . . . . . .   5
      5.2.  JSON Web Key Parameters Registration  . . . . . . . . . .   5
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   6
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   6
-   Appendix B.  Document History . . . . . . . . . . . . . . . . . .   6
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   7
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   7
+   Appendix B.  Document History . . . . . . . . . . . . . . . . . .   7
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
-   JSON Web Key ([JWK]) describes an abstract data structure to
-   represent public keys using JavaScript Object Notation (JSON)
+   JavaScript Object Notation (JSON) Web Key ([JWK]) describes an
+   abstract data structure to represent public keys using JSON
    [RFC4627].  The JSON Web Algorithms ([JWA]) define specific key
    representations for raw asymmetric key types, such as RSA [RFC3447]
    or Elliptic Curve [DSS].  However, there are times when it is
-   desirable to represent a Public Key Infrastructure (X.509)
+   desirable to represent a Public Key Infrastructure (X.509) (PKIX)
    certificate chain, such as to associate with a JSON Web Encryption
    ([JWE]) or JSON Web Signature ([JWS]) object.  This document
    specifies an approach which encodes a chain of PKIX certificates as
@@ -93,6 +104,15 @@ Internet-Draft                JWK for PKIX                 February 2013
    sometimes desirable for JSON-based cryptographic operations to
    support the existing and widespread deployment of PKIX-based
    technologies.
+
+
+
+
+
+Miller & Campbell       Expires August 25, 2013                 [Page 2]
+
+Internet-Draft                JWK for PKIX                 February 2013
+
 
 2.  Terminology
 
@@ -105,14 +125,6 @@ Internet-Draft                JWK for PKIX                 February 2013
    "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
    [RFC2119].
-
-
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 2]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
 
 3.  PKIX Key Type
 
@@ -150,6 +162,14 @@ Internet-Draft                JWK for PKIX                 February 2013
       KoZIhvcNAQEBBQADggEPADCCAQoCggEBAMQt1RWMnCZM7DI161+4WQFapmGBWTt
       wY6vj3D3HKrjJM9N55DrtPDAjhI6zMBS2sofDPZVUBJ7fmd0LJR4h3mUpfjWoqV
       Tr9vcyOdQmVZWt7/v+WIbXnvQAjYwqDL1CBM6nPwT27oDyqu9SoWlm2r4arV3aL
+
+
+
+Miller & Campbell       Expires August 25, 2013                 [Page 3]
+
+Internet-Draft                JWK for PKIX                 February 2013
+
+
       GbqGmu75RpRSgAvSMeYddi5Kcju+GZtCpyz8/x4fKL4o/K1w/O5epHBp+YlLpyo
       7RJlbmr2EkRTcDCVw5wrWCs9CHRK8r5RsL+H0EwnWGu1NcWdrxcx+AuP7q2BNgW
       JCJjPOq8lh8BJ6qf9Z/dFjpfMFDniNoW1fho3/Rb2cRGadDAW/hOUoz+EDU8CAw
@@ -162,14 +182,6 @@ Internet-Draft                JWK for PKIX                 February 2013
       b20vcmVwb3NpdG9yeTAOBgNVHQ8BAf8EBAMCAQYwDQYJKoZIhvcNAQEFBQADggE
       BANKGwOy9+aG2Z+5mC6IGOgRQjhVyrEp0lVPLN8tESe8HkGsz2ZbwlFalEzAFPI
       UyIXvJxwqoJKSQ3kbTJSMUA2fCENZvD117esyfxVgqwcSeIaha86ykRvOe5GPLL
-
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 3]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
-
       5CkKSkB2XIsKd83ASe8T+5o0yGPwLPk9Qnt0hCqU7S+8MxZC9Y7lhyVJEnfzuz9
       p0iRFEUOOjZv2kWzRaJBydTXRE4+uXR21aITVSzGh6O1mawGhId/dQb8vxRMDsx
       uxN89txJx9OjxUUAiKEngHUuHqDTMBqLdElrRhjZkAzVvb3du6/KFUJheqwNTrZ
@@ -206,6 +218,14 @@ Internet-Draft                JWK for PKIX                 February 2013
       0IFZhbGlkYXRpb24gTmV0d29yazEXMBUGA1UEChMOVmFsaUNlcnQsIEluYy4xNT
       AzBgNVBAsTLFZhbGlDZXJ0IENsYXNzIDIgUG9saWN5IFZhbGlkYXRpb24gQXV0a
       G9yaXR5MSEwHwYDVQQDExhodHRwOi8vd3d3LnZhbGljZXJ0LmNvbS8xIDAeBgkq
+
+
+
+Miller & Campbell       Expires August 25, 2013                 [Page 4]
+
+Internet-Draft                JWK for PKIX                 February 2013
+
+
       hkiG9w0BCQEWEWluZm9AdmFsaWNlcnQuY29tMB4XDTk5MDYyNjAwMTk1NFoXDTE
       5MDYyNjAwMTk1NFowgbsxJDAiBgNVBAcTG1ZhbGlDZXJ0IFZhbGlkYXRpb24gTm
       V0d29yazEXMBUGA1UEChMOVmFsaUNlcnQsIEluYy4xNTAzBgNVBAsTLFZhbGlDZ
@@ -218,15 +238,7 @@ Internet-Draft                JWK for PKIX                 February 2013
       AA4GBADt/UG9vUJSZSWI4OB9L+KXIPqeCgfYrx+jFzug6EILLGACOTb2oWH+heQ
       C1u+mNr0HZDzTuIYEZoDJJKPTEjlbVUjP9UNV+mWwD5MlM/Mtsq2azSiGM5bUMM
       j4QssxsodyamEwCW/POuZ6lcg5Ktz885hZo+L7tdEy8W9ViH0Pd"],
-
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 4]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
-
-     "use":"sign",
+     "use":"sig",
      "kid":"somekey"}]
    }
 
@@ -234,6 +246,9 @@ Internet-Draft                JWK for PKIX                 February 2013
 5.  IANA Considerations
 
 5.1.  JSON Web Key Type Registration
+
+   This document registers the following to the JSON Web Key Types
+   registry:
 
    o  "kty" Paramater value: "PKIX"
 
@@ -249,6 +264,9 @@ Internet-Draft                JWK for PKIX                 February 2013
 
 5.2.  JSON Web Key Parameters Registration
 
+   This document registers the following to the JSON Web Key Parameters
+   registry:
+
    o  Parameter Name: "x5c"
 
 
@@ -256,6 +274,12 @@ Internet-Draft                JWK for PKIX                 February 2013
 
 
    o  Specification Document(s): Section 3.1 of [[ this document ]]
+
+
+
+Miller & Campbell       Expires August 25, 2013                 [Page 5]
+
+Internet-Draft                JWK for PKIX                 February 2013
 
 
 6.  Security Considerations
@@ -274,14 +298,6 @@ Internet-Draft                JWK for PKIX                 February 2013
               Signature Standard (DSS)", FIPS PUB 186-3, June 2009.
 
    [ITU.X690.1994]
-
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 5]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
-
               International Telecommunications Union, "Information
               Technology - ASN.1 encoding rules: Specification of Basic
               Encoding Rules (BER), Canonical Encoding Rules (CER) and
@@ -315,6 +331,13 @@ Internet-Draft                JWK for PKIX                 February 2013
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, May 2008.
 
+
+
+Miller & Campbell       Expires August 25, 2013                 [Page 6]
+
+Internet-Draft                JWK for PKIX                 February 2013
+
+
 7.2.  Informative References
 
    [RFC3447]  Jonsson, J. and B. Kaliski, "Public-Key Cryptography
@@ -325,18 +348,11 @@ Appendix A.  Acknowledgements
 
 Appendix B.  Document History
 
+   -01  Minor typos and nits
+
    -00  Initial revision
 
 Authors' Addresses
-
-
-
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 6]
-
-Internet-Draft                JWK for PKIX                 February 2013
-
 
    Matthew Miller
    Cisco Systems, Inc.
@@ -372,20 +388,4 @@ Internet-Draft                JWK for PKIX                 February 2013
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Miller & Campbell       Expires August 16, 2013                 [Page 7]
+Miller & Campbell       Expires August 25, 2013                 [Page 7]
