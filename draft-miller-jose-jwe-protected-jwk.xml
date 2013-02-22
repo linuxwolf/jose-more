@@ -27,14 +27,14 @@
     <workgroup>JOSE Working Group</workgroup>
     <keyword>Internet-Draft</keyword>
     <abstract>
-      <t>This document specifies an approach to protecting JSON Web Key (JWK) objects using JSON Web Encryption (JWE). This document also specifies a set of algorithms for encrypting content using password-based cryptography.</t>
+      <t>This document specifies an approach to protecting a private key formatted as a JavaScript Syntax Object Notation (JSON) Web Key (JWK) object using JSON Web Encryption (JWE). This document also specifies a set of algorithms for protecting such content using password-based cryptography.</t>
     </abstract>
   </front>
   <middle>
     <section title="Introduction" anchor="intro">
-      <t>There are times when it is necessary to transport a private key, whether the private component to an asymmetric public-private key-pair or a symmetric key used for encryption or generating a message authentication code (MAC), where the transport mechanism might not provide adequate content protection for the key. For instance, end-to-end scenarios where the key holder and key recipient are linked through multiple network hops that might or might not employ transport layer security (TLS, <xref target="RFC5246"/>), or might exchange of a key using physical media such as a USB drive that itself is not encrypted.</t>
-      <t>This document specifies an approach that uses <xref target="JWE"/> to encrypt a private key that is formatted as <xref target="JWK"/>. While <xref target="JWE"/> provides protection of symmetric keys, this key is itself intended for the protection of content, not as the content itself. Further, <xref target="JWE"/> does not itself provide protection of an asymmetric private key.</t>
-      <t>Ofttimes the transport of private keys involves direct interaction with human beings. In these scenarios the use of a human-understandable password or passphrase to protect the private key is desirable. This document also specifies and registers JSON Web Key formats and JSON Web Encryption algorithms based on <xref target="RFC2898"/> to allow for these scenarios.</t>
+      <t>There are times when it is necessary to transport a private key, whether the private component to an asymmetric cipher key-pair or a symmetric cipher key used for encryption or generating a message authentication code (MAC), where the transport mechanism might not provide adequate content protection for the key. For instance, end-to-end scenarios where the key holder and key recipient are linked through multiple network hops that might or might not employ transport layer security (TLS, <xref target="RFC5246"/>), or the key holder an key recipient (often the same human being) might exchange a private key using physical media such as a USB drive that itself is not encrypted.</t>
+      <t>This document specifies an approach that uses JavaScript Object Notation (JSON) Web Encryption <xref target="JWE"/> to encrypt a private key that is formatted as a JSON Web Key <xref target="JWK"/>. While <xref target="JWE"/> provides protection of symmetric keys, this key is itself intended for the protection of content, not as the content itself. Further, <xref target="JWE"/> does not itself provide protection of an asymmetric private key.</t>
+      <t>Ofttimes the transport of private keys involves direct interaction with human beings. In these scenarios the use of a human-understandable password or passphrase to protect the private key is desirable. Therefore, this document also specifies and registers JWK formats and JWE algorithms based on <xref target="RFC2898"/> to allow for protecting content using a password.</t>
     </section>
     <section title="Terminology" anchor="terms">
       <t>This document inherits JSON Web Algorithms (JWA)-related terminology from <xref target="JWA"/>, JSON Web Encryption (JWE)-related terminology from <xref target="JWE"/>, JSON Web Key (JWK)-related terminology from <xref target="JWK"/>, and password-based cryptography-related terminology from <xref target="RFC2898"/>.  Security-related terms are to be understood in the sense defined in <xref target="RFC4949"/>.</t>
@@ -671,7 +671,7 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
               <t>Explicitly noted what registries are updated by the IANA considerations.</t>
               <t>Relaxed language around re-use of keying material.</t>
               <t>Removed section discussing protected key lifetimes.</t>
-              <t>Improved explanation of manximum password lengths.</t>
+              <t>Improved recommendations around password lengths.</t>
             </list>
           </t>
           <t hangText="-00">Initial revision</t>
