@@ -22,7 +22,7 @@
         <email>mamille2@cisco.com</email>
       </address>
     </author>
-    <date month="February" day="21" year="2013"/>
+    <date/>
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -47,8 +47,8 @@
           <t>Converts the JWK object to a UTF-8 encoded string (K').<vspace blankLines="1"/></t>
           <t>Performs the message encryption steps from <xref target="JWE"/> to generate the JWE header H, JWE Encrypted Key E, JWE Initialization Vector IV, JWE Ciphertext C, and JWE Integrity Value I, using the following inputs:<vspace blankLines="1"/>
             <list style="symbols">
-              <t>The 'alg' property set to the intended key encryption algorithm (e.g., "RSA-OAEP", or "PBES2-HS512+A256KW" from below).<vspace blankLines="1"/></t>
-              <t>Keying material appropriate for the selected key encryption algorithm  (e.g., private key for "RSA-OAEP", or shared password, salt, and iteration count for "PBES2-HS512+A256KW").<vspace blankLines="1"/></t>
+              <t>The 'alg' property set to the intended key encryption algorithm (e.g., "RSA-OAEP", or "PBES2-HS256+A256KW" from below).<vspace blankLines="1"/></t>
+              <t>Keying material appropriate for the selected key encryption algorithm  (e.g., private key for "RSA-OAEP", or shared password, salt, and iteration count for "PBES2-HS256+A256KW").<vspace blankLines="1"/></t>
               <t>The 'enc' property set to the intended content encryption algorithm (e.g., "A256GCM" or "A256CBC+HS512").<vspace blankLines="1"/></t>
               <t>Keying material appropriate for the selected content encryption algorithm (e.g., Content Encryption Key and Initialization Vector).<vspace blankLines="1"/></t>
               <t>K' as the plaintext content to encrypt.</t>
@@ -58,7 +58,7 @@
         </list>
       </t>
       <section title="Details for Private Keys" anchor="protect-private">
-        <t>Private keys are typically protected using a symmetric key. This symmetric key can be exchanged or determined in various ways, such as deriving one from a user-supplied password; the algorithms "PBES2-HS256+A128KW" and "PBES2-HS512+A256KW" (defined in <xref target="pbcrypto-pbes2-jwe"/>) enable this.</t>
+        <t>Private keys are typically protected using a symmetric key. This symmetric key can be exchanged or determined in various ways, such as deriving one from a user-supplied password; the algorithms "PBES2-HS256+A128KW" and "PBES2-HS256+A256KW" (defined in <xref target="pbcrypto-pbes2-jwe"/>) enable this.</t>
       </section>
       <section title="Details for Symmetric Keys" anchor="protect-symmetric">
         <t>Symmetric keys are typically protected using public-private key pairs. It is assumed the key holder has the appropriate public key(s) for the key recipient(s).</t>
@@ -329,12 +329,12 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
         </section>
       </section>
       <section title="PBES2 Key Encryption Algorithms" anchor="pbcrypto-pbes2-jwe">
-        <t>The "PBES2-HS256+A128KW" and "PBES2-HS512+A256KW" algorithms defined below are used to encrypt a JWE Content Master Key using a user-supplied password to derive the key encryption key. With these algorithms, the derived key is used to encrypt the JWE Content Master Key. These algorithms combine a key derivation function with an encryption scheme to encrypt the JWE Content Master Key according to PBES2 from section 6.2 of <xref target="RFC2898"/>.</t>
+        <t>The "PBES2-HS256+A128KW" and "PBES2-HS256+A256KW" algorithms defined below are used to encrypt a JWE Content Master Key using a user-supplied password to derive the key encryption key. With these algorithms, the derived key is used to encrypt the JWE Content Master Key. These algorithms combine a key derivation function with an encryption scheme to encrypt the JWE Content Master Key according to PBES2 from section 6.2 of <xref target="RFC2898"/>.</t>
         <section title="PBES2-HS256+A128KW" anchor="pbcrypto-pbes2-jwe-hs256-a128kw">
           <t>The "PBES2-HS256+A128KW" algorithm uses "HMAC-SHA256" as the PRF and "AES128-WRAP" as defined in <xref target="RFC3394"/> for the encryption scheme. The salt (S) and iteration count (c) MUST be specified by the "s" and "c" parameters (respectively) in the applicable "PBKDF2" JWK object. The derived-key length (dkLen) is 16 octets.</t>
         </section>
-        <section title="PBES2-HS512+A256KW" anchor="pbcrypto-pbes2-jwe-hs512-a256kw">
-          <t>The "PBES2-HS512+A256KW" algorithm uses "HMAC-SHA512" as the PRF "and "AES256-WRAP" as defined in <xref target="RFC3394"/> for the encryption scheme. The salt (S) and iteration count (c) MUST be specified by the "s" and "c" parameters (respectively) in the applicable "PBKDF2" JWK object. The derived-key length (dkLen) is 32 octets.</t>
+        <section title="PBES2-HS256+A256KW" anchor="pbcrypto-pbes2-jwe-hs512-a256kw">
+          <t>The "PBES2-HS256+A256KW" algorithm uses "HMAC-SHA256" as the PRF "and "AES256-WRAP" as defined in <xref target="RFC3394"/> for the encryption scheme. The salt (S) and iteration count (c) MUST be specified by the "s" and "c" parameters (respectively) in the applicable "PBKDF2" JWK object. The derived-key length (dkLen) is 32 octets.</t>
         </section>
       </section>
     </section>
@@ -387,7 +387,7 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
         </t>
         <t>
           <list style="symbols">
-            <t>Algorithm Name: "PBES2-HS512+A256KW"<vspace blankLines="1"/></t>
+            <t>Algorithm Name: "PBES2-HS256+A256KW"<vspace blankLines="1"/></t>
             <t>Algorithm Usage Location(s): "alg"</t>
             <t>Implementation Requirements: OPTIONAL<vspace blankLines="1"/></t>
             <t>Change Controller: IETF<vspace blankLines="1"/></t>
@@ -404,10 +404,11 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
       <section title="Lifetime of Protected Keys" anchor="security-store">
         <t>Depending on the application, a protected JWK could potentially be stored for an indefinite time, anywhere from milliseconds (e.g., broadcasted over a computer network) to years (e.g., stored as a file). This lifetime can influence the factors used to protect the key; for a protected JWK that exists for as long as it takes to transit a network might use minimal-strength keys and algorithms, while longer term storage might necessitate stronger factors.</t>
       </section>
-    -->
+      -->
       <section title="Password Considerations" anchor="security-pwd">
-        <t>While convenient for end users, passwords have many drawbacks. To help mitigate these limitations, this document applies principles from <xref target="RFC2898"/> to derive cryptographic keys from user-supplied passwords.</t>
-        <t>An ideal password is one that is as large (or larger) than the derived key length but less than the PRF's block size. Passwords larger than the PRF's block size are first hashed, which reduces an attacker's effective search space to the length of the hash algorithm (32 octects for HMAC-SHA-256; 64 octets for HMAC-SHA-512). For "PBES2-HS256+A128KW", it is RECOMMENDED that the password be no longer than 64 octets long; for "PBES2-HS512+A256KW", it is RECOMMENDED that the password be no longer than 128 octets long.</t>
+        <t>While convenient for end users, passwords are vulnerable to a number of attacks. To help mitigate some of these limitations, this document applies principles from <xref target="RFC2898"/> to derive cryptographic keys from user-supplied passwords.</t>
+        <t>An ideal password is one that is as large (or larger) than the derived key length but less than the PRF's block size. Passwords larger than the PRF's block size are first hashed, which reduces an attacker's effective search space to the length of the hash algorithm (32 octects for HMAC-SHA-256). It is RECOMMENDED that the password be no longer than 64 octets long; for "PBES2-HS256+A256KW".</t>
+        <t>However, this does not completely address all attacks, particularly dictionary attacks. <xref target="NIST-800-63-1"/> contains guidelines for estimating password entropy, which can help applications and users generate stronger passwords.</t>
       </section>
     </section>
     <section title="Internationalization Considerations" anchor="i18n">
@@ -622,6 +623,17 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
         </front>
         <seriesInfo name="FIPS" value="PUB 197"/>
         <format target="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf" type="PDF"/>
+      </reference>
+      <reference anchor="NIST-800-63-1">
+        <front>
+          <title>Electronic Authentication Guideline</title>
+          <author>
+            <organization>National Institute of Standards and Technology (NIST)</organization>
+          </author>
+          <date month="December" year="2011"/>
+        </front>
+        <seriesInfo name="NIST" value="800-63-1"/>
+        <format target="http://csrc.nist.gov/publications/nistpubs/800-63-1/SP-800-63-1.pdf" type="PDF"/>
       </reference>
       <reference anchor="RFC3447">
         <front>
