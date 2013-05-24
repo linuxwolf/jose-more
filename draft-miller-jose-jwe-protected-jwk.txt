@@ -4,8 +4,8 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Standards Track                            May 21, 2013
-Expires: November 22, 2013
+Intended status: Standards Track                            May 24, 2013
+Expires: November 25, 2013
 
 
     Using JavaScript Object Notation (JSON) Web Encryption (JWE) for
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 22, 2013.
+   This Internet-Draft will expire on November 25, 2013.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                 Expires November 22, 2013                [Page 1]
+Miller                 Expires November 25, 2013                [Page 1]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Miller                 Expires November 22, 2013                [Page 2]
+Miller                 Expires November 25, 2013                [Page 2]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -165,7 +165,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 3]
+Miller                 Expires November 25, 2013                [Page 3]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -221,7 +221,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 4]
+Miller                 Expires November 25, 2013                [Page 4]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -277,7 +277,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 5]
+Miller                 Expires November 25, 2013                [Page 5]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -333,7 +333,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 6]
+Miller                 Expires November 25, 2013                [Page 6]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -389,7 +389,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 7]
+Miller                 Expires November 25, 2013                [Page 7]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -445,7 +445,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 8]
+Miller                 Expires November 25, 2013                [Page 8]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -501,7 +501,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013                [Page 9]
+Miller                 Expires November 25, 2013                [Page 9]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -557,7 +557,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013               [Page 10]
+Miller                 Expires November 25, 2013               [Page 10]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -613,7 +613,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013               [Page 11]
+Miller                 Expires November 25, 2013               [Page 11]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -669,7 +669,7 @@ Internet-Draft             JWE Protected JWK                    May 2013
 
 
 
-Miller                 Expires November 22, 2013               [Page 12]
+Miller                 Expires November 25, 2013               [Page 12]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
@@ -710,6 +710,11 @@ Internet-Draft             JWE Protected JWK                    May 2013
    document applies principles from [RFC2898] to derive cryptographic
    keys from user-supplied passwords.
 
+   However, the strength of the password still has a significant impact.
+   A high-entry password has greater resistance to dictionary attacks.
+   [NIST-800-63-1] contains guidelines for estimating password entropy,
+   which can help applications and users generate stronger passwords.
+
    An ideal password is one that is as large (or larger) than the
    derived key length but less than the PRF's block size.  Passwords
    larger than the PRF's block size are first hashed, which reduces an
@@ -717,18 +722,18 @@ Internet-Draft             JWE Protected JWK                    May 2013
    (32 octects for HMAC-SHA-256).  It is RECOMMENDED that the password
    be no longer than 64 octets long; for "PBES2-HS256+A256KW".
 
-   However, this does not completely address all attacks, particularly
-   dictionary attacks.  [NIST-800-63-1] contains guidelines for
-   estimating password entropy, which can help applications and users
-   generate stronger passwords.
 
 
 
-
-Miller                 Expires November 22, 2013               [Page 13]
+Miller                 Expires November 25, 2013               [Page 13]
 
 Internet-Draft             JWE Protected JWK                    May 2013
 
+
+   Still, care needs to be taken in where and how password-based
+   encryption is used.  Such algorithms MUST NOT be used where the
+   attacker can make an indefinite number of attempts to circumvent the
+   protection.
 
 9.  Internationalization Considerations
 
@@ -772,19 +777,20 @@ Internet-Draft             JWE Protected JWK                    May 2013
    [RFC3394]  Schaad, J. and R. Housley, "Advanced Encryption Standard
               (AES) Key Wrap Algorithm", RFC 3394, September 2002.
 
+
+
+
+
+Miller                 Expires November 25, 2013               [Page 14]
+
+Internet-Draft             JWE Protected JWK                    May 2013
+
+
    [RFC4086]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
               Requirements for Security", RFC 4086, June 2005.
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
-
-
-
-
-Miller                 Expires November 22, 2013               [Page 14]
-
-Internet-Draft             JWE Protected JWK                    May 2013
-
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2", RFC
               4949, August 2007.
@@ -828,19 +834,20 @@ Appendix B.  Document History
       *  Moved information on PBKDF2 iteration count from security
          considerations to the "c" JWK parameter definition.
 
+
+
+
+Miller                 Expires November 25, 2013               [Page 15]
+
+Internet-Draft             JWE Protected JWK                    May 2013
+
+
       *  Added the "hint" JWK parameter.
 
       *  Explicitly noted what registries are updated by the IANA
          considerations.
 
       *  Relaxed language around re-use of keying material.
-
-
-
-Miller                 Expires November 22, 2013               [Page 15]
-
-Internet-Draft             JWE Protected JWK                    May 2013
-
 
       *  Removed section discussing protected key lifetimes.
 
@@ -885,11 +892,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-Miller                 Expires November 22, 2013               [Page 16]
+Miller                 Expires November 25, 2013               [Page 16]
