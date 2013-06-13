@@ -10,7 +10,7 @@ Expires: December 15, 2013
 
     Using JavaScript Object Notation (JSON) Web Encryption (JWE) for
                  Protecting JSON Web Key (JWK) Objects
-                 draft-miller-jose-jwe-protected-jwk-01
+                 draft-miller-jose-jwe-protected-jwk-02
 
 Abstract
 
