@@ -50,6 +50,7 @@
               <t>The 'alg' property set to the intended key encryption algorithm (e.g., "RSA-OAEP", or "PBES2-HS256+A256KW" from below).<vspace blankLines="1"/></t>
               <t>Keying material appropriate for the selected key encryption algorithm  (e.g., private key for "RSA-OAEP", or shared password, salt, and iteration count for "PBES2-HS256+A256KW").<vspace blankLines="1"/></t>
               <t>The 'enc' property set to the intended content encryption algorithm (e.g., "A256GCM" or "A256CBC+HS512").<vspace blankLines="1"/></t>
+              <t>The 'cty' property set to "application/jwk+json", indicating the content is a JWK object.<vspace blankLines="1"/></t>
               <t>Keying material appropriate for the selected content encryption algorithm (e.g., Content Encryption Key and Initialization Vector).<vspace blankLines="1"/></t>
               <t>K' as the plaintext content to encrypt.</t>
             </list>
@@ -93,11 +94,10 @@
          bsPjyB30D9BZMV1a8flhPmRG66orx_9ogi1Eu8AJel7wEbdSpCGlMT
          z0mAfcpN9bNEPFCvehN_zqwAwGLQCbPjNycQi3zYKoeehw5xE00IR9
          6wk-U98icL",
-    "q":"2a43135aa05479f570676fc36e3d693d0ab21d21e38fdd0be71fcc
-         3b3a9800931c2cc66d6d4b702aabd50eaded6c4a3764872885b0ed
-         b7a49b7e65b382069ba50c4dc6e069a0e39ffdafc780c5cafe586a
-         8a0238cbf92a4b5c18e762308d49f9ae046b27ec98a35878d4a47e
-         bf3da9621100798ae1b6d5adc55a8b0915620fa7",
+    "q":"ANbv0YhQz-ywWIdzeBly0_TqUimD9LkGcommcAbTggTSYEMWo9dEVo
+         7GbtHOiHnYrOEuwf3KEigdCo_T2j2gc4PiMkkb73ELj2pkLuuq4jIY
+         1bRuk5VfAiwmCq2Jeds4qitBP8ptkJ5MLFF-3mEwey2wB0SvRqqHAx
+         OQdH_NPCOL",
     "dp":"KkMTWqBUefVwZ2_Dbj1pPQqyHSHjj90L5x_MOzqYAJMcLMZtbUtwK
           qvVDq3tbEo3ZIcohbDtt6SbfmWzggabpQxNxuBpoOOf_a_HgMXK_l
           hqigI4y_kqS1wY52IwjUn5rgRrJ-yYo1h41KR-vz2pYhEAeYrhttW
@@ -121,12 +121,14 @@
             <artwork><![CDATA[
 {
   "alg":"PBES2-HS256+A128KW",
-  "enc":"A128CBC+HS256",
   "jwk":{
-    "kty":"PBKDF2",
-    "s":"2WCTcJZ1Rvd_CJuJripQ1w",
-    "c":4096
-  }
+    kty:"PBKDF2",
+    kid:"27a4c46f-6d36-4a8c-814c-c954165f6dc9",
+    s:"2WCTcJZ1Rvd_CJuJripQ1w",
+    c:4096
+  },
+  "enc":"A128CBC+HS256",
+  "cty":"application/jwk+json"
 }
             ]]></artwork>
           </figure>
@@ -145,7 +147,7 @@ Thus from my lips, by yours, my sin is purged.
         <figure>
           <preamble>Content Master Key (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
-1ICvnpc3zPRNS7JoJ9bnJ929eX7EnRwmc0CHNOF1zKc
+D0GoLoMS35BtD4_rSF56VGg_Syj0VG6-lb4xrpQIQmU
           ]]></artwork>
         </figure>
         <vspace blankLines="1"/>
@@ -154,7 +156,7 @@ Thus from my lips, by yours, my sin is purged.
         <figure>
           <preamble>Initialization Vector (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
-B9BVK3hIsEu9zUOWjKeOSg
+XYqmb7uopcN1pCNRGJ5hKw
           ]]></artwork>
         </figure>
         <vspace blankLines="1"/>
@@ -163,49 +165,48 @@ B9BVK3hIsEu9zUOWjKeOSg
       <t>
         <figure>
           <artwork><![CDATA[
-eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDK0hTMjU
-2IiwiandrIjp7Imt0eSI6IlBCS0RGMiIsInNhbHQiOiIyV0NUY0paMVJ2ZF9DSn
-VKcmlwUTF3IiwiaXRycyI6NDA5Nn19.
-dO4VTHV1JJnnPxbc9xswMA6ezNLCQ1Nq0Bnt4l2hjzxyXfbgM3w-cQ.
-B9BVK3hIsEu9zUOWjKeOSg.
-mUt0YpU0Gsfis7tK70aggz5Qb5J6oppjl7aSn_S4DIHJkSF-Gd9KEu4XF0vbMc1
-kvovNOmnahDLoJIq7hoB666zt1yp4umZKuzhOQ5O3jwOwC4rUf1W3hDM5p2nYZq
-LFqDBme-Z8KVwosfBj2TkZSnFWC6cqMy6d7K6egWz7uct39ZH6_FAUrr0JiMMnj
-0jxTEBP6apiLD-GJutxITnWISmGmX0jOWyTKRh-F-I3lJ3pXE0_4vWR8-gXaFGW
-CgItofAOsdKKoxiSJvXPVxK-oqPFPlS0H5OLHw9tkjmPVZ0Ot-RLgoMPQJ0Yi47
-U0DBh_2-IQBcpPvwBnUzl8KcrLFh-NpTSoC_zIn6xos5r4JVXf5v1V79MKGvk3-
-evdQoEKtS9LnimKTP8YmeqAnU1Y3VoUkgeRTZikKhQ_kwpAxakaRuBzfaIOKjqY
-X5J_jSJuuBQU_4fgHPkvrq1zJ3TnUAWZIqFcw27dKGMxXLMlz_sbW2YerZ0BULc
-xbe8bJpbHkE64r7Nc86iZyL6e-8htkUvpGmdQGqno-q723Ry-u2Iz1-exjgjbNu
-z4tbSrf49Y0_VSFEuHLnCRChVQE8cgupCy8GioEpuC7v1hMNE7JZTVbG3Ud3QzZ
-Webr0sAYjWwqa2ySoJ7AaRfIiVgMdTAS2_gBdbYRSYI2pkQTHpyZ8D_lp5RvYFR
-FNsHWoEToXeL1P_csuKaGsikKbzgXdevrjmCJTOpByGYO5cb2O8xFyYy1VX_pM6
-bxqj5ai8-jyiCoDKvF_40wT_9F6H79UIZtuc3L7r7OxKrmY32LLvfofVRsfdIcK
-AhMvnvOCpzRN3sHiR7iAx1bvaIaz40Mshf8z-__70GEqr5oWxRwyv2uhCiPHtV6
-lBIhCqki6th317-n_lR58LHw894ja0xbOOxUJfZziaG14O9tqjetTSB0JGKXC4S
-ry6zzeyqDwsSpY439Uqn7va_V5ELLfJf9S7fh0AtZS3ogpw4oT-6LbywFPf0jH9
-LgNmatORG_J2wgu8R8QpKogo_WTQK7izHVtEMe1vQQElAy8P2SUjOJiOU6wAW4o
-neU7HUUwD3cvFSn-ykze48FurI5f6DXyPNTVtzaEjBnVVP517bGb_3V_-1SCBdZ
-1f_sYWJ0S8r2u5ccy28CP_7MhZOY8r4oJJn2NmT_jDOllCNtJLKVdKon0QslEER
-GXa8r6Jtp3UbfLVjZQbnFl2mBygH4PoWbyGVxUNDE66mZVKM4Y-6ng5L84PrDt5
-aAQ0HREqjvX4bsQgWyXKq-HRe5DXO2qdoPAIoPGhqOlZz70iYHO5lkX_Oso3eBv
-DCDVbkD7Gr-LZJusrVtA6Hf82YpUUldjyPsD985T2hdcSQMoxol8aWNDL52T4Eo
-FTTLFNG0Xy3qvS79ScgMOSIOE8k_DgzyBrcGJibeeaVKGdbqUQRADaeWO2QM3Rq
-9TOyizLNyyjkJBgecWtIfLAWSTPx7n39zuBhGb5oChAFlR1HqrV76KO22rj08ra
-J_zi8YQpp4qTTXmYwY5sjftE8IDDcLxk6ovvDM7262onZ5CP3GKp09s9dTJZi2L
-tmZ8NAHlJ5Q9v9XMHi0tvLKKlahdcvgnG3sC_gL46osnNE3gBipLe_IQNl0X0zU
-cakwzYtC02JeBbNFQSduY4OBiAAhD2VhyhLMNvGyt9QjntCru1z_gkr1qZR4y5W
-Uec9WtxPqqC-dny-MZOINZd13LdStVY_g0KaAJET0etT4vYZJ6IfqdEXRSKKQKN
-CJpencNhJH99NEumPwY0J8hYGC-KkGb6ZQ0yeQDIpcH2reMS9_DU0JaFtd5BpKm
-pNDAvmekzWv65o6MCzLVN4Wlf4tZ6a7FnLxDg0jQBsPGh3ZKEeGmvxJKSvGK_Or
-5-gXJdMyj1n0bWyex-ZTmtbR3OHKgAlFQUdLuB-47UFS0HtF0Lo1ENPZUoxwFcg
-Uu2Yr30O8vhHLhkRAyAvrFPBHhSqcGr954FeMhMo18dKu3zdykyueIQpLIpU7qN
-btXXSOu1c1rPqBMm3h77iLmNzSByFER32-W7hQwx9-Ikbwy52DaZACpXdyzZOQ2
-PSYEJeuy8CyHap8_Dwucb3CQiqBi-iz25Mmwx8qBjWq3K31W4WeF0heC_rCe6LS
-vOCuHJXpu8Wqa1LeyTbuHyQawH8Aev-MzVLXp0E-WtggfNi-mqcThs25993uveI
-TpmK6lyQu6SX31t6MlQKI_29e46cYRMFhsEZSGM--acnZiryvi39IKsVNtOf33E
-9zlKntRdmMoROenR-q5--9nObKaF81k3Xb-yWNTlQh1ot59rWAeqpPv0uA.
-big8BFT-dXJqoKGScpLk0ssjuyWn7fxDvJc7AN7ONPw
+eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJqd2siOnsia3R5IjoiUEJLREY
+yIiwia2lkIjoiMjdhNGM0NmYtNmQzNi00YThjLTgxNGMtYzk1NDE2NWY2ZGM5Ii
+wicyI6IjJXQ1RjSloxUnZkX0NKdUpyaXBRMXciLCJjIjo0MDk2fSwiZW5jIjoiQ
+TEyOENCQytIUzI1NiIsImN0eSI6ImFwcGxpY2F0aW9uL2p3aytqc29uIn0.
+b735tKJtEzS9VNxgEO6hT6WYZ9-zOpEIAFk3k0jIiCju7bPLb7FQKw.
+XYqmb7uopcN1pCNRGJ5hKw.
+dmqTOCIGwHdNOixUkmQ9H0g-JWU74ayVUeuSnsRnRdBPy0wRdBkZBsiQC6-Cl8q
+QSjmC376EJvffG2xUBqjt4omuzMX9KY3Kn64GAHr528N5Bv5487fu-iHBy7uVvT
+F0zgBaSV4Rt-44FWoMoE7H4vcQn_Lf7mv0dviciDM3Spp_IZrb5ufzDhrQlzArM
+xOh7rBTgwoeOaFywXuFrxqr9GbV4Qzn7Vy78T8UUd5alr6GlfF-_O0hW37Gwju_
+AT4bN6fs42NKYvqsAq90ZDujQjRlj3BJc1wAJbw9Ev7oxEvPvUSXgfDk6rvnB-n
+uKD-0KU-M9td2QM8De0AXYRf2rTMiIIuNsRWeJxgeL97Unz9yNywAfcf4SX1P38
+pgCZAbVwLRdbZwcOjK0_R3BQAtyysX-f4rtDCH9BKKFLB_YLcDkQn547QS2RMWf
+GrVPT5CKp5Z5H8RSC47HEnmwppAKtGfUPb4wSs6zT8yV60RxOYD8Ze5DK9UJrPN
+MFfN33_JlpeNKF7w9ulN57-ooYbXkX0WI4JjdF9G9NdJbh8F1NRqLc4KyQBW2bJ
+S_SCZdeVZ4O_spCKfwKpIDFoXE9Nm-3o8mxhfdUbq_Ck8WqiJ6CKm-XjN1b7Z0f
+lkGz6YkXdbd3-F62bB09VzsYERnSBIdsWtwaKMvSyqi8MkhMyhZe2-Iz481r4gi
+v8ESWXAMeVihmOU9HLtgO4MMY3kSbB1qLzhbH7-CRh4h7k83tCmHPvNIQc-JYLm
+80aHs_W_91SPRwnUZJHKasybepqika_CNwkmYsRkiV0GOpzrl2T28Nor74xPrBb
+tk5LJMT_ZKErrCQoIvcgXrWcaTknCpe2sDYkOMuvNlsT8g6r45HuPJ6u561-sw7
+wvam2P1AEg4wuQBAt7Y1_VDy6N-q71ZejayANTCtMGeJiWea79X6xdUJQ_py5xR
+SuSjSwjsXCvisWyiKLAKXoVO9gQGEZLZMhYqRSGwip-KSkYpFYPd5ofn21MHXKG
+D6r0gapo7lMysKlCpfd5v0_sB0JJYKsm12F49cvtK_CEtMYQw9n5R2wo8_2m5og
+HGG3hMajGmem3anRAoSfifBBzx4kP_OOSqo_FoDbRzGluImVwcGL_pzCRRVNwAx
+e5Bx8Al2xGLYncgs-QG7MRKu6LRB5pUq_ZbarL8JJengaa6AbxWsIMkTPEqilyi
+SPpl7zmOFrUtuu-UUnNwhr6WEdLJm7o0iUoXr-Eyi8rfnZgdSvJOdMj-pGKQrWl
+xyAo-Td8IqU-3DHk-otvjCd_i9SW0zRoL4GmqMkiJkIzZ7mjLdFLIFnX85sx4Qt
+yYhMzEIfpgqnv66RnKVLyQ-sIap-9XO_mvSxsLL0yr8a4c_jufv0aFAbbLa_bo0
+Mz_U309z0PmMp7BMh7CuwbiLhaoM6ZoafsxxVcOTHMbmEpybvsDOf8HPQ_k2kN2
+qrVUfvYW5Be9ViOBNxKZWSiDDY0YWs5MhMZUvqnfq8amtAQNYTrpu5w2LfJIWhA
+KkqzYAkzH7Jm7NFnOlcSrLPzFndjVZgIysYnBqkziTqtDoSNHCFY2TaJyZ3cT-o
+WZQkVn07E8zuzMd6SGqPRAzY51CKbXdEfRaNgvaSb-V9TZYyhCmSHCGbwo0iErG
+TfGiHtrfo4Jf6GD8-CcdmggWN-824rGOtp3Bgl8VAi_jmKkzF5s_sIEwhe7oa1H
+S6PMYPkp9llZAiwmFCKHdQbfOdKXbD8FI7p7kUX8llOFLk3w12R2ffVR-gOm7qs
+9MJjmi14nXmp13mV9YP_CgkNNss45B1DdcNMhtippHJ07CWIvKm1pkQOrsXG45C
+4bNJ6YCn63X9ctdzhnFGmCJxCji3TasWWbnI4eA6XthWkJC5e5Nbz_2K-99PC9K
+zwmauA98sqU1yKZFugSYOB6NRwN_y_GB1LEXDSE_FPRSEPNZNJyEMvKo5CeAtEj
+7YPvFR6-yzWDTG0Uq1PafxITByg6UXHl9xBRborklCdfL3gUj3EoXHkvEsXdg22
+jkpGZUmhWWlNvHeM5y0FUHZTIgyyJqHx_Y8v7yaZ881xwFaYAW52aSnL_8h68U1
+8Sv7Q66FKi1gtOYU41FRW6i7oAC9xPYr1Jt5A-am4IwPPR-CPL071mGqOPrDd7l
+gSCumoFESqi24d0IQuzPdEh643DHbWbeAQ7YB-LpZR_hTEC4IndRugQA.
+3c4RF_muOYT02o5Klxv-IQ
           ]]></artwork>
         </figure>
       </t>
@@ -231,9 +232,9 @@ big8BFT-dXJqoKGScpLk0ssjuyWn7fxDvJc7AN7ONPw
           <artwork><![CDATA[
 {
   "alg":"RSA-OAEP",
-  "enc":"A128CBC+HS256",
   "jwk":{
     "kty":"RSA",
+    "kid":"juliet@capulet.lit",
     "n":"ALekPD1kotXZCY_YUz_ITWBZb2nTOw35VvZlnqTiYSeusO58qCtYDz
          ahTEkEcjtduRqfkxJKHYVq9Iro4x1cewXFdJZUuMOQAhoD63AHemXE
          kdPiKqJvkBXDT_Eo4NPOjMKKkFPy2MsJQBmdtVknUvzxEchhYjZ490
@@ -242,7 +243,9 @@ big8BFT-dXJqoKGScpLk0ssjuyWn7fxDvJc7AN7ONPw
          i99vpUnmTvjrOlNef2l65PRsPHD1Gl9fyPLCxrkolXbdwvxZ9j2d2f
          Iu-OBTxRhnBtarNls_k",
     "e":"AQAB"
-  }
+  },
+  "enc":"A128CBC+HS256",
+  "cty":"application/jwk+json"
 }
             ]]></artwork>
           </figure>
@@ -252,7 +255,7 @@ big8BFT-dXJqoKGScpLk0ssjuyWn7fxDvJc7AN7ONPw
         <figure>
           <preamble>Content Master Key (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
-ci5IlLIHnFLn-1lhL5CWOS3DdbXGU-BPuFCrLspXAkA
+QkWU4j0bOc_meVgxNYoad74fQAosvz-4rnKqAhHEV-c
           ]]></artwork>
         </figure>
         <vspace blankLines="1"/>
@@ -261,7 +264,7 @@ ci5IlLIHnFLn-1lhL5CWOS3DdbXGU-BPuFCrLspXAkA
         <figure>
           <preamble>Initialization Vector (encoded as base64url per <xref target="RFC4648"/>):</preamble>
           <artwork><![CDATA[
-_dYbckd_xuJUBUNsxkT9yw
+VMmZ6nLXHkcOUmBTlZaSsQ
             ]]></artwork>
           </figure>
         <vspace blankLines="1"/>
@@ -270,43 +273,28 @@ _dYbckd_xuJUBUNsxkT9yw
       <t>
         <figure>
           <artwork><![CDATA[
-eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkExMjhDQkMrSFMyNTYiLCJqd2siOns
-ia3R5IjoiUlNBIiwibiI6IkFMZWtQRDFrb3RYWkNZX1lVel9JVFdCWmIyblRPdz
-M1VnZabG5xVGlZU2V1c081OHFDdFlEemFoVEVrRWNqdGR1UnFma3hKS0hZVnE5S
-XJvNHgxY2V3WEZkSlpVdU1PUUFob0Q2M0FIZW1YRWtkUGlLcUp2a0JYRFRfRW80
-TlBPak1LS2tGUHkyTXNKUUJtZHRWa25Vdnp4RWNoaFlqWjQ5MEVKVHZHSjdPWXd
-yU3drY0N4eTlEMjlYeEwtT1FMa1NMbEgxWEQ4a2dWbUp3OGhzYjQyQmcwalBnS2
-xrdmN5RU5tWXBZRV9ocWxKb3FZTkZ6Z3RBbk50SzRDM3RzcGl4NDZSM0lnaWxRR
-zJPZmk5OXZwVW5tVHZqck9sTmVmMmw2NVBSc1BIRDFHbDlmeVBMQ3hya29sWGJk
-d3Z4WjlqMmQyZkl1LU9CVHhSaG5CdGFyTmxzX2siLCJlIjoiQVFBQiJ9fQ.
-UW26BTjbDGjgQ288JXJpGGpbZVV3WyZYJdm1Fvux8wM_t7bh6UbjbOdYXjL3rzD
-phZteaD-DXiKrdGaVndTMLUmjg78H0R9K2WHxWNhTWiq8iMDGtw6BYnHW_r5DSf
-vhojcDhCCBKWyO-QLXvTO1mfgo6UQwYY32Lvz-IrbxphrfBePsEXVYm75PLIIft
-PnRwN3fWDMkKLCq2AesvWDuRWtKVjsh7uu_AX2ky6dvov2Lw_xMiDshsNz62RES
-bNUW-ylMqNNn_VAYWKHK83k5CZppPlBb_8MDEUBPyGe_NDCa3118eo20tJGMn8v
-XRg8k7D0nJ051hGlzAkMQ0S_x9g.
-_dYbckd_xuJUBUNsxkT9yw.
-QHkwptAlO0Gdo5BrbkaGPSek6wASr-twP8ZQ3YYHOkbRMedtsM0QwpvdnfUXoJL
-7HZ0fbI-5YwO3PHvTOMXKx-K26cA-Hn9aseBvuICL2getFnrUcXs3vQI416PCw7
-n39HtFLozCaBhJBaMv5x41CT6eaeRCMXE9Kbgz8lFicKNS9GYB7bUQfPXJl-qP7
-05v-qkY4m2BAfofWtyGK-bnbs2ZKhKgaRTdRZlbnZTC19eSS8bPlalSNBrpr2eP
-kDGDsYIKJvtbqD_xHeb7u5BT3ELmDl4CDjMruB3RiNwINcwNkCAhkg9tgV_vFCm
-Qzsc9DH6dlnkYrbnyFrAD4Qe7xI1anDjLmRvU2cBB68-AtRd3PmpVzbr4t2eo33
-GX9c_6fUILJS8WuExPs7KJkOuqDfKCPWDwRfX-yf8YUkrBZMj9aImyY2MyMJZFu
-ITxseXbhkQFPJn-A4scSt1suWEXch5fKfl1KfxJlMio-Bm8kfUba4mgOKen7cJ0
-whFSh7cupuSG0vVMLeBoBVGnndjARUxl5I57NZupH7xq3L8lDVHu_mQ_8Ae1j2h
-QmPOA7_882j1ubpM9Kq-YmOPP4R8wk9SD0bl0k222mSMUMMEZoiSVk7OSHPHkXj
-v-IkXkMmKT0lZiRohdKanb-Dfa1GWXeFTKFSKKJUQibLQ2zy6jlBptIEkxQNrJe
-F-96Ie08r93r79ZRs3lNegzhI6ShMot1YBiG5C-WiOvPw6zysh_-AIGbuvZ9hBn
-nuNfeGr2VPPcO5Z0FKGYGJ0DDnwlNHkdztEj_xLzSZjMxeO6o2hVJScLzzyG_Fy
-T2v2kUHv_qeal18x-ICLR3yyF6JzoT0zKYPouBEIM5EZNAX9A3UjG0kNWW4Lou9
-dlbLIZm-T7H6kj89RATMbDCwHa-nsF2kmnTRR6djt7lzDU1CHEEcM83ZWxi9qTR
-cN_YrCokMkSjZYI87GqmnYHFsTktBBMNDX0u9SBdDZSwmz4EPsn7blYFt6Oiyd-
-EBJlE_ocI4desERjIj0vKsgCoa9ea46S4m_gPa8xlCHK9wcsXU0ZhH8Lo_PyLm0
-4CnjAbhKV0g8WvupjRQijkA6WoqYxQCP9EsDWH7kHJxDWV0uXXFoPZkcW5DBWrG
-1NUC4TAjjI-9qhW7bpBZTLZHDJ99Awsh5lBqPYwUoPMS-lx-FPv9pAEih0rdHdH
-__PelgmXKSwsoBSXzS_ErzePKwTfMAqedpe4WVykQ1rOTRn3uW01sv5gfRBRpo.
-PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
+eyJhbGciOiJSU0EtT0FFUCIsImp3ayI6eyJrdHkiOiJSU0EiLCJraWQiOiJqdWx
+pZXRAY2FwdWxldC5saXQiLCJuIjoiQUxla1BEMWtvdFhaQ1lfWVV6X0lUV0JaYj
+JuVE93MzVWdlpsbnFUaVlTZXVzTzU4cUN0WUR6YWhURWtFY2p0ZHVScWZreEpLS
+FlWcTlJcm80eDFjZXdYRmRKWlV1TU9RQWhvRDYzQUhlbVhFa2RQaUtxSnZrQlhE
+VF9FbzROUE9qTUtLa0ZQeTJNc0pRQm1kdFZrblV2enhFY2hoWWpaNDkwRUpUdkd
+KN09Zd3JTd2tjQ3h5OUQyOVh4TC1PUUxrU0xsSDFYRDhrZ1ZtSnc4aHNiNDJCZz
+BqUGdLbGt2Y3lFTm1ZcFlFX2hxbEpvcVlORnpndEFuTnRLNEMzdHNwaXg0NlIzS
+WdpbFFHMk9maTk5dnBVbm1UdmpyT2xOZWYybDY1UFJzUEhEMUdsOWZ5UExDeHJr
+b2xYYmR3dnhaOWoyZDJmSXUtT0JUeFJobkJ0YXJObHNfayIsImUiOiJBUUFCIn0
+sImVuYyI6IkExMjhDQkMrSFMyNTYiLCJjdHkiOiJhcHBsaWNhdGlvbi9qd2sran
+NvbiJ9.
+ReivAR0RfDi-03K9Db3gC3MSJQJvCe378Anzg0vKj45DJGwfEaPFym_tt6HkbgB
+vgIBaFX_WZE1E3xXMngH_oBz-zUJzB9Gc_hAeov6uLz0pp4knb20pOZCls0Lcjs
+xqgAF_RwB7l_mcPP3HVAwfoEz-_Um7FOztq5Wjse1fBmEX0fwqJT3VC7HVKzJpo
+pJgrrsYFyGPlraNBJJ3yvmRMYLOzTLNoNDYqQz89yZ_dYDcN7zjrke8T3NnSwx2
+9xF3kwiD_AO2SUsA23Zw3xEFQoiskK0w54KKa75yFlSbnObFLOOvqncxJy0bbha
+GqW6I-jeoXVaG7aia6hGU9aMX2g.
+VMmZ6nLXHkcOUmBTlZaSsQ.
+N3j7CW5JfJj7C6uL9PCVIm4U_NWRtAVjrnqnPRXIwhepaGoL-TQHeMyHveg5Uyg
+rPP_PBwk-VkwAyFBJClPNJ6cGSS_VN5a9Z60rxlXEQi8nBhCgQzA3wU1XMTHCs-
+QF.
+trBdLTmkE2mIPdA7eefNyQ
           ]]></artwork>
         </figure>
       </t>
@@ -672,19 +660,31 @@ PnWwSPZ6TWOHKQwCIIt1HcCLhXof1j4frx2IcLXjIQ0
     <section title="Document History" anchor="history">
       <t>
         <list style="hanging">
+          <t hangText="-02">
+            <list style="symbols">
+              <t>Incorporated changes suggested at the JOSE interim meeting on 2012-04-28:<vspace blankLines="1"/>
+                <list style="symbols">
+                  <t>Replaced JWE key encryption algorithm "PBES2-HS512+A256KW" with "PBES2-HS256+A256KW".<vspace blankLines="1"/></t>
+                  <t>Added considerations for password-based encryption algorithms around dictionary and brute force attacks.<vspace blankLines="1"/></t>
+                </list>
+              </t>
+              <t>Updated to latest versions of JOSE dependencies.<vspace blankLines="1"/></t>
+            </list>
+             
+          </t>
           <t hangText="-01">
             Incorporated changes suggested by Jim Schaad:<vspace blankLines="1"/>
             <list style="symbols">
-              <t>Expanded the acronym "JSON" on first use.</t>
-              <t>Expanded the introduction to explain how this document's protection of symmetric keys differs from <xref target="JWE"/>.</t>
-              <t>Expanded the introduction to better explain why password-based encryption algorithms are needed.</t>
-              <t>Moved information on PBKDF2 salt from the security considerations to the "s" JWK parameter definition.</t>
-              <t>Moved information on PBKDF2 iteration count from security considerations to the "c" JWK parameter definition.</t>
-              <t>Added the "hint" JWK parameter.</t>
-              <t>Explicitly noted what registries are updated by the IANA considerations.</t>
-              <t>Relaxed language around re-use of keying material.</t>
-              <t>Removed section discussing protected key lifetimes.</t>
-              <t>Improved recommendations around password lengths.</t>
+              <t>Expanded the acronym "JSON" on first use.<vspace blankLines="1"/></t>
+              <t>Expanded the introduction to explain how this document's protection of symmetric keys differs from <xref target="JWE"/>.<vspace blankLines="1"/></t>
+              <t>Expanded the introduction to better explain why password-based encryption algorithms are needed.<vspace blankLines="1"/></t>
+              <t>Moved information on PBKDF2 salt from the security considerations to the "s" JWK parameter definition.<vspace blankLines="1"/></t>
+              <t>Moved information on PBKDF2 iteration count from security considerations to the "c" JWK parameter definition.<vspace blankLines="1"/></t>
+              <t>Added the "hint" JWK parameter.<vspace blankLines="1"/></t>
+              <t>Explicitly noted what registries are updated by the IANA considerations.<vspace blankLines="1"/></t>
+              <t>Relaxed language around re-use of keying material.<vspace blankLines="1"/></t>
+              <t>Removed section discussing protected key lifetimes.<vspace blankLines="1"/></t>
+              <t>Improved recommendations around password lengths.<vspace blankLines="1"/></t>
             </list>
           </t>
           <t hangText="-00">Initial revision</t>
