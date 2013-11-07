@@ -1,0 +1,80 @@
+---
+title: Examples of Signing and Encrypting Data using JOSE
+abbrev: JOSE Cookbook
+docname: draft-miller-jose-cookbook-00
+date: 
+category: info
+
+ipr: trust200902
+area: Security
+workgroup: JOSE Working Group
+keyword: Internet-Draft
+
+stand_alone: yes
+pi: [toc, sortrefs, symrefs]
+
+author:
+ -
+    ins: M. Miller
+    name: Matthew Miller
+    org: Cisco Systems, Inc.
+    street: 1899 Wynkoop Street, Suite 600
+    city: Denver
+    region: CO
+    code: 80202
+    country: USA
+    phone: +1-303-308-3204
+    email: mamille2@cisco.com
+
+normative:
+    I-D.ietf-jose-json-web-algorithms:
+    I-D.ietf-jose-json-web-encryption:
+    I-D.ietf-jose-json-web-key:
+    I-D.ietf-jose-json-web-signature:
+
+--- abstract
+
+A set of examples of using JOSE to protect data.
+
+
+--- middle
+
+Introduction {#intro}
+============
+
+TBD
+
+
+Example Keys {#jwk}
+============
+
+TBD
+
+
+RSA Public Key {#jwk-rsapub}
+--------------
+
+
+RSA Private Key {#jwk-rsapriv}
+---------------
+
+
+Elliptic Curve Public Key {#jwk-ecpub}
+-------------------------
+
+
+Elliptic Curve Private Key {#jwk-ecpriv}
+--------------------------
+
+
+Symmetric Key {#jwk-oct}
+-------------
+
+
+Security Considerations {#security}
+=======================
+
+TBD
+
+
+--- back
