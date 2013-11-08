@@ -4,8 +4,8 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Informational                         November 07, 2013
-Expires: May 11, 2014
+Intended status: Informational                         November 08, 2013
+Expires: May 12, 2014
 
 
            Examples of Signing and Encrypting Data using JOSE
@@ -30,7 +30,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 11, 2014.
+   This Internet-Draft will expire on May 12, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                    Expires May 11, 2014                  [Page 1]
+Miller                    Expires May 12, 2014                  [Page 1]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
@@ -61,39 +61,172 @@ Internet-Draft                JOSE Cookbook                November 2013
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Example Keys  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     2.1.  RSA Public Key  . . . . . . . . . . . . . . . . . . . . .   2
-     2.2.  RSA Private Key . . . . . . . . . . . . . . . . . . . . .   2
-     2.3.  Elliptic Curve Public Key . . . . . . . . . . . . . . . .   2
-     2.4.  Elliptic Curve Private Key  . . . . . . . . . . . . . . .   2
-     2.5.  Symmetric Key . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  Security Considerations . . . . . . . . . . . . . . . . . . .   2
-   4.  Normative References  . . . . . . . . . . . . . . . . . . . .   2
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Considerations for Applications . . . . . . . . . . . . .   2
+   2.  Terminology and Conventions . . . . . . . . . . . . . . . . .   3
+   3.  JSON Web Key Examples . . . . . . . . . . . . . . . . . . . .   3
+     3.1.  RSA Public Key  . . . . . . . . . . . . . . . . . . . . .   3
+     3.2.  RSA Private Key . . . . . . . . . . . . . . . . . . . . .   3
+     3.3.  Elliptic Curve Public Key . . . . . . . . . . . . . . . .   3
+     3.4.  Elliptic Curve Private Key  . . . . . . . . . . . . . . .   3
+     3.5.  Symmetric Key . . . . . . . . . . . . . . . . . . . . . .   3
+     3.6.  Key Set . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     3.7.  Encrypted Key . . . . . . . . . . . . . . . . . . . . . .   3
+     3.8.  Encrypted Key Set . . . . . . . . . . . . . . . . . . . .   3
+   4.  JSON Web Signature Examples . . . . . . . . . . . . . . . . .   3
+     4.1.  RSA v1.5 Signature  . . . . . . . . . . . . . . . . . . .   3
+     4.2.  RSA-PSS Signature . . . . . . . . . . . . . . . . . . . .   3
+     4.3.  ECDSA Signature . . . . . . . . . . . . . . . . . . . . .   3
+     4.4.  HMAC-SHA2 Integrity Protection  . . . . . . . . . . . . .   3
+     4.5.  Protecting Specific Header Fields . . . . . . . . . . . .   3
+     4.6.  Protecting Content Only . . . . . . . . . . . . . . . . .   3
+     4.7.  Multiple Signatures . . . . . . . . . . . . . . . . . . .   3
+   5.  JSON Web Encryption Examples  . . . . . . . . . . . . . . . .   4
+     5.1.  Direct Encryption using AES-GCM . . . . . . . . . . . . .   4
+     5.2.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .   4
+     5.3.  Key Agreement with Key Wrapping using ECDH-ES and AES-KW
+           with AES-GCM  . . . . . . . . . . . . . . . . . . . . . .   4
+     5.4.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2 . . . . .   4
+     5.5.  Key Encryption using RSA-OAEP with A256GCM  . . . . . . .   4
+     5.6.  Key Wrap using PBES2-AES-KW with AES-CBC-HMAC-SHA2  . . .   4
+     5.7.  Key Wrap using AES-KW with AES-GCM  . . . . . . . . . . .   4
+     5.8.  Protecting Specific Header Fields . . . . . . . . . . . .   4
+     5.9.  Protecting Content Only . . . . . . . . . . . . . . . . .   4
+     5.10. Encryption for Multiple Recipients  . . . . . . . . . . .   4
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
+   7.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   5
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
 
-   TBD
+1.1.  Considerations for Applications
 
-2.  Example Keys
 
-   TBD
 
-2.1.  RSA Public Key
 
-2.2.  RSA Private Key
 
-2.3.  Elliptic Curve Public Key
 
-2.4.  Elliptic Curve Private Key
 
-2.5.  Symmetric Key
 
-3.  Security Considerations
 
-   TBD
+Miller                    Expires May 12, 2014                  [Page 2]
+
+Internet-Draft                JOSE Cookbook                November 2013
 
-4.  Normative References
+
+2.  Terminology and Conventions
+
+3.  JSON Web Key Examples
+
+3.1.  RSA Public Key
+
+3.2.  RSA Private Key
+
+3.3.  Elliptic Curve Public Key
+
+3.4.  Elliptic Curve Private Key
+
+3.5.  Symmetric Key
+
+3.6.  Key Set
+
+3.7.  Encrypted Key
+
+3.8.  Encrypted Key Set
+
+4.  JSON Web Signature Examples
+
+4.1.  RSA v1.5 Signature
+
+   RS256, all fields
+
+4.2.  RSA-PSS Signature
+
+   PS384, all fields
+
+4.3.  ECDSA Signature
+
+   ES256, all fields
+
+4.4.  HMAC-SHA2 Integrity Protection
+
+   HS256, all fields
+
+4.5.  Protecting Specific Header Fields
+
+   HS256, fields = ['alg']
+
+4.6.  Protecting Content Only
+
+   HS256, no fields
+
+4.7.  Multiple Signatures
+
+
+
+
+Miller                    Expires May 12, 2014                  [Page 3]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   multi-sign [RS256, HS256, ES256]
+
+5.  JSON Web Encryption Examples
+
+5.1.  Direct Encryption using AES-GCM
+
+   dir/A128GCM, all fields
+
+5.2.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2
+
+   ECDH-ES/A128CBC-HS256, all fields
+
+5.3.  Key Agreement with Key Wrapping using ECDH-ES and AES-KW with AES-
+      GCM
+
+   ECDH-ES+A128KW/A128GCM, all fields
+
+5.4.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2
+
+   RSA1_5/A128CBC-HS256, all fields
+
+5.5.  Key Encryption using RSA-OAEP with A256GCM
+
+   RSA-OAEP/A256GCM, all fields
+
+5.6.  Key Wrap using PBES2-AES-KW with AES-CBC-HMAC-SHA2
+
+   PBES2-HS512+A256KW/A128CBC-HS256, all fields
+
+5.7.  Key Wrap using AES-KW with AES-GCM
+
+   A256KW/A128GCM, all fields
+
+5.8.  Protecting Specific Header Fields
+
+   A256KW/A128GCM, fields = ['alg']
+
+5.9.  Protecting Content Only
+
+   A256KW/A128GCM, no fields
+
+5.10.  Encryption for Multiple Recipients
+
+   multi-encrypt [RSA1_5, ECDH-ES, A256KW]
+
+6.  Security Considerations
+
+
+
+
+
+Miller                    Expires May 12, 2014                  [Page 4]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+7.  Normative References
 
    [I-D.ietf-jose-json-web-algorithms]
               Jones, M., "JSON Web Algorithms (JWA)", draft-ietf-jose-
@@ -105,15 +238,6 @@ Table of Contents
               (work in progress), October 2013.
 
    [I-D.ietf-jose-json-web-key]
-
-
-
-
-Miller                    Expires May 11, 2014                  [Page 2]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
               Jones, M., "JSON Web Key (JWK)", draft-ietf-jose-json-web-
               key-17 (work in progress), October 2013.
 
@@ -121,6 +245,14 @@ Internet-Draft                JOSE Cookbook                November 2013
               Jones, M., Bradley, J., and N. Sakimura, "JSON Web
               Signature (JWS)", draft-ietf-jose-json-web-signature-17
               (work in progress), October 2013.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, October 2006.
+
+Appendix A.  Acknowledgements
 
 Author's Address
 
@@ -145,24 +277,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Miller                    Expires May 11, 2014                  [Page 3]
+Miller                    Expires May 12, 2014                  [Page 5]

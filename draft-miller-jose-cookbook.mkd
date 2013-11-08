@@ -26,11 +26,15 @@ author:
     phone: +1-303-308-3204
     email: mamille2@cisco.com
 
+informative:
+
 normative:
     I-D.ietf-jose-json-web-algorithms:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
+    RFC2119:
+    RFC4648:
 
 --- abstract
 
@@ -39,42 +43,137 @@ A set of examples of using JOSE to protect data.
 
 --- middle
 
-Introduction {#intro}
-============
-
-TBD
+# Introduction # {#intro}
 
 
-Example Keys {#jwk}
-============
-
-TBD
+## Considerations for Applications ## {#design}
 
 
-RSA Public Key {#jwk-rsapub}
---------------
+# Terminology and Conventions # {#terms}
 
 
-RSA Private Key {#jwk-rsapriv}
----------------
+# JSON Web Key Examples # {#jwk}
 
 
-Elliptic Curve Public Key {#jwk-ecpub}
--------------------------
+## RSA Public Key ## {#jwk-rsapub}
 
 
-Elliptic Curve Private Key {#jwk-ecpriv}
---------------------------
+## RSA Private Key ## {#jwk-rsapriv}
 
 
-Symmetric Key {#jwk-oct}
--------------
+## Elliptic Curve Public Key ## {#jwk-ecpub}
 
 
-Security Considerations {#security}
-=======================
+## Elliptic Curve Private Key ## {#jwk-ecpriv}
 
-TBD
+
+## Symmetric Key ## {#jwk-oct}
+
+
+## Key Set ## {#jwk-set}
+
+
+## Encrypted Key ## {#jwk-keyenc}
+
+
+## Encrypted Key Set ## {#jwk-keysetenc}
+
+
+# JSON Web Signature Examples # {#jws}
+
+
+## RSA v1.5 Signature ## {#jws-rsa}
+
+RS256, all fields
+
+
+## RSA-PSS Signature ## {#jws-rsapss}
+
+PS384, all fields
+
+
+## ECDSA Signature ## {#jws-ecdsa}
+
+ES256, all fields
+
+
+## HMAC-SHA2 Integrity Protection ## {#jws-hmac}
+
+HS256, all fields
+
+
+## Protecting Specific Header Fields ## {#jws-somefields}
+
+HS256, fields = \['alg'\]
+
+
+## Protecting Content Only ## {#jws-nofields}
+
+HS256, no fields
+
+
+## Multiple Signatures ## {#jws-multi}
+
+multi-sign \[RS256, HS256, ES256\]
+
+
+# JSON Web Encryption Examples # {#jwe}
+
+
+## Direct Encryption using AES-GCM ## {#jwe-dir_gcm}
+
+dir/A128GCM, all fields
+
+
+## Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2 ## {#jwe-ecdh}
+
+ECDH-ES/A128CBC-HS256, all fields
+
+
+## Key Agreement with Key Wrapping using ECDH-ES and AES-KW with AES-GCM ## {#jwe-ecdh_aeskw}
+
+ECDH-ES+A128KW/A128GCM, all fields
+
+
+## Key Encryption using RSA v1.5 and AES-HMAC-SHA2 ## {#jwe-rsa15}
+
+RSA1_5/A128CBC-HS256, all fields
+
+
+## Key Encryption using RSA-OAEP with A256GCM ## {#jwe-rsa_oaep}
+
+RSA-OAEP/A256GCM, all fields
+
+
+## Key Wrap using PBES2-AES-KW with AES-CBC-HMAC-SHA2 ## {#jwe-pbes2}
+
+PBES2-HS512+A256KW/A128CBC-HS256, all fields
+
+
+## Key Wrap using AES-KW with AES-GCM ## {#jwe-aeskw}
+
+A256KW/A128GCM, all fields
+
+
+## Protecting Specific Header Fields ## {#jwe-somefields}
+
+A256KW/A128GCM, fields = \['alg'\]
+
+
+## Protecting Content Only ## {#jwe-nofields}
+
+A256KW/A128GCM, no fields
+
+
+## Encryption for Multiple Recipients ## {#jwe-multi}
+
+multi-encrypt \[RSA1_5, ECDH-ES, A256KW\]
+
+
+# Security Considerations # {#security}
 
 
 --- back
+
+# Acknowledgements
+
