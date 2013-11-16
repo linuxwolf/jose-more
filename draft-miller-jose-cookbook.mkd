@@ -27,13 +27,10 @@ author:
     email: mamille2@cisco.com
 
 informative:
-
-normative:
     I-D.ietf-jose-json-web-algorithms:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
-    RFC2119:
     RFC4648:
 
 --- abstract
@@ -46,78 +43,646 @@ A set of examples of using JOSE to protect data.
 # Introduction # {#intro}
 
 
-## Considerations for Applications ## {#design}
+## Considerations for Applications ## {#intro-design}
 
 
-# Terminology and Conventions # {#terms}
+## Conventions Used in this Document ## {#intro-conventions}
+
+Unless otherwise stated, all examples include both the Compact and JSON serializations.
+
+All of the examples in this document include whitespace to improve formatting and readability.  Unless otherwise specified, whitespace is not part of the cryptographic operations.
 
 
-# JSON Web Key Examples # {#jwk}
+# Terminology  # {#terms}
 
-
-## RSA Public Key ## {#jwk-rsapub}
-
-
-## RSA Private Key ## {#jwk-rsapriv}
-
-
-## Elliptic Curve Public Key ## {#jwk-ecpub}
-
-
-## Elliptic Curve Private Key ## {#jwk-ecpriv}
-
-
-## Symmetric Key ## {#jwk-oct}
-
-
-## Key Set ## {#jwk-set}
-
-
-## Encrypted Key ## {#jwk-keyenc}
-
-
-## Encrypted Key Set ## {#jwk-keysetenc}
-
+This document inherits terminology regarding JSON Web Key (JWK) technology from {{I-D.ietf-jose-json-web-key}}, terminology regarding JSON Web Signature (JWS) technology from {{I-D.ietf-jose-json-web-signature}}, terminology regarding JSON Web Encryption (JWE) technology from {{I-D.ietf-jose-json-web-encryption}}, and terminology regarding algorithms from {{I-D.ietf-jose-json-web-algorithms}}.
 
 # JSON Web Signature Examples # {#jws}
 
+The following sections demonstrate how to generate various JWS structures.
+
+## Keys Used ## {#jws-key}
+
+The following keys, formatted here as JWK objects, are used to generate the signatures in the succeeding sections.
+
+### RSA 2048-bit Private Key ### {#jws-key-rsa}
+~~~~~~~~~~
+{
+  "kty": "RSA",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "sig",
+  "n":   "n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rH
+          VTeT-O-XV2jRojdNhxJWTDvNd7nqQ0VEiZQHz_AJmSCpMaJMRB
+          SFKrKb2wqVwGU_NsYOYL-QtiWN2lbzcEe6XC0dApr5ydQLrHqk
+          HHig3RBordaZ6Aj-oBHqFEHYpPe7Tpe-OfVfHd1E6cS6M1FZcD
+          1NNLYD5lFHpPI9bTwJlsde3uhGqC0ZCuEHg8lhzwOHrtIQbS0F
+          Vbb9k3-tVTU4fg_3L_vniUFAKwuCLqKnS2BYwdq_mzSnbLY7h_
+          qixoR7jig3__kRhuaxwUkRz5iaiQkqgc5gHdrNP5zw",
+  "e":   "AQAB",
+  "d":   "bWUC9B-EFRIo8kpGfh0ZuyGPvMNKvYWNtB_ikiH9k20eT-O1q_
+          I78eiZkpXxXQ0UTEs2LsNRS-8uJbvQ-A1irkwMSMkK1J3XTGgd
+          rhCku9gRldY7sNA_AKZGh-Q661_42rINLRCe8W-nZ34ui_qOfk
+          LnK9QWDDqpaIsA-bMwWWSDFu2MUBYwkHTMEzLYGqOe04noqeq1
+          hExBTHBOBdkMXiuFhUq1BU6l-DqEiWxqg82sXt2h-LMnT3046A
+          OYJoRioz75tSUQfGCshWTBnP5uDjd18kKhyv07lhfSJdrPdM5P
+          lyl21hsFf4L_mHCuoFau7gdsPfHPxxjVOcOpBrQzwQ",
+  "p":   "3Slxg_DwTXJcb6095RoXygQCAZ5RnAvZlno1yhHtnUex_fp7AZ
+          _9nRaO7HX_-SFfGQeutao2TDjDAWU4Vupk8rw9JR0AzZ0N2fvu
+          IAmr_WCsmGpeNqQnev1T7IyEsnh8UMt-n5CafhkikzhEsrmndH
+          6LxOrvRJlsPp6Zv8bUq0k",
+  "q":   "uKE2dh-cTf6ERF4k4e_jy78GfPYUIaUyoSSJuBzp3Cubk3OCqs
+          6grT8bR_cu0Dm1MZwWmtdqDyI95HrUeq3MP15vMMON8lHTeZu2
+          lmKvwqW7anV5UzhM1iZ7z4yMkuUwFWoBvyY898EXvRD-hdqRxH
+          lSqAZ192zB3pVFJ0s7pFc",
+  "dp":  "B8PVvXkvJrj2L-GYQ7v3y9r6Kw5g9SahXBwsWUzp19TVlgI-YV
+          85q1NIb1rxQtD-IsXXR3-TanevuRPRt5OBOdiMGQp8pbt26glj
+          YfKU_E9xn-RULHz0-ed9E9gXLKD4VGngpz-PfQ_q29pk5xWHoJ
+          p009Qf1HvChixRX59ehik",
+  "dq":  "CLDmDGduhylc9o7r84rEUVn7pzQ6PF83Y-iBZx5NT-TpnOZKF1
+          pErAMVeKzFEl41DlHHqqBLSM0W1sOFbwTxYWZDm6sI6og5iTbw
+          QGIC3gnJKbi_7k_vJgGHwHxgPaX2PnvP-zyEkDERuf-ry4c_Z1
+          1Cq9AqC2yeL6kdKT1cYF8",
+  "qi":  "3PiqvXQN0zwMeE-sBvZgi289XP9XCQF3VWqPzMKnIgQp7_Tugo
+          6-NZBKCQsMf3HaEGBjTVJs_jcK8-TRXvaKe-7ZMaQj8VfBdYks
+          sbu0NKDDhjJ-GtiseaDVWt7dcH0cfwxgFUHpQh7FoCrjFJ6h6Z
+          EpMF6xmujs4qMpPz8aaI4"
+}
+~~~~~~~~~~
+
+### Elliptic Curve P-521 Private Key ### {#jws-key-ec}
+~~~~~~~~~~
+{
+  "kty": "EC",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "sig",
+  "crv": "P-521",
+  "x":   "AWgtjGfmvSMhpGCMPuzQ6azSdC9YrtigFVVNE0ZrOBr1v2zLVC
+          XD3KvRnY10OiDyfRCPsXD2zfGC5rSw_botidXb",
+  "y":   "AS7At94ZHgiR7gCF525ARfmSWEW8ITW99N5XQ7xmG_yQ_DFx5L
+          0z5GLa0mHidjuJ5vNBkXAbEmCCqkgIaWGRf48C",
+  "d":   "AHGTtSfiB9EWgcpE-2Ya91mutYRGV8WoZ0R0JJ3djgXCPXAs3g
+          K4H8_S5EzOseys5CkjYxclu0yqbcuDtEHhwKVD"
+}
+~~~~~~~~~~
+
+### AES 256-bit Symmetric Key ### {#jws-key-aes}
+~~~~~~~~~~
+{
+  "kty": "oct",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
+  "use": "sig",
+  "k":   "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
+}
+~~~~~~~~~~
 
 ## RSA v1.5 Signature ## {#jws-rsa}
 
-RS256, all fields
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
 
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "RS256",
+  "kid": "bilbo.baggins@hobbiton.example"
+}
+~~~~~~~~~~
+{: title="Protected JWS Header JSON" }
+
+~~~~~~~~~~
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
+hhbXBsZSJ9
+~~~~~~~~~~
+{: title="Protected JWS Header, base64url-encoded" }
+
+~~~~~~~~~~
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
+hhbXBsZSJ9
+.
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+.
+jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
+8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweDy8L_6XBy6JjcxGne_o
+GDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuMpkd675wX8lPtiiEmswOqph6aCtA
+LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
+-UR_XcxxvQ1b7gYAhh5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxW
+dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
+~~~~~~~~~~
+{: title="Compact Serialization" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "protected":
+        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
+         ml0b24uZXhhbXBsZSJ9",
+      "signature":
+        "jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmIN
+         xPHuBZyNb8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweD
+         y8L_6XBy6JjcxGne_oGDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuM
+         pkd675wX8lPtiiEmswOqph6aCtALnBDMTUOlFzPpOb6B6OXctf4AG
+         1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R-UR_XcxxvQ1b7gYAh
+         h5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxWdD6kVwiE
+         IYeHPT4uhaRe2XgbTSx2pTQg"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 ## RSA-PSS Signature ## {#jws-rsapss}
 
-PS384, all fields
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
 
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "PS384",
+  "kid": "bilbo.baggins@hobbiton.example"
+}
+~~~~~~~~~~
+{: title="Protected JWS Header JSON" }
+
+~~~~~~~~~~
+eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
+hhbXBsZSJ9
+~~~~~~~~~~
+{: title="Protected JWS Header, base64url-encoded" }
+
+~~~~~~~~~~
+eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
+hhbXBsZSJ9
+.
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+.
+kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQlT698iBkiy
+wXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1AaphZObG94tYCdyQlwdrCy
+lBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rAUK9VL_HmKRcjo2dQ_VRfbaCSmmI
+-aohWvcdptMyI6kZhHL_zLCOWO5RoY5YWV42u46ZdW-e06QgBZkzdHEmS2Aimx
+EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
+6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
+~~~~~~~~~~
+{: title="Compact Serialization" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "protected":
+        "eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
+         ml0b24uZXhhbXBsZSJ9",
+      "signature":
+        "kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQl
+         T698iBkiywXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1Aaph
+         ZObG94tYCdyQlwdrCylBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rA
+         UK9VL_HmKRcjo2dQ_VRfbaCSmmI-aohWvcdptMyI6kZhHL_zLCOWO
+         5RoY5YWV42u46ZdW-e06QgBZkzdHEmS2AimxEIy6PamU6FKvRLR3s
+         8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU6jN1AwrF
+         Gwe7kd33X6AX9CaMtOJaUZVw"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 ## ECDSA Signature ## {#jws-ecdsa}
 
-ES256, all fields
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
 
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "ES512",
+  "kid": "bilbo.baggins@hobbiton.example"
+}
+~~~~~~~~~~
+{: title="Protected JWS Header JSON" }
+
+~~~~~~~~~~
+eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
+hhbXBsZSJ9
+~~~~~~~~~~
+{: title="Protected JWS Header, base64url-encoded" }
+
+~~~~~~~~~~
+eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
+hhbXBsZSJ9
+.
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3V
+yIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9uJ3
+Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3Ugb
+WlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+.
+GLXQcuBYt1CmfDN65H9cv1YO0WlcyQGZP7GoKTZvlwckZqA5i42qfP-X8XSPnF
+YEUuWAzgw3v6VbIipgFZdYaAgdbKp1zw_mqo5cSsg3kXdfYVA5RwvWHoZ9peCi
+USw8dGzt9_jPzdl_P4HH0mxpySZxDC6RxPxEhY79muYSaLfSvA
+~~~~~~~~~~
+{: title="Compact Serialization" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG9 1
+     dCB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZ
+     iB5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2
+     luZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "protected":
+        "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
+         ml0b24uZXhhbXBsZSJ9",
+      "signature":
+        "GLXQcuBYt1CmfDN65H9cv1YO0WlcyQGZP7GoKTZvlwckZqA5i42qf
+         P-X8XSPnFYEUuWAzgw3v6VbIipgFZdYaAgdbKp1zw_mqo5cSsg3kX
+         dfYVA5RwvWHoZ9peCiUSw8dGzt9_jPzdl_P4HH0mxpySZxDC6RxPx
+         EhY79muYSaLfSvA"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 ## HMAC-SHA2 Integrity Protection ## {#jws-hmac}
 
-HS256, all fields
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "HS256",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
+~~~~~~~~~~
+{: title="Protected JWS Header JSON" }
+
+~~~~~~~~~~
+eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
+VlZjMxNGJjNzAzNyJ9
+~~~~~~~~~~
+{: title="Protected JWS Header, base64url-encoded" }
+
+~~~~~~~~~~
+eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
+VlZjMxNGJjNzAzNyJ9
+.
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+.
+BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
+~~~~~~~~~~
+{: title="Compact Serialization" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "protected":
+        "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxY
+         i1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+      "signature":
+        "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 
 ## Protecting Specific Header Fields ## {#jws-somefields}
 
-HS256, fields = \['alg'\]
+This example illustrates a signature where only certain header parameters are protected.  Since this example contains both unprotected and protected header parameters, only the JSON serialization is possible.
+
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "HS256"
+}
+~~~~~~~~~~
+{: title="Protected JWS Header JSON" }
+
+~~~~~~~~~~
+eyJhbGciOiJIUzI1NiJ9
+~~~~~~~~~~
+{: title="Protected JWS Header, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
+~~~~~~~~~~
+{: title="Unprotected JWS Header JSON" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "protected":
+        "eyJhbGciOiJIUzI1NiJ9",
+      "header": {
+        "kid":
+          "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+      },
+      "signature":
+        "LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 
 ## Protecting Content Only ## {#jws-nofields}
 
-HS256, no fields
+This example illustrates a signature where none of the header parameters are protected.  Since this example contains only unprotected header parameters, only the JSON serialization is possible.
+
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "HS256",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
+~~~~~~~~~~
+{: title="Unprotected JWS Header JSON" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "header": {
+        "alg":
+          "HS256",
+        "kid":
+          "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+      },
+      "signature":
+        "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 
 ## Multiple Signatures ## {#jws-multi}
+This example illustrates multiple signatures applied to the same payload.  Since this example contains more than one signature, only the JSON serialization is possible.
 
-multi-sign \[RS256, HS256, ES256\]
+**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+~~~~~~~~~~
+{
+  "alg": "RS256",
+  "kid": "bilbo.baggins@hobbiton.example"
+}
+~~~~~~~~~~
+{: title="Unprotected JWS Header JSON, first signature" }
+
+~~~~~~~~~~
+{
+  "alg": "ES512",
+  "kid": "bilbo.baggins@hobbiton.example"
+}
+~~~~~~~~~~
+{: title="Unprotected JWS Header JSON, second signature" }
+
+~~~~~~~~~~
+{
+  "alg": "HS256",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
+~~~~~~~~~~
+{: title="Unprotected JWS Header JSON, third signature" }
+
+~~~~~~~~~~
+{
+  "payload":
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "signatures": [
+    {
+      "header": {
+        "alg": "RS256",
+        "kid": "bilbo.baggins@hobbiton.example"
+      },
+      "signature":
+        "ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVka
+         nmE1vzQX3Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIi
+         PTkw1iWGYUsKOHFEWyQ3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4w
+         F3f2s0RWpm8jUC5u-1KPwqFmGR3JsDxIIITaD7DbLxPN3Cm7e4JLi
+         reOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkfn118HQ4hwGsTg_24Z
+         siV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N5m4zLwlj
+         EWssVakmr__aq7MUBniv5vtA"
+    },
+    {
+      "header": {
+        "alg": "ES512",
+        "kid": "bilbo.baggins@hobbiton.example"
+      },
+      "signature":
+        "GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1Y
+         Rp9mBn7wqUkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_u
+         sLDyzlSh2UCW-jF6WAH1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLf
+         DoA1hEyUoqeY50A"
+    },
+    {
+      "header": {
+        "alg": "HS256",
+        "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+      },
+      "signature":
+        "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+    }
+  ]
+}
+~~~~~~~~~~
+{: title="JSON Serialization" }
 
 
 # JSON Web Encryption Examples # {#jwe}
+
+The following sections demonstrate how to generate various JWE structures.
+
+## Keys Used ## {#jwe-key}
+The following keys, formatted as JWK objects, are used in generating the JWE objects in the succeeding sections.
+
+### RSA 2048-bit Public Key ### {#jwe-key-rsa}
+
+~~~~~~~~~~
+{
+  "kty": "RSA",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "enc",
+  "n":   "88ZUlSk8RDjppfHWkDi6spirlyvunqMXQ53Qneq4MayiYqbHcc
+          ptRCRYDFtu8U4nw9rtcCj34NlGj8Emay8vDjogP-7FJgUyAPH5
+          qYabt1U14x4OooG0YTcu9HC_ecZRX2lDpFJ9ZGG3VVCfHLLW5z
+          GjUAAbHOJMh2TzP3xGKtrDuW-YebkoW_WhajMywqnWWFl2lq99
+          yodfxuWzCxDEHzKQtE-5UiWPeJCzXT6ZZkauNsvteWUOlhgSBk
+          _JnJ6bFguqT-Kurfchzp5Y1eVMYo-U2jiTRdZiijMVsDZLy3KZ
+          td-IiwFeusutbAmKoP-hW00gDLAMBaWcvjS2jBYPzw",
+  "e":   "AQAB"
+}
+~~~~~~~~~~
+
+### Elliptic Curve P-521 Public Key ### {#jwe-key-ec}
+~~~~~~~~~~
+{
+  "kty": "EC",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "enc",
+  "crv": "P-521",
+  "x":   "AHJHYDDnu83m5UqbNuWbbcwaGZURUHolt6PY3SA3tHSZ7y9fmb
+          kN-lyfLQ8Spi--j6yhO_0hrpDx0d_XLu7Gqrkq",
+  "y":   "AWj8ynYbIOIFM3eAlzKgxf_yfiwzTnRAv8lsiyuX2D6_XKmPjg
+          gzKrICzUx8VlBqa3rlezcg-4jJiHDGCGvTXCS7"
+}
+~~~~~~~~~~
+
+### AES 256-bit Symmetric Key ### {#jwe-key-aes}
+~~~~~~~~~~
+{
+  "kty": "oct",
+  "kid": "17427a21-c949-4fbd-b097-63157044d2e6",
+  "use": "enc",
+  "k":   "yWjguksj8uHX2rht7Vh9u2uLSsogRDCzO7PWvHpWxL8"
+}
+~~~~~~~~~~
 
 
 ## Direct Encryption using AES-GCM ## {#jwe-dir_gcm}
@@ -130,7 +695,7 @@ dir/A128GCM, all fields
 ECDH-ES/A128CBC-HS256, all fields
 
 
-## Key Agreement with Key Wrapping using ECDH-ES and AES-KW with AES-GCM ## {#jwe-ecdh_aeskw}
+## Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with AES-GCM ## {#jwe-ecdh_aeskw}
 
 ECDH-ES+A128KW/A128GCM, all fields
 
@@ -145,14 +710,19 @@ RSA1_5/A128CBC-HS256, all fields
 RSA-OAEP/A256GCM, all fields
 
 
-## Key Wrap using PBES2-AES-KW with AES-CBC-HMAC-SHA2 ## {#jwe-pbes2}
+## Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 ## {#jwe-pbes2}
 
 PBES2-HS512+A256KW/A128CBC-HS256, all fields
 
 
-## Key Wrap using AES-KW with AES-GCM ## {#jwe-aeskw}
+## Key Wrap using AES-KeyWrap with AES-GCM ## {#jwe-aeskw}
 
 A256KW/A128GCM, all fields
+
+
+## Compressed Content ## {#jwe-compressed}
+
+A256KW/A128GCM, all fields, {'zip':'DEF'}
 
 
 ## Protecting Specific Header Fields ## {#jwe-somefields}
@@ -167,13 +737,21 @@ A256KW/A128GCM, no fields
 
 ## Encryption for Multiple Recipients ## {#jwe-multi}
 
-multi-encrypt \[RSA1_5, ECDH-ES, A256KW\]
+multi-encrypt \{RSA1_5, ECDH-ES+A256KW, A256KW\}
 
 
 # Security Considerations # {#security}
+
+
+# IANA Considerations # {#iana}
+
+This document has no actions for IANA.
 
 
 --- back
 
 # Acknowledgements
 
+Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.
+
+Most of the signature payload content and encrypted plaintext content are quotes from the series of novels collectively known as "The Lord of the Rigns", written by J. R. R. Tolkien.
