@@ -69,36 +69,29 @@ Table of Contents
      3.3.  RSA-PSS Signature . . . . . . . . . . . . . . . . . . . .   6
      3.4.  ECDSA Signature . . . . . . . . . . . . . . . . . . . . .   8
      3.5.  HMAC-SHA2 Integrity Protection  . . . . . . . . . . . . .  10
-     3.6.  Protecting Specific Header Fields . . . . . . . . . . . .  11
+     3.6.  Protecting Specific Header Fields . . . . . . . . . . . .  12
      3.7.  Protecting Content Only . . . . . . . . . . . . . . . . .  13
      3.8.  Multiple Signatures . . . . . . . . . . . . . . . . . . .  14
    4.  JSON Web Encryption Examples  . . . . . . . . . . . . . . . .  16
-     4.1.  Keys Used . . . . . . . . . . . . . . . . . . . . . . . .  16
-       4.1.1.  RSA 2048-bit Public Key . . . . . . . . . . . . . . .  16
-       4.1.2.  RSA 4096-bit Public Key . . . . . . . . . . . . . . .  17
-       4.1.3.  Elliptic Curve P-256 Public Key . . . . . . . . . . .  17
-       4.1.4.  Elliptic Curve P-384 Public Key . . . . . . . . . . .  17
-       4.1.5.  AES 128-bit Symmetric Key for Content Encryption  . .  18
-       4.1.6.  AES 128-bit Symmetric Key . . . . . . . . . . . . . .  18
-       4.1.7.  AES 256-bit Symmetric Key . . . . . . . . . . . . . .  18
-     4.2.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  18
-     4.3.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  20
-     4.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-
-           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  22
-     4.5.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2 . . . . .  25
-     4.6.  Key Encryption using RSA-OAEP with A256GCM  . . . . . . .  27
-     4.7.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  30
-     4.8.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  32
-     4.9.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  34
-     4.10. Compressed Content  . . . . . . . . . . . . . . . . . . .  36
-     4.11. Protecting Specific Header Fields . . . . . . . . . . . .  38
-     4.12. Protecting Content Only . . . . . . . . . . . . . . . . .  39
-     4.13. Encryption to Multiple Recipients . . . . . . . . . . . .  41
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  44
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  44
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  44
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  44
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  44
+     4.1.  Plaintext Content . . . . . . . . . . . . . . . . . . . .  16
+     4.2.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2 . . . . .  17
+     4.3.  Key Encryption using RSA-OAEP with A256GCM  . . . . . . .  20
+     4.4.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  24
+     4.5.  Key Agreement with Key Wrapping using ECDH-ES and AES-
+           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  27
+     4.6.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  31
+     4.7.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  34
+     4.8.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  36
+     4.9.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  39
+     4.10. Compressed Content  . . . . . . . . . . . . . . . . . . .  41
+     4.11. Protecting Specific Header Fields . . . . . . . . . . . .  44
+     4.12. Protecting Content Only . . . . . . . . . . . . . . . . .  45
+     4.13. Encryption to Multiple Recipients . . . . . . . . . . . .  47
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  50
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  50
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  50
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  50
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  51
 
 1.  Introduction
 
@@ -106,6 +99,13 @@ Table of Contents
    JSON Web Key (JWK) [I-D.ietf-jose-json-web-key], JSON Web Signature
    (JWS) [I-D.ietf-jose-json-web-signature], JSON Web Encryption (JWE)
    [I-D.ietf-jose-json-web-encryption], and JSON Web Algorithms (JWA)
+   [I-D.ietf-jose-json-web-algorithms] - collectively can be used to
+   protect content in a myriad of ways.  The full set of permutations is
+   extremely large, and might be daunting to some.
+
+   This document provides a number of examples of signing or encrypting
+   content using JOSE.  While not exhaustive, it does compile together a
+   representative sample of JOSE features.  As much as possible, the
 
 
 
@@ -114,13 +114,6 @@ Miller                    Expires May 23, 2014                  [Page 2]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   [I-D.ietf-jose-json-web-algorithms] - collectively can be used to
-   protect content in a myriad of ways.  The full set of permutations is
-   extremely large, and might be daunting to some.
-
-   This document provides a number of examples of signing or encrypting
-   content using JOSE.  While not exhaustive, it does compile together a
-   representative sample of JOSE features.  As much as possible, the
    same signature payload or encryption plaintext content is used to
    illustrate differences in various signing and encryption results.
 
@@ -152,7 +145,7 @@ Internet-Draft                JOSE Cookbook                November 2013
 3.  JSON Web Signature Examples
 
    The following sections demonstrate how to generate various JWS
-   structures.
+   objects.
 
 3.1.  Payload Content
 
@@ -162,6 +155,13 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    It's a dangerous business, Frodo, going out your door. You
    step onto the road, and if you don't keep your feet, there's
+   no knowing where you might be swept off to.
+
+                         Payload content plaintext
+
+   The Payload encoded as [RFC4648] base64url:
+
+
 
 
 
@@ -169,12 +169,6 @@ Miller                    Expires May 23, 2014                  [Page 3]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
-
-   no knowing where you might be swept off to.
-
-                         Payload content plaintext
-
-   The Payload encoded as [RFC4648] base64url:
 
    SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
    VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
@@ -218,6 +212,12 @@ Internet-Draft                JOSE Cookbook                November 2013
              lmKvwqW7anV5UzhM1iZ7z4yMkuUwFWoBvyY898EXvRD-hdqRxH
              lSqAZ192zB3pVFJ0s7pFc",
      "dp":  "B8PVvXkvJrj2L-GYQ7v3y9r6Kw5g9SahXBwsWUzp19TVlgI-YV
+             85q1NIb1rxQtD-IsXXR3-TanevuRPRt5OBOdiMGQp8pbt26glj
+             YfKU_E9xn-RULHz0-ed9E9gXLKD4VGngpz-PfQ_q29pk5xWHoJ
+             p009Qf1HvChixRX59ehik",
+     "dq":  "CLDmDGduhylc9o7r84rEUVn7pzQ6PF83Y-iBZx5NT-TpnOZKF1
+             pErAMVeKzFEl41DlHHqqBLSM0W1sOFbwTxYWZDm6sI6og5iTbw
+             QGIC3gnJKbi_7k_vJgGHwHxgPaX2PnvP-zyEkDERuf-ry4c_Z1
 
 
 
@@ -226,12 +226,6 @@ Miller                    Expires May 23, 2014                  [Page 4]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-             85q1NIb1rxQtD-IsXXR3-TanevuRPRt5OBOdiMGQp8pbt26glj
-             YfKU_E9xn-RULHz0-ed9E9gXLKD4VGngpz-PfQ_q29pk5xWHoJ
-             p009Qf1HvChixRX59ehik",
-     "dq":  "CLDmDGduhylc9o7r84rEUVn7pzQ6PF83Y-iBZx5NT-TpnOZKF1
-             pErAMVeKzFEl41DlHHqqBLSM0W1sOFbwTxYWZDm6sI6og5iTbw
-             QGIC3gnJKbi_7k_vJgGHwHxgPaX2PnvP-zyEkDERuf-ry4c_Z1
              1Cq9AqC2yeL6kdKT1cYF8",
      "qi":  "3PiqvXQN0zwMeE-sBvZgi289XP9XCQF3VWqPzMKnIgQp7_Tugo
              6-NZBKCQsMf3HaEGBjTVJs_jcK8-TRXvaKe-7ZMaQj8VfBdYks
@@ -257,8 +251,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                   Protected JWS Header, base64url-encoded
 
-   Combining Protected JWS Header and Payload content (base64url-
-   encoded) produces the following signature:
+   Performing the signature operation over the combined protected JWS
+   header (base64url-encoded) and Payload content (base64url-encoded)
+   produces the following signature:
 
    jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
    8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweDy8L_6XBy6JjcxGne_o
@@ -274,6 +269,11 @@ Internet-Draft                JOSE Cookbook                November 2013
    eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
    hhbXBsZSJ9
    .
+   SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+   VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+   J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+   UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+   .
 
 
 
@@ -282,11 +282,6 @@ Miller                    Expires May 23, 2014                  [Page 5]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-   VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-   J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-   UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-   .
    jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
    8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweDy8L_6XBy6JjcxGne_o
    GDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuMpkd675wX8lPtiiEmswOqph6aCtA
@@ -331,17 +326,17 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    The protected JWS Header parameters:
 
+   {
+     "alg": "PS384",
+     "kid": "bilbo.baggins@hobbiton.example"
+   }
+
 
 
 Miller                    Expires May 23, 2014                  [Page 6]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
-
-   {
-     "alg": "PS384",
-     "kid": "bilbo.baggins@hobbiton.example"
-   }
 
                          Protected JWS Header JSON
 
@@ -352,8 +347,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                   Protected JWS Header, base64url-encoded
 
-   Combining Protected JWS Header and Payload content (base64url-
-   encoded) produces the following signature:
+   Performing the signature operation over the combined protected JWS
+   header (base64url-encoded) and Payload content (base64url-encoded)
+   produces the following signature:
 
    kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQlT698iBkiy
    wXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1AaphZObG94tYCdyQlwdrCy
@@ -386,6 +382,10 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    {
      "payload":
+       "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+        CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+        B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+        uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
 
 
 
@@ -394,10 +394,6 @@ Miller                    Expires May 23, 2014                  [Page 7]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-       "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-        CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-        B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-        uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
      "signatures": [
        {
          "protected":
@@ -445,6 +441,10 @@ Internet-Draft                JOSE Cookbook                November 2013
 
 
 
+
+
+
+
 Miller                    Expires May 23, 2014                  [Page 8]
 
 Internet-Draft                JOSE Cookbook                November 2013
@@ -464,8 +464,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                   Protected JWS Header, base64url-encoded
 
-   Combining Protected JWS Header and Payload content (base64url-
-   encoded) produces the following signature:
+   Performing the signature operation over the combined protected JWS
+   header (base64url-encoded) and Payload content (base64url-encoded)
+   produces the following signature:
 
    GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
    dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
@@ -497,7 +498,6 @@ Internet-Draft                JOSE Cookbook                November 2013
         CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
         B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
         uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
-     "signatures": [
 
 
 
@@ -506,6 +506,7 @@ Miller                    Expires May 23, 2014                  [Page 9]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
+     "signatures": [
        {
          "protected":
            "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
@@ -526,7 +527,7 @@ Internet-Draft                JOSE Cookbook                November 2013
    This example illustrates integrity protecting content using the
    "HS256" (HMAC-SHA-256) algorithm.
 
-   The following AES symmetric keys is used (formatted as a JWK object):
+   The following AES symmetric key is used (formatted as a JWK object):
 
    {
      "kty": "oct",
@@ -556,14 +557,14 @@ Internet-Draft                JOSE Cookbook                November 2013
 
 
 
-
 Miller                    Expires May 23, 2014                 [Page 10]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   Combining Protected JWS Header and Payload content (base64url-
-   encoded) produces the following signature:
+   Performing the signature operation over the combined protected JWS
+   header (base64url-encoded) and Payload content (base64url-encoded)
+   produces the following signature:
 
    BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
 
@@ -604,12 +605,11 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                             JSON Serialization
 
-3.6.  Protecting Specific Header Fields
 
-   This example illustrates a signature where only certain header
-   parameters are protected.  Since this example contains both
-   unprotected and protected header parameters, only the JSON
-   serialization is possible.
+
+
+
+
 
 
 
@@ -617,6 +617,13 @@ Miller                    Expires May 23, 2014                 [Page 11]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
+
+3.6.  Protecting Specific Header Fields
+
+   This example illustrates a signature where only certain header
+   parameters are protected.  Since this example contains both
+   unprotected and protected header parameters, only the JSON
+   serialization is possible.
 
    This example uses the AES symmetric key from Section 3.5.
 
@@ -642,8 +649,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                   Protected JWS Header, base64url-encoded
 
-   Combining the Protected JWS header and Payload content (base64url-
-   encoded) produces the following signature:
+   Performing the signature operation over the combined protected JWS
+   header and Payload content (base64url-encoded) produces the following
+   signature:
 
    LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM
 
@@ -658,14 +666,6 @@ Internet-Draft                JOSE Cookbook                November 2013
         B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
         uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
      "signatures": [
-       {
-         "protected":
-           "eyJhbGciOiJIUzI1NiJ9",
-         "header": {
-           "kid":
-             "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-         },
-         "signature":
 
 
 
@@ -674,6 +674,14 @@ Miller                    Expires May 23, 2014                 [Page 12]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
+       {
+         "protected":
+           "eyJhbGciOiJIUzI1NiJ9",
+         "header": {
+           "kid":
+             "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+         },
+         "signature":
            "LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM"
        }
      ]
@@ -699,8 +707,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                         Unprotected JWS Header JSON
 
-   Combining the empty Protected JWS header with the Payload content
-   (base64url-encoded) produces the following signature:
+   Performing the signature operation over the combined empty protected
+   JWS header and Payload content (base64url-encoded) produces the
+   following signature:
 
    RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
 
@@ -713,6 +722,14 @@ Internet-Draft                JOSE Cookbook                November 2013
        "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
         CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
         B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+
+
+
+Miller                    Expires May 23, 2014                 [Page 13]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
         uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
      "signatures": [
        {
@@ -722,14 +739,6 @@ Internet-Draft                JOSE Cookbook                November 2013
            "kid":
              "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
          },
-
-
-
-Miller                    Expires May 23, 2014                 [Page 13]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
          "signature":
            "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
        }
@@ -756,9 +765,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                  Signature #1 unprotected JWS Header JSON
 
-   Combining the empty Protected JWS header for the first signature with
-   the Payload content (base64url-encoded) produces the following
-   signature:
+   Performing the first signature operation over the combined empty
+   protected JWS header and the Payload content (base64url-encoded)
+   produces the following signature:
 
    ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1vzQX3
    Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIiPTkw1iWGYUsKOHFEWy
@@ -769,6 +778,14 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                       Signature #1, base64url-encoded
 
+
+
+
+Miller                    Expires May 23, 2014                 [Page 14]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
    The unprotected JWS header parameters for the second signature:
 
    {
@@ -778,17 +795,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                Unprotected JWS Header JSON, second signature
 
-
-
-
-Miller                    Expires May 23, 2014                 [Page 14]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   Combining the empty Protected JWS header for the second signature
-   with the Payload content (base64url-encoded) produces the following
-   signature:
+   Performing the second signature operation over the combined empty
+   Protected JWS header and Payload content (base64url-encoded) produces
+   the following signature:
 
    GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1YRp9mBn7wq
    UkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh2UCW-jF6WA
@@ -805,9 +814,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                Unprotected JWS Header JSON, third signature
 
-   Combining the empty Protected JWS header for the second signature
-   with the Payload content (base64url-encoded) produces the following
-   signature:
+   Performing the third signature operation over the combined empty
+   Protected JWS header and Payload content (base64url-encoded) produces
+   the following signature:
 
    RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
 
@@ -825,6 +834,14 @@ Internet-Draft                JOSE Cookbook                November 2013
        {
          "header": {
            "alg": "RS256",
+
+
+
+Miller                    Expires May 23, 2014                 [Page 15]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
            "kid": "bilbo.baggins@hobbiton.example"
          },
          "signature":
@@ -834,14 +851,6 @@ Internet-Draft                JOSE Cookbook                November 2013
             F3f2s0RWpm8jUC5u-1KPwqFmGR3JsDxIIITaD7DbLxPN3Cm7e4JLi
             reOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkfn118HQ4hwGsTg_24Z
             siV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N5m4zLwlj
-
-
-
-Miller                    Expires May 23, 2014                 [Page 15]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
             EWssVakmr__aq7MUBniv5vtA"
        },
        {
@@ -871,14 +880,41 @@ Internet-Draft                JOSE Cookbook                November 2013
 4.  JSON Web Encryption Examples
 
    The following sections demonstrate how to generate various JWE
-   structures.
+   objects.
 
-4.1.  Keys Used
+4.1.  Plaintext Content
 
-   The following keys, formatted as JWK objects, are used in generating
-   the JWE objects in the succeeding sections.
+   All of the succeeding examples (unless otherwise noted) use the
+   following plaintext content, serialized as UTF-8, with line breaks
+   (U+000A LINE FEED) replacing some " " (U+0020 SPACE) characters to
+   improve formatting:
 
-4.1.1.  RSA 2048-bit Public Key
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 16]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   You can trust us to stick with you through thick and thin--to
+   the bitter end. And you can trust us to keep any secret of
+   yours--closer than you keep it yourself. But you cannot trust
+   us to let you face trouble alone, and go off without a word.
+   We are your friends, Frodo.
+
+                             Plaintext content
+
+4.2.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2
+
+   This example illustrates encrypting content using the "RSA1_5"
+   (RSAES-PKCS1-v1_5) key encryption algorithm and the "A128CBC-HS256"
+   (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
+
+   The Plaintext content from Section 4.1 is used for this example.
+
+   The following RSA key is used (formatted as a JWK object):
 
    {
      "kty": "RSA",
@@ -890,20 +926,168 @@ Internet-Draft                JOSE Cookbook                November 2013
              p9t5fS9W5UNwaAllhrd-osQGPjIeI1deHTwx-ZTHu3C60Pu_LJIl
              6hKn9wbwaUmA4cR5Bd2pgbaY7ASgsjCUbtYJaNIHSoHXprUdJZKU
              MAzV0WOKPfA6OPI4oypBadjvMZ4ZAj3BnXaSYsEZhaueTXvZB4eZ
-
-
-
-Miller                    Expires May 23, 2014                 [Page 16]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
              OAjIyh2e_VOIKVMsnDrJYAVotGlvMQ",
      "e":   "AQAB"
    }
 
+                             RSA 2048-bit Key
 
-4.1.2.  RSA 4096-bit Public Key
+   (*NOTE*: While the key includes the private parameters, only the
+   public parameters "e" and "n" are necessary for the encryption
+   operation.)
+
+   The protected JWE header parameters:
+
+   {
+     "alg": "RSA1_5",
+     "kid": "frodo.baggins@hobbiton.example",
+     "enc": "A128CBC-HS256"
+   }
+
+                         Protected JWE Header JSON
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 17]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   Encoded as [RFC4648] base64url:
+
+   eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
+   V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+
+                  Protected JWE Header, base64url-encoded
+
+   The Content Encryption Key (CEK):
+
+   vQ6_Pof-pnIBBB_qhAxzuusbc25hFCB1pJuBIN7yMNU
+
+                 Content Encryption Key, base64url-encoded
+
+   Performing the key encryption operation over the CEK with the given
+   RSA key results in the following encrypted key:
+
+   IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
+   vR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1vQuC_TYslbSDLHx
+   nnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJmvWt_XrDp9tBby0xyjdwd
+   teAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2AKyuE10KEMbBo8EJVf1PP1JSS73qy
+   UqEt8oo0OHlYTicOwwwwhyiNshdrA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJa
+   B-u6qkDMAwA1tJEch4R58z9WsYKyrhAw
+
+                     Encrypted Key, base64url-encoded
+
+   The initialization vector/nonce:
+
+   mR-7lneQlGq9vxe_udL4LA
+
+                 Initialization Vector, base64url-encoded
+
+   Performing the content encryption operation on the Plaintext using
+   the given CEK, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) as authenticated data produces the following
+   ciphertext:
+
+   LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7zqSkl
+   a_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVweYeYc_l7m2
+   vyC_E1BzTQ9jb3wS1DxrqSX6YRjJ5mqx8ZX3tJW-wWVZfW8-PSEXb4GlBi22iQ
+   goXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maWZiglK4XckGv7-whchA42
+   VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
+   op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
+
+                       Ciphertext, base64url-encoded
+
+   And authentication tag:
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 18]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   3AIdtJkgAkWuhBdFo8iL8A
+
+                   Authentication Tag, base64url-encoded
+
+   The resulting JWE object, using the Compact serialization:
+
+   eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
+   V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+   .
+   IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
+   vR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1vQuC_TYslbSDLHx
+   nnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJmvWt_XrDp9tBby0xyjdwd
+   teAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2AKyuE10KEMbBo8EJVf1PP1JSS73qy
+   UqEt8oo0OHlYTicOwwwwhyiNshdrA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJa
+   B-u6qkDMAwA1tJEch4R58z9WsYKyrhAw
+   .
+   mR-7lneQlGq9vxe_udL4LA
+   .
+   LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7zqSkl
+   a_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVweYeYc_l7m2
+   vyC_E1BzTQ9jb3wS1DxrqSX6YRjJ5mqx8ZX3tJW-wWVZfW8-PSEXb4GlBi22iQ
+   goXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maWZiglK4XckGv7-whchA42
+   VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
+   op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
+   .
+   3AIdtJkgAkWuhBdFo8iL8A
+
+                           Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
+
+   {
+     "recipients": {
+       "encrypted_key":
+         "IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4
+          sJ7xpNovR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1v
+          QuC_TYslbSDLHxnnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJ
+          mvWt_XrDp9tBby0xyjdwdteAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2A
+          KyuE10KEMbBo8EJVf1PP1JSS73qyUqEt8oo0OHlYTicOwwwwhyiNshd
+          rA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJaB-u6qkDMAwA1tJEch4R5
+          8z9WsYKyrhAw"
+     },
+     "protected":
+       "eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpd
+        G9uLmV4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
+     "iv":
+       "mR-7lneQlGq9vxe_udL4LA",
+     "ciphertext":
+
+
+
+Miller                    Expires May 23, 2014                 [Page 19]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+       "LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7
+        zqSkla_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVw
+        eYeYc_l7m2vyC_E1BzTQ9jb3wS1DxrqSX6YRjJ5mqx8ZX3tJW-wWVZfW8
+        -PSEXb4GlBi22iQgoXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maW
+        ZiglK4XckGv7-whchA42VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--
+        aTLxGtl9sR7z1ZgAyfRqoSs0Sop9J35heE89JveLIAjnuXH2ShsF0lW6T
+        4HEYXFh9QsAF4TRdnpRs4",
+     "tag":
+       "3AIdtJkgAkWuhBdFo8iL8A"
+   }
+
+                            JSON Serialization
+
+4.3.  Key Encryption using RSA-OAEP with A256GCM
+
+   This example illustrates encrypting content using the "RSA-OAEP"
+   (RSAES-OAEP) key encryption algorithm and the "A256GCM" (AES-GCM)
+   content encryption algorithm.
+
+   The Plaintext content from Section 4.1 is used for this example.
+
+   The following RSA key is used (formatted as a JWK object):
 
    {
      "kty": "RSA",
@@ -924,11 +1108,252 @@ Internet-Draft                JOSE Cookbook                November 2013
              rCuVzsUMv54szidQ9wf1cYWf3g5qFDxDQKis99gcDaiCAwM3yEBI
              zuNeeCa5dartHDb1xEB_HcHSeYbghbMjGfasvKn0aZRsnTyC0xhW
              BlsolZE",
-     "e":   "AQAB"
+     "e":   "AQAB",
+     "d":   "n7fzJc3_WG59VEOBTkayzuSMM780OJQuZjN_KbH8lOZG25ZoA7T4
+             Bxcc0xQn5oZE5uSCIwg91oCt0JvxPcpmqzaJZg1nirjcWZ-oBtVk
+             7gCAWq-B3qhfF3izlbkosrzjHajIcY33HBhsy4_WerrXg4MDNE4H
+             Yojy68TcxT2LYQRxUOCf5TtJXvM8olexlSGtVnQnDRutxEUCwiew
+             fmmrfveEogLx9EA-KMgAjTiISXxqIXQhWUQX1G7v_mV_Hr2YuImY
+
+
+
+Miller                    Expires May 23, 2014                 [Page 20]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+             cNcHkRvp9E7ook0876DhkO8v4UOZLwA1OlUX98mkoqwc58A_Y2lB
+             YbVx1_s5lpPsEqbbH-nqIjh1fL0gdNfihLxnclWtW7pCztLnImZA
+             yeCWAG7ZIfv-Rn9fLIv9jZ6r7r-MSH9sqbuziHN2grGjD_jfRluM
+             Ha0l84fFKl6bcqN1JWxPVhzNZo01yDF-1LiQnqUYSepPf6X3a2SO
+             dkqBRiquE6EvLuSYIDpJq3jDIsgoL8Mo1LoomgiJxUwL_GWEOGu2
+             8gplyzm-9Q0U0nyhEf1uhSR8aJAQWAiFImWH5W_IQT9I7-yrindr
+             _2fWQ_i1UgMsGzA7aOGzZfPljRy6z-tY_KuBG00-28S_aWvjyUc-
+             Alp8AUyKjBZ-7CWH32fGWK48j1t-zomrwjL_mnhsPbGs0c9WsWgR
+             zI-K8gE",
+     "p":   "7_2v3OQZzlPFcHyYfLABQ3XP85Es4hCdwCkbDeltaUXgVy9l9etK
+             ghvM4hRkOvbb01kYVuLFmxIkCDtpi-zLCYAdXKrAK3PtSbtzld_X
+             Z9nlsYa_QZWpXB_IrtFjVfdKUdMz94pHUhFGFj7nr6NNxfpiHSHW
+             FE1zD_AC3mY46J961Y2LRnreVwAGNw53p07Db8yD_92pDa97vqcZ
+             OdgtybH9q6uma-RFNhO1AoiJhYZj69hjmMRXx-x56HO9cnXNbmzN
+             SCFCKnQmn4GQLmRj9sfbZRqL94bbtE4_e0Zrpo8RNo8vxRLqQNwI
+             y85fc6BRgBJomt8QdQvIgPgWCv5HoQ",
+     "q":   "zqOHk1P6WN_rHuM7ZF1cXH0x6RuOHq67WuHiSknqQeefGBA9PWs6
+             ZyKQCO-O6mKXtcgE8_Q_hA2kMRcKOcvHil1hqMCNSXlflM7WPRPZ
+             u2qCDcqssd_uMbP-DqYthH_EzwL9KnYoH7JQFxxmcv5An8oXUtTw
+             k4knKjkIYGRuUwfQTus0w1NfjFAyxOOiAQ37ussIcE6C6ZSsM3n4
+             1UlbJ7TCqewzVJaPJN5cxjySPZPD3Vp01a9YgAD6a3IIaKJdIxJS
+             1ImnfPevSJQBE79-EXe2kSwVgOzvt-gsmM29QQ8veHy4uAqca5dZ
+             zMs7hkkHtw1z0jHV90epQJJlXXnH8Q",
+     "dp":  "19oDkBh1AXelMIxQFm2zZTqUhAzCIr4xNIGEPNoDt1jK83_FJA-x
+             nx5kA7-1erdHdms_Ef67HsONNv5A60JaR7w8LHnDiBGnjdaUmmuO
+             8XAxQJ_ia5mxjxNjS6E2yD44USo2JmHvzeeNczq25elqbTPLhUpG
+             o1IZuG72FZQ5gTjXoTXC2-xtCDEUZfaUNh4IeAipfLugbpe0JAFl
+             FfrTDAMUFpC3iXjxqzbEanflwPvj6V9iDSgjj8SozSM0dLtxvu0L
+             IeIQAeEgT_yXcrKGmpKdSO08kLBx8VUjkbv_3Pn20Gyu2YEuwpFl
+             M_H1NikuxJNKFGmnAq9LcnwwT0jvoQ",
+     "dq":  "S6p59KrlmzGzaQYQM3o0XfHCGvfqHLYjCO557HYQf72O9kLMCfd_
+             1VBEqeD-1jjwELKDjck8kOBl5UvohK1oDfSP1DleAy-cnmL29DqW
+             mhgwM1ip0CCNmkmsmDSlqkUXDi6sAaZuntyukyflI-qSQ3C_BafP
+             yFaKrt1fgdyEwYa08pESKwwWisy7KnmoUvaJ3SaHmohFS78TJ25c
+             fc10wZ9hQNOrIChZlkiOdFCtxDqdmCqNacnhgE3bZQjGp3n83ODS
+             z9zwJcSUvODlXBPc2AycH6Ci5yjbxt4Ppox_5pjm6xnQkiPgj01G
+             psUssMmBN7iHVsrE7N2iznBNCeOUIQ",
+     "qi":  "FZhClBMywVVjnuUud-05qd5CYU0dK79akAgy9oX6RX6I3IIIPckC
+             ciRrokxglZn-omAY5CnCe4KdrnjFOT5YUZE7G_Pg44XgCXaarLQf
+             4hl80oPEf6-jJ5Iy6wPRx7G2e8qLxnh9cOdf-kRqgOS3F48Ucvw3
+             ma5V6KGMwQqWFeV31XtZ8l5cVI-I3NzBS7qltpUVgz2Ju021eyc7
+             IlqgzR98qKONl27DuEES0aK0WE97jnsyO27Yp88Wa2RiBrEocM89
+             QZI1seJiGDizHRUP4UZxw9zsXww46wy0P6f9grnYp7t8LkyDDk8e
+             oI4KX6SNMNVcyVS9IWjlq8EzqZEKIA"
    }
 
+                             RSA 4096-bit Key
 
-4.1.3.  Elliptic Curve P-256 Public Key
+
+
+
+Miller                    Expires May 23, 2014                 [Page 21]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   (*NOTE*: While the key includes the private parameters, only the
+   public parameters "e" and "n" are necessary for the encryption
+   operation.)
+
+   The protected JWE header parameters:
+
+   {
+     "alg": "RSA-OAEP",
+     "kid": "samwise.gamgee@hobbiton.example",
+     "enc": "A256GCM"
+   }
+
+                         Protected JWE Header JSON
+
+   Encoded as [RFC4648] base64url:
+
+   eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
+   9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
+
+                  Protected JWE Header, base64url-encoded
+
+   The Content Encryption Key (CEK):
+
+   09EnDWfdf6KCP09QbQQdhhoyFE5GoGAjdShgLGLol8k
+
+                 Content Encryption Key, base64url-encoded
+
+   Performing the key encryption operation over the CEK with the given
+   RSA key produces the following encrypted key:
+
+   WaQnEArx6u7NRlv6o08qNgsMpo-UFVXs_ALqEbAhQJVOXMyNqacRhYoujIOFlt
+   i0u_ofz6Yh93Pu83iTZYIGk0fFD4C62-kSiX5Enl-UyORiMca925XxPItbOE6v
+   8sbzwzTBC-rzPXN9qrfPvKCdrlWbJv6oQAUbtreKpG8yD17YYyKw9qedx7BrSc
+   9TCvNH8ahrC93O1Qp_rZIPdkt92A8yhAje_cxMMaMHZ4YmlN_u05120iJhp6bg
+   5S_zPlpqmd5-BrpUIGmH0hwuBk2Z5Djbm47YlosNZUWIB69JBFazaDhGGRhsfM
+   eceRRhhGaG94gP2uZS42h1fZjYDH9zNxvXXHJ-4zqj8sM-LHLH16uDTVkvYaUw
+   ZPTUAj55fBKBs-o8o7rLCce8AWXEDBuqm-8rTnakLss5_Hc7l61RC8K4IJWnWB
+   zGLFlM1jRApbEwA5HZO61ku45WLGC64NLDdnyGahFxW9EikKXcE21Jc716oRfF
+   EeiOXaZGtJhYTjsuPr5IYJr8fWX_NC1y1xqYW1JnfLKklIemtznHTXvq7de6Vx
+   eSucwBklB24oafBFSeMEGBqKFQPhCBaAqCdJL1NkMhA9D6gqJkjluT1Aj0_Dq8
+   ikwSP2dG3grGlrl6EtTuhA-j_ArrqLzvSoJU51Nu_1k3usrvgIWLZ89i8Zt05S
+   A
+
+                     Encrypted Key, base64url-encoded
+
+   The initialization vector/nonce:
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 22]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   MKccO3TLKaMB67zj
+
+                 Initialization Vector, base64url-encoded
+
+   Performing the content encryption operation over the Plaintext with
+   the given CEK, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) produces the following ciphertext:
+
+   dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_qhZgJ
+   3bVLTVPr1p8JcThDcqTZtrA4ShYpyyTrBnEzOOyyzv4h6WWiuoCJTfI1Gxzm-J
+   PJNdPYifgOS0E5RKk5L64yDtotBP9AMTZZ4WjatyAlRcgD5hVhP2HrqIVG0j1S
+   b5g5tz4fi5vmSwIhGOeOxwgLvuryjn-8ECi_5LkdUiC3wQP53pZRtqmwmACyq_
+   uXvTpbUWSGna1LKaup-UC1PkOUGvHFa83WgkarkJbSkA0ZoVtebBJ_XvwNlfe1
+   VRDk8hxh0AmPvvsMiantgQ4oE6LCjOWKj6C4UNSWgla8zhousjSQ
+
+                       Ciphertext, base64url-encoded
+
+   And authentication tag:
+
+   vCmVSWBtadRAKUhtizP5tw
+
+                   Authentication Tag, base64url-encoded
+
+   The resulting JWE object, using the Compact serialization:
+
+   eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
+   9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
+   .
+   WaQnEArx6u7NRlv6o08qNgsMpo-UFVXs_ALqEbAhQJVOXMyNqacRhYoujIOFlt
+   i0u_ofz6Yh93Pu83iTZYIGk0fFD4C62-kSiX5Enl-UyORiMca925XxPItbOE6v
+   8sbzwzTBC-rzPXN9qrfPvKCdrlWbJv6oQAUbtreKpG8yD17YYyKw9qedx7BrSc
+   9TCvNH8ahrC93O1Qp_rZIPdkt92A8yhAje_cxMMaMHZ4YmlN_u05120iJhp6bg
+   5S_zPlpqmd5-BrpUIGmH0hwuBk2Z5Djbm47YlosNZUWIB69JBFazaDhGGRhsfM
+   eceRRhhGaG94gP2uZS42h1fZjYDH9zNxvXXHJ-4zqj8sM-LHLH16uDTVkvYaUw
+   ZPTUAj55fBKBs-o8o7rLCce8AWXEDBuqm-8rTnakLss5_Hc7l61RC8K4IJWnWB
+   zGLFlM1jRApbEwA5HZO61ku45WLGC64NLDdnyGahFxW9EikKXcE21Jc716oRfF
+   EeiOXaZGtJhYTjsuPr5IYJr8fWX_NC1y1xqYW1JnfLKklIemtznHTXvq7de6Vx
+   eSucwBklB24oafBFSeMEGBqKFQPhCBaAqCdJL1NkMhA9D6gqJkjluT1Aj0_Dq8
+   ikwSP2dG3grGlrl6EtTuhA-j_ArrqLzvSoJU51Nu_1k3usrvgIWLZ89i8Zt05S
+   A
+   .
+   MKccO3TLKaMB67zj
+   .
+   dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_qhZgJ
+   3bVLTVPr1p8JcThDcqTZtrA4ShYpyyTrBnEzOOyyzv4h6WWiuoCJTfI1Gxzm-J
+   PJNdPYifgOS0E5RKk5L64yDtotBP9AMTZZ4WjatyAlRcgD5hVhP2HrqIVG0j1S
+   b5g5tz4fi5vmSwIhGOeOxwgLvuryjn-8ECi_5LkdUiC3wQP53pZRtqmwmACyq_
+   uXvTpbUWSGna1LKaup-UC1PkOUGvHFa83WgkarkJbSkA0ZoVtebBJ_XvwNlfe1
+
+
+
+Miller                    Expires May 23, 2014                 [Page 23]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   VRDk8hxh0AmPvvsMiantgQ4oE6LCjOWKj6C4UNSWgla8zhousjSQ
+   .
+   vCmVSWBtadRAKUhtizP5tw
+
+                           Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
+
+   {
+     "recipients": [
+       {
+         "encrypted_key":
+           "WaQnEArx6u7NRlv6o08qNgsMpo-UFVXs_ALqEbAhQJVOXMyNqacRh
+            YoujIOFlti0u_ofz6Yh93Pu83iTZYIGk0fFD4C62-kSiX5Enl-UyO
+            RiMca925XxPItbOE6v8sbzwzTBC-rzPXN9qrfPvKCdrlWbJv6oQAU
+            btreKpG8yD17YYyKw9qedx7BrSc9TCvNH8ahrC93O1Qp_rZIPdkt9
+            2A8yhAje_cxMMaMHZ4YmlN_u05120iJhp6bg5S_zPlpqmd5-BrpUI
+            GmH0hwuBk2Z5Djbm47YlosNZUWIB69JBFazaDhGGRhsfMeceRRhhG
+            aG94gP2uZS42h1fZjYDH9zNxvXXHJ-4zqj8sM-LHLH16uDTVkvYaU
+            wZPTUAj55fBKBs-o8o7rLCce8AWXEDBuqm-8rTnakLss5_Hc7l61R
+            C8K4IJWnWBzGLFlM1jRApbEwA5HZO61ku45WLGC64NLDdnyGahFxW
+            9EikKXcE21Jc716oRfFEeiOXaZGtJhYTjsuPr5IYJr8fWX_NC1y1x
+            qYW1JnfLKklIemtznHTXvq7de6VxeSucwBklB24oafBFSeMEGBqKF
+            QPhCBaAqCdJL1NkMhA9D6gqJkjluT1Aj0_Dq8ikwSP2dG3grGlrl6
+            EtTuhA-j_ArrqLzvSoJU51Nu_1k3usrvgIWLZ89i8Zt05SA"
+       }
+     ],
+     "protected":
+       "eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvY
+        mJpdG9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0",
+     "iv":
+       "MKccO3TLKaMB67zj",
+     "ciphertext":
+       "dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_
+        qhZgJ3bVLTVPr1p8JcThDcqTZtrA4ShYpyyTrBnEzOOyyzv4h6WWiuoCJ
+        TfI1Gxzm-JPJNdPYifgOS0E5RKk5L64yDtotBP9AMTZZ4WjatyAlRcgD5
+        hVhP2HrqIVG0j1Sb5g5tz4fi5vmSwIhGOeOxwgLvuryjn-8ECi_5LkdUi
+        C3wQP53pZRtqmwmACyq_uXvTpbUWSGna1LKaup-UC1PkOUGvHFa83Wgka
+        rkJbSkA0ZoVtebBJ_XvwNlfe1VRDk8hxh0AmPvvsMiantgQ4oE6LCjOWK
+        j6C4UNSWgla8zhousjSQ",
+     "tag":
+       "vCmVSWBtadRAKUhtizP5tw"
+   }
+
+                            JSON Serialization
+
+4.4.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 24]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   This example illustrates encrypting content using the "ECDH-ES"
+   (Elliptic Curve Diffie-Hellman Ephemeral-Static) key agreement
+   algorithm and the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content
+   encryption algorithm.
+
+   The Plaintext content from Section 4.1 is used for this example.
+
+   The following Elliptic Curve key is used (formatted as a JWK object):
 
    {
      "kty": "EC",
@@ -940,20 +1365,165 @@ Internet-Draft                JOSE Cookbook                November 2013
      "d":   "44eY-VRWsn1zdz3VaWS6idEpOGt1ErydBARq7Iyh9pY"
    }
 
+                         Elliptic Curve P-256 Key
 
+   (*NOTE*: While the key includes the private parameters, only the
+   public parameters "crv", "x", and "y" are necessary for the
+   encryption operation.)
 
-4.1.4.  Elliptic Curve P-384 Public Key
+   The protected JWE header parameters:
 
    {
-     "kty": "EC",
+     "alg": "ECDH-ES",
+     "kid": "meriadoc.brandybuck@buckland.example",
+     "epk": {
+       "kty": "EC",
+       "crv": "P-256",
+       "x":   "h_ImuH3OW5JxZNQZWIWCFTYAIigZYs1-QzsQR9tCEQ4",
+       "y":   "4ZWJVVrTOWdEVbH266nb4Wy2QiwH_9XAcdpNh4S2oX0"
+     },
+     "enc": "A128CBC-HS256"
+   }
+
+                         Protected JWE Header JSON
+
+   Encoded as [RFC4648] base64url:
+
+   eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
+   NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
+   LCJ4IjoiaF9JbXVIM09XNUp4Wk5RWldJV0NGVFlBSWlnWllzMS1RenNRUjl0Q0
+   VRNCIsInkiOiI0WldKVlZyVE9XZEVWYkgyNjZuYjRXeTJRaXdIXzlYQWNkcE5o
+   NFMyb1gwIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 
 
 
-Miller                    Expires May 23, 2014                 [Page 17]
+Miller                    Expires May 23, 2014                 [Page 25]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
 
+                  Protected JWE Header, base64url-encoded
+
+   The initialization vector/nonce:
+
+   BMbSNYW2uC7RX3xql1gbQw
+
+                 Initialization Vector, base64url-encoded
+
+   Performing the encryption operation on the Plaintext using the given
+   key, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) as authenticated data produces the following
+   ciphertext:
+
+   mwSOHtsJDtD1R4Y4r0Ads9Bc8nTgk_Y4wVe_4pJsb7RERAgnfFRYRmlgjSaGPM
+   M7PytxfLss6clZI7YW366xh8DiqOWUavR7VFGLZIOHkrMsTPaehWlQZrQz77Ie
+   dSM20wSGVj-E4T0KRtX3CrZsEPjtXqNbm_EmDPgxVYTaTthGdWbyDnPMvp6eGL
+   T6gsMkctSLIHgaGvI2VWB0oNYdKnCRU-p2JFkLu5XQfOww4E5zKW9Xycx3mkh_
+   gA1dFU28Zs_boX-mm4UYseIJfaZAX_eqs7NDMpbrb29frJCFI-rYfahoVz6QhN
+   QXQMNmzL93pDo5QE_i9pIzR4KJu-uaItKTKNAdBKgSa9JZfc21dSw
+
+                       Ciphertext, base64url-encoded
+
+   And authentication tag:
+
+   kqeubaGyskAjcj8mDymY6A
+
+                   Authentication Tag, base64url-encoded
+
+   the resulting JWE object, using the Compact serialization:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 26]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
+   NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
+   LCJ4IjoiaF9JbXVIM09XNUp4Wk5RWldJV0NGVFlBSWlnWllzMS1RenNRUjl0Q0
+   VRNCIsInkiOiI0WldKVlZyVE9XZEVWYkgyNjZuYjRXeTJRaXdIXzlYQWNkcE5o
+   NFMyb1gwIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+   .
+   .
+   BMbSNYW2uC7RX3xql1gbQw
+   .
+   mwSOHtsJDtD1R4Y4r0Ads9Bc8nTgk_Y4wVe_4pJsb7RERAgnfFRYRmlgjSaGPM
+   M7PytxfLss6clZI7YW366xh8DiqOWUavR7VFGLZIOHkrMsTPaehWlQZrQz77Ie
+   dSM20wSGVj-E4T0KRtX3CrZsEPjtXqNbm_EmDPgxVYTaTthGdWbyDnPMvp6eGL
+   T6gsMkctSLIHgaGvI2VWB0oNYdKnCRU-p2JFkLu5XQfOww4E5zKW9Xycx3mkh_
+   gA1dFU28Zs_boX-mm4UYseIJfaZAX_eqs7NDMpbrb29frJCFI-rYfahoVz6QhN
+   QXQMNmzL93pDo5QE_i9pIzR4KJu-uaItKTKNAdBKgSa9JZfc21dSw
+   .
+   kqeubaGyskAjcj8mDymY6A
+
+                           Compact Serialization
+
+   the resulting JWE object, using the JSON serialization:
+
+   {
+     "protected":
+       "eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja
+        0BidWNrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2Ij
+        oiUC0yNTYiLCJ4IjoiaF9JbXVIM09XNUp4Wk5RWldJV0NGVFlBSWlnWll
+        zMS1RenNRUjl0Q0VRNCIsInkiOiI0WldKVlZyVE9XZEVWYkgyNjZuYjRX
+        eTJRaXdIXzlYQWNkcE5oNFMyb1gwIn0sImVuYyI6IkExMjhDQkMtSFMyN
+        TYifQ",
+     "iv":
+       "BMbSNYW2uC7RX3xql1gbQw",
+     "ciphertext":
+       "mwSOHtsJDtD1R4Y4r0Ads9Bc8nTgk_Y4wVe_4pJsb7RERAgnfFRYRmlgj
+       SaGPMM7PytxfLss6clZI7YW366xh8DiqOWUavR7VFGLZIOHkrMsTPaehWl
+       QZrQz77IedSM20wSGVj-E4T0KRtX3CrZsEPjtXqNbm_EmDPgxVYTaTthGd
+       WbyDnPMvp6eGLT6gsMkctSLIHgaGvI2VWB0oNYdKnCRU-p2JFkLu5XQfOw
+       w4E5zKW9Xycx3mkh_gA1dFU28Zs_boX-mm4UYseIJfaZAX_eqs7NDMpbrb
+       29frJCFI-rYfahoVz6QhNQXQMNmzL93pDo5QE_i9pIzR4KJu-uaItKTKNA
+       dBKgSa9JZfc21dSw",
+     "tag":
+       "kqeubaGyskAjcj8mDymY6A"
+   }
+
+                            JSON Serialization
+
+4.5.  Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with
+      AES-GCM
+
+
+
+Miller                    Expires May 23, 2014                 [Page 27]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   This example illustrates encrypting content using a previously
+   exchanged key directly and the "A128GCM" (AES-GCM) content encryption
+   algorithm.
+
+   The Plaintext content in Section 4.1 is used for this example.
+
+   The following Elliptic Curve key is used (formatted as a JWK object):
+
+   {
+     "kty": "EC",
      "kid": "peregrin.took@tuckborough.example",
      "use": "enc",
      "crv": "P-384",
@@ -965,8 +1535,355 @@ Internet-Draft                JOSE Cookbook                November 2013
              dnYK2xDlZh-j"
    }
 
+                         Elliptic Curve P-384 Key
 
-4.1.5.  AES 128-bit Symmetric Key for Content Encryption
+   (*NOTE*: While the key includes the private parameters, only the
+   public parameters "crv", "x", and "y" are necessary for the
+   encryption operation.)
+
+   The protected JWE header parameters:
+
+   {
+     "alg": "ECDH-ES+A128KW",
+     "kid": "peregrin.took@tuckborough.example",
+     "epk": {
+       "kty": "EC",
+       "crv": "P-384",
+       "x":   "qMz7Lgb3Bc1GNuVn4ZSxLDeDpihGWRwqA2fA1-2IJwDQtKMdpK
+               Y0XjNqBbjigcL-",
+       "y":   "Ygt6Bc_o29f-DJ_5O3YCMoX2tXXz1ysj9MFRnucByIQoR0y3SV
+               mqBBwQISq9grWe"
+     },
+     "enc": "A128GCM"
+   }
+
+                         Protected JWE Header JSON
+
+   Encoded as [RFC4648] base64url:
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 28]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
+   Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
+   Mzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHBpaEdXUndxQTJmQT
+   EtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5IjoiWWd0NkJjX28yOWYt
+   REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
+   E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
+
+                  Protected JWE Header, base64url-encoded
+
+   The Content Encryption Key (CEK):
+
+   C3eS2iNXmSTA7W8tBpjs3w
+
+                 Content Encryption Key, base64url-encoded
+
+   Performing the key encryption operation over the CEK results in the
+   following JWE encrypted key:
+
+   zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
+
+                     Encrypted Key, base64url-encoded
+
+   The initialization vector/nonce:
+
+   ubzqaTluloMJR8Ec
+
+                 Initialization Vector, base64url-encoded
+
+   Performing the content encryption operation on the Plaintext using
+   the given CEK, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) as authenticated data produces the following
+   ciphertext:
+
+   zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
+   Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
+   vFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-JlnQ3pssAqQLpUV
+   _-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
+   htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
+   VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
+
+                       Ciphertext, base64url-encoded
+
+   And authentication tag:
+
+   5cJTRUT3kQRrw_UGwtMtDQ
+
+                   Authentication Tag, base64url-encoded
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 29]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   The resulting JWE object, using the Compact serialization:
+
+   eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
+   Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
+   Mzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHBpaEdXUndxQTJmQT
+   EtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5IjoiWWd0NkJjX28yOWYt
+   REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
+   E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
+   .
+   zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
+   .
+   ubzqaTluloMJR8Ec
+   .
+   zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
+   Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
+   vFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-JlnQ3pssAqQLpUV
+   _-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
+   htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
+   VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
+   .
+   5cJTRUT3kQRrw_UGwtMtDQ
+
+                           Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
+
+   {
+     "recipients": [
+       {
+         "encrypted_key":
+           "zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY"
+       }
+     ],
+     "protected":
+       "eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb
+        2tAdHVja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsIm
+        NydiI6IlAtMzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHB
+        paEdXUndxQTJmQTEtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5
+        IjoiWWd0NkJjX28yOWYtREpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQ
+        nlJUW9SMHkzU1ZtcUJCd1FJU3E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn
+        0",
+     "iv":
+       "ubzqaTluloMJR8Ec",
+     "ciphertext":
+       "zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqK
+        a-xC2Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbg
+        f0_TQqG9PKvFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-
+        JlnQ3pssAqQLpUV_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToP
+
+
+
+Miller                    Expires May 23, 2014                 [Page 30]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+        q57d2Q99N10WfPmXVQ38htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE
+        3Bb8IJ1a04LzqB4Xmp_wgbwHCVR-bqTKgth3h_NoDLqCxQ0QcG9E78i36
+        iPJuLAzVgS0ChHzo5ULw",
+     "tag":
+       "5cJTRUT3kQRrw_UGwtMtDQ"
+   }
+
+                            JSON Serialization
+
+4.6.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2
+
+   The example illustrates encrypting content using the
+   "PBES2-HS512+A256KW" (PBES2 Password-based Encryption using HMAC-
+   SHA-512 and AES-256-KeyWrap) key encryption algorithm with the
+   "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption
+   algorithm.
+
+   This example does not use the Plaintext from Section 4.1.  Instead it
+   uses the following JWK-Set object as the plaintext (*NOTE* all
+   whitespace added for readability):
+
+   {
+     "keys": [
+       {
+         "kty": "oct",
+         "kid": "77c7e2b8-6e13-45cf-8672-617b5b45243a",
+         "use": "enc",
+         "alg": "A128GCM",
+         "k":   "XctOhJAkA-pD9Lh7ZgW_2A"
+       },
+       {
+         "kty": "oct",
+         "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
+         "use": "enc",
+         "alg": "A128KW",
+         "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
+       },
+       {
+         "kty": "oct",
+         "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
+         "use": "enc",
+         "alg": "A256GCMKW",
+         "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
+       }
+     ]
+   }
+
+                             Plaintext Content
+
+
+
+Miller                    Expires May 23, 2014                 [Page 31]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   The password plaintext:
+
+   entrap_o_peter_long_credit_tun
+
+                                 Password
+
+   The protected JWE header parameters:
+
+   {
+     "alg": "PBES2-HS512+A256KW",
+     "p2s": "8Q1SzinasR3xchYz6ZZcHA",
+     "p2c": 8192,
+     "enc": "A128CBC-HS256"
+   }
+
+                         Protected JWE Header JSON
+
+   Encoded as [RFC4648] base64url:
+
+   eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
+   hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+
+                  Protected JWE Header, base64url-encoded
+
+   The Content Encryption Key (CEK):
+
+   1XjHr2XJOCQQu1VBjgUP1gpsgHqqHQaEwD2PogUMCYI
+
+                 Content Encryption Key, base64url-encoded
+
+   Performing the key encryption operation over the CEK with the given
+   password, salt, and iteration count produces the following encrypted
+   key:
+
+   dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
+
+                     Encrypted Key, base64url-encoded
+
+   The initialization vector/nonce:
+
+   obvv9nee1GDQTucO7EiLUw
+
+                 Initialization Vector, base64url-encoded
+
+   Performing the content encryption operation over the Plaintext with
+   the given CEK, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) produces the following ciphertext:
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 32]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
+   _njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
+   Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
+   bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
+   Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
+   5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
+   09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
+   ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
+   VGF951uNP8TABCf6
+
+                       Ciphertext, base64url-encoded
+
+   And authentication tag:
+
+   F5MFKAu7qA_hE5w5N1iJ5w
+
+                   Authentication Tag, base64url-encoded
+
+   The resulting JWE object, using the Compact serialization:
+
+   eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
+   hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+   .
+   dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
+   .
+   obvv9nee1GDQTucO7EiLUw
+   .
+   3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
+   _njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
+   Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
+   bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
+   Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
+   5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
+   09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
+   ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
+   VGF951uNP8TABCf6
+   .
+   F5MFKAu7qA_hE5w5N1iJ5w
+
+                           Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
+
+   {
+     "recipients": [
+       {
+         "encrypted_key":
+           "dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5
+
+
+
+Miller                    Expires May 23, 2014                 [Page 33]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+            A"
+       }
+     ],
+     "protected":
+       "eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluY
+        XNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLU
+        hTMjU2In0",
+     "iv":
+       "obvv9nee1GDQTucO7EiLUw",
+     "ciphertext":
+       "3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVP
+        J85lA_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4
+        OP_Y_MVUOZSn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5j
+        TGMMAN33dFfrHx3bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQk
+        dvRYauZ66rKoyZeygVluEf_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wi
+        v2gvmk-aLwgmRF6uUYvccsB4K5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1E
+        J8_krTVtVQxF9F6LcUNQ-rua5Iub5Y09INYdA9fdUe8bs7iFWp3wWBjLx
+        1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKEipKmfIqIVvtdEHdS4hq_rP
+        0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_VGF951uNP8TABCf6",
+     "tag":
+       "F5MFKAu7qA_hE5w5N1iJ5w"
+   }
+
+                            JSON Serialization
+
+4.7.  Direct Encryption using AES-GCM
+
+   This example illustrates encrypting content using a previously
+   exchanged key directly and the "A128GCM" (AES-GCM) content encryption
+   algorithm.
+
+   The Plaintext content in Section 4.1 is used for this example.
+
+   The following AES symmetric key is used (formatted as a JWK object):
 
    {
      "kty": "oct",
@@ -977,67 +1894,41 @@ Internet-Draft                JOSE Cookbook                November 2013
    }
 
 
-4.1.6.  AES 128-bit Symmetric Key
+   The protected JWE header parameters:
 
    {
-     "kty": "oct",
-     "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
-     "use": "enc",
-     "alg": "A128KW",
-     "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
-   }
-
-
-4.1.7.  AES 256-bit Symmetric Key
-
-   {
-     "kty": "oct",
-     "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-     "use": "enc",
-     "alg": "A256GCMKW",
-     "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
-   }
-
-
-4.2.  Direct Encryption using AES-GCM
+     "alg": "dir",
 
 
 
-
-
-Miller                    Expires May 23, 2014                 [Page 18]
+Miller                    Expires May 23, 2014                 [Page 34]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
-
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
-
-                             Plaintext content
-
-   {
-     "alg": "dir",
      "kid": "77c7e2b8-6e13-45cf-8672-617b5b45243a",
      "enc": "A128GCM"
    }
 
                          Protected JWE Header JSON
 
+   Encoded as [RFC4648] base64url:
+
    eyJhbGciOiJkaXIiLCJraWQiOiI3N2M3ZTJiOC02ZTEzLTQ1Y2YtODY3Mi02MT
    diNWI0NTI0M2EiLCJlbmMiOiJBMTI4R0NNIn0
 
                   Protected JWE Header, base64url-encoded
 
+   The initialization vector/nonce:
+
    OI-fESJKbHHk1-rA
 
                  Initialization Vector, base64url-encoded
+
+   Performing the encryption operation on the Plaintext using the given
+   key, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) as authenticated data produces the following
+   ciphertext:
 
    18KNUnRDhesDLn7Ec4ui6q0aptYFNkbx6Vf64wWItX7hMQe2XgbNTt-GVG_3Dz
    -5mscM9bKe0TkgEecWAovlTFkuwhL-TZhbcnYdMXtaNtqYe2TEZ5fFlRiEr9is
@@ -1048,9 +1939,13 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                        Ciphertext, base64url-encoded
 
+   And authentication tag:
+
    mBCmmmn0W0j4BS7ln3nxVA
 
                    Authentication Tag, base64url-encoded
+
+   The resulting JWE object, using the Compact serialization:
 
    eyJhbGciOiJkaXIiLCJraWQiOiI3N2M3ZTJiOC02ZTEzLTQ1Y2YtODY3Mi02MT
    diNWI0NTI0M2EiLCJlbmMiOiJBMTI4R0NNIn0
@@ -1058,15 +1953,15 @@ Internet-Draft                JOSE Cookbook                November 2013
    .
    OI-fESJKbHHk1-rA
    .
+   18KNUnRDhesDLn7Ec4ui6q0aptYFNkbx6Vf64wWItX7hMQe2XgbNTt-GVG_3Dz
 
 
 
-Miller                    Expires May 23, 2014                 [Page 19]
+Miller                    Expires May 23, 2014                 [Page 35]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   18KNUnRDhesDLn7Ec4ui6q0aptYFNkbx6Vf64wWItX7hMQe2XgbNTt-GVG_3Dz
    -5mscM9bKe0TkgEecWAovlTFkuwhL-TZhbcnYdMXtaNtqYe2TEZ5fFlRiEr9is
    8gBeJ7YOwazxwtE8O6FwwqeAOnR-PI8M30ODcq9B8UVzEISWu3Pf4yugvVMpLR
    DxJEbyVDVr5MjiXsXpOkEdc7uUisJ0H0ygoP_mjSjUHROjh2_QVqpTUwzx2qto
@@ -1076,6 +1971,8 @@ Internet-Draft                JOSE Cookbook                November 2013
    mBCmmmn0W0j4BS7ln3nxVA
 
                            Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
 
    {
      "protected":
@@ -1097,780 +1994,182 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                             JSON Serialization
 
-4.3.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2
-
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
-
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
-
-                             Plaintext content
-
-   {
-     "alg": "ECDH-ES",
-     "apu":
-
-
-
-Miller                    Expires May 23, 2014                 [Page 20]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-       "hjkQStZuM9v7StPFT2RP2-U8vCnvU3UIPLqbebnCzVznEoiCS3RvB32hI
-        9kbUS2BW4INHcWL_v8PU7tpX7fscw",
-     "kid": "meriadoc.brandybuck@buckland.example",
-     "epk": {
-       "kty": "EC",
-       "crv": "P-256",
-       "x": "UBTy9JyGanBI_QaP-2BIdSGchTluAnD-sETjrh6gfaQ",
-       "y": "XAUTe5HtIx9wR19262QGuAWc0uyW2bkvsGcN_AKh2ts"
-     },
-     "enc": "A128CBC-HS256"
-   }
-
-                         Protected JWE Header JSON
-
-   eyJhbGciOiJFQ0RILUVTIiwiYXB1IjoiaGprUVN0WnVNOXY3U3RQRlQyUlAyLV
-   U4dkNudlUzVUlQTHFiZWJuQ3pWem5Fb2lDUzNSdkIzMmhJOWtiVVMyQlc0SU5I
-   Y1dMX3Y4UFU3dHBYN2ZzY3ciLCJraWQiOiJtZXJpYWRvYy5icmFuZHlidWNrQG
-   J1Y2tsYW5kLmV4YW1wbGUiLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1
-   NiIsIngiOiJVQlR5OUp5R2FuQklfUWFQLTJCSWRTR2NoVGx1QW5ELXNFVGpyaD
-   ZnZmFRIiwieSI6IlhBVVRlNUh0SXg5d1IxOTI2MlFHdUFXYzB1eVcyYmt2c0dj
-   Tl9BS2gydHMifSwiZW5jIjoiQTEyOENCQy1IUzI1NiJ9
-
-                  Protected JWE Header, base64url-encoded
-
-   AK-Rm4xXUE2vxFYeBernAw
-
-                 Initialization Vector, base64url-encoded
-
-   ydw7W9FQPQWaN81mBQ1vVQdWb6vEPATpmCRaSEaCarGhzb48tzJS0IuglOSju1
-   ndsN7tViPw4Bry967GNKKzLhiEU-_lEi90mh7WuR8jRhpTFDWHQflXWi5GmwSU
-   u4zBpYPmAw89lV4eOAcDMdKMpoSsRcDWSnzt8nfhkJW6KJbOUIk0vjcH5jIl68
-   3_65qIHR79JU_n1Cr84faaps4pz7UV0vI3TXoGvfPauftw4aiANmSfprO0JQey
-   Dtf9SovBlNc_2aXarXNxflUIhKgxPeBS3z7HqvYKAPCrTudymkqMzB4PDDHzon
-   oPSd2WYrwWE1me37OZjTYzQQzQNRu6bFPSKn5dIh31gCgdDguB7ms
-
-                       Ciphertext, base64url-encoded
-
-   pcinTs8qGdWAQQ0NzooeWw
-
-                   Authentication Tag, base64url-encoded
-
-   eyJhbGciOiJFQ0RILUVTIiwiYXB1IjoiaGprUVN0WnVNOXY3U3RQRlQyUlAyLV
-   U4dkNudlUzVUlQTHFiZWJuQ3pWem5Fb2lDUzNSdkIzMmhJOWtiVVMyQlc0SU5I
-   Y1dMX3Y4UFU3dHBYN2ZzY3ciLCJraWQiOiJtZXJpYWRvYy5icmFuZHlidWNrQG
-   J1Y2tsYW5kLmV4YW1wbGUiLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1
-   NiIsIngiOiJVQlR5OUp5R2FuQklfUWFQLTJCSWRTR2NoVGx1QW5ELXNFVGpyaD
-   ZnZmFRIiwieSI6IlhBVVRlNUh0SXg5d1IxOTI2MlFHdUFXYzB1eVcyYmt2c0dj
-   Tl9BS2gydHMifSwiZW5jIjoiQTEyOENCQy1IUzI1NiJ9
-
-
-
-Miller                    Expires May 23, 2014                 [Page 21]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   .
-   .
-   AK-Rm4xXUE2vxFYeBernAw
-   .
-   ydw7W9FQPQWaN81mBQ1vVQdWb6vEPATpmCRaSEaCarGhzb48tzJS0IuglOSju1
-   ndsN7tViPw4Bry967GNKKzLhiEU-_lEi90mh7WuR8jRhpTFDWHQflXWi5GmwSU
-   u4zBpYPmAw89lV4eOAcDMdKMpoSsRcDWSnzt8nfhkJW6KJbOUIk0vjcH5jIl68
-   3_65qIHR79JU_n1Cr84faaps4pz7UV0vI3TXoGvfPauftw4aiANmSfprO0JQey
-   Dtf9SovBlNc_2aXarXNxflUIhKgxPeBS3z7HqvYKAPCrTudymkqMzB4PDDHzon
-   oPSd2WYrwWE1me37OZjTYzQQzQNRu6bFPSKn5dIh31gCgdDguB7ms
-   .
-   pcinTs8qGdWAQQ0NzooeWw
-
-                           Compact Serialization
-
-   {
-     "protected":
-       "eyJhbGciOiJFQ0RILUVTIiwiYXB1IjoiaGprUVN0WnVNOXY3U3RQRlQyU
-        lAyLVU4dkNudlUzVUlQTHFiZWJuQ3pWem5Fb2lDUzNSdkIzMmhJOWtiVV
-        MyQlc0SU5IY1dMX3Y4UFU3dHBYN2ZzY3ciLCJraWQiOiJtZXJpYWRvYy5
-        icmFuZHlidWNrQGJ1Y2tsYW5kLmV4YW1wbGUiLCJlcGsiOnsia3R5Ijoi
-        RUMiLCJjcnYiOiJQLTI1NiIsIngiOiJVQlR5OUp5R2FuQklfUWFQLTJCS
-        WRTR2NoVGx1QW5ELXNFVGpyaDZnZmFRIiwieSI6IlhBVVRlNUh0SXg5d1
-        IxOTI2MlFHdUFXYzB1eVcyYmt2c0djTl9BS2gydHMifSwiZW5jIjoiQTE
-        yOENCQy1IUzI1NiJ9",
-     "iv":
-       "AK-Rm4xXUE2vxFYeBernAw",
-     "ciphertext":
-       "ydw7W9FQPQWaN81mBQ1vVQdWb6vEPATpmCRaSEaCarGhzb48tzJS0Iugl
-        OSju1ndsN7tViPw4Bry967GNKKzLhiEU-_lEi90mh7WuR8jRhpTFDWHQf
-        lXWi5GmwSUu4zBpYPmAw89lV4eOAcDMdKMpoSsRcDWSnzt8nfhkJW6KJb
-        OUIk0vjcH5jIl683_65qIHR79JU_n1Cr84faaps4pz7UV0vI3TXoGvfPa
-        uftw4aiANmSfprO0JQeyDtf9SovBlNc_2aXarXNxflUIhKgxPeBS3z7Hq
-        vYKAPCrTudymkqMzB4PDDHzonoPSd2WYrwWE1me37OZjTYzQQzQNRu6bF
-        PSKn5dIh31gCgdDguB7ms",
-     "tag":
-       "pcinTs8qGdWAQQ0NzooeWw"
-   }
-
-                            JSON Serialization
-
-4.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with
-      AES-GCM
-
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 22]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
-
-                             Plaintext content
-
-   {
-     "alg": "ECDH-ES+A128KW",
-     "apu":
-       "eej-3Dy5T0APB61-H6EAczZqzB_v1Dv6ospeKQRQJ_xIIDelZ6fL4fOvv
-        dC8u2g5fTyLAXh6K3FQ8w5FMnDxkg",
-     "kid": "peregrin.took@tuckborough.example",
-     "epk": {
-       "kty": "EC",
-       "crv": "P-384",
-       "x":
-         "REVT3Z-Qy-VdlXAjTxJRpJ8qg40lk2e5Ys_-CDadrxWNU946ZDedCGh
-          Iz6BIZWFe",
-       "y":
-         "B32HgL_jzu6iRrwN8RiiEN2yHJDfsbrp1-QdzYTgQAhRjaTlUOeaXK3
-          IWRYxAjfM"
-     },
-     "enc": "A128GCM"
-   }
-
-                         Protected JWE Header JSON
-
-   eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImFwdSI6ImVlai0zRHk1VDBBUEI2MS
-   1INkVBY3pacXpCX3YxRHY2b3NwZUtRUlFKX3hJSURlbFo2Zkw0Zk92dmRDOHUy
-   ZzVmVHlMQVhoNkszRlE4dzVGTW5EeGtnIiwia2lkIjoicGVyZWdyaW4udG9va0
-   B0dWNrYm9yb3VnaC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2Ijoi
-   UC0zODQiLCJ4IjoiUkVWVDNaLVF5LVZkbFhBalR4SlJwSjhxZzQwbGsyZTVZc1
-   8tQ0RhZHJ4V05VOTQ2WkRlZENHaEl6NkJJWldGZSIsInkiOiJCMzJIZ0xfanp1
-   NmlScndOOFJpaUVOMnlISkRmc2JycDEtUWR6WVRnUUFoUmphVGxVT2VhWEszSV
-   dSWXhBamZNIn0sImVuYyI6IkExMjhHQ00ifQ
-
-                  Protected JWE Header, base64url-encoded
-
-   c0asrEQDZPgz7_V6s1qVw536S2p8tO8O
-
-                     Encrypted CEK, base64url-encoded
-
-   luK5JVSHuqT8kXua
-
-                 Initialization Vector, base64url-encoded
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 23]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   z4mShjS95h3yLU-ftVfOxDrz3VF1OBZGz9k0KNipqnh1cDPSDrfxsLKjnLFRUD
-   FKnPKT5KmtYW385XQKEZ9_cj766SDvgbh5wkIELKDRDQSWMsa5jHhk7ji5cxab
-   hE2FEHY-SZTvG9ywnQmb3e38XBXswp4_SdBQXCdGkLHcv-RuPCEgsiRvL_7MCU
-   PkBmYYr6bUxTRoP_w9R4jS5yrm1du3b6gu4u-RwvJmFai4HukdtoHjws2UNviR
-   erXBUFfAwdKq_GiowypRyhwTIKcOt0S7bOfkmwJNsj_ggb9czw6zhVfIeoZ9Xn
-   ogxeQODHOJ2O95_Lo5k436LwQicq23f25eNLevCRwr8AjNSWS_mQ
-
-                       Ciphertext, base64url-encoded
-
-   nNiRweBiHh7DYjY7LuHJ7A
-
-                   Authentication Tag, base64url-encoded
-
-   eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImFwdSI6ImVlai0zRHk1VDBBUEI2MS
-   1INkVBY3pacXpCX3YxRHY2b3NwZUtRUlFKX3hJSURlbFo2Zkw0Zk92dmRDOHUy
-   ZzVmVHlMQVhoNkszRlE4dzVGTW5EeGtnIiwia2lkIjoicGVyZWdyaW4udG9va0
-   B0dWNrYm9yb3VnaC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2Ijoi
-   UC0zODQiLCJ4IjoiUkVWVDNaLVF5LVZkbFhBalR4SlJwSjhxZzQwbGsyZTVZc1
-   8tQ0RhZHJ4V05VOTQ2WkRlZENHaEl6NkJJWldGZSIsInkiOiJCMzJIZ0xfanp1
-   NmlScndOOFJpaUVOMnlISkRmc2JycDEtUWR6WVRnUUFoUmphVGxVT2VhWEszSV
-   dSWXhBamZNIn0sImVuYyI6IkExMjhHQ00ifQ
-   .
-   c0asrEQDZPgz7_V6s1qVw536S2p8tO8O
-   .
-   luK5JVSHuqT8kXua
-   .
-   z4mShjS95h3yLU-ftVfOxDrz3VF1OBZGz9k0KNipqnh1cDPSDrfxsLKjnLFRUD
-   FKnPKT5KmtYW385XQKEZ9_cj766SDvgbh5wkIELKDRDQSWMsa5jHhk7ji5cxab
-   hE2FEHY-SZTvG9ywnQmb3e38XBXswp4_SdBQXCdGkLHcv-RuPCEgsiRvL_7MCU
-   PkBmYYr6bUxTRoP_w9R4jS5yrm1du3b6gu4u-RwvJmFai4HukdtoHjws2UNviR
-   erXBUFfAwdKq_GiowypRyhwTIKcOt0S7bOfkmwJNsj_ggb9czw6zhVfIeoZ9Xn
-   ogxeQODHOJ2O95_Lo5k436LwQicq23f25eNLevCRwr8AjNSWS_mQ
-   .
-   nNiRweBiHh7DYjY7LuHJ7A
-
-                           Compact Serialization
-
-   {
-     "recipients": {
-       "encrypted_key":
-         "c0asrEQDZPgz7_V6s1qVw536S2p8tO8O"
-     },
-     "protected":
-       "eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImFwdSI6ImVlai0zRHk1VDBBU
-        EI2MS1INkVBY3pacXpCX3YxRHY2b3NwZUtRUlFKX3hJSURlbFo2Zkw0Zk
-        92dmRDOHUyZzVmVHlMQVhoNkszRlE4dzVGTW5EeGtnIiwia2lkIjoicGV
-        yZWdyaW4udG9va0B0dWNrYm9yb3VnaC5leGFtcGxlIiwiZXBrIjp7Imt0
-        eSI6IkVDIiwiY3J2IjoiUC0zODQiLCJ4IjoiUkVWVDNaLVF5LVZkbFhBa
-
-
-
-Miller                    Expires May 23, 2014                 [Page 24]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-        lR4SlJwSjhxZzQwbGsyZTVZc18tQ0RhZHJ4V05VOTQ2WkRlZENHaEl6Nk
-        JJWldGZSIsInkiOiJCMzJIZ0xfanp1NmlScndOOFJpaUVOMnlISkRmc2J
-        ycDEtUWR6WVRnUUFoUmphVGxVT2VhWEszSVdSWXhBamZNIn0sImVuYyI6
-        IkExMjhHQ00ifQ",
-     "iv":
-       "luK5JVSHuqT8kXua",
-     "ciphertext":
-       "z4mShjS95h3yLU-ftVfOxDrz3VF1OBZGz9k0KNipqnh1cDPSDrfxsLKjn
-        LFRUDFKnPKT5KmtYW385XQKEZ9_cj766SDvgbh5wkIELKDRDQSWMsa5jH
-        hk7ji5cxabhE2FEHY-SZTvG9ywnQmb3e38XBXswp4_SdBQXCdGkLHcv-R
-        uPCEgsiRvL_7MCUPkBmYYr6bUxTRoP_w9R4jS5yrm1du3b6gu4u-RwvJm
-        Fai4HukdtoHjws2UNviRerXBUFfAwdKq_GiowypRyhwTIKcOt0S7bOfkm
-        wJNsj_ggb9czw6zhVfIeoZ9XnogxeQODHOJ2O95_Lo5k436LwQicq23f2
-        5eNLevCRwr8AjNSWS_mQ",
-     "tag":
-       "nNiRweBiHh7DYjY7LuHJ7A"
-   }
-
-                            JSON Serialization
-
-4.5.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2
-
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
-
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
-
-                             Plaintext content
-
-   {
-     "alg": "RSA1_5",
-     "kid": "frodo.baggins@hobbiton.example",
-     "enc": "A128CBC-HS256"
-   }
-
-                         Protected JWE Header JSON
-
-   eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
-   V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
-
-                  Protected JWE Header, base64url-encoded
-
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 25]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
-   vR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1vQuC_TYslbSDLHx
-   nnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJmvWt_XrDp9tBby0xyjdwd
-   teAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2AKyuE10KEMbBo8EJVf1PP1JSS73qy
-   UqEt8oo0OHlYTicOwwwwhyiNshdrA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJa
-   B-u6qkDMAwA1tJEch4R58z9WsYKyrhAw
-
-            Encrtyped Content Encryption Key, base64url-encoded
-
-   mR-7lneQlGq9vxe_udL4LA
-
-                 Initialization Vector, base64url-encoded
-
-   LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7zqSkl
-   a_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVweYeYc_l7m2
-   vyC_E1BzTQ9jb3wS1DxrqSX6YRjJ5mqx8ZX3tJW-wWVZfW8-PSEXb4GlBi22iQ
-   goXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maWZiglK4XckGv7-whchA42
-   VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
-   op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
-
-                       Ciphertext, base64url-encoded
-
-   3AIdtJkgAkWuhBdFo8iL8A
-
-                   Authentication Tag, base64url-encoded
-
-   eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
-   V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
-   .
-   IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
-   vR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1vQuC_TYslbSDLHx
-   nnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJmvWt_XrDp9tBby0xyjdwd
-   teAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2AKyuE10KEMbBo8EJVf1PP1JSS73qy
-   UqEt8oo0OHlYTicOwwwwhyiNshdrA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJa
-   B-u6qkDMAwA1tJEch4R58z9WsYKyrhAw
-   .
-   mR-7lneQlGq9vxe_udL4LA
-   .
-   LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7zqSkl
-   a_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVweYeYc_l7m2
-   vyC_E1BzTQ9jb3wS1DxrqSX6YRjJ5mqx8ZX3tJW-wWVZfW8-PSEXb4GlBi22iQ
-   goXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maWZiglK4XckGv7-whchA42
-   VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
-   op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
-   .
-   3AIdtJkgAkWuhBdFo8iL8A
-
-                           Compact Serialization
-
-
-
-Miller                    Expires May 23, 2014                 [Page 26]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   {
-     "recipients": {
-       "encrypted_key":
-         "IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4
-          sJ7xpNovR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1v
-          QuC_TYslbSDLHxnnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJ
-          mvWt_XrDp9tBby0xyjdwdteAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2A
-          KyuE10KEMbBo8EJVf1PP1JSS73qyUqEt8oo0OHlYTicOwwwwhyiNshd
-          rA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJaB-u6qkDMAwA1tJEch4R5
-          8z9WsYKyrhAw"
-     },
-     "protected":
-       "eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpd
-        G9uLmV4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
-     "iv":
-       "mR-7lneQlGq9vxe_udL4LA",
-     "ciphertext":
-       "LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7
-        zqSkla_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVw
-        eYeYc_l7m2vyC_E1BzTQ9jb3wS1DxrqSX6YRjJ5mqx8ZX3tJW-wWVZfW8
-        -PSEXb4GlBi22iQgoXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maW
-        ZiglK4XckGv7-whchA42VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--
-        aTLxGtl9sR7z1ZgAyfRqoSs0Sop9J35heE89JveLIAjnuXH2ShsF0lW6T
-        4HEYXFh9QsAF4TRdnpRs4",
-     "tag":
-       "3AIdtJkgAkWuhBdFo8iL8A"
-   }
-
-                            JSON Serialization
-
-4.6.  Key Encryption using RSA-OAEP with A256GCM
-
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
-
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
-
-                             Plaintext content
-
-   {
-     "alg": "RSA-OAEP",
-     "kid": "samwise.gamgee@hobbiton.example",
-     "enc": "A256GCM"
-
-
-
-Miller                    Expires May 23, 2014                 [Page 27]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   }
-
-                         Protected JWE Header JSON
-
-   eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
-   9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
-
-                  Protected JWE Header, base64url-encoded
-
-   IXMsrvX7gqq0M7wKXPCNdI_XAzC8ecxz6ifYgyDNTBAnHs2RGUzt34uJa-S2mF
-   yDCy2ONUDYq62HAPEM3RUXVNcvpAj6T3QueM0AjN5Dnbm8k1a_4vkRHkeIPuPO
-   HHfa3AhArS9w1qWX7NxuXq2DX7FON-GeCP8RymbBNhuwWm1LS4OhJUljuj-RyR
-   vtGNiqRTt4S3qyLvxDRAi16nj5oHbJj3SNz5Nv704w2zR6O4rezSCWxzshGpNk
-   p5u1ujPlAKjzIi8m7pjcRRYzF_S1DUXCz_w8sh_zQ4HkL7MVZrmY7k-4fRMH4o
-   -jwTIX8_t4SHpTL_4ssrJbxKE9pdi6bL0qbfw7B1cVqP8kGsbAiHAXxWorvcb9
-   swbn95iNXtuQkU83vU604x2djruXFf59lXfE3e1tChKKh75wVeEQBBSxe5Cqv8
-   AkzZI0HWwrLpYjD-XyXHZOTPNC9jcIEA4Nn8WMd0eK4U7jsYmXEpoK3V5caTVC
-   IvtL725BAVSs75nM8plbnH6W1sxAIKxrZdTUXccweHL6mDSp_Y0HRFig_Mo2NI
-   sOKRay4pnmEgx-h72cWswQjWKmWWxiRzesa-P0Th9tafIh7H3zQVF1EeWQP8yR
-   uRM5TNOnzavZ2uI5o5MwHPSeuRf3stv8lde2ocJOMfKwEAVgCBtLW4B0ikHvAr
-   0
-
-            Encrypted Content Encryption Key, base64url-encoded
-
-   fpDEu24ziqFnLBw4
-
-                 Initialization Vector, base64url-encoded
-
-   eiLa5Cu0SeTadQyhMtpFHNEL8EOu3bi8xX4kUMR37VeYwYF3m00FR5ZJr6D4GG
-   5wMMK15OvHo-RIOV5chvgXxXaW67rlDMdlFFPbDg2eojWV6mEucr2aeM9XzMSB
-   kzHqutZgiuv4LyuEl11UUUrxXiq-8mKkQwLyuqHZt6ItQB-ypLrE1kW8wmEnJp
-   6p9I1xFcL32BeVxNVBjbGYWkyGS9sAjsoKfJB2ZUQ55WyHrh0LxmWxUsJmtZ8H
-   N9lkmXytPTtQuIP6BZ5IzS2cgTwG3d8vZln8BPsIQAD25dVlAOmMwZ-oJgGm94
-   rWmiKKUtZJ96-HWxojcVq_MpghXYslO8Ug5hB1pY3oW5PqmY37ag
-
-                       Ciphertext, base64url-encoded
-
-   JqmbmqcGpiYIFXAZzJEudA
-
-                   Authentication Tag, base64url-encoded
-
-   eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
-   9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
-   .
-   IXMsrvX7gqq0M7wKXPCNdI_XAzC8ecxz6ifYgyDNTBAnHs2RGUzt34uJa-S2mF
-   yDCy2ONUDYq62HAPEM3RUXVNcvpAj6T3QueM0AjN5Dnbm8k1a_4vkRHkeIPuPO
-   HHfa3AhArS9w1qWX7NxuXq2DX7FON-GeCP8RymbBNhuwWm1LS4OhJUljuj-RyR
-   vtGNiqRTt4S3qyLvxDRAi16nj5oHbJj3SNz5Nv704w2zR6O4rezSCWxzshGpNk
-
-
-
-Miller                    Expires May 23, 2014                 [Page 28]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   p5u1ujPlAKjzIi8m7pjcRRYzF_S1DUXCz_w8sh_zQ4HkL7MVZrmY7k-4fRMH4o
-   -jwTIX8_t4SHpTL_4ssrJbxKE9pdi6bL0qbfw7B1cVqP8kGsbAiHAXxWorvcb9
-   swbn95iNXtuQkU83vU604x2djruXFf59lXfE3e1tChKKh75wVeEQBBSxe5Cqv8
-   AkzZI0HWwrLpYjD-XyXHZOTPNC9jcIEA4Nn8WMd0eK4U7jsYmXEpoK3V5caTVC
-   IvtL725BAVSs75nM8plbnH6W1sxAIKxrZdTUXccweHL6mDSp_Y0HRFig_Mo2NI
-   sOKRay4pnmEgx-h72cWswQjWKmWWxiRzesa-P0Th9tafIh7H3zQVF1EeWQP8yR
-   uRM5TNOnzavZ2uI5o5MwHPSeuRf3stv8lde2ocJOMfKwEAVgCBtLW4B0ikHvAr
-   0
-   .
-   fpDEu24ziqFnLBw4
-   .
-   eiLa5Cu0SeTadQyhMtpFHNEL8EOu3bi8xX4kUMR37VeYwYF3m00FR5ZJr6D4GG
-   5wMMK15OvHo-RIOV5chvgXxXaW67rlDMdlFFPbDg2eojWV6mEucr2aeM9XzMSB
-   kzHqutZgiuv4LyuEl11UUUrxXiq-8mKkQwLyuqHZt6ItQB-ypLrE1kW8wmEnJp
-   6p9I1xFcL32BeVxNVBjbGYWkyGS9sAjsoKfJB2ZUQ55WyHrh0LxmWxUsJmtZ8H
-   N9lkmXytPTtQuIP6BZ5IzS2cgTwG3d8vZln8BPsIQAD25dVlAOmMwZ-oJgGm94
-   rWmiKKUtZJ96-HWxojcVq_MpghXYslO8Ug5hB1pY3oW5PqmY37ag
-   .
-   JqmbmqcGpiYIFXAZzJEudA
-
-                           Compact Serialization
-
-   {
-     "recipients": {
-       "encrypted_key":
-         "IXMsrvX7gqq0M7wKXPCNdI_XAzC8ecxz6ifYgyDNTBAnHs2RGUzt34u
-          Ja-S2mFyDCy2ONUDYq62HAPEM3RUXVNcvpAj6T3QueM0AjN5Dnbm8k1
-          a_4vkRHkeIPuPOHHfa3AhArS9w1qWX7NxuXq2DX7FON-GeCP8RymbBN
-          huwWm1LS4OhJUljuj-RyRvtGNiqRTt4S3qyLvxDRAi16nj5oHbJj3SN
-          z5Nv704w2zR6O4rezSCWxzshGpNkp5u1ujPlAKjzIi8m7pjcRRYzF_S
-          1DUXCz_w8sh_zQ4HkL7MVZrmY7k-4fRMH4o-jwTIX8_t4SHpTL_4ssr
-          JbxKE9pdi6bL0qbfw7B1cVqP8kGsbAiHAXxWorvcb9swbn95iNXtuQk
-          U83vU604x2djruXFf59lXfE3e1tChKKh75wVeEQBBSxe5Cqv8AkzZI0
-          HWwrLpYjD-XyXHZOTPNC9jcIEA4Nn8WMd0eK4U7jsYmXEpoK3V5caTV
-          CIvtL725BAVSs75nM8plbnH6W1sxAIKxrZdTUXccweHL6mDSp_Y0HRF
-          ig_Mo2NIsOKRay4pnmEgx-h72cWswQjWKmWWxiRzesa-P0Th9tafIh7
-          H3zQVF1EeWQP8yRuRM5TNOnzavZ2uI5o5MwHPSeuRf3stv8lde2ocJO
-          MfKwEAVgCBtLW4B0ikHvAr0"
-     },
-     "iv":
-       "fpDEu24ziqFnLBw4",
-     "ciphertext":
-       "eiLa5Cu0SeTadQyhMtpFHNEL8EOu3bi8xX4kUMR37VeYwYF3m00FR5ZJr
-        6D4GG5wMMK15OvHo-RIOV5chvgXxXaW67rlDMdlFFPbDg2eojWV6mEucr
-        2aeM9XzMSBkzHqutZgiuv4LyuEl11UUUrxXiq-8mKkQwLyuqHZt6ItQB-
-        ypLrE1kW8wmEnJp6p9I1xFcL32BeVxNVBjbGYWkyGS9sAjsoKfJB2ZUQ5
-        5WyHrh0LxmWxUsJmtZ8HN9lkmXytPTtQuIP6BZ5IzS2cgTwG3d8vZln8B
-        PsIQAD25dVlAOmMwZ-oJgGm94rWmiKKUtZJ96-HWxojcVq_MpghXYslO8
-
-
-
-Miller                    Expires May 23, 2014                 [Page 29]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-        Ug5hB1pY3oW5PqmY37ag",
-     "tag":
-       "JqmbmqcGpiYIFXAZzJEudA"
-   }
-
-                            JSON Serialization
-
-4.7.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2
-
-   This example uses the following JWK Set object as the plaintext (with
-   all whitespace removed before encrypting).
-
-   {
-     "keys": [
-       {
-         "kty": "oct",
-         "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-         "use": "enc",
-         "alg": "A256GCMKW",
-         "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
-       },
-       {
-         "kty": "oct",
-         "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
-         "use": "enc",
-         "alg": "A128KW",
-         "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
-       }
-     ]
-   }
-
-                             Plaintext Content
-
-   entrap_o_peter_long_credit_tun
-
-                                 Password
-
-   {
-     "alg": "PBES2-HS512+A256KW",
-     "p2s": "c2hvgtBAqZDqovhj43zW8A",
-     "p2c": 8192,
-     "enc": "A128CBC-HS256"
-   }
-
-                         Protected JWE Header JSON
-
-   eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiJjMmh2Z3RCQXFaRH
-   FvdmhqNDN6VzhBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
-
-
-
-Miller                    Expires May 23, 2014                 [Page 30]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-                  Protected JWE Header, base64url-encoded
-
-   xl4lstRMtEYkbruA7I_rTqIJODDp1g9QKJcNVZi96tSxHcSbCzlZyA
-
-            Encrypted Content Encryption Key, base64url-encoded
-
-   gY6XnqB-wzZ6QRjjfYa9I
-
-                 Initialization Vector, base64url-encoded
-
-   OU5-nB2pI_6QoXbpKn48dL-Nd2s3D1bOObURc3UBWZSZhqHc8ezSlv0jk3qsR2
-   _bMdpy0OeqAzQvluJqWBINDMWKoeu6r8ZEIeqFYs8-USKuq5B-OG-Jmdjf6t2p
-   lnlFJ-4p93mtS6MgJWmMqwjVObxNGCdrL7aZuRaapE_l4ad2oxEm5figGziwrA
-   5qxBBYyxJdVoKADIVgwC8zDaGNE5bPa1rngxpv5hvVWJtkOCgRjtqLRxaVkIac
-   WefvBkT37gPSSDiSK5OkL7yOSL4ScHUMk2D8rpYSKQnUc3VcS3eji0oXuiOtlp
-   wmkK3WOIQXtPXMiXRt5SlJ0iG8Nwv4tkZtvUVt_U_JLRYALpOyJ7k
-
-                       Ciphertext, base64url-encoded
-
-   cGNNKBJSdptdqE0-bq_EYA
-
-                   Authentication Tag, base64url-encoded
-
-   cGNNKBJSdptdqE0-bq_EYA
-
-                           Compact Serialization
-
-   {
-     "recipients": {
-       "encrypted_key":
-         "xl4lstRMtEYkbruA7I_rTqIJODDp1g9QKJcNVZi96tSxHcSbCzlZyA"
-     },
-     "protected":
-       "eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiJjMmh2Z3RCQ
-        XFaRHFvdmhqNDN6VzhBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLU
-        hTMjU2In0",
-     "iv":
-       "gY6XnqB-wzZ6QRjjfYa9Iw",
-     "ciphertext":
-       "OU5-nB2pI_6QoXbpKn48dL-Nd2s3D1bOObURc3UBWZSZhqHc8ezSlv0jk
-        3qsR2_bMdpy0OeqAzQvluJqWBINDMWKoeu6r8ZEIeqFYs8-USKuq5B-OG
-        -Jmdjf6t2plnlFJ-4p93mtS6MgJWmMqwjVObxNGCdrL7aZuRaapE_l4ad
-        2oxEm5figGziwrA5qxBBYyxJdVoKADIVgwC8zDaGNE5bPa1rngxpv5hvV
-        WJtkOCgRjtqLRxaVkIacWefvBkT37gPSSDiSK5OkL7yOSL4ScHUMk2D8r
-        pYSKQnUc3VcS3eji0oXuiOtlpwmkK3WOIQXtPXMiXRt5SlJ0iG8Nwv4tk
-        ZtvUVt_U_JLRYALpOyJ7k",
-     "tag":
-       "cGNNKBJSdptdqE0-bq_EYA"
-
-
-
-Miller                    Expires May 23, 2014                 [Page 31]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
-   }
-
-                            JSON Serialization
-
 4.8.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2
 
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
+   This example illustrates encrypting content using the "A256GCMKW"
+   (AES-256-GCM-KeyWrap) key encryption algorithm with the "A128CBC-
+   HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
+   This example uses the Plaintext from Section 4.1.
 
-                             Plaintext content
+   The following AES symmetric key is used (formatted as a JWK object):
+
+   {
+     "kty": "oct",
+     "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
+     "use": "enc",
+     "alg": "A256GCMKW",
+     "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
+
+
+
+Miller                    Expires May 23, 2014                 [Page 36]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   }
+
+                              AES 256-bit Key
+
+   The protected JWE header parameters:
 
    {
      "alg": "A256GCMKW",
      "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-     "tag": "2jSweIPv9TXvYlV3bciahA",
-     "iv":  "npr_cjNkVZTYNR0f",
-     "enc":  "A128CBC-HS256"
+     "tag": "7qiY1gOLorD7ro67FZqYRw",
+     "iv":  "3llIgu3y7Vu5dZW7",
+     "enc": "A128CBC-HS256"
    }
 
                          Protected JWE Header JSON
 
+   Encoded as [RFC4648] base64url:
+
    eyJhbGciOiJBMjU2R0NNS1ciLCJraWQiOiIxOGVjMDhlMS1iZmE5LTRkOTUtYj
-   IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiIyalN3ZUlQdjlUWHZZbFYzYmNpYWhB
-   IiwiaXYiOiJucHJfY2pOa1ZaVFlOUjBmIiwiZW5jIjoiQTEyOENCQy1IUzI1Ni
+   IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiI3cWlZMWdPTG9yRDdybzY3RlpxWVJ3
+   IiwiaXYiOiIzbGxJZ3UzeTdWdTVkWlc3IiwiZW5jIjoiQTEyOENCQy1IUzI1Ni
    J9
 
                   Protected JWE Header, base64url-encoded
 
-   V_RcQ8Ub1q7ew9poHsOw68Eq3HlTZmxQ2J8GEWTPIhw
+   The Content Encryption Key (CEK):
 
-            Encrypted Content Encryption Key, base64url-encoded
+   a2gN8ASDdVKI86lMJC8rKI8RV8U8OltRlVzygIo48NA
 
-   R7aBFWBG7CaKbzvc7szWBQ
+                 Content Encryption Key, base64url-encoded
+
+   Performing the key encryption operation over the CEK with the given
+   AES key and key encryption iv (via the "iv" JWE header parameter)
+   produces the following encrypted key:
+
+   cfBkmK29hCy31FM6VhHHgqbGa2DQvXZgnqSSl8zcOsE
+
+                     Encrypted Key, base64url-encoded
+
+   The initialization vector/nonce:
+
+   Z3wPFyzW8czy88sUmzcnlg
 
                  Initialization Vector, base64url-encoded
 
-   H4iHCdVZXihv7z03KuUq5yly2o7U9Hp4VtfYJF9qbdGh0tmaMrjKUYpZdLCAVg
-   Tb0diAhPCE6R_CUvWRQmA_4PK5ZUn3CJYeLkOCJKi8J9CHwKNeun4Rp2IOxRTr
-   qK1iTY8PSm0SlOKxVuA2DWSs9uXyt9aCmxj4Ca7Iaxfp402nB3dqrlzprTDAdx
-   nwVV6n4E-FazXJLvFok2bDPt_fDJNR8Q73bWgS_aOdrVU1zzzzNwZBG9w4Nn0F
-   k00sWCjfojSilrtOfpYhujUIz2pWwDnbnRrg-pi1ht6FgvNVAJ7FxAMbL4OACA
+   Performing the content encryption operation over the Plaintext with
+   the given CEK, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) produces the following ciphertext:
 
 
 
-Miller                    Expires May 23, 2014                 [Page 32]
+Miller                    Expires May 23, 2014                 [Page 37]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   oWzTFY6-fZPdk7CSdIgg8fGHnYXhvQX-H6j9lHUxVnhO8yt9jfykY
+   YSoJLPEGGMUoFM7zbKAwZivdakcAZWsyoQycpRG-4haDdLdXXGtLCev_HEs-Tu
+   5xRlK-4FFIQJ8l6bfSTR9glEa2FaVS8tgkZO1X9BbPAY9_4SCuLLO4n5LFK0mI
+   TQ8WOgpa0FTfG_1ml76MWGVtgADHGzvqSib9xoW39YsIdOu3Evj2GmvvPIm1WZ
+   K3HjQhQkvfKbpSFLFRkH3xsHyYYkKiH2PEOCZOzHNzc8PRMavtkBO64zmpWTfy
+   tMshzm0sgbroEBFU-vCHWzt5fVx_A9oUn5szL7RlkXU12fOCc7VJ2X5TtYPPr_
+   bM4z6KB5FBLS3hVVfHZee83e9IDrk0k7AIcf3KpfzapJmZ3kdZgOg
 
                        Ciphertext, base64url-encoded
+
+   And authentication tag:
 
    d7dahIDc06hrpWqDiQzaXQ
 
                    Authentication Tag, base64url-encoded
 
+   The resulting JWE object, using the Compact serialization:
+
    eyJhbGciOiJBMjU2R0NNS1ciLCJraWQiOiIxOGVjMDhlMS1iZmE5LTRkOTUtYj
-   IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiIyalN3ZUlQdjlUWHZZbFYzYmNpYWhB
-   IiwiaXYiOiJucHJfY2pOa1ZaVFlOUjBmIiwiZW5jIjoiQTEyOENCQy1IUzI1Ni
+   IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiI3cWlZMWdPTG9yRDdybzY3RlpxWVJ3
+   IiwiaXYiOiIzbGxJZ3UzeTdWdTVkWlc3IiwiZW5jIjoiQTEyOENCQy1IUzI1Ni
    J9
    .
-   V_RcQ8Ub1q7ew9poHsOw68Eq3HlTZmxQ2J8GEWTPIhw
+   cfBkmK29hCy31FM6VhHHgqbGa2DQvXZgnqSSl8zcOsE
    .
-   R7aBFWBG7CaKbzvc7szWBQ
+   Z3wPFyzW8czy88sUmzcnlg
    .
-   H4iHCdVZXihv7z03KuUq5yly2o7U9Hp4VtfYJF9qbdGh0tmaMrjKUYpZdLCAVg
-   Tb0diAhPCE6R_CUvWRQmA_4PK5ZUn3CJYeLkOCJKi8J9CHwKNeun4Rp2IOxRTr
-   qK1iTY8PSm0SlOKxVuA2DWSs9uXyt9aCmxj4Ca7Iaxfp402nB3dqrlzprTDAdx
-   nwVV6n4E-FazXJLvFok2bDPt_fDJNR8Q73bWgS_aOdrVU1zzzzNwZBG9w4Nn0F
-   k00sWCjfojSilrtOfpYhujUIz2pWwDnbnRrg-pi1ht6FgvNVAJ7FxAMbL4OACA
-   oWzTFY6-fZPdk7CSdIgg8fGHnYXhvQX-H6j9lHUxVnhO8yt9jfykY
+   YSoJLPEGGMUoFM7zbKAwZivdakcAZWsyoQycpRG-4haDdLdXXGtLCev_HEs-Tu
+   5xRlK-4FFIQJ8l6bfSTR9glEa2FaVS8tgkZO1X9BbPAY9_4SCuLLO4n5LFK0mI
+   TQ8WOgpa0FTfG_1ml76MWGVtgADHGzvqSib9xoW39YsIdOu3Evj2GmvvPIm1WZ
+   K3HjQhQkvfKbpSFLFRkH3xsHyYYkKiH2PEOCZOzHNzc8PRMavtkBO64zmpWTfy
+   tMshzm0sgbroEBFU-vCHWzt5fVx_A9oUn5szL7RlkXU12fOCc7VJ2X5TtYPPr_
+   bM4z6KB5FBLS3hVVfHZee83e9IDrk0k7AIcf3KpfzapJmZ3kdZgOg
    .
-   d7dahIDc06hrpWqDiQzaXQ
+   W7cYYn27uUYttxShJ2yYhQ
 
                            Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
 
    {
      "recipients": [
        {
          "encrypted_key":
-           "V_RcQ8Ub1q7ew9poHsOw68Eq3HlTZmxQ2J8GEWTPIhw"
+           "cfBkmK29hCy31FM6VhHHgqbGa2DQvXZgnqSSl8zcOsE"
        }
      ],
      "protected":
        "eyJhbGciOiJBMjU2R0NNS1ciLCJraWQiOiIxOGVjMDhlMS1iZmE5LTRkO
-        TUtYjIwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiIyalN3ZUlQdjlUWHZZbF
-        YzYmNpYWhBIiwiaXYiOiJucHJfY2pOa1ZaVFlOUjBmIiwiZW5jIjoiQTE
-        yOENCQy1IUzI1NiJ9",
-     "iv":
-       "R7aBFWBG7CaKbzvc7szWBQ",
-     "ciphertext":
-       "H4iHCdVZXihv7z03KuUq5yly2o7U9Hp4VtfYJF9qbdGh0tmaMrjKUYpZd
-        LCAVgTb0diAhPCE6R_CUvWRQmA_4PK5ZUn3CJYeLkOCJKi8J9CHwKNeun
-        4Rp2IOxRTrqK1iTY8PSm0SlOKxVuA2DWSs9uXyt9aCmxj4Ca7Iaxfp402
-        nB3dqrlzprTDAdxnwVV6n4E-FazXJLvFok2bDPt_fDJNR8Q73bWgS_aOd
-        rVU1zzzzNwZBG9w4Nn0Fk00sWCjfojSilrtOfpYhujUIz2pWwDnbnRrg-
 
 
 
-Miller                    Expires May 23, 2014                 [Page 33]
+Miller                    Expires May 23, 2014                 [Page 38]
 
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-        pi1ht6FgvNVAJ7FxAMbL4OACAoWzTFY6-fZPdk7CSdIgg8fGHnYXhvQX-
-        H6j9lHUxVnhO8yt9jfykY",
+        TUtYjIwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiI3cWlZMWdPTG9yRDdybz
+        Y3RlpxWVJ3IiwiaXYiOiIzbGxJZ3UzeTdWdTVkWlc3IiwiZW5jIjoiQTE
+        yOENCQy1IUzI1NiJ9",
+     "iv":
+       "Z3wPFyzW8czy88sUmzcnlg",
+     "ciphertext":
+       "YSoJLPEGGMUoFM7zbKAwZivdakcAZWsyoQycpRG-4haDdLdXXGtLCev_H
+        Es-Tu5xRlK-4FFIQJ8l6bfSTR9glEa2FaVS8tgkZO1X9BbPAY9_4SCuLL
+        O4n5LFK0mITQ8WOgpa0FTfG_1ml76MWGVtgADHGzvqSib9xoW39YsIdOu
+        3Evj2GmvvPIm1WZK3HjQhQkvfKbpSFLFRkH3xsHyYYkKiH2PEOCZOzHNz
+        c8PRMavtkBO64zmpWTfytMshzm0sgbroEBFU-vCHWzt5fVx_A9oUn5szL
+        7RlkXU12fOCc7VJ2X5TtYPPr_bM4z6KB5FBLS3hVVfHZee83e9IDrk0k7
+        AIcf3KpfzapJmZ3kdZgOg",
      "tag":
-       "d7dahIDc06hrpWqDiQzaXQ"
+       "W7cYYn27uUYttxShJ2yYhQ"
    }
 
                             JSON Serialization
 
 4.9.  Key Wrap using AES-KeyWrap with AES-GCM
 
-   *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
-   of the (U+0020 SPACE) characters were replaced with (U+000A LINE
-   FEED) to improve readability.
+   The following example illustrates content encryption using the
+   "A128KW" (AES-128-KeyWrap) key encryption algorithm and the "A128GCM"
+   (AES-128-GCM) content encryption algorithm.
 
-   You can trust us to stick with you through thick and thin--to
-   the bitter end. And you can trust us to keep any secret of
-   yours--closer than you keep it yourself. But you cannot trust
-   us to let you face trouble alone, and go off without a word.
-   We are your friends, Frodo.
+   The Plaintext content in Section 4.1 is used for this example.
 
-                             Plaintext content
+   The following AES symmetric key is used (formatted as a JWK object):
+
+   {
+     "kty": "oct",
+     "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
+     "use": "enc",
+     "alg": "A128KW",
+     "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
+   }
+
+                              AES 128-Bit Key
+
+   The protected JWE header:
 
    {
      "alg": "A128KW",
@@ -1880,39 +2179,68 @@ Internet-Draft                JOSE Cookbook                November 2013
 
                          Protected JWE Header JSON
 
+
+
+Miller                    Expires May 23, 2014                 [Page 39]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
+   Encoded as [RFC4648] base64url:
+
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0
 
                   Protected JWE Header, base64url-encoded
 
+   The Content Encryption Key (CEK):
+
+   'Hv3Kmjt7vR2in57dLm-Pfw
+
+                 Content Encryption Key, base64url-encoded
+
+   Performing the key encryption operation over the CEK with the given
+   AES key produces the following encrypted key:
+
    RMMWwegPo5GY-5DeqC51gevcIOQpc4CH
 
-            Encrypted Content Encryption Key, base64url-encoded
+                     Encrypted Key, base64url-encoded
+
+   The initialization vector/nonce:
 
    wxdDTG0-QnGvBZew
 
                  Initialization Vector, base64url-encoded
+
+   Performing the content encryption algorithm over the Plaintext with
+   the given CEK, initialization vector/nonce, and protected JWE header
+   (base64url-encoded) produces the following ciphertext:
 
    DoM1vi13RWus_t3EsvGWk4gDH3F8TGRnBo4p3uImtmboRrT1pniDLDQTipfOin
    86hMl343jhxcRObGyiKgIyPI-tG8M9E92VkHeOE8O77-s6wRj9XxxEs8zw9YPX
    baILJYTbR5aWyRLpTwlEhAf5_DVL2b5vnvTNctEp5JaojvqXF5F3jkZAaJwa4u
    IjhqGd7gJvf7zKbwF7Is_GbSm9rf9Z0dacH5LQQn2P_VYEb8ptUWmgz4Gg1YFF
    tGg16H5JAutG9a6GqFUdkSZ-mKSothgDEHv9gnAqYnWKLaE3E2hzhxcgtNwNKf
-
-
-
-Miller                    Expires May 23, 2014                 [Page 34]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
    lLSfmV247xbRYZhR8NeJ_GoKCjrH7isFvUM0Uzx43cPpPDypyiGA
 
                        Ciphertext, base64url-encoded
 
+   And authentication tag:
+
    N7CDBxgruPcQozgqPeihlw
 
                    Authentication Tag, base64url-encoded
+
+   The resulting JWE object, using the Compact serialization:
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 40]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
 
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0
@@ -1931,6 +2259,8 @@ Internet-Draft                JOSE Cookbook                November 2013
    N7CDBxgruPcQozgqPeihlw
 
                            Compact Serialization
+
+   The resulting JWE object, using the JSON serialization:
 
    {
      "recipients": [
@@ -1954,19 +2284,19 @@ Internet-Draft                JOSE Cookbook                November 2013
         vUM0Uzx43cPpPDypyiGA",
      "tag":
        "N7CDBxgruPcQozgqPeihlw"
-
-
-
-Miller                    Expires May 23, 2014                 [Page 35]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
    }
 
                             JSON Serialization
 
 4.10.  Compressed Content
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 41]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
 
    *NOTE:* The payload content contains whitespace (U+0020 SPACE).  Some
    of the (U+0020 SPACE) characters were replaced with (U+000A LINE
@@ -1996,11 +2326,33 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    fUGYywsd6dWWr5JpNP0EMMN2XkXk8_h5
 
-            Encrypted Content Encryption Key, base64url-encoded
+                     Encrypted Key, base64url-encoded
 
    9UnGd0z8-Yx3BFV3
 
                  Initialization Vector, base64url-encoded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 42]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
 
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
@@ -2010,14 +2362,6 @@ Internet-Draft                JOSE Cookbook                November 2013
    9UnGd0z8-Yx3BFV3
    .
    b962BmHXeA9iYY8u9GnpxtXnme1MNm7vhhBqcxJHof08hGn1ltC7Mpf0dnlB0y
-
-
-
-Miller                    Expires May 23, 2014                 [Page 36]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
    ZqAlqBWDJrGs3eVseTlFEFm0pDHDlIven74xwZPdJdEylDKPTeZLaCf6TjK46C
    UfWJBajPZ2wiupjQJb5FYz_1KsWYCXAE4k6xt9v5wkwm_FHpYevNXuE7hokcim
    LRiCi1R_xjnG7sHCTWKb56L0ZsqacWn_52jkO9B3Q
@@ -2058,6 +2402,14 @@ Internet-Draft                JOSE Cookbook                November 2013
      "ciphertext":
        "b962BmHXeA9iYY8u9GnpxtXnme1MNm7vhhBqcxJHof08hGn1ltC7Mpf0d
         nlB0yZqAlqBWDJrGs3eVseTlFEFm0pDHDlIven74xwZPdJdEylDKPTeZL
+
+
+
+Miller                    Expires May 23, 2014                 [Page 43]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
         aCf6TjK46CUfWJBajPZ2wiupjQJb5FYz_1KsWYCXAE4k6xt9v5wkwm_FH
         pYevNXuE7hokcimLRiCi1R_xjnG7sHCTWKb56L0ZsqacWn_52jkO9B3Q",
      "tag":
@@ -2065,14 +2417,6 @@ Internet-Draft                JOSE Cookbook                November 2013
    }
 
                             JSON Serialization
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 37]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
 
 4.11.  Protecting Specific Header Fields
 
@@ -2108,11 +2452,19 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    MJjYoJ6DKa__0KTJP5PT8pR0T_tybLRc
 
-            Encrypted Content Encryption Key, base64url-encoded
+                     Encrypted Key, base64url-encoded
 
    HorZstLCLfNNC7TN
 
                  Initialization Vector, base64url-encoded
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 44]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
 
    fOxklZw0MD_ScE71g8eRmcgF5mFiLIk4Fax0iTNYu96PAjskl1ZAZmcvUDiPiA
    ZGGU8Q44O_nt6EjXhx20z6Ix2M_TZnfJWH9YtPm-uEzzWU0Yos0k-BqvQ3jOXk
@@ -2120,15 +2472,6 @@ Internet-Draft                JOSE Cookbook                November 2013
    wiPdD2WSbn3YSXZj2NFerDl7o0GBTZ-q12AFHWD38
 
                        Ciphertext, base64url-encoded
-
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 38]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
 
    TNzmuMZK-VpijGRN4fmfOg
 
@@ -2171,6 +2514,14 @@ Internet-Draft                JOSE Cookbook                November 2013
    the bitter end. And you can trust us to keep any secret of
    yours--closer than you keep it yourself. But you cannot trust
    us to let you face trouble alone, and go off without a word.
+
+
+
+Miller                    Expires May 23, 2014                 [Page 45]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
    We are your friends, Frodo.
 
                              Plaintext content
@@ -2178,14 +2529,6 @@ Internet-Draft                JOSE Cookbook                November 2013
    {
      "alg": "A128KW",
      "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
-
-
-
-Miller                    Expires May 23, 2014                 [Page 39]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
      "enc": "A128GCM",
      "zip": "DEF"
    }
@@ -2194,7 +2537,7 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    yyuirCy7Hd_nY0gL5Jfq6sJ7RXRR0DtF
 
-            Encrypted Content Encryption Key, base64url-encoded
+                     Encrypted Key, base64url-encoded
 
    zdbIl4BrrziYK55_
 
@@ -2227,6 +2570,14 @@ Internet-Draft                JOSE Cookbook                November 2013
      "iv":
        "zdbIl4BrrziYK55_",
      "ciphertext":
+
+
+
+Miller                    Expires May 23, 2014                 [Page 46]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
        "_Th0nZypKIbnODRLTU0L5tjL1_8Kvlq--xUT3cz9Uc-MfGRluhgY3reY0
         KX_Ern2FrSe0ou9FZKA2YH9bRRux6NvmBRdhsELHR0VkbBAADn4GGCBBW
         XQPRzydbWEYfRj5a6vYphkINp0L71HuVyxpnS30cJE6khxnTEhJu0bJ4s
@@ -2234,13 +2585,6 @@ Internet-Draft                JOSE Cookbook                November 2013
      "tag":
        "J2Q3F_rNJ2szSiSdMENJDw"
    }
-
-
-
-Miller                    Expires May 23, 2014                 [Page 40]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
 
                             JSON Serialization
 
@@ -2279,7 +2623,16 @@ Internet-Draft                JOSE Cookbook                November 2013
    bEyRYlUet8PRH_CjINMipv7LCDRsKVnr3oHwZEfCJFGNC-w_-Qn4xcmkmxyaz1
    -kZEpS_t2kWJsFqx3mg7QAXJBxdGmy6A
 
-     Recipient #1 Encrypted Content Encryption Key, base64url-encoded
+               Recipient #1 Encrypted Key, base64url-encoded
+
+
+
+
+
+Miller                    Expires May 23, 2014                 [Page 47]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
 
    {
      "alg": "ECDH-ES+A256KW",
@@ -2290,14 +2643,6 @@ Internet-Draft                JOSE Cookbook                November 2013
        "x":   "-fcIsKguXqJTTsWdHbJ4iRY_xARz9O_JdAxVEJnrxo7sJRbkwH
                mwlMi4AxCVzG_I",
        "y":   "JcuN_3pD0dbTjry07BoFoJ-_W-SumUHH9XIAvXkKeFkJV4s5GM
-
-
-
-Miller                    Expires May 23, 2014                 [Page 41]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
                CwXwxtgkNeZ32T"
      }
    }
@@ -2306,7 +2651,7 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    Dd1kQYNhhSIlKEAyE9UYhjtUBGahteiYVnRUg_tWf8S9VJZKL_8YOw
 
-     Recipient #2 Encrypted Content Encryption Key, base64url-encoded
+               Recipient #2 Encrypted Key, base64url-encoded
 
    {
      "alg": "A256GCMKW",
@@ -2319,7 +2664,7 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    iiVL4XCDCnsWCSZCTysGxl41vdnJqIThbumNa9wSQBo
 
-     Recipient #3 Encrypted Content Encryption Key, base64url-encoded
+               Recipient #3 Encrypted Key, base64url-encoded
 
    qP1KgJY-vTLW-nMrMSfMYw
 
@@ -2337,6 +2682,14 @@ Internet-Draft                JOSE Cookbook                November 2013
                    Authentication Tag, base64url-encoded
 
    {
+
+
+
+Miller                    Expires May 23, 2014                 [Page 48]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
      "recipients": [
        {
          "encrypted_key":
@@ -2346,14 +2699,6 @@ Internet-Draft                JOSE Cookbook                November 2013
             tk7KKjyw38LBuvSOVdokkHWMP4pVLeUJB1ovbT4M1j3pxUzyM2426
             sD6LfjorQhY8vsChyDaFST0Oe8uBvcRyA5mabEyRYlUet8PRH_CjI
             NMipv7LCDRsKVnr3oHwZEfCJFGNC-w_-Qn4xcmkmxyaz1-kZEpS_t
-
-
-
-Miller                    Expires May 23, 2014                 [Page 42]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
             2kWJsFqx3mg7QAXJBxdGmy6A",
          "header": {
            "alg": "RSA1_5",
@@ -2393,6 +2738,14 @@ Internet-Draft                JOSE Cookbook                November 2013
      "unprotected": {
        "enc": "A128CBC-HS256",
        "zip": "DEF"
+
+
+
+Miller                    Expires May 23, 2014                 [Page 49]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
      },
      "iv":
        "qP1KgJY-vTLW-nMrMSfMYw",
@@ -2402,14 +2755,6 @@ Internet-Draft                JOSE Cookbook                November 2013
         JdggbRPdojZe0VJRS6BXNFgTu0KJKtC4GJp_O-9oDQuof8o6LtLg-2JiG
         FBvQPB-krDjwL9Ff3u2ZhNoFYta6IQvh5BqR7XnY87cuu7m8xFxEv0wKm
         rnqlvc4",
-
-
-
-Miller                    Expires May 23, 2014                 [Page 43]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
-
      "tag":
        "zWJK47HuwOoZ2OitcrEfUA"
    }
@@ -2450,21 +2795,18 @@ Appendix A.  Acknowledgements
    Thanks to Richard Barnes and Jim Schaad for providing for their input
    on the outline for this document.
 
+
+
+Miller                    Expires May 23, 2014                 [Page 50]
+
+Internet-Draft                JOSE Cookbook                November 2013
+
+
    Most of the signature payload content and encrypted plaintext content
    are quotes from the series of novels collectively known as "The Lord
    of the Rings", written by J. R. R. Tolkien.
 
 Author's Address
-
-
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 44]
-
-Internet-Draft                JOSE Cookbook                November 2013
-
 
    Matthew Miller
    Cisco Systems, Inc.
@@ -2511,10 +2853,4 @@ Internet-Draft                JOSE Cookbook                November 2013
 
 
 
-
-
-
-
-
-
-Miller                    Expires May 23, 2014                 [Page 45]
+Miller                    Expires May 23, 2014                 [Page 51]
