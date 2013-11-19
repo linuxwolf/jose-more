@@ -992,7 +992,7 @@ MKccO3TLKaMB67zj
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
 
-Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) produces the following ciphertext:
+Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_qhZgJ
@@ -1453,7 +1453,7 @@ obvv9nee1GDQTucO7EiLUw
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
 
-Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) produces the following ciphertext:
+Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
@@ -1703,7 +1703,7 @@ Z3wPFyzW8czy88sUmzcnlg
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
 
-Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) produces the following ciphertext:
+Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 YSoJLPEGGMUoFM7zbKAwZivdakcAZWsyoQycpRG-4haDdLdXXGtLCev_HEs-Tu
@@ -1836,7 +1836,7 @@ wxdDTG0-QnGvBZew
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
 
-Performing the content encryption algorithm over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) produces the following ciphertext:
+Performing the content encryption algorithm over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 DoM1vi13RWus_t3EsvGWk4gDH3F8TGRnBo4p3uImtmboRrT1pniDLDQTipfOin
@@ -1908,16 +1908,21 @@ The resulting JWE object, using the JSON serialization:
 
 ## Compressed Content ## {#jwe-compressed}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates encrypting content that is first compressed.  It reuses the AES key, key encryption algorithm, and content encryption algorithm from {{jwe-aeskw}}.
+
+The Plaintext content in {{jwe-plaintext}} is used for this example.
+
+The compressed Plaintext:
 
 ~~~~~~~~~~
-You can trust us to stick with you through thick and thin--to
-the bitter end. And you can trust us to keep any secret of
-yours--closer than you keep it yourself. But you cannot trust
-us to let you face trouble alone, and go off without a word.
-We are your friends, Frodo.
+eJxtj0EOwyAMBL-yD0jyh_bQL1Q9EmICCsKVMYry-zpEPVTqycizu15e3OBdgU
+qrilahjKrJb9iTRhyGNQq3Ndo8164s56uMoyk1EuakSgIqy4SbweNP4kb0NueB
+Sl5IweGUSR1Hn7maW6M5TmdXJr0w5TDh3vSbWVh_YjNdKDhPBrjNmeAyFxp6z5
+XtUug_YUtx2Fms5dNEQv0EgiRrXgc8hBeePt1uYQ0
 ~~~~~~~~~~
-{: title="Plaintext content" }
+{: title="Compressed Plaintext, base64url-encoded"}
+
+The protected JWE header parameters:
 
 ~~~~~~~~~~
 {
@@ -1929,45 +1934,59 @@ We are your friends, Frodo.
 ~~~~~~~~~~
 {: title="Protected JWE Header JSON"}
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
 04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
 ~~~~~~~~~~
 {: title="Protected JWE Header, base64url-encoded"}
 
+The Content Encryption Key (CEK):
+
+~~~~~~~~~~
+03x4Y5d1Lk0K2VbMmePmMw
+~~~~~~~~~~
+{: title="Content Encryption Key, base64url-encoded"}
+
+Performing the key encryption operation over the CEK with the given AES key produces the following encrypted key:
+
 ~~~~~~~~~~
 fUGYywsd6dWWr5JpNP0EMMN2XkXk8_h5
 ~~~~~~~~~~
 {: title="Encrypted Key, base64url-encoded"}
+
+The initialization vector/nonce:
 
 ~~~~~~~~~~
 9UnGd0z8-Yx3BFV3
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
 
+Performing the content encryption operation over the compressed Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
+
 ~~~~~~~~~~
-eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
-04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
-.
-fUGYywsd6dWWr5JpNP0EMMN2XkXk8_h5
-.
-9UnGd0z8-Yx3BFV3
-.
 b962BmHXeA9iYY8u9GnpxtXnme1MNm7vhhBqcxJHof08hGn1ltC7Mpf0dnlB0y
 ZqAlqBWDJrGs3eVseTlFEFm0pDHDlIven74xwZPdJdEylDKPTeZLaCf6TjK46C
 UfWJBajPZ2wiupjQJb5FYz_1KsWYCXAE4k6xt9v5wkwm_FHpYevNXuE7hokcim
 LRiCi1R_xjnG7sHCTWKb56L0ZsqacWn_52jkO9B3Q
-.
-Im5q_DU2ZafibIuj5GNI5Q
 ~~~~~~~~~~
 {: title="Ciphertext, base64url-encoded"}
+
+And authentication tag:
 
 ~~~~~~~~~~
 Im5q_DU2ZafibIuj5GNI5Q
 ~~~~~~~~~~
 {: title="Authentication Tag, base64url-encoded"}
 
+The resulting JWE object, using the Compact serialization:
+
 ~~~~~~~~~~
+eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
+04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
+.
+fUGYywsd6dWWr5JpNP0EMMN2XkXk8_h5
 .
 9UnGd0z8-Yx3BFV3
 .
@@ -1979,6 +1998,8 @@ LRiCi1R_xjnG7sHCTWKb56L0ZsqacWn_52jkO9B3Q
 Im5q_DU2ZafibIuj5GNI5Q
 ~~~~~~~~~~
 {: title="Compact Serialization"}
+
+The resulting JWE object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -2008,16 +2029,13 @@ Im5q_DU2ZafibIuj5GNI5Q
 
 ## Protecting Specific Header Fields ## {#jwe-somefields}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates encrypting content where only certain JWE header parameters are protected.  As this example includes unprotected JWE header parameters, only the JSON serialization is possible.
 
-~~~~~~~~~~
-You can trust us to stick with you through thick and thin--to
-the bitter end. And you can trust us to keep any secret of
-yours--closer than you keep it yourself. But you cannot trust
-us to let you face trouble alone, and go off without a word.
-We are your friends, Frodo.
-~~~~~~~~~~
-{: title="Plaintext content" }
+This example reuses the AES key, key encryption algorithm, and content encryption algorithm from {{jwe-aeskw}}.
+
+The Plaintext content from {{jwe-plaintext}} is used for this example, and compressed as demonstrated in {{jwe-compressed}}.
+
+The unprotected JWE header parameters:
 
 ~~~~~~~~~~
 {
@@ -2028,6 +2046,8 @@ We are your friends, Frodo.
 ~~~~~~~~~~
 {: title="Unprotected JWE Header JSON"}
 
+The protected JWE header parameters:
+
 ~~~~~~~~~~
 {
   "enc": "A128GCM"
@@ -2035,20 +2055,35 @@ We are your friends, Frodo.
 ~~~~~~~~~~
 {: title="Protected JWE Header JSON"}
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJlbmMiOiJBMTI4R0NNIn0
 ~~~~~~~~~~
 {: title="Protected JWE Header, base64url-encoded"}
+
+The Content Encryption Key (CEK):
+
+~~~~~~~~~~
+uGL3QU7R3HMR3ik-oTW82w
+~~~~~~~~~~
+{: title="Content Encryption Key, base64url-encoded"}
+
+Performing the key encryption operation over the CEK with the given AES key produces the following encrypted key:
 
 ~~~~~~~~~~
 MJjYoJ6DKa__0KTJP5PT8pR0T_tybLRc
 ~~~~~~~~~~
 {: title="Encrypted Key, base64url-encoded"}
 
+The initialization vector/nonce:
+
 ~~~~~~~~~~
 HorZstLCLfNNC7TN
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
+
+Performing the content encryption operation over the compressed Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 fOxklZw0MD_ScE71g8eRmcgF5mFiLIk4Fax0iTNYu96PAjskl1ZAZmcvUDiPiA
@@ -2058,10 +2093,14 @@ wiPdD2WSbn3YSXZj2NFerDl7o0GBTZ-q12AFHWD38
 ~~~~~~~~~~
 {: title="Ciphertext, base64url-encoded"}
 
+And authentication tag:
+
 ~~~~~~~~~~
 TNzmuMZK-VpijGRN4fmfOg
 ~~~~~~~~~~
 {: title="Authentication Tag, base64url-encoded"}
+
+The resulting JWE object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -2094,16 +2133,13 @@ TNzmuMZK-VpijGRN4fmfOg
 
 ## Protecting Content Only ## {#jwe-nofields}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates encrypting content where none of the JWE header parameters are protected.  As this example includes only unprotected JWE header parameters, only the JSON serialization is possible.
 
-~~~~~~~~~~
-You can trust us to stick with you through thick and thin--to
-the bitter end. And you can trust us to keep any secret of
-yours--closer than you keep it yourself. But you cannot trust
-us to let you face trouble alone, and go off without a word.
-We are your friends, Frodo.
-~~~~~~~~~~
-{: title="Plaintext content" }
+This example reuses the AES key, key encryption algorithm, and content encryption algorithm from {{jwe-aeskw}}.
+
+The Plaintext content from {{jwe-plaintext}} is used for this example, and compressed as demonstrated in {{jwe-compressed}}.
+
+The unprotected JWE header parameters:
 
 ~~~~~~~~~~
 {
@@ -2115,15 +2151,28 @@ We are your friends, Frodo.
 ~~~~~~~~~~
 {: title="Unprotected JWE Header JSON"}
 
+The Content Encryption Key (CEK):
+
+~~~~~~~~~~
+5UVirgqilMhbWpSnM3alUQ
+~~~~~~~~~~
+{: title="Content Encryption Key, base64url-encoded"}
+
+Performing the key encryption operation over the CEK with the given AES key produces the following encrypted key:
+
 ~~~~~~~~~~
 yyuirCy7Hd_nY0gL5Jfq6sJ7RXRR0DtF
 ~~~~~~~~~~
 {: title="Encrypted Key, base64url-encoded"}
 
+The initialization vector/nonce:
+
 ~~~~~~~~~~
 zdbIl4BrrziYK55_
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
+
+Performing the content encryption operation over the compressed Plaintext using the given CEK, initialization vector/nonce, and empty string as authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 _Th0nZypKIbnODRLTU0L5tjL1_8Kvlq--xUT3cz9Uc-MfGRluhgY3reY0KX_Er
@@ -2133,10 +2182,14 @@ TPbVHfBfZ2o2JMwkwehQiLMigTxTbHxoI36wbAyd4
 ~~~~~~~~~~
 {: title="Ciphertext, base64url-encoded"}
 
+And authentication tag:
+
 ~~~~~~~~~~
 J2Q3F_rNJ2szSiSdMENJDw
 ~~~~~~~~~~
 {: title="Authentication Tag, base64url-encoded"}
+
+The resulting JWE object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -2166,18 +2219,15 @@ J2Q3F_rNJ2szSiSdMENJDw
 {: title="JSON Serialization"}
 
 
-## Encryption to Multiple Recipients ## {#jwe-multi}
+## Encrypting to Multiple Recipients ## {#jwe-multi}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates encryption content for multiple recipients. As this example has multiple recipients, only the JSON serialization is possible.
 
-~~~~~~~~~~
-You can trust us to stick with you through thick and thin--to
-the bitter end. And you can trust us to keep any secret of
-yours--closer than you keep it yourself. But you cannot trust
-us to let you face trouble alone, and go off without a word.
-We are your friends, Frodo.
-~~~~~~~~~~
-{: title="Plaintext content" }
+This example reuses the RSA key from {{jwe-rsa15}}, the Elliptic Curve key from {{jwe-ecdh_aeskw}}, and the AES key from {{jwe-aesgcmkw}}.
+
+The Plaintext content from {{jwe-plaintext}} is used in this example, and compressed as demonstrated in {{jwe-compressed}}.
+
+The global unprotected JWE header parameters:
 
 ~~~~~~~~~~
 {
@@ -2188,12 +2238,21 @@ We are your friends, Frodo.
 {: title="Global Unprotected JWE Header JSON"}
 
 ~~~~~~~~~~
+OYs79m0f3LEuMZzmWBCywRn4u8B09BVidJb9j0ojDsY
+~~~~~~~~~~
+{: title="Content Encryption Key, base64url-encoded"}
+
+The unprotected JWE header parameters for the first recipient:
+
+~~~~~~~~~~
 {
   "alg": "RSA1_5",
   "kid": "frodo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
 {: title="Recipient #1 Unprotected JWE Header JSON"}
+
+Performing the "RSA1_5" key encryption operation over the CEK with the first recipient's RSA key produces the following encrypted key:
 
 ~~~~~~~~~~
 EBbDunXtz-j0Gn0q4c9vtueHlb0E-oBkSMno9PUg8eR7Y5T71aU9t0JkvxtKiO
@@ -2204,6 +2263,8 @@ bEyRYlUet8PRH_CjINMipv7LCDRsKVnr3oHwZEfCJFGNC-w_-Qn4xcmkmxyaz1
 -kZEpS_t2kWJsFqx3mg7QAXJBxdGmy6A
 ~~~~~~~~~~
 {: title="Recipient #1 Encrypted Key, base64url-encoded"}
+
+The unprotected JWE header parameters for the second recipient:
 
 ~~~~~~~~~~
 {
@@ -2221,10 +2282,14 @@ bEyRYlUet8PRH_CjINMipv7LCDRsKVnr3oHwZEfCJFGNC-w_-Qn4xcmkmxyaz1
 ~~~~~~~~~~
 {: title="Recipient #2 Unprotected JWE Header JSON"}
 
+Performing the "ECDH-ES+A256KW" key encryption operation over the CEK with the given EC key and ephemeral key ("epk" parameter in the recipient's unprotected JWE header) produces the following encrypted key:
+
 ~~~~~~~~~~
 Dd1kQYNhhSIlKEAyE9UYhjtUBGahteiYVnRUg_tWf8S9VJZKL_8YOw
 ~~~~~~~~~~
 {: title="Recipient #2 Encrypted Key, base64url-encoded"}
+
+The unprotected JWE header parameters for the third recipient:
 
 ~~~~~~~~~~
 {
@@ -2236,15 +2301,21 @@ Dd1kQYNhhSIlKEAyE9UYhjtUBGahteiYVnRUg_tWf8S9VJZKL_8YOw
 ~~~~~~~~~~
 {: title="Recipient #3 Unprotected JWE Header JSON"}
 
+Performing the "A256GCMKW" key encryption operation over the CEK with the given AES key and initialization vector/nonce (the "iv" parameter in the recipient's unprotected JWE header) produces the following encrypted key (as well as the authentication tag "DOVpODvbotRWOHEqTRcXkg", included in the recipient's JWE header parameter "tag"):
+
 ~~~~~~~~~~
 iiVL4XCDCnsWCSZCTysGxl41vdnJqIThbumNa9wSQBo
 ~~~~~~~~~~
 {: title="Recipient #3 Encrypted Key, base64url-encoded"}
 
+The initialization vector/nonce:
+
 ~~~~~~~~~~
 qP1KgJY-vTLW-nMrMSfMYw
 ~~~~~~~~~~
 {: title="Initialization Vector, base64url-encoded"}
+
+Performing the content encryption operation over the compressed Plaintext with the given CEK, initialization vector, and empty string authenticated data produces the following ciphertext:
 
 ~~~~~~~~~~
 labOfATex-4SHcp4ZcZ87QbLfm0Swhk55BmsYPxrFHFfoXNmutGTHLP2LUmKbH
@@ -2254,10 +2325,14 @@ f3u2ZhNoFYta6IQvh5BqR7XnY87cuu7m8xFxEv0wKmrnqlvc4
 ~~~~~~~~~~
 {: title="Ciphertext, base64url-encoded"}
 
+And authentication tag:
+
 ~~~~~~~~~~
 zWJK47HuwOoZ2OitcrEfUA
 ~~~~~~~~~~
 {: title="Authentication Tag, base64url-encoded"}
+
+The resulting JWE object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
