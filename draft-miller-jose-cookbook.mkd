@@ -35,22 +35,24 @@ informative:
 
 --- abstract
 
-A set of examples of using JOSE to protect data.
+A set of examples of using JavaScript Object Signing and Encryption (JOSE) to protect data.  This document illustrates a representative sampling of various JSON Web Signature (JWS) and JSON Web Encryption (JWE) results given similar inputs.
 
 
 --- middle
 
 # Introduction # {#intro}
 
+The JavaScript Object Signing and Encryption (JOSE) technologies -- JSON Web Key (JWK) {{I-D.ietf-jose-json-web-key}}, JSON Web Signature (JWS) {{I-D.ietf-jose-json-web-signature}}, JSON Web Encryption (JWE) {{I-D.ietf-jose-json-web-encryption}}, and JSON Web Algorithms (JWA) {{I-D.ietf-jose-json-web-algorithms}} -- collectively can be used to protect content in a myriad of ways.  The full set of permutations is extremely large, and might be daunting to some.
 
-## Considerations for Applications ## {#intro-design}
-
+This document provides a number of examples of signing or encrypting content using JOSE.  While not exhaustive, it does compile together a representative sample of JOSE features.  As much as possible, the same signature payload or encryption plaintext content is used to illustrate differences in various signing and encryption results.
 
 ## Conventions Used in this Document ## {#intro-conventions}
 
+All instances of binary octet strings are represented using {{RFC4648}} base64url encoding.
+
 Unless otherwise stated, all examples include both the Compact and JSON serializations.
 
-All of the examples in this document include whitespace to improve formatting and readability.  Unless otherwise specified, whitespace is not part of the cryptographic operations.
+All of the examples in this document include whitespace to improve formatting and readability.  Except for plaintext or payload content, whitespace is not part of the cryptographic operations.  Plaintext or payload content does include whitespace (unless otherwise noted), although line breaks (U+000A LINE FEED) have replaced spaces (U+0020 SPACE) is some cases to improve readability.
 
 
 # Terminology  # {#terms}
@@ -61,11 +63,34 @@ This document inherits terminology regarding JSON Web Key (JWK) technology from 
 
 The following sections demonstrate how to generate various JWS structures.
 
-## Keys Used ## {#jws-key}
+## Payload Content ## {#jws-payload}
 
-The following keys, formatted here as JWK objects, are used to generate the signatures in the succeeding sections.
+All of the succeeding examples use the following payload plaintext, serialized as UTF-8, with line breaks (U+000A LINE FEED) replacing some " " (U+0020 SPACE) characters to improve formatting:
 
-### RSA 2048-bit Private Key ### {#jws-key-rsa}
+~~~~~~~~~~
+It's a dangerous business, Frodo, going out your door. You
+step onto the road, and if you don't keep your feet, there's
+no knowing where you might be swept off to.
+~~~~~~~~~~
+{: title="Payload content plaintext" }
+
+The Payload encoded as {{RFC4648}} base64url:
+
+~~~~~~~~~~
+SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
+VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
+J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
+UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+~~~~~~~~~~
+{: title="Payload content, base64url-encoded" }
+
+
+## RSA v1.5 Signature ## {#jws-rsa}
+
+This example illustrates signing content using the "RS256" (RSASSA-PKCS1-v1_5 with SHA-256) algorithm.
+
+The following RSA private key is used (formatted as a JWK object):
+
 ~~~~~~~~~~
 {
   "kty": "RSA",
@@ -108,51 +133,9 @@ The following keys, formatted here as JWK objects, are used to generate the sign
           EpMF6xmujs4qMpPz8aaI4"
 }
 ~~~~~~~~~~
+{: #jws-rsa-key title="RSA 2048-bit Private Key"}
 
-### Elliptic Curve P-521 Private Key ### {#jws-key-ec}
-~~~~~~~~~~
-{
-  "kty": "EC",
-  "kid": "bilbo.baggins@hobbiton.example",
-  "use": "sig",
-  "crv": "P-521",
-  "x":   "AWgtjGfmvSMhpGCMPuzQ6azSdC9YrtigFVVNE0ZrOBr1v2zLVC
-          XD3KvRnY10OiDyfRCPsXD2zfGC5rSw_botidXb",
-  "y":   "AS7At94ZHgiR7gCF525ARfmSWEW8ITW99N5XQ7xmG_yQ_DFx5L
-          0z5GLa0mHidjuJ5vNBkXAbEmCCqkgIaWGRf48C",
-  "d":   "AHGTtSfiB9EWgcpE-2Ya91mutYRGV8WoZ0R0JJ3djgXCPXAs3g
-          K4H8_S5EzOseys5CkjYxclu0yqbcuDtEHhwKVD"
-}
-~~~~~~~~~~
-
-### AES 256-bit Symmetric Key ### {#jws-key-aes}
-~~~~~~~~~~
-{
-  "kty": "oct",
-  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
-  "use": "sig",
-  "k":   "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
-}
-~~~~~~~~~~
-
-## RSA v1.5 Signature ## {#jws-rsa}
-
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
-
-~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
-~~~~~~~~~~
-{: title="Payload content plaintext" }
-
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The protected JWS Header parameters:
 
 ~~~~~~~~~~
 {
@@ -162,11 +145,27 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
 {: title="Protected JWS Header JSON" }
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 ~~~~~~~~~~
 {: title="Protected JWS Header, base64url-encoded" }
+
+Combining Protected JWS Header and Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
+8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweDy8L_6XBy6JjcxGne_o
+GDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuMpkd675wX8lPtiiEmswOqph6aCtA
+LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
+-UR_XcxxvQ1b7gYAhh5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxW
+dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
+~~~~~~~~~~
+{: title="Signature, base64url-encoded"}
+
+The resulting JWS object, using the Compact serialization:
 
 ~~~~~~~~~~
 eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
@@ -185,6 +184,8 @@ LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
 dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
 ~~~~~~~~~~
 {: title="Compact Serialization" }
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -214,22 +215,9 @@ dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
 
 ## RSA-PSS Signature ## {#jws-rsapss}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates signing content using the "PS256" (RSASSA-PSS with SHA-256) algorithm.  This example uses the RSA private key in {{jws-rsa}}.
 
-~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
-~~~~~~~~~~
-{: title="Payload content plaintext" }
-
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The protected JWS Header parameters:
 
 ~~~~~~~~~~
 {
@@ -239,11 +227,26 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
 {: title="Protected JWS Header JSON" }
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 ~~~~~~~~~~
 {: title="Protected JWS Header, base64url-encoded" }
+
+Combining Protected JWS Header and Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQlT698iBkiy
+wXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1AaphZObG94tYCdyQlwdrCy
+lBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rAUK9VL_HmKRcjo2dQ_VRfbaCSmmI
+-aohWvcdptMyI6kZhHL_zLCOWO5RoY5YWV42u46ZdW-e06QgBZkzdHEmS2Aimx
+EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
+6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
+~~~~~~~~~~
+
+The resulting JWS object, using the Compact serialization:
 
 ~~~~~~~~~~
 eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
@@ -262,6 +265,8 @@ EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
 6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
 ~~~~~~~~~~
 {: title="Compact Serialization" }
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -291,22 +296,27 @@ EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
 
 ## ECDSA Signature ## {#jws-ecdsa}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates signing content using the "ES512" (ECDSA with curve P-521 and SHA-512) algorithm.
+
+The following EC private key is used (formatted as a JWK object):
 
 ~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
+{
+  "kty": "EC",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "sig",
+  "crv": "P-521",
+  "x":   "AHKZLLOsCOzz5cY97ewNUajB957y-C-U88c3v13nmGZx6sYl_oJX
+          u9A5RkTKqjqvjyekWF-7ytDyRXYgCF5cj0Kt",
+  "y":   "AdymlHvOiLxXkEhayXQnNCvDX4h9htZaCJN34kfmC6pV5OhQHira
+          VySsUdaQkAgDPrwQrJmbnX9cwlGfP-HqHZR1",
+  "d":   "CFE43av1ypdfWGD5GgjpHW1fmnatQBh2akdmgLVc0znoq2xytfrN
+          sqKlCsJb0IZkfdPi5umehMosNgn98Xf-sm0"
+}
 ~~~~~~~~~~
-{: title="Payload content plaintext" }
+{: title="Elliptic Curve P-521 Private Key"}
 
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The protected JWS Header parameters:
 
 ~~~~~~~~~~
 {
@@ -316,11 +326,24 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
 {: title="Protected JWS Header JSON" }
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 ~~~~~~~~~~
 {: title="Protected JWS Header, base64url-encoded" }
+
+Combining Protected JWS Header and Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
+dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
+cLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6Nh-KcNJmViDeD2gA
+~~~~~~~~~~
+{: title="Signature, base64url-encoded"}
+
+The resulting JWS object, using the Compact serialization:
 
 ~~~~~~~~~~
 eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
@@ -331,29 +354,31 @@ yIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9uJ3
 Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3Ugb
 WlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 .
-GLXQcuBYt1CmfDN65H9cv1YO0WlcyQGZP7GoKTZvlwckZqA5i42qfP-X8XSPnF
-YEUuWAzgw3v6VbIipgFZdYaAgdbKp1zw_mqo5cSsg3kXdfYVA5RwvWHoZ9peCi
-USw8dGzt9_jPzdl_P4HH0mxpySZxDC6RxPxEhY79muYSaLfSvA
+GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
+dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
+cLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6Nh-KcNJmViDeD2gA
 ~~~~~~~~~~
 {: title="Compact Serialization" }
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
   "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG9 1
-     dCB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZ
-     iB5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2
-     luZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
+     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
+     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
+     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
   "signatures": [
     {
       "protected":
         "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
          ml0b24uZXhhbXBsZSJ9",
       "signature":
-        "GLXQcuBYt1CmfDN65H9cv1YO0WlcyQGZP7GoKTZvlwckZqA5i42qf
-         P-X8XSPnFYEUuWAzgw3v6VbIipgFZdYaAgdbKp1zw_mqo5cSsg3kX
-         dfYVA5RwvWHoZ9peCiUSw8dGzt9_jPzdl_P4HH0mxpySZxDC6RxPx
-         EhY79muYSaLfSvA"
+        "GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHA
+         HuOIuH9RDdnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6T
+         yH7feCxMpfZ8BEqLSLcLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6N
+         h-KcNJmViDeD2gA"
     }
   ]
 }
@@ -362,22 +387,21 @@ USw8dGzt9_jPzdl_P4HH0mxpySZxDC6RxPxEhY79muYSaLfSvA
 
 ## HMAC-SHA2 Integrity Protection ## {#jws-hmac}
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example illustrates integrity protecting content using the "HS256" (HMAC-SHA-256) algorithm.
+
+The following AES symmetric keys is used (formatted as a JWK object):
 
 ~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
+{
+  "kty": "oct",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
+  "use": "sig",
+  "k":   "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
+}
 ~~~~~~~~~~
-{: title="Payload content plaintext" }
+{: title="AES 256-bit symmetric key"}
 
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The protected JWS Header parameters:
 
 ~~~~~~~~~~
 {
@@ -387,11 +411,22 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
 {: title="Protected JWS Header JSON" }
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
 VlZjMxNGJjNzAzNyJ9
 ~~~~~~~~~~
 {: title="Protected JWS Header, base64url-encoded" }
+
+Combining Protected JWS Header and Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
+~~~~~~~~~~
+{: title="Signature, base64url-encoded"}
+
+The resulting JWS object, using the Compact serialization:
 
 ~~~~~~~~~~
 eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
@@ -405,6 +440,8 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
 ~~~~~~~~~~
 {: title="Compact Serialization" }
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -431,22 +468,18 @@ BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
 
 This example illustrates a signature where only certain header parameters are protected.  Since this example contains both unprotected and protected header parameters, only the JSON serialization is possible.
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example uses the AES symmetric key from {{jws-hmac}}.
+
+The unprotected JWS header parameters:
 
 ~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
+{
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
 ~~~~~~~~~~
-{: title="Payload content plaintext" }
+{: title="Unprotected JWS Header JSON" }
 
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The protected JWS header parameters:
 
 ~~~~~~~~~~
 {
@@ -455,17 +488,21 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
 {: title="Protected JWS Header JSON" }
 
+Encoded as {{RFC4648}} base64url:
+
 ~~~~~~~~~~
 eyJhbGciOiJIUzI1NiJ9
 ~~~~~~~~~~
 {: title="Protected JWS Header, base64url-encoded" }
 
+Combining the Protected JWS header and Payload content (base64url-encoded) produces the following signature:
+
 ~~~~~~~~~~
-{
-  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-}
+LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM
 ~~~~~~~~~~
-{: title="Unprotected JWS Header JSON" }
+{: title="Signature, base64url-encoded"}
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -495,22 +532,9 @@ eyJhbGciOiJIUzI1NiJ9
 
 This example illustrates a signature where none of the header parameters are protected.  Since this example contains only unprotected header parameters, only the JSON serialization is possible.
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example uses the AES symmetric key from {{jws-hmac}}.
 
-~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
-~~~~~~~~~~
-{: title="Payload content plaintext" }
-
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The unprotected JWS header parameters:
 
 ~~~~~~~~~~
 {
@@ -519,6 +543,15 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 }
 ~~~~~~~~~~
 {: title="Unprotected JWS Header JSON" }
+
+Combining the empty Protected JWS header with the Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
+~~~~~~~~~~
+{: title="Signature, base64url-encoded"}
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -547,22 +580,9 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ## Multiple Signatures ## {#jws-multi}
 This example illustrates multiple signatures applied to the same payload.  Since this example contains more than one signature, only the JSON serialization is possible.
 
-**NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
+This example uses the keys from {{jws-rsa}}, {{jws-ecdsa}}, and {{jws-hmac}} for signatures 1, 2, and 3 (respecitively).
 
-~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
-~~~~~~~~~~
-{: title="Payload content plaintext" }
-
-~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
-~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+The unprotected JWS header parameters for the first signature:
 
 ~~~~~~~~~~
 {
@@ -570,7 +590,21 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
-{: title="Unprotected JWS Header JSON, first signature" }
+{: title="Signature #1 unprotected JWS Header JSON" }
+
+Combining the empty Protected JWS header for the first signature with the Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1vzQX3
+Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIiPTkw1iWGYUsKOHFEWy
+Q3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4wF3f2s0RWpm8jUC5u-1KPwqFmGR3
+JsDxIIITaD7DbLxPN3Cm7e4JLireOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkf
+n118HQ4hwGsTg_24ZsiV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N
+5m4zLwljEWssVakmr__aq7MUBniv5vtA
+~~~~~~~~~~
+{: title="Signature #1, base64url-encoded"}
+
+The unprotected JWS header parameters for the second signature:
 
 ~~~~~~~~~~
 {
@@ -580,6 +614,17 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
 {: title="Unprotected JWS Header JSON, second signature" }
 
+Combining the empty Protected JWS header for the second signature with the Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1YRp9mBn7wq
+UkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh2UCW-jF6WA
+H1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLfDoA1hEyUoqeY50A
+~~~~~~~~~~
+{: title="Signature #2, base64url-encoded"}
+
+The unprotected JWS header parameters for the third signature:
+
 ~~~~~~~~~~
 {
   "alg": "HS256",
@@ -587,6 +632,15 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 }
 ~~~~~~~~~~
 {: title="Unprotected JWS Header JSON, third signature" }
+
+Combining the empty Protected JWS header for the second signature with the Payload content (base64url-encoded) produces the following signature:
+
+~~~~~~~~~~
+RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
+~~~~~~~~~~
+{: title="Signature #2, base64url-encoded"}
+
+The resulting JWS object, using the JSON serialization:
 
 ~~~~~~~~~~
 {
@@ -1895,9 +1949,7 @@ J2Q3F_rNJ2szSiSdMENJDw
 {: title="JSON Serialization"}
 
 
-## Encryption for Multiple Recipients ## {#jwe-multi}
-
-multi-encrypt \{RSA1_5, ECDH-ES+A256KW, A256GCMKW\}
+## Encryption to Multiple Recipients ## {#jwe-multi}
 
 **NOTE:** The payload content contains whitespace (U+0020 SPACE). Some of the (U+0020 SPACE) characters were replaced with (U+000A LINE FEED) to improve readability.
 
@@ -2070,4 +2122,4 @@ This document has no actions for IANA.
 
 Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.
 
-Most of the signature payload content and encrypted plaintext content are quotes from the series of novels collectively known as "The Lord of the Rigns", written by J. R. R. Tolkien.
+Most of the signature payload content and encrypted plaintext content are quotes from the series of novels collectively known as "The Lord of the Rings", written by J. R. R. Tolkien.
