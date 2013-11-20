@@ -1,5 +1,5 @@
 ---
-title: Examples of Signing and Encrypting Data using JOSE
+title: Examples of Protecting Content using JavaScript Object Signing and Encryption (JOSE)
 abbrev: JOSE Cookbook
 docname: draft-miller-jose-cookbook-00
 date: 
@@ -63,8 +63,6 @@ This document inherits terminology regarding JSON Web Key (JWK) technology from 
 
 The following sections demonstrate how to generate various JWS objects.
 
-## Payload Content ## {#jws-payload}
-
 All of the succeeding examples use the following payload plaintext, serialized as UTF-8, with line breaks (U+000A LINE FEED) replacing some " " (U+0020 SPACE) characters to improve formatting:
 
 ~~~~~~~~~~
@@ -72,9 +70,9 @@ It's a dangerous business, Frodo, going out your door. You
 step onto the road, and if you don't keep your feet, there's
 no knowing where you might be swept off to.
 ~~~~~~~~~~
-{: title="Payload content plaintext" }
+{: #jws-payload title="Payload content plaintext" }
 
-The Payload encoded as {{RFC4648}} base64url:
+The Payload -- with line breaks (U+000A LINE FEED) replaced with " " (U+0020 SPACE) -- encoded as {{RFC4648}} base64url:
 
 ~~~~~~~~~~
 SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
@@ -82,14 +80,20 @@ VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
 J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
 UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 ~~~~~~~~~~
-{: title="Payload content, base64url-encoded" }
+{: #jws-payload_b64u title="Payload content, base64url-encoded" }
 
 
 ## RSA v1.5 Signature ## {#jws-rsa}
 
 This example illustrates signing content using the "RS256" (RSASSA-PKCS1-v1_5 with SHA-256) algorithm.
 
-The following RSA private key is used (formatted as a JWK object):
+### Input Factors ### {#jws-rsa-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* RSA private key; this example uses the key from {{jws-rsa-key}}.
+* "alg" parameter of "RS256".
 
 ~~~~~~~~~~
 {
@@ -133,9 +137,13 @@ The following RSA private key is used (formatted as a JWK object):
           EpMF6xmujs4qMpPz8aaI4"
 }
 ~~~~~~~~~~
-{: #jws-rsa-key title="RSA 2048-bit Private Key"}
+{: #jws-rsa-key title="RSA 2048-bit Private Key, in JWK format"}
 
-The protected JWS Header parameters:
+### Signing Operation #### {#jws-rsa-op}
+
+The following are generated to complete the signing operation:
+
+* Protected JWS Header; this example uses the header from {{jws-rsa-protected}}, encoded using {{RFC4648}} base64url to produce {{jws-rsa-protected_b64u}}.
 
 ~~~~~~~~~~
 {
@@ -143,17 +151,15 @@ The protected JWS Header parameters:
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
-{: title="Protected JWS Header JSON" }
-
-Encoded as {{RFC4648}} base64url:
+{: #jws-rsa-protected title="Protected JWS Header JSON" }
 
 ~~~~~~~~~~
 eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 ~~~~~~~~~~
-{: title="Protected JWS Header, base64url-encoded" }
+{: #jws-rsa-protected_b64u title="Protected JWS Header, base64url-encoded" }
 
-Performing the signature operation over the combined protected JWS header (base64url-encoded) and Payload content (base64url-encoded) produces the following signature:
+Performing the signature operation over the combined protected JWS header ({{jws-rsa-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
@@ -163,7 +169,9 @@ LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
 -UR_XcxxvQ1b7gYAhh5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxW
 dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
 ~~~~~~~~~~
-{: title="Signature, base64url-encoded"}
+{: #jws-rsa-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-rsa-output}
 
 The resulting JWS object, using the Compact serialization:
 
@@ -183,7 +191,7 @@ LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
 -UR_XcxxvQ1b7gYAhh5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxW
 dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
 ~~~~~~~~~~
-{: title="Compact Serialization" }
+{: #jws-rsa-compact title="Compact Serialization" }
 
 The resulting JWS object, using the JSON serialization:
 
@@ -211,13 +219,25 @@ The resulting JWS object, using the JSON serialization:
   ]
 }
 ~~~~~~~~~~
-{: title="JSON Serialization" }
+{: #jws-rsa-json title="JSON Serialization" }
 
 ## RSA-PSS Signature ## {#jws-rsapss}
 
-This example illustrates signing content using the "PS256" (RSASSA-PSS with SHA-256) algorithm.  This example uses the RSA private key in {{jws-rsa}}.
+This example illustrates signing content using the "PS256" (RSASSA-PSS with SHA-256) algorithm.
 
-The protected JWS Header parameters:
+### Input Factors ### {#jws-rsapss-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* RSA private key; this example uses the key from {{jws-rsa-key}}.
+* "alg" parameter of "RS256".
+
+### Signing Operation ### {#jws-rsapss-op}
+
+The following are generated to complete the signing operation:
+
+* Protected JWS Header; this example uses the header from {{jws-rsapss-protected}}, encoded using {{RFC4648}} base64url to produce {{jws-rsapss-protected_b64u}}.
 
 ~~~~~~~~~~
 {
@@ -225,17 +245,15 @@ The protected JWS Header parameters:
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
-{: title="Protected JWS Header JSON" }
-
-Encoded as {{RFC4648}} base64url:
+{: #jws-rsapss-protected title="Protected JWS Header JSON" }
 
 ~~~~~~~~~~
 eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 ~~~~~~~~~~
-{: title="Protected JWS Header, base64url-encoded" }
+{: #jws-rsapss-protected_b64u title="Protected JWS Header, base64url-encoded" }
 
-Performing the signature operation over the combined protected JWS header (base64url-encoded) and Payload content (base64url-encoded) produces the following signature:
+Performing the signature operation over the combined protected JWS header ({{jws-rsapss-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQlT698iBkiy
@@ -245,6 +263,9 @@ lBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rAUK9VL_HmKRcjo2dQ_VRfbaCSmmI
 EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
 6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
 ~~~~~~~~~~
+{: #jws-rsapss-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-rsapss-output}
 
 The resulting JWS object, using the Compact serialization:
 
@@ -264,7 +285,7 @@ lBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rAUK9VL_HmKRcjo2dQ_VRfbaCSmmI
 EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
 6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
 ~~~~~~~~~~
-{: title="Compact Serialization" }
+{: #jws-rsapss-compact title="Compact Serialization" }
 
 The resulting JWS object, using the JSON serialization:
 
@@ -292,13 +313,19 @@ The resulting JWS object, using the JSON serialization:
   ]
 }
 ~~~~~~~~~~
-{: title="JSON Serialization" }
+{: #jws-rsapss-json title="JSON Serialization" }
 
 ## ECDSA Signature ## {#jws-ecdsa}
 
 This example illustrates signing content using the "ES512" (ECDSA with curve P-521 and SHA-512) algorithm.
 
-The following EC private key is used (formatted as a JWK object):
+### Input Factors ### {#jws-ecdsa-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* EC private key on the curve P-521; this example uses the key from {{jws-ecdsa-key}}.
+* "alg" parameter of "ES512"
 
 ~~~~~~~~~~
 {
@@ -314,9 +341,13 @@ The following EC private key is used (formatted as a JWK object):
           sqKlCsJb0IZkfdPi5umehMosNgn98Xf-sm0"
 }
 ~~~~~~~~~~
-{: title="Elliptic Curve P-521 Private Key"}
+{: #jws-ecdsa-key title="Elliptic Curve P-521 Private Key"}
 
-The protected JWS Header parameters:
+### Signing Operation ### {#jws-ecdsa-op}
+
+The following are generated before beginning the signature process:
+
+* Protected JWS Header; this example uses the header from {{jws-ecdsa-protected}}, encoded using {{RFC4648}} base64url to produce {{jws-ecdsa-protected_b64u}}.
 
 ~~~~~~~~~~
 {
@@ -324,24 +355,24 @@ The protected JWS Header parameters:
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
-{: title="Protected JWS Header JSON" }
-
-Encoded as {{RFC4648}} base64url:
+{: #jws-ecdsa-protected title="Protected JWS Header JSON" }
 
 ~~~~~~~~~~
 eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 ~~~~~~~~~~
-{: title="Protected JWS Header, base64url-encoded" }
+{: #jws-ecdsa-protected_b64u title="Protected JWS Header, base64url-encoded" }
 
-Performing the signature operation over the combined protected JWS header (base64url-encoded) and Payload content (base64url-encoded) produces the following signature:
+Performing the signature operation over the combined protected JWS header ({{jws-ecdsa-protected_b64u}}) and Payload content ({{jws-payload_b64u) produces the following signature:
 
 ~~~~~~~~~~
 GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
 dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
 cLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6Nh-KcNJmViDeD2gA
 ~~~~~~~~~~
-{: title="Signature, base64url-encoded"}
+{: #jws-ecdsa-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-ecdsa-output}
 
 The resulting JWS object, using the Compact serialization:
 
@@ -358,7 +389,7 @@ GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
 dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
 cLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6Nh-KcNJmViDeD2gA
 ~~~~~~~~~~
-{: title="Compact Serialization" }
+{: #jws-ecdsa-compact title="Compact Serialization" }
 
 The resulting JWS object, using the JSON serialization:
 
@@ -383,13 +414,19 @@ The resulting JWS object, using the JSON serialization:
   ]
 }
 ~~~~~~~~~~
-{: title="JSON Serialization" }
+{: #jws-ecdsa-json title="JSON Serialization" }
 
 ## HMAC-SHA2 Integrity Protection ## {#jws-hmac}
 
 This example illustrates integrity protecting content using the "HS256" (HMAC-SHA-256) algorithm.
 
-The following AES symmetric key is used (formatted as a JWK object):
+### Input Factors ### {#jws-hmac-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* AES symmetric key; this example uses the key from {{jws-hmac-key}}.
+* "alg" parameter of "HS256".
 
 ~~~~~~~~~~
 {
@@ -399,9 +436,13 @@ The following AES symmetric key is used (formatted as a JWK object):
   "k":   "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
 }
 ~~~~~~~~~~
-{: title="AES 256-bit symmetric key"}
+{: #jws-hmac-key title="AES 256-bit symmetric key"}
 
-The protected JWS Header parameters:
+### Signing Operation ### {#jws-hmac-op}
+
+The following are generated before completing the signing operation:
+
+* Protected JWS Header; this example uses the header from {{jws-hmac-protected}}, encoded using {{RFC4648}} base64url to produce {{jws-hmac-protected_b64u}}.
 
 ~~~~~~~~~~
 {
@@ -409,22 +450,22 @@ The protected JWS Header parameters:
   "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
 }
 ~~~~~~~~~~
-{: title="Protected JWS Header JSON" }
-
-Encoded as {{RFC4648}} base64url:
+{: #jws-hmac-protected title="Protected JWS Header JSON" }
 
 ~~~~~~~~~~
 eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
 VlZjMxNGJjNzAzNyJ9
 ~~~~~~~~~~
-{: title="Protected JWS Header, base64url-encoded" }
+{: #jws-hmac-protected_b64u title="Protected JWS Header, base64url-encoded" }
 
-Performing the signature operation over the combined protected JWS header (base64url-encoded) and Payload content (base64url-encoded) produces the following signature:
+Performing the signature operation over the combined protected JWS header ({{jws-hmac-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
 ~~~~~~~~~~
-{: title="Signature, base64url-encoded"}
+{: #jws-hmac-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-hmac-output}
 
 The resulting JWS object, using the Compact serialization:
 
@@ -439,7 +480,7 @@ UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
 .
 BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
 ~~~~~~~~~~
-{: title="Compact Serialization" }
+{: #jws-hmac-compact title="Compact Serialization" }
 
 The resulting JWS object, using the JSON serialization:
 
@@ -461,23 +502,26 @@ The resulting JWS object, using the JSON serialization:
   ]
 }
 ~~~~~~~~~~
-{: title="JSON Serialization" }
-
+{: #jws-hmac-json title="JSON Serialization" }
 
 ## Protecting Specific Header Fields ## {#jws-somefields}
 
 This example illustrates a signature where only certain header parameters are protected.  Since this example contains both unprotected and protected header parameters, only the JSON serialization is possible.
 
-This example uses the AES symmetric key from {{jws-hmac}}.
+### Input Factors ### {#jws-somefields-input}
 
-The unprotected JWS header parameters:
+The following are supplied before beginning the signing operation:
 
-~~~~~~~~~~
-{
-  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-}
-~~~~~~~~~~
-{: title="Unprotected JWS Header JSON" }
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* Signing key; this example uses the AES symmetric key from {{jws-hmac-key}}.
+* Signing algorithm; this example uses "RS256".
+
+### Signing Operation ### {#jws-somefields-op}
+
+The following are generated before completing the signing operation:
+
+* Protected JWS Header; this example uses the header from {{jws-somefields-protected}}, encoded using {{RFC4648}} base64url to produce {{jws-somefields-protected_b64u}}.
+* Unprotected JWS Header; this example uses the header from {{jws-somefields-unprotected}}.
 
 The protected JWS header parameters:
 
@@ -486,21 +530,28 @@ The protected JWS header parameters:
   "alg": "HS256"
 }
 ~~~~~~~~~~
-{: title="Protected JWS Header JSON" }
-
-Encoded as {{RFC4648}} base64url:
+{: #jws-somefields-protected title="Protected JWS Header JSON" }
 
 ~~~~~~~~~~
 eyJhbGciOiJIUzI1NiJ9
 ~~~~~~~~~~
-{: title="Protected JWS Header, base64url-encoded" }
+{: #jws-somefields-protected_b64u title="Protected JWS Header, base64url-encoded" }
 
-Performing the signature operation over the combined protected JWS header and Payload content (base64url-encoded) produces the following signature:
+~~~~~~~~~~
+{
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
+~~~~~~~~~~
+{: #jws-somefields-unprotected title="Unprotected JWS Header JSON" }
+
+Performing the signature operation over the combined protected JWS header ({{jws-somefields-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM
 ~~~~~~~~~~
-{: title="Signature, base64url-encoded"}
+{: #jws-somefields-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-somefields-output}
 
 The resulting JWS object, using the JSON serialization:
 
@@ -525,16 +576,26 @@ The resulting JWS object, using the JSON serialization:
   ]
 }
 ~~~~~~~~~~
-{: title="JSON Serialization" }
+{: #jws-somefields-json title="JSON Serialization" }
 
 
 ## Protecting Content Only ## {#jws-nofields}
 
 This example illustrates a signature where none of the header parameters are protected.  Since this example contains only unprotected header parameters, only the JSON serialization is possible.
 
-This example uses the AES symmetric key from {{jws-hmac}}.
+### Input Factors ### {#jws-nofields-input}
 
-The unprotected JWS header parameters:
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* Signing key; this example uses the AES key from {{jws-hmac-key}}.
+* Signing algorithm; this example uses "RS256"
+
+### Signing Operation ### {#jws-nofields-op}
+
+The following are generated before completing the signing operation:
+
+* Unprotected JWS Header; this example uses the header from {{jws-nofields-unprotected}}.
 
 ~~~~~~~~~~
 {
@@ -542,14 +603,16 @@ The unprotected JWS header parameters:
   "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
 }
 ~~~~~~~~~~
-{: title="Unprotected JWS Header JSON" }
+{: #jws-nofields-unprotected title="Unprotected JWS Header JSON" }
 
-Performing the signature operation over the combined empty protected JWS header and Payload content (base64url-encoded) produces the following signature:
+Performing the signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
 ~~~~~~~~~~
-{: title="Signature, base64url-encoded"}
+{: #jws-nofields-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-nofields-output}
 
 The resulting JWS object, using the JSON serialization:
 
@@ -578,11 +641,31 @@ The resulting JWS object, using the JSON serialization:
 
 
 ## Multiple Signatures ## {#jws-multi}
+
 This example illustrates multiple signatures applied to the same payload.  Since this example contains more than one signature, only the JSON serialization is possible.
 
-This example uses the keys from {{jws-rsa}}, {{jws-ecdsa}}, and {{jws-hmac}} for signatures 1, 2, and 3 (respecitively).
+### Input Factors ### {#jws-multi-input}
 
-The unprotected JWS header parameters for the first signature:
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* Signing keys; this example uses the following:
+
+  + RSA private key from {{jws-rsa-key}} for the first signature
+  + EC private key from {{jws-ecdsa-key}} for the second signature
+  + AES symmetric key from {{jws-hmac-key}} for the third signature
+
+* Signing algorithms; this example uses the following:
+
+  + "RS256" for the first signature
+  + "ES512" for the second signature
+  + "HS256" for the third signature
+
+### First Signing Operation ### {#jws-multi-op_1}
+ 
+The following are generated before completing the first signing operation:
+
+* Unprotected JWS Header; this example uses the header from {{jws-multi-unprotected_1}}.
 
 ~~~~~~~~~~
 {
@@ -590,9 +673,9 @@ The unprotected JWS header parameters for the first signature:
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
-{: title="Signature #1 unprotected JWS Header JSON" }
+{: #jws-multi-unprotected_1 title="Signature #1 unprotected JWS Header JSON" }
 
-Performing the first signature operation over the combined empty protected JWS header and the Payload content (base64url-encoded) produces the following signature:
+Performing the first signature operation over the combined empty string (as there is no proteced JWS header) and the Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1vzQX3
@@ -602,9 +685,13 @@ JsDxIIITaD7DbLxPN3Cm7e4JLireOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkf
 n118HQ4hwGsTg_24ZsiV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N
 5m4zLwljEWssVakmr__aq7MUBniv5vtA
 ~~~~~~~~~~
-{: title="Signature #1, base64url-encoded"}
+{: #jws-multi-sig_1 title="Signature #1, base64url-encoded"}
 
-The unprotected JWS header parameters for the second signature:
+### Second Signing Operation ### {#jws-multi-op_2}
+
+The following are generated before completing the second signing operation:
+
+* Unprotected JWS Header; this example uses the header from {{jws-multi-unprotected_2}}.
 
 ~~~~~~~~~~
 {
@@ -612,18 +699,22 @@ The unprotected JWS header parameters for the second signature:
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~
-{: title="Unprotected JWS Header JSON, second signature" }
+{: #jws-multi-unprotected_2 title="Unprotected JWS Header JSON, second signature" }
 
-Performing the second signature operation over the combined empty Protected JWS header and Payload content (base64url-encoded) produces the following signature:
+Performing the second signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1YRp9mBn7wq
 UkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh2UCW-jF6WA
 H1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLfDoA1hEyUoqeY50A
 ~~~~~~~~~~
-{: title="Signature #2, base64url-encoded"}
+{: #jws-multi-sig_2 title="Signature #2, base64url-encoded"}
 
-The unprotected JWS header parameters for the third signature:
+### Third Signing Operation ### {#jws-multi-op_3}
+
+The following are generated before completing the third signing operation:
+
+* Unprotected JWS Header; this example uses the header from {{jws-multi-unprotected_3}}.
 
 ~~~~~~~~~~
 {
@@ -631,14 +722,16 @@ The unprotected JWS header parameters for the third signature:
   "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
 }
 ~~~~~~~~~~
-{: title="Unprotected JWS Header JSON, third signature" }
+{: #jws-multi-unprotected_3 title="Unprotected JWS Header JSON, third signature" }
 
-Performing the third signature operation over the combined empty Protected JWS header and Payload content (base64url-encoded) produces the following signature:
+Performing the third signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~
 RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
 ~~~~~~~~~~
-{: title="Signature #2, base64url-encoded"}
+{: #jws-multi-sig_3 title="Signature #3, base64url-encoded"}
+
+### Output Results ### {#jws-multi-output}
 
 The resulting JWS object, using the JSON serialization:
 
@@ -686,14 +779,12 @@ The resulting JWS object, using the JSON serialization:
   ]
 }
 ~~~~~~~~~~
-{: title="JSON Serialization" }
+{: #jws-multi-json title="JSON Serialization" }
 
 
 # JSON Web Encryption Examples # {#jwe}
 
 The following sections demonstrate how to generate various JWE objects.
-
-## Plaintext Content ## {#jwe-plaintext}
 
 All of the succeeding examples (unless otherwise noted) use the following plaintext content, serialized as UTF-8, with line breaks (U+000A LINE FEED) replacing some " " (U+0020 SPACE) characters to improve formatting:
 
@@ -704,16 +795,22 @@ yours--closer than you keep it yourself. But you cannot trust
 us to let you face trouble alone, and go off without a word.
 We are your friends, Frodo.
 ~~~~~~~~~~
-{: title="Plaintext content" }
+{: #jwe-plaintext title="Plaintext content" }
 
 
 ## Key Encryption using RSA v1.5 and AES-HMAC-SHA2 ## {#jwe-rsa15}
 
 This example illustrates encrypting content using the "RSA1_5" (RSAES-PKCS1-v1_5) key encryption algorithm and the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
-The Plaintext content from {{jwe-plaintext}} is used for this example.
+### Input Factors ### {#jwe-rsa15-input}
 
-The following RSA key is used (formatted as a JWK object):
+The following are supplied before beginning the encryption process:
+
+* Plaintext content; this example uses the content from {{jwe-plaintext}}.
+The Plaintext content from {{jwe-plaintext}} is used for this example.
+* RSA public key; this example uses the key from {{jwe-rsa15-key}}.
+* "alg" parameter of "RSA1_5".
+* "enc" parameter of "A128CBC-HS256".
 
 ~~~~~~~~~~
 {
@@ -730,37 +827,24 @@ The following RSA key is used (formatted as a JWK object):
   "e":   "AQAB"
 }
 ~~~~~~~~~~
-{: title="RSA 2048-bit Key"}
+{: #jwe-rsa15-key title="RSA 2048-bit Key, in JWK format"}
 
 (**NOTE**: While the key includes the private parameters, only the public parameters "e" and "n" are necessary for the encryption operation.)
 
-The protected JWE header parameters:
+### Generated Factors ### {#jwe-rsa15-gen}
 
-~~~~~~~~~~
-{
-  "alg": "RSA1_5",
-  "kid": "frodo.baggins@hobbiton.example",
-  "enc": "A128CBC-HS256"
-}
-~~~~~~~~~~
-{: title="Protected JWE Header JSON"}
+The following are generated before encrypting:
 
-Encoded as {{RFC4648}} base64url:
-
-~~~~~~~~~~
-eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
-V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
-~~~~~~~~~~
-{: title="Protected JWE Header, base64url-encoded"}
-
-The Content Encryption Key (CEK):
+* AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jwe-rsa15-cek}}
 
 ~~~~~~~~~~
 vQ6_Pof-pnIBBB_qhAxzuusbc25hFCB1pJuBIN7yMNU
 ~~~~~~~~~~
-{: title="Content Encryption Key, base64url-encoded"}
+{: #jwe-rsa15-cek title="Content Encryption Key, base64url-encoded"}
 
-Performing the key encryption operation over the CEK with the given RSA key results in the following encrypted key:
+### Encrypting the Key ### {#jwe-rsa15-keyenc}
+
+Performing the key encryption operation over the CEK ({{jwe-rsa15-cek}}; encoded as an octet string) with the RSA key ({{jwe-rsa15-key}}) results in the following encrypted key:
 
 ~~~~~~~~~~
 IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
@@ -770,16 +854,45 @@ teAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2AKyuE10KEMbBo8EJVf1PP1JSS73qy
 UqEt8oo0OHlYTicOwwwwhyiNshdrA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJa
 B-u6qkDMAwA1tJEch4R58z9WsYKyrhAw
 ~~~~~~~~~~
-{: title="Encrypted Key, base64url-encoded"}
+{: #jwe-rsa15-encdkey title="Encrypted Key, base64url-encoded"}
 
-The initialization vector/nonce:
+### Encrypting the Content ### {#jwe-rsa15-contentenc}
+
+The following are generated before encrypting the plaintext:
+
+* Protected JWE Header; this example uses the header from {{jwe-rsa15-protected}}, encoded using {{RFC4648}} base64url to produce {{jwe-rsa15-protected_b64u}}.
+* Initialization vector/none; this example uses the initialization vector from {{jwe-rsa15-iv}}
+
+~~~~~~~~~~
+{
+  "alg": "RSA1_5",
+  "kid": "frodo.baggins@hobbiton.example",
+  "enc": "A128CBC-HS256"
+}
+~~~~~~~~~~
+{: #jwe-rsa15-protected title="Protected JWE Header JSON"}
+
+~~~~~~~~~~
+eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
+V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+~~~~~~~~~~
+{: #jwe-rsa15-protected_b64u title="Protected JWE Header, base64url-encoded"}
 
 ~~~~~~~~~~
 mR-7lneQlGq9vxe_udL4LA
 ~~~~~~~~~~
-{: title="Initialization Vector, base64url-encoded"}
+{: #jwe-rsa15-iv title="Initialization Vector, base64url-encoded"}
 
-Performing the content encryption operation on the Plaintext using the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
+Performing the content encryption operation on the Plaintext ({{jwe-plaintext}}) using the following:
+
+* CEK ({{jwe-rsa15-cek}}), encoded as an octet string;
+* Initialization vector/nonce ({{jwe-rsa15-iv}}), encoded as an octet string; and
+* Protected JWE header ({{jwe-rsa15-protected}}) as authenticated data
+
+produces the following:
+
+* Ciphertext from {{jwe-rsa15-ciphertext}}.
+* Authentication tag from {{jwe-rsa15-tag}}.
 
 ~~~~~~~~~~
 LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7zqSkl
@@ -789,14 +902,14 @@ goXfx8yHYfv-lXWlaQ2HjDWl21Mab41aW4ZYKt8maWZiglK4XckGv7-whchA42
 VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
 op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
 ~~~~~~~~~~
-{: title="Ciphertext, base64url-encoded"}
-
-And authentication tag:
+{: #jwe-rsa15-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~
 3AIdtJkgAkWuhBdFo8iL8A
 ~~~~~~~~~~
-{: title="Authentication Tag, base64url-encoded"}
+{: #jwe-rsa15-tag title="Authentication Tag, base64url-encoded"}
+
+### Output Results ### {#jwe-rsa15-output}
 
 The resulting JWE object, using the Compact serialization:
 
@@ -822,7 +935,7 @@ op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
 .
 3AIdtJkgAkWuhBdFo8iL8A
 ~~~~~~~~~~
-{: title="Compact Serialization"}
+{: #jwe-rsa15-compact title="Compact Serialization"}
 
 The resulting JWE object, using the JSON serialization:
 
@@ -855,15 +968,20 @@ The resulting JWE object, using the JSON serialization:
     "3AIdtJkgAkWuhBdFo8iL8A"
 }
 ~~~~~~~~~~
-{: title="JSON Serialization"}
+{: #jwe-rsa15-json title="JSON Serialization"}
 
 ## Key Encryption using RSA-OAEP with A256GCM ## {#jwe-rsa_oaep}
 
 This example illustrates encrypting content using the "RSA-OAEP" (RSAES-OAEP) key encryption algorithm and the "A256GCM" (AES-GCM) content encryption algorithm.
 
-The Plaintext content from {{jwe-plaintext}} is used for this example.
+### Input Factors ### {#jwe-rsa_oaep-input}
 
-The following RSA key is used (formatted as a JWK object):
+The following are supplied before beginning the encryption process:
+
+* Plaintext content; this example uses the plaintext from {{jwe-plaintext}}.
+* RSA public key; this example uses the key from {{jwe-rsa_oaep-key}}.
+* "alg" parameter of "RSA-OAEP"
+* "enc" parameter of "A256GCM"
 
 ~~~~~~~~~~
 {
@@ -937,37 +1055,24 @@ The following RSA key is used (formatted as a JWK object):
           oI4KX6SNMNVcyVS9IWjlq8EzqZEKIA"
 }
 ~~~~~~~~~~
-{: title="RSA 4096-bit Key"}
+{: #jwe-rsa_oaep-key title="RSA 4096-bit Key"}
 
 (**NOTE**: While the key includes the private parameters, only the public parameters "e" and "n" are necessary for the encryption operation.)
 
-The protected JWE header parameters:
+### Generated Factors ### {#jwe-rsa_oaep-gen}
 
-~~~~~~~~~~
-{
-  "alg": "RSA-OAEP",
-  "kid": "samwise.gamgee@hobbiton.example",
-  "enc": "A256GCM"
-}
-~~~~~~~~~~
-{: title="Protected JWE Header JSON"}
+The following are generated before encrypting:
 
-Encoded as {{RFC4648}} base64url:
-
-~~~~~~~~~~
-eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
-9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
-~~~~~~~~~~
-{: title="Protected JWE Header, base64url-encoded"}
-
-The Content Encryption Key (CEK):
+* AES symmetric key as the Content Encryption CEK (CEK); this example uses the key from {{jwe-rsa_oaep-cek}}.
 
 ~~~~~~~~~~
 09EnDWfdf6KCP09QbQQdhhoyFE5GoGAjdShgLGLol8k
 ~~~~~~~~~~
-{: title="Content Encryption Key, base64url-encoded"}
+{: #jwe-rsa_oaep-cek title="Content Encryption Key, base64url-encoded"}
 
-Performing the key encryption operation over the CEK with the given RSA key produces the following encrypted key:
+### Encrypting the Key ### {#jwe-rsa_oaep-keyenc}
+
+Performing the key encryption operation over the CEK ({{jwe-rsa_oaep-cek}}),  encoded as an octet string}}) with the RSA key ({{jwe-rsa_oaep-key}}) produces the following encrypted key:
 
 ~~~~~~~~~~
 WaQnEArx6u7NRlv6o08qNgsMpo-UFVXs_ALqEbAhQJVOXMyNqacRhYoujIOFlt
@@ -983,16 +1088,45 @@ eSucwBklB24oafBFSeMEGBqKFQPhCBaAqCdJL1NkMhA9D6gqJkjluT1Aj0_Dq8
 ikwSP2dG3grGlrl6EtTuhA-j_ArrqLzvSoJU51Nu_1k3usrvgIWLZ89i8Zt05S
 A
 ~~~~~~~~~~
-{: title="Encrypted Key, base64url-encoded"}
+{: #jwe-rsa_oaep-encdkey title="Encrypted Key, base64url-encoded"}
 
-The initialization vector/nonce:
+### Encrypting the Content ### {#jwe-rsa_oaep-contentenc}
+
+The following are generated before encrypting the plaintext:
+
+* Protected JWE Header; this example uses the the header from {{jwe-rsa_oaep-protected}}, encoded using {{RFC4648}} base64url to produce {{jwe-rsa_oaep-protected_b64u}}.
+* Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-rsa_oaep-iv}}.
+
+~~~~~~~~~~
+{
+  "alg": "RSA-OAEP",
+  "kid": "samwise.gamgee@hobbiton.example",
+  "enc": "A256GCM"
+}
+~~~~~~~~~~
+{: #jwe-rsa_oaep-protected title="Protected JWE Header JSON"}
+
+~~~~~~~~~~
+eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
+9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
+~~~~~~~~~~
+{: #jwe-rsa_oaep-protected_b64u title="Protected JWE Header, base64url-encoded"}
 
 ~~~~~~~~~~
 MKccO3TLKaMB67zj
 ~~~~~~~~~~
-{: title="Initialization Vector, base64url-encoded"}
+{: #jwe-rsa_oaep-iv title="Initialization Vector, base64url-encoded"}
 
-Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
+Performing the content encryption operation over the Plaintext ({{jwe-plaintext}}) with the following:
+
+* CEK ({{jwe-rsa_oaep-cek}}, encoded as an octet string;
+* Initialization vector/nonce ({{jwe-rsa_oaep-iv}}, encoded as an octet string; and
+* Protected JWE Header ({{jwe-rsa_oaep-protected_b64u}}) as authenticated data
+
+produces the following:
+
+* Ciphertext from {{jwe-rsa_oaep-ciphertext}}.
+* Authentication tag from {{jwe-rsa_oaep-tag}}.
 
 ~~~~~~~~~~
 dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_qhZgJ
@@ -1002,14 +1136,14 @@ b5g5tz4fi5vmSwIhGOeOxwgLvuryjn-8ECi_5LkdUiC3wQP53pZRtqmwmACyq_
 uXvTpbUWSGna1LKaup-UC1PkOUGvHFa83WgkarkJbSkA0ZoVtebBJ_XvwNlfe1
 VRDk8hxh0AmPvvsMiantgQ4oE6LCjOWKj6C4UNSWgla8zhousjSQ
 ~~~~~~~~~~
-{: title="Ciphertext, base64url-encoded"}
-
-And authentication tag:
+{: #jwe-rsa_oaep-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~
 vCmVSWBtadRAKUhtizP5tw
 ~~~~~~~~~~
-{: title="Authentication Tag, base64url-encoded"}
+{: #jwe-rsa_oaep-tag title="Authentication Tag, base64url-encoded"}
+
+### Output Results ### {#jwe-rsa_oaep-output}
 
 The resulting JWE object, using the Compact serialization:
 
@@ -1041,7 +1175,7 @@ VRDk8hxh0AmPvvsMiantgQ4oE6LCjOWKj6C4UNSWgla8zhousjSQ
 .
 vCmVSWBtadRAKUhtizP5tw
 ~~~~~~~~~~
-{: title="Compact Serialization"}
+{: #jwe-rsa_oaep-compact title="Compact Serialization"}
 
 The resulting JWE object, using the JSON serialization:
 
@@ -1082,7 +1216,400 @@ The resulting JWE object, using the JSON serialization:
     "vCmVSWBtadRAKUhtizP5tw"
 }
 ~~~~~~~~~~
-{: title="JSON Serialization"}
+{: #jwe-rsa_oaep-json title="JSON Serialization"}
+
+
+## Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 ## {#jwe-pbes2}
+
+The example illustrates encrypting content using the "PBES2-HS512+A256KW" (PBES2 Password-based Encryption using HMAC-SHA-512 and AES-256-KeyWrap) key encryption algorithm with the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
+
+### Input Factors ### {#jwe-pbes2-input}
+
+The following are supplied before beginning the encryption process:
+
+* Plaintext content; this example uses the plaintext from {{jwe-pbes2-plaintext}} (**NOTE** all whitespace added for readability)
+* Password; this example uses the password from {{jwe-pbes2-pwd}}
+* "alg" parameter of "PBES2-HS512+A256KW"
+* "enc" parameter of "A128CBC-HS256"
+
+~~~~~~~~~~
+{
+  "keys": [
+    {
+      "kty": "oct",
+      "kid": "77c7e2b8-6e13-45cf-8672-617b5b45243a",
+      "use": "enc",
+      "alg": "A128GCM",
+      "k":   "XctOhJAkA-pD9Lh7ZgW_2A"
+    },
+    {
+      "kty": "oct",
+      "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
+      "use": "enc",
+      "alg": "A128KW",
+      "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
+    },
+    {
+      "kty": "oct",
+      "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
+      "use": "enc",
+      "alg": "A256GCMKW",
+      "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
+    }
+  ]
+}
+~~~~~~~~~~
+{: #jwe-pbes2-plaintext title="Plaintext Content"}
+
+~~~~~~~~~~
+entrap_o_peter_long_credit_tun
+~~~~~~~~~~
+{: #jwe-pbes2-pwd title="Password"}
+
+### Generated Factors ### {#jwe-pbes2-gen}
+
+The following are generated before encrypting:
+
+* AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jwe-pbes2-cek}}.
+* Salt; this example uses the salt from {{jwe-pbes2-p2s}}.
+* Iteration count; this example uses the interaction count 8192.
+
+~~~~~~~~~~
+1XjHr2XJOCQQu1VBjgUP1gpsgHqqHQaEwD2PogUMCYI
+~~~~~~~~~~
+{: #jwe-pbes2-cek title="Content Encryption Key, base64url-encoded"}
+
+~~~~~~~~~~
+8Q1SzinasR3xchYz6ZZcHA
+~~~~~~~~~~
+{: #jwe-pbes2-p2s title="Salt, base64url-encoded"}
+
+### Encrypting the Key ### {#jwe-pbes2-keyenc}
+
+Performing the key encryption operation over the CEK ({{jwe-pbes2-cek}}); encoded as an octet string) with the following:
+
+* Password ({{jwe-pbes2-pwd}};
+* Salt ({{jwe-pbes2-p2s}}), encoded as an octet string; and
+* Iteration count (8192)
+
+produces the following encrypted key:
+
+~~~~~~~~~~
+dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
+~~~~~~~~~~
+{: #jwe-pbes2-encdkey title="Encrypted Key, base64url-encoded"}
+
+### Encrypting the Content ### {#jwe-pbes2-contentenc}
+
+The following are generated before encrypting the content:
+
+* Protected JWE Header; this example uses the header from {{jwe-pbes2-protected}}, encoded using {{RFC4648}} base64url to produce {{jwe-pbes2-protected_b64u}}.
+The protected JWE header parameters:
+* Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-pbes2-iv}}.
+
+~~~~~~~~~~
+{
+  "alg": "PBES2-HS512+A256KW",
+  "p2s": "8Q1SzinasR3xchYz6ZZcHA",
+  "p2c": 8192,
+  "enc": "A128CBC-HS256"
+}
+~~~~~~~~~~
+{: #jwe-pbes2-protected title="Protected JWE Header JSON"}
+
+~~~~~~~~~~
+eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
+hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+~~~~~~~~~~
+{: #jwe-pbes2-protected_b64u title="Protected JWE Header, base64url-encoded"}
+
+~~~~~~~~~~
+obvv9nee1GDQTucO7EiLUw
+~~~~~~~~~~
+{: #jwe-pbes2-iv title="Initialization Vector, base64url-encoded"}
+
+Performing the content encryption operation over the Plaintext ({{jwe-pbes2-plaintext}}) with the the following:
+
+* CEK ({{jwe-pbes2-cek}}), encoded as an octet string;
+* Initialization vector/nonce ({{jwe-pbes2-iv}}), encoded as an octet string; and
+* Protected JWE header ({{jwe-pbes2-protected_b64u}}) as authenticated data
+
+produces the following:
+
+* Ciphertext from {{jwe-pbes2-ciphertext}}.
+* Authentication tag from {{jwe-pbes2-tag}}.
+
+~~~~~~~~~~
+3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
+_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
+Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
+bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
+Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
+5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
+09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
+ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
+VGF951uNP8TABCf6
+~~~~~~~~~~
+{: #jwe-pbes2-ciphertext title="Ciphertext, base64url-encoded"}
+
+~~~~~~~~~~
+F5MFKAu7qA_hE5w5N1iJ5w
+~~~~~~~~~~
+{: #jwe-pbes2-tag title="Authentication Tag, base64url-encoded"}
+
+### Output Results ### {#jwe-pbes2-output}
+
+The resulting JWE object, using the Compact serialization:
+
+~~~~~~~~~~
+eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
+hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+.
+dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
+.
+obvv9nee1GDQTucO7EiLUw
+.
+3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
+_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
+Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
+bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
+Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
+5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
+09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
+ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
+VGF951uNP8TABCf6
+.
+F5MFKAu7qA_hE5w5N1iJ5w
+~~~~~~~~~~
+{: #jwe-pbes2-compact title="Compact Serialization"}
+
+The resulting JWE object, using the JSON serialization:
+
+~~~~~~~~~~
+{
+  "recipients": [
+    {
+      "encrypted_key":
+        "dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5
+         A"
+    }
+  ],
+  "protected":
+    "eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluY
+     XNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLU
+     hTMjU2In0",
+  "iv":
+    "obvv9nee1GDQTucO7EiLUw",
+  "ciphertext":
+    "3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVP
+     J85lA_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4
+     OP_Y_MVUOZSn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5j
+     TGMMAN33dFfrHx3bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQk
+     dvRYauZ66rKoyZeygVluEf_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wi
+     v2gvmk-aLwgmRF6uUYvccsB4K5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1E
+     J8_krTVtVQxF9F6LcUNQ-rua5Iub5Y09INYdA9fdUe8bs7iFWp3wWBjLx
+     1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKEipKmfIqIVvtdEHdS4hq_rP
+     0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_VGF951uNP8TABCf6",
+  "tag":
+    "F5MFKAu7qA_hE5w5N1iJ5w"
+}
+~~~~~~~~~~
+{: #jwe-pbes2-json title="JSON Serialization"}
+
+
+## Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with AES-GCM ## {#jwe-ecdh_aeskw}
+
+This example illustrates encrypting content using the "ECDH-ES+A128KW" (Elliptic Curve Diffie-Hellman Ephemeral-Static with AES-128-KeyWrap) key encryption algorithm and the "A128GCM" (AES-GCM) content encryption algorithm.
+
+### Input Factors ### {#jwe-ecdh_aeskw-input}
+
+The following are supplied before beginning the encryption process:
+
+* Plaintext content; this example uses the content from {{jwe-plaintext}}
+* EC public key; this example uses the public key in {{jwe-ecdh_aeskw-key}}
+* "alg" parameter of "ECDH-ES+A128KW"
+* "enc" parameter of "A128GCM"
+
+~~~~~~~~~~
+{
+  "kty": "EC",
+  "kid": "peregrin.took@tuckborough.example",
+  "use": "enc",
+  "crv": "P-384",
+  "x":   "YU4rRUzdmVqmRtWOs2OpDE_T5fsNIodcG8G5FWPrTPMyxpzsSOGa
+          QLpe2FpxBmu2",
+  "y":   "A8-yxCHxkfBz3hKZfI1jUYMjUhsEveZ9THuwFjH2sCNdtksRJU7D
+          5-SkgaFL1ETP",
+  "d":   "iTx2pk7wW-GqJkHcEkFQb2EFyYcO7RugmaW3mRrQVAOUiPommT0I
+          dnYK2xDlZh-j"
+}
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-key title="Elliptic Curve P-384 Key, in JWK format"}
+
+(**NOTE**: While the key includes the private parameters, only the public parameters "crv", "x", and "y" are necessary for the encryption operation.)
+
+### Generated Factors ### {#jwe-ecdh_aeskw-gen}
+
+The following are generated before encrypting:
+
+* Symmetric AES key as the Content Encryption Key (CEK); this example uses the key from {{jwe-ecdh_aeskw-cek}}.
+
+~~~~~~~~~~
+C3eS2iNXmSTA7W8tBpjs3w
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-cek title="Content Encryption Key, base64url-encoded"}
+
+
+### Encrypting the Key ### {#jwe-ecdh_aeskw-keyenc}
+
+To encrypt the Content Encryption Key, the following are generated:
+
+* Ephemeral EC private key on the same curve as the EC public key; this example uses the private key that matches the public key from {{jwe-ecdh_aeskw-epk}}.
+
+~~~~~~~~~~
+{
+  "kty": "EC",
+  "crv": "P-384",
+  "x":   "qMz7Lgb3Bc1GNuVn4ZSxLDeDpihGWRwqA2fA1-2IJwDQtKMdpKY0
+          XjNqBbjigcL-",
+  "y":   "Ygt6Bc_o29f-DJ_5O3YCMoX2tXXz1ysj9MFRnucByIQoR0y3SVmq
+          BBwQISq9grWe"
+}
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-epk title="Ephemeral Elliptic Curve P-384 Key, in JWK format"}
+
+Performing the key encryption operation over the CEK ({{jwe-ecdh_aeskw-cek}}, encoded as an octet string) with the ephemeral private key ({{jwe-ecdh_aeskw-epk}}) results in the following JWE encrypted key:
+
+~~~~~~~~~~
+zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-encdkey title="Encrypted Key, base64url-encoded"}
+
+### Encrypting the Content ### {#jwe-ecdh_aeskw-contentenc}
+
+The following are generated before encrypting the content:
+
+* Protected JWE header; this example uses the header from {{jwe-ecdh_aeskw-protected}}, encoded to {{RFC4648}} base64url as {{jwe-ecdh_aeskw-protected_b64u}}.
+* Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-ecdh_aeskw-iv}}
+
+~~~~~~~~~~
+{
+  "alg": "ECDH-ES+A128KW",
+  "kid": "peregrin.took@tuckborough.example",
+  "epk": {
+    "kty": "EC",
+    "crv": "P-384",
+    "x":   "qMz7Lgb3Bc1GNuVn4ZSxLDeDpihGWRwqA2fA1-2IJwDQtKMdpK
+            Y0XjNqBbjigcL-",
+    "y":   "Ygt6Bc_o29f-DJ_5O3YCMoX2tXXz1ysj9MFRnucByIQoR0y3SV
+            mqBBwQISq9grWe"
+  },
+  "enc": "A128GCM"
+}
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-protected title="Protected JWE Header JSON"}
+
+~~~~~~~~~~
+eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
+Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
+Mzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHBpaEdXUndxQTJmQT
+EtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5IjoiWWd0NkJjX28yOWYt
+REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
+E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-protected_b64u title="Protected JWE Header, base64url-encoded"}
+
+~~~~~~~~~~
+ubzqaTluloMJR8Ec
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-iv title="Initialization Vector, base64url-encoded"}
+
+Performing the content encryption operation on the Plaintext ({{jwe-plaintext}}) using the following:
+
+* CEK ({{jwe-ecdh_aeskw-cek}}), encoded as an octet string;
+* Initialization vector/nonce ({{jwe-ecdh_aeskw-iv}}), encoded as an octet string; and
+* Protected JWE header ({{jwe-ecdh_aeskw-protected_b64u}}) as authenticated data
+
+produces the following
+
+* Ciphertext from {{jwe-ecdh_aeskw-ciphertext}}.
+* Authentication tag from {{jwe-ecdh_aeskw-tag}}.
+
+~~~~~~~~~~
+zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
+Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
+vFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-JlnQ3pssAqQLpUV
+_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
+htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
+VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-ciphertext title="Ciphertext, base64url-encoded"}
+
+~~~~~~~~~~
+5cJTRUT3kQRrw_UGwtMtDQ
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-tag title="Authentication Tag, base64url-encoded"}
+
+### Output Results ### {#jwe-ecdh_aeskw-output}
+
+The resulting JWE object, using the Compact serialization:
+
+~~~~~~~~~~
+eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
+Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
+Mzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHBpaEdXUndxQTJmQT
+EtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5IjoiWWd0NkJjX28yOWYt
+REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
+E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
+.
+zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
+.
+ubzqaTluloMJR8Ec
+.
+zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
+Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
+vFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-JlnQ3pssAqQLpUV
+_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
+htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
+VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
+.
+5cJTRUT3kQRrw_UGwtMtDQ
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-compact title="Compact Serialization"}
+
+The resulting JWE object, using the JSON serialization:
+
+~~~~~~~~~~
+{
+  "recipients": [
+    {
+      "encrypted_key":
+        "zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY"
+    }
+  ],
+  "protected":
+    "eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb
+     2tAdHVja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsIm
+     NydiI6IlAtMzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHB
+     paEdXUndxQTJmQTEtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5
+     IjoiWWd0NkJjX28yOWYtREpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQ
+     nlJUW9SMHkzU1ZtcUJCd1FJU3E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn
+     0",
+  "iv":
+    "ubzqaTluloMJR8Ec",
+  "ciphertext":
+    "zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqK
+     a-xC2Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbg
+     f0_TQqG9PKvFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-
+     JlnQ3pssAqQLpUV_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToP
+     q57d2Q99N10WfPmXVQ38htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE
+     3Bb8IJ1a04LzqB4Xmp_wgbwHCVR-bqTKgth3h_NoDLqCxQ0QcG9E78i36
+     iPJuLAzVgS0ChHzo5ULw",
+  "tag":
+    "5cJTRUT3kQRrw_UGwtMtDQ"
+}
+~~~~~~~~~~
+{: #jwe-ecdh_aeskw-json title="JSON Serialization"}
 
 
 ## Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2 ## {#jwe-ecdh}
@@ -1208,326 +1735,6 @@ the resulting JWE object, using the JSON serialization:
     dBKgSa9JZfc21dSw",
   "tag":
     "kqeubaGyskAjcj8mDymY6A"
-}
-~~~~~~~~~~
-{: title="JSON Serialization"}
-
-
-## Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with AES-GCM ## {#jwe-ecdh_aeskw}
-
-This example illustrates encrypting content using a previously exchanged key directly and the "A128GCM" (AES-GCM) content encryption algorithm.
-
-The Plaintext content in {{jwe-plaintext}} is used for this example.
-
-The following Elliptic Curve key is used (formatted as a JWK object):
-
-~~~~~~~~~~
-{
-  "kty": "EC",
-  "kid": "peregrin.took@tuckborough.example",
-  "use": "enc",
-  "crv": "P-384",
-  "x":   "YU4rRUzdmVqmRtWOs2OpDE_T5fsNIodcG8G5FWPrTPMyxpzsSOGa
-          QLpe2FpxBmu2",
-  "y":   "A8-yxCHxkfBz3hKZfI1jUYMjUhsEveZ9THuwFjH2sCNdtksRJU7D
-          5-SkgaFL1ETP",
-  "d":   "iTx2pk7wW-GqJkHcEkFQb2EFyYcO7RugmaW3mRrQVAOUiPommT0I
-          dnYK2xDlZh-j"
-}
-~~~~~~~~~~
-{: title="Elliptic Curve P-384 Key"}
-
-(**NOTE**: While the key includes the private parameters, only the public parameters "crv", "x", and "y" are necessary for the encryption operation.)
-
-The protected JWE header parameters:
-
-~~~~~~~~~~
-{
-  "alg": "ECDH-ES+A128KW",
-  "kid": "peregrin.took@tuckborough.example",
-  "epk": {
-    "kty": "EC",
-    "crv": "P-384",
-    "x":   "qMz7Lgb3Bc1GNuVn4ZSxLDeDpihGWRwqA2fA1-2IJwDQtKMdpK
-            Y0XjNqBbjigcL-",
-    "y":   "Ygt6Bc_o29f-DJ_5O3YCMoX2tXXz1ysj9MFRnucByIQoR0y3SV
-            mqBBwQISq9grWe"
-  },
-  "enc": "A128GCM"
-}
-~~~~~~~~~~
-{: title="Protected JWE Header JSON"}
-
-Encoded as {{RFC4648}} base64url:
-
-~~~~~~~~~~
-eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
-Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
-Mzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHBpaEdXUndxQTJmQT
-EtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5IjoiWWd0NkJjX28yOWYt
-REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
-E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
-~~~~~~~~~~
-{: title="Protected JWE Header, base64url-encoded"}
-
-The Content Encryption Key (CEK):
-
-~~~~~~~~~~
-C3eS2iNXmSTA7W8tBpjs3w
-~~~~~~~~~~
-{: title="Content Encryption Key, base64url-encoded"}
-
-Performing the key encryption operation over the CEK results in the following JWE encrypted key:
-
-~~~~~~~~~~
-zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
-~~~~~~~~~~
-{: title="Encrypted Key, base64url-encoded"}
-
-The initialization vector/nonce:
-
-~~~~~~~~~~
-ubzqaTluloMJR8Ec
-~~~~~~~~~~
-{: title="Initialization Vector, base64url-encoded"}
-
-Performing the content encryption operation on the Plaintext using the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
-
-~~~~~~~~~~
-zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
-Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
-vFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-JlnQ3pssAqQLpUV
-_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
-htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
-VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
-~~~~~~~~~~
-{: title="Ciphertext, base64url-encoded"}
-
-And authentication tag:
-
-~~~~~~~~~~
-5cJTRUT3kQRrw_UGwtMtDQ
-~~~~~~~~~~
-{: title="Authentication Tag, base64url-encoded"}
-
-The resulting JWE object, using the Compact serialization:
-
-~~~~~~~~~~
-eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
-Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
-Mzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHBpaEdXUndxQTJmQT
-EtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5IjoiWWd0NkJjX28yOWYt
-REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
-E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
-.
-zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
-.
-ubzqaTluloMJR8Ec
-.
-zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
-Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
-vFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-JlnQ3pssAqQLpUV
-_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
-htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
-VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
-.
-5cJTRUT3kQRrw_UGwtMtDQ
-~~~~~~~~~~
-{: title="Compact Serialization"}
-
-The resulting JWE object, using the JSON serialization:
-
-~~~~~~~~~~
-{
-  "recipients": [
-    {
-      "encrypted_key":
-        "zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY"
-    }
-  ],
-  "protected":
-    "eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb
-     2tAdHVja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsIm
-     NydiI6IlAtMzg0IiwieCI6InFNejdMZ2IzQmMxR051Vm40WlN4TERlRHB
-     paEdXUndxQTJmQTEtMklKd0RRdEtNZHBLWTBYak5xQmJqaWdjTC0iLCJ5
-     IjoiWWd0NkJjX28yOWYtREpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQ
-     nlJUW9SMHkzU1ZtcUJCd1FJU3E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn
-     0",
-  "iv":
-    "ubzqaTluloMJR8Ec",
-  "ciphertext":
-    "zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqK
-     a-xC2Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbg
-     f0_TQqG9PKvFOki83X3aZ2PIHGcjSifIT6OQqxXE9YhdXwD0bXpkXUlq-
-     JlnQ3pssAqQLpUV_-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToP
-     q57d2Q99N10WfPmXVQ38htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE
-     3Bb8IJ1a04LzqB4Xmp_wgbwHCVR-bqTKgth3h_NoDLqCxQ0QcG9E78i36
-     iPJuLAzVgS0ChHzo5ULw",
-  "tag":
-    "5cJTRUT3kQRrw_UGwtMtDQ"
-}
-~~~~~~~~~~
-{: title="JSON Serialization"}
-
-
-## Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 ## {#jwe-pbes2}
-
-The example illustrates encrypting content using the "PBES2-HS512+A256KW" (PBES2 Password-based Encryption using HMAC-SHA-512 and AES-256-KeyWrap) key encryption algorithm with the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
-
-This example does not use the Plaintext from {{jwe-plaintext}}.  Instead it uses the following JWK-Set object as the plaintext (**NOTE** all whitespace added for readability):
-
-~~~~~~~~~~
-{
-  "keys": [
-    {
-      "kty": "oct",
-      "kid": "77c7e2b8-6e13-45cf-8672-617b5b45243a",
-      "use": "enc",
-      "alg": "A128GCM",
-      "k":   "XctOhJAkA-pD9Lh7ZgW_2A"
-    },
-    {
-      "kty": "oct",
-      "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
-      "use": "enc",
-      "alg": "A128KW",
-      "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
-    },
-    {
-      "kty": "oct",
-      "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-      "use": "enc",
-      "alg": "A256GCMKW",
-      "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
-    }
-  ]
-}
-~~~~~~~~~~
-{: title="Plaintext Content"}
-
-The password plaintext:
-
-~~~~~~~~~~
-entrap_o_peter_long_credit_tun
-~~~~~~~~~~
-{: title="Password"}
-
-The protected JWE header parameters:
-
-~~~~~~~~~~
-{
-  "alg": "PBES2-HS512+A256KW",
-  "p2s": "8Q1SzinasR3xchYz6ZZcHA",
-  "p2c": 8192,
-  "enc": "A128CBC-HS256"
-}
-~~~~~~~~~~
-{: title="Protected JWE Header JSON"}
-
-Encoded as {{RFC4648}} base64url:
-
-~~~~~~~~~~
-eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
-hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
-~~~~~~~~~~
-{: title="Protected JWE Header, base64url-encoded"}
-
-The Content Encryption Key (CEK):
-
-~~~~~~~~~~
-1XjHr2XJOCQQu1VBjgUP1gpsgHqqHQaEwD2PogUMCYI
-~~~~~~~~~~
-{: title="Content Encryption Key, base64url-encoded"}
-
-Performing the key encryption operation over the CEK with the given password, salt, and iteration count produces the following encrypted key:
-
-~~~~~~~~~~
-dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
-~~~~~~~~~~
-{: title="Encrypted Key, base64url-encoded"}
-
-The initialization vector/nonce:
-
-~~~~~~~~~~
-obvv9nee1GDQTucO7EiLUw
-~~~~~~~~~~
-{: title="Initialization Vector, base64url-encoded"}
-
-Performing the content encryption operation over the Plaintext with the given CEK, initialization vector/nonce, and protected JWE header (base64url-encoded) as authenticated data produces the following ciphertext:
-
-~~~~~~~~~~
-3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
-_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
-Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
-bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
-Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
-5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
-09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
-ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
-VGF951uNP8TABCf6
-~~~~~~~~~~
-{: title="Ciphertext, base64url-encoded"}
-
-And authentication tag:
-
-~~~~~~~~~~
-F5MFKAu7qA_hE5w5N1iJ5w
-~~~~~~~~~~
-{: title="Authentication Tag, base64url-encoded"}
-
-The resulting JWE object, using the Compact serialization:
-
-~~~~~~~~~~
-eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
-hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
-.
-dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
-.
-obvv9nee1GDQTucO7EiLUw
-.
-3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
-_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
-Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
-bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
-Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
-5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
-09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
-ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
-VGF951uNP8TABCf6
-.
-F5MFKAu7qA_hE5w5N1iJ5w
-~~~~~~~~~~
-{: title="Compact Serialization"}
-
-The resulting JWE object, using the JSON serialization:
-
-~~~~~~~~~~
-{
-  "recipients": [
-    {
-      "encrypted_key":
-        "dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5
-         A"
-    }
-  ],
-  "protected":
-    "eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluY
-     XNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLU
-     hTMjU2In0",
-  "iv":
-    "obvv9nee1GDQTucO7EiLUw",
-  "ciphertext":
-    "3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVP
-     J85lA_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4
-     OP_Y_MVUOZSn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5j
-     TGMMAN33dFfrHx3bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQk
-     dvRYauZ66rKoyZeygVluEf_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wi
-     v2gvmk-aLwgmRF6uUYvccsB4K5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1E
-     J8_krTVtVQxF9F6LcUNQ-rua5Iub5Y09INYdA9fdUe8bs7iFWp3wWBjLx
-     1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKEipKmfIqIVvtdEHdS4hq_rP
-     0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_VGF951uNP8TABCf6",
-  "tag":
-    "F5MFKAu7qA_hE5w5N1iJ5w"
 }
 ~~~~~~~~~~
 {: title="JSON Serialization"}
