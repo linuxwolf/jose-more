@@ -824,9 +824,9 @@ The following is the assembled third signature serialized as JSON:
 The following compose the resulting JWS object:
 
 * Payload content ({{jws-payload_b64u}})
-* First signature JSON ({{jws-multi-sig_sig_1}})
-* Second signature JSON ({{jws-multi-sig_sig_2}})
-* Third signature JSON ({{jws-multi-sig_sig_3}})
+* Signature #1 JSON ({{jws-multi-sig_sig_1}})
+* Signature #2 JSON ({{jws-multi-sig_sig_2}})
+* Signature #3 JSON ({{jws-multi-sig_sig_3}})
 
 The resulting JWS object using the JSON serialization:
 
@@ -3198,6 +3198,6 @@ This document has no actions for IANA.
 
 # Acknowledgements
 
-Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.
+All of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
 
-Most of the signature payload content and encrypted plaintext content are quotes from the series of novels collectively known as "The Lord of the Rings", written by J. R. R. Tolkien.
+Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.

@@ -1222,9 +1222,9 @@ Internet-Draft                JOSE Cookbook                November 2013
 
    o  Payload content (Figure 2)
 
-   o  First signature JSON (Figure 35)
+   o  Signature #1 JSON (Figure 35)
 
-   o  Second signature JSON (Figure 38)
+   o  Signature #2 JSON (Figure 38)
 
 
 
@@ -1234,7 +1234,7 @@ Miller                    Expires May 25, 2014                 [Page 22]
 Internet-Draft                JOSE Cookbook                November 2013
 
 
-   o  Third signature JSON (Figure 41)
+   o  Signature #3 JSON (Figure 41)
 
    The resulting JWS object using the JSON serialization:
 
@@ -4172,12 +4172,12 @@ Internet-Draft                JOSE Cookbook                November 2013
 
 Appendix A.  Acknowledgements
 
+   All of the examples herein use quotes and character names found in
+   the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two
+   Towers"; and "Return of the King", written by J. R. R. Tolkien.
+
    Thanks to Richard Barnes and Jim Schaad for providing for their input
    on the outline for this document.
-
-   Most of the signature payload content and encrypted plaintext content
-   are quotes from the series of novels collectively known as "The Lord
-   of the Rings", written by J. R. R. Tolkien.
 
 Author's Address
 
