@@ -31,6 +31,7 @@ informative:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
+    I-D.ietf-jcardcal-jcard:
     RFC1951:
     RFC4648:
 
@@ -528,6 +529,86 @@ The resulting JWS object using the JSON serialization:
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-hmac-json title="JSON Serialization" }
+
+## Detached Signature ## {#jws-detached}
+
+This example illustrates a detached signature.  This example is identical others, except the resulting JWS objects do not include the Payload content.  Instead, the application is expected to locate it elsewhere.  For example, the signature might be in a meta-data section, with the payload being the content.
+
+### Input Factors ### {#jws-detached-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* Signing key; this example uses the AES symmetric key from {{jws-hmac-key}}.
+* Signing algorithm; this example uses "RS256".
+
+### Signing Operation ### {#jws-detached-op}
+
+The following are generated before completing the signing operation:
+
+* Protected JWS Header; this example uses the header from {{jws-detached-protected}}, encoded using {{RFC4648}} base64url to produce {{jws-detached-protected_b64u}}.
+
+The protected JWS header parameters:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "alg": "HS256",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-detached-protected title="Protected JWS Header JSON" }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
+VlZjMxNGJjNzAzNyJ9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-detached-protected_b64u title="Protected JWS Header, base64url-encoded" }
+
+Performing the signature operation over the combined protected JWS header ({{jws-detached-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ns-fxWMR0YjG5KJK5VAVdE9c9zEHL4SlnjJvw2yiRQw
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-detached-sig title="Signature, base64url-encoded"}
+
+### Output Results ### {#jws-detached-output}
+
+The following compose the resulting JWS object:
+
+* Protected JWS header ({{jws-detached-protected_b64u}})
+* Signature ({{jws-detached-sig}})
+
+The resulting JWS object using the Compact serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
+VlZjMxNGJjNzAzNyJ9
+.
+.
+ns-fxWMR0YjG5KJK5VAVdE9c9zEHL4SlnjJvw2yiRQw
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-detached-compact title="JSON Serialization" }
+
+The resulting JWS object using the JSON serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "signatures": [
+    {
+      "protected":
+        "eyJhbGciOiJIUzI1NiJ9",
+      "header": {
+        "kid":
+          "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+      },
+      "signature":
+        "LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM"
+    }
+  ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-detached-json title="JSON Serialization" }
+
 
 ## Protecting Specific Header Fields ## {#jws-somefields}
 
@@ -2590,6 +2671,168 @@ The resulting JWE object using the JSON serialization:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-compressed-json title="JSON Serialization"}
 
+## Including Additional Authenticated Data ## {#jwe-aad}
+
+This example illustrates encrypting content that includes additional authenticated data. As this example includes an additional top-level property not present in the Compact serialization, only the JSON serialization is possible.
+
+### Input Factors ### {#jwe-aad-input}
+
+The following are supplied before beginning the encryption process:
+
+* Plaintext content; this example uses the content from {{jwe-plaintext}}.
+* Recipient encryption key; this example uses the key from {{jwe-aeskw-key}}.
+* Key encryption algorithm; this example uses "A128KW".
+* Content encryption algorithm; this example uses "A128GCM".
+* Additional authenticated data; this example uses a {{I-D.ietf-jcardcal-jcard}} vCard from {{jwe-aad-data}}, serialized to UTF-8.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[
+  "vcard",
+  [
+    [ "version", {}, "text", "4.0" ],
+    [ "fn", {}, "text", "Meriadoc Brandybuck" ],
+    [ "n", {},
+      "text", [
+        "Brandybuck", "Meriadoc", "Mr.", ""
+      ]
+    ],
+    [ "bday", {}, "text", "TA 2982" ],
+    [ "gender", {}, "text", "M" ]
+  ]
+]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-data title="Additional Authenticated Data, in JSON format"}
+
+**NOTE** whitespace between JSON values added for readability.
+ 
+### Generated Factors ### {#jwe-aad-gen}
+
+The following are generated before encrypting:
+
+* AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jwe-aad-cek}}.
+* Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-aad-iv}}.
+* Encoded additional authenticated data (AAD); this example uses the additional authenticated data from {{jwe-aad-data}}, encoded to {{RFC4648}} base64url as {{jwe-aad-data_b64u}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+uGL3QU7R3HMR3ik-oTW82w
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-cek title="Content Encryption Key, base64url-encoded"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+HorZstLCLfNNC7TN
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-iv title="Initialization Vector, base64url-encoded"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+WyJ2Y2FyZCIsW1sidmVyc2lvbiIse30sInRleHQiLCI0LjAiXSxbImZuIix7fS
+widGV4dCIsIk1lcmlhZG9jIEJyYW5keWJ1Y2siXSxbIm4iLHt9LCJ0ZXh0Iixb
+IkJyYW5keWJ1Y2siLCJNZXJpYWRvYyIsIk1yLiIsIiJdXSxbImJkYXkiLHt9LC
+J0ZXh0IiwiVEEgMjk4MiJdLFsiZ2VuZGVyIix7fSwidGV4dCIsIk0iXV1d
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-data_b64u title="Additional Authenticated Data, base64url-encoded"}
+
+### Encrypting the Key ### {#jwe-aad-keyenc}
+
+Performing the key encryption operation over the CEK ({{jwe-aad-cek}}) with the AES key ({{jwe-aeskw-key}}) produces the following encrypted key:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MJjYoJ6DKa__0KTJP5PT8pR0T_tybLRc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-encdkey title="Encrypted Key, base64url-encoded"}
+
+### Encrypting the Content ### {#jwe-aad-contentenc}
+
+The following are generated before encrypting the content:
+
+* Protected JWE Header; this example uses the header from {{jwe-aad-protected}}, encoded to {{RFC4648}} base64url as {{jwe-aad-protected_b64u}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "alg": "A128KW",
+  "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
+  "enc": "A128GCM"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-protected title="Protected JWE Header JSON"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
+04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-protected_b64u title="Protected JWE Header, base64url-encoded"}
+
+Performing the content encryption operation over the Plaintext with the following:
+
+* CEK ({{jwe-aad-cek}});
+* Initialization vector/nonce ({{jwe-aad-iv}}); and
+* Concatenation of the protected JWE header ({{jwe-aad-protected_b64u}}), ".", and the {{RFC4648}} base64url encoding of {{jwe-aad-data}} as authenticated data
+
+produces the following:
+
+* Ciphertext from {{jwe-aad-ciphertext}}.
+* Authentication tag from {{jwe-aad-tag}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+36qblaXJa6XlM7EHkAWVcrAvUA-w0zUsaSiK9ajj1CsPp-oHpElk7bktsA2u9p
+b_T0yeXpjeaGKc0tWO6VKMIpIEJed-reIzaHva_JrHKt63tKWRmGDtQ9EHDCgw
+Vv_0EwUoVW_RzfugR-71IsoTSYeziVi2XL_nsHpcVGFQOgD2C-nvwqo4_8f9pZ
+_bmK_kj0eAc54qp2laNG7odWGOSpOvW4Vr2ujW8QnHQlaKUNUqh0ODvCu0hFWN
+pzxEgja4X6UlSkY6uTQR-mBBpwlA4rAnjP-pn0zuq0T13vkCplokt2GKhRLysE
+6UqLjnyfexHGjC349nzsBHoCXk2tKJwrqPpssCnsqPaffU
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-ciphertext title="Ciphertext, base64url-encoded"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tp_Idm6BMHn3iJQ86T4sRA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-tag title="Authentication Tag, base64url-encoded"}
+
+### Output Results ### {#jwe-aad-output}
+
+The following compose the resulting JWE object:
+
+* Protected JWE header ({{jwe-aad-protected_b64u}})
+* encrypted key ({{jwe-aad-encdkey}})
+* Initialization vector/nonce ({{jwe-aad-iv}})
+* Additional authenticated data ({{jwe-aad-data_b64u}})
+* Ciphertext ({{jwe-aad-ciphertext}})
+* Authentication tag ({{jwe-aad-tag}})
+
+The resulting JWE object using the JSON serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "recipients": [
+    {
+      "encrypted_key":
+        "Aa2ArPkcYIHxdlA3lsGWtcC9sBkqTYHr"
+    }
+  ],
+  "protected":
+    "eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktY
+     TQ2OC04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0",
+  "iv":
+    "HorZstLCLfNNC7TN",
+  "aad":
+    "WyJ2Y2FyZCIsW1sidmVyc2lvbiIse30sInRleHQiLCI0LjAiXSxbImZuI
+    ix7fSwidGV4dCIsIk1lcmlhZG9jIEJyYW5keWJ1Y2siXSxbIm4iLHt9LCJ
+    0ZXh0IixbIkJyYW5keWJ1Y2siLCJNZXJpYWRvYyIsIk1yLiIsIiJdXSxbI
+    mJkYXkiLHt9LCJ0ZXh0IiwiVEEgMjk4MiJdLFsiZ2VuZGVyIix7fSwidGV
+    4dCIsIk0iXV1d",
+  "ciphertext":
+    "36qblaXJa6XlM7EHkAWVcrAvUA-w0zUsaSiK9ajj1CsPp-oHpElk7bkts
+     A2u9pb_T0yeXpjeaGKc0tWO6VKMIpIEJed-reIzaHva_JrHKt63tKWRmG
+     DtQ9EHDCgwVv_0EwUoVW_RzfugR-71IsoTSYeziVi2XL_nsHpcVGFQOgD
+     2C-nvwqo4_8f9pZ_bmK_kj0eAc54qp2laNG7odWGOSpOvW4Vr2ujW8QnH
+     QlaKUNUqh0ODvCu0hFWNpzxEgja4X6UlSkY6uTQR-mBBpwlA4rAnjP-pn
+     0zuq0T13vkCplokt2GKhRLysE6UqLjnyfexHGjC349nzsBHoCXk2tKJwr
+     qPpssCnsqPaffU",
+  "tag":
+    "tp_Idm6BMHn3iJQ86T4sRA"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-aad-json title="JSON Serialization"}
+
 
 ## Protecting Specific Header Fields ## {#jwe-somefields}
 
@@ -3181,7 +3424,7 @@ The resulting JWE object using the JSON serialization:
     "viYGRDbo5-F0Mj2Cy4FiKQ"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: title="JSON Serialization"}
+{: #jwe-multi-json title="JSON Serialization"}
 
 
 # Security Considerations # {#security}
