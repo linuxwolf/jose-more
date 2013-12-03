@@ -1,6 +1,6 @@
 KRAMDOWN=kramdown-rfc2629
 RFC2TXT=xml2rfc --text
-RFC2HTML=xsltproc rfc2629.xslt
+RFC2HTML=xsltproc --param xml2rfc-toc "'yes'" rfc2629.xslt
 
 SOURCES=draft-miller-jose-cookbook.mkd
 OBJS=$(SOURCES:.mkd=.xml)
