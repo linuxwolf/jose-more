@@ -52,9 +52,9 @@ This document provides a number of examples of signing or encrypting content usi
 
 All instances of binary octet strings are represented using {{RFC4648}} base64url encoding.
 
-Unless otherwise stated, all examples include both the Compact and JSON serializations.
+Wherever possible, the examples include both the Compact and JSON serializations.
 
-All of the examples in this document include whitespace to improve formatting and readability.  Except for plaintext or payload content, whitespace is not part of the cryptographic operations.  Plaintext or payload content does include whitespace (unless otherwise noted), although line breaks (U+000A LINE FEED) have replaced spaces (U+0020 SPACE) is some cases to improve readability.
+All of the examples in this document have whitespace added to improve formatting and readability.  Except for plaintext or payload content, whitespace is not part of the cryptographic operations.  Plaintext or payload content does include whitespace (unless otherwise noted), although line breaks (U+000A LINE FEED) have replaced spaces (U+0020 SPACE) is some cases to improve readability.
 
 
 # Terminology  # {#terms}
@@ -1492,12 +1492,12 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-pbes2-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1XjHr2XJOCQQu1VBjgUP1gpsgHqqHQaEwD2PogUMCYI
+LbIgtUgy3OYW-gpNaXZro-2naGkhnyw9NnXDrijI4EI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-cek title="Content Encryption Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-obvv9nee1GDQTucO7EiLUw
+HnJqms6_fz9N6mpsML9NHA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-iv title="Initialization Vector, base64url-encoded"}
 
@@ -1522,7 +1522,7 @@ Performing the key encryption operation over the CEK ({{jwe-pbes2-cek}})) with t
 produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
+WY1x1MsMrbQogWOeXDasyESSjYi-3iS4p8UjlWMwNJOS0j7_KFQE0w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-encdkey title="Encrypted Key, base64url-encoded"}
 
@@ -1534,17 +1534,19 @@ The following are generated before encrypting the content:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "alg": "PBES2-HS512+A256KW",
   "p2s": "8Q1SzinasR3xchYz6ZZcHA",
   "p2c": 8192,
+  "alg": "PBES2-HS256+A128KW",
+  "cty": "JWK-SET+JSON",
   "enc": "A128CBC-HS256"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-protected title="Protected JWE Header JSON"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
-hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+eyJwMnMiOiI4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJhbG
+ciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJKV0stU0VUK0pTT04iLCJl
+bmMiOiJBMTI4Q0JDLUhTMjU2In0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-protected_b64u title="Protected JWE Header, base64url-encoded"}
 
@@ -1560,20 +1562,20 @@ produces the following:
 * Authentication tag from {{jwe-pbes2-tag}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
-_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
-Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
-bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
-Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
-5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
-09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
-ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
-VGF951uNP8TABCf6
+B39o2LfmeYhS_FiszP560P1VkHWNS6vukmQrUL2DdoQgzwz8debUcWgo1A9JXE
+BUk4rr4ALHcn8wA1yRuzWOUlpk0LNBmBfrvdRpgItUQiknWa5U1KY_PqWIZKpJ
+J-Gq0QTaBTsfnffUbk3BD7eillUdg3poI7EFHLsE7GN3nyuJKaCCdIkFngEekt
+jM2WMUPPMuXracPftXsxJDPnUAwtCAEsShnHozPEUpMIIgWnnlM8dlofYaDewX
+WySoYn321leWpLGCZVaJIEEgAttFH2iZpbb3MNV1UifDMgMCUS-Xbq4ohDcgu3
+dv9xWg81PNib-GyXoFU93HN9HEblg8iZ6CfKVZ_KKvNS1oCVaoMKqPIf6Jgo-i
+G4S_bblOma9esofjwIp-RU9h3fpx-taoMRvjb2pLEm1FQrYXkx5i3hfN0ESsHR
+BW1WyCWnVK8M7mHJUHQqBL0FWZMKjpgWa00uZOnpZteZO4eyQKYSsBgyMRSuhF
+6tceKFfxIWtclIno
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-F5MFKAu7qA_hE5w5N1iJ5w
+YLeY6UpSeM3dUNqg5lEu0Q
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-tag title="Authentication Tag, base64url-encoded"}
 
@@ -1590,24 +1592,25 @@ The following compose the resulting JWE object:
 The resulting JWE object using the Compact serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
-hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
+eyJwMnMiOiI4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJhbG
+ciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJKV0stU0VUK0pTT04iLCJl
+bmMiOiJBMTI4Q0JDLUhTMjU2In0
 .
-dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5A
+WY1x1MsMrbQogWOeXDasyESSjYi-3iS4p8UjlWMwNJOS0j7_KFQE0w
 .
-obvv9nee1GDQTucO7EiLUw
+HnJqms6_fz9N6mpsML9NHA
 .
-3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVPJ85lA
-_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4OP_Y_MVUOZ
-Sn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5jTGMMAN33dFfrHx3
-bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQkdvRYauZ66rKoyZeygVlu
-Ef_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wiv2gvmk-aLwgmRF6uUYvccsB4K
-5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1EJ8_krTVtVQxF9F6LcUNQ-rua5Iub5Y
-09INYdA9fdUe8bs7iFWp3wWBjLx1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKE
-ipKmfIqIVvtdEHdS4hq_rP0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_
-VGF951uNP8TABCf6
+B39o2LfmeYhS_FiszP560P1VkHWNS6vukmQrUL2DdoQgzwz8debUcWgo1A9JXE
+BUk4rr4ALHcn8wA1yRuzWOUlpk0LNBmBfrvdRpgItUQiknWa5U1KY_PqWIZKpJ
+J-Gq0QTaBTsfnffUbk3BD7eillUdg3poI7EFHLsE7GN3nyuJKaCCdIkFngEekt
+jM2WMUPPMuXracPftXsxJDPnUAwtCAEsShnHozPEUpMIIgWnnlM8dlofYaDewX
+WySoYn321leWpLGCZVaJIEEgAttFH2iZpbb3MNV1UifDMgMCUS-Xbq4ohDcgu3
+dv9xWg81PNib-GyXoFU93HN9HEblg8iZ6CfKVZ_KKvNS1oCVaoMKqPIf6Jgo-i
+G4S_bblOma9esofjwIp-RU9h3fpx-taoMRvjb2pLEm1FQrYXkx5i3hfN0ESsHR
+BW1WyCWnVK8M7mHJUHQqBL0FWZMKjpgWa00uZOnpZteZO4eyQKYSsBgyMRSuhF
+6tceKFfxIWtclIno
 .
-F5MFKAu7qA_hE5w5N1iJ5w
+YLeY6UpSeM3dUNqg5lEu0Q
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-compact title="Compact Serialization"}
 
@@ -1618,28 +1621,28 @@ The resulting JWE object using the JSON serialization:
   "recipients": [
     {
       "encrypted_key":
-        "dtpBE7O4AvWbuLzPf_lF138DemX6KXdsL2GRm1oWeHNZlu5TqTuJ5
-         A"
+        "WY1x1MsMrbQogWOeXDasyESSjYi-3iS4p8UjlWMwNJOS0j7_KFQE0
+         w"
     }
   ],
   "protected":
-    "eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluY
-     XNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJlbmMiOiJBMTI4Q0JDLU
-     hTMjU2In0",
+    "eyJwMnMiOiI4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyL
+     CJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJKV0stU0VUK0
+     pTT04iLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
   "iv":
-    "obvv9nee1GDQTucO7EiLUw",
+    "HnJqms6_fz9N6mpsML9NHA",
   "ciphertext":
-    "3ttprUp9nllP7zbqTTONYOVtHnSkWXzEKMBF6XGGDZdX04iM1wsX3qcVP
-     J85lA_njOM5AiKxKCdPEpGGvrhgXhBmFqXwBA4MVwAML0LRsc-od_1vG4
-     OP_Y_MVUOZSn89gDh11z8SHHYYYS1Vq8j6vBNEZSoLuJTftIozi_Hyn5j
-     TGMMAN33dFfrHx3bSfq7ooueLgrrkPA3ATCkFckRmhMuQxrx_wk71qbQk
-     dvRYauZ66rKoyZeygVluEf_dHNFrMoTWbi5iH8ORdEHiH1VLcnMoF-3Wi
-     v2gvmk-aLwgmRF6uUYvccsB4K5McRpPsxHyv5BhV85PfyiuNPcgfEmQ1E
-     J8_krTVtVQxF9F6LcUNQ-rua5Iub5Y09INYdA9fdUe8bs7iFWp3wWBjLx
-     1Kn4BuGeu3LltcRbqI3ob_4F1xhKFpghcKEipKmfIqIVvtdEHdS4hq_rP
-     0csShvJop1Qk0E-_4bOmWtCC7slgM2q0USs7FAc_VGF951uNP8TABCf6",
+    "B39o2LfmeYhS_FiszP560P1VkHWNS6vukmQrUL2DdoQgzwz8debUcWgo1
+     A9JXEBUk4rr4ALHcn8wA1yRuzWOUlpk0LNBmBfrvdRpgItUQiknWa5U1K
+     Y_PqWIZKpJJ-Gq0QTaBTsfnffUbk3BD7eillUdg3poI7EFHLsE7GN3nyu
+     JKaCCdIkFngEektjM2WMUPPMuXracPftXsxJDPnUAwtCAEsShnHozPEUp
+     MIIgWnnlM8dlofYaDewXWySoYn321leWpLGCZVaJIEEgAttFH2iZpbb3M
+     NV1UifDMgMCUS-Xbq4ohDcgu3dv9xWg81PNib-GyXoFU93HN9HEblg8iZ
+     6CfKVZ_KKvNS1oCVaoMKqPIf6Jgo-iG4S_bblOma9esofjwIp-RU9h3fp
+     x-taoMRvjb2pLEm1FQrYXkx5i3hfN0ESsHRBW1WyCWnVK8M7mHJUHQqBL
+     0FWZMKjpgWa00uZOnpZteZO4eyQKYSsBgyMRSuhF6tceKFfxIWtclIno",
   "tag":
-    "F5MFKAu7qA_hE5w5N1iJ5w"
+    "YLeY6UpSeM3dUNqg5lEu0Q"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-json title="JSON Serialization"}
