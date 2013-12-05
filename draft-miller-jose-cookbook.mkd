@@ -784,25 +784,37 @@ The following are supplied before beginning the signing operation:
  
 The following are generated before completing the first signing operation:
 
+* Protected JWS Header; this example uses the header from {{jws-multi-protected_1}}, encoded using {{RFC4648}} base64url to produce {{jws-multi-protected_b64u_1}}.
 * Unprotected JWS Header; this example uses the header from {{jws-multi-unprotected_1}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "alg": "RS256",
+  "alg": "RS256"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-multi-protected_1 title="Signature #1 Protected JWS Header JSON" }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJSUzI1NiJ9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-multi-protected_b64u_1 title="Signature #1 Protected JWS Header, base64url-encoded" }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
   "kid": "bilbo.baggins@hobbiton.example"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-unprotected_1 title="Signature #1 JWS Header JSON" }
 
-Performing the first signature operation over the combined empty string (as there is no proteced JWS header) and the Payload content ({{jws-payload_b64u}}) produces the following signature:
+Performing the first signature operation over the combined protected JWS header ({{jws-multi-protected_b64u_1}}) and the Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1vzQX3
-Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIiPTkw1iWGYUsKOHFEWy
-Q3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4wF3f2s0RWpm8jUC5u-1KPwqFmGR3
-JsDxIIITaD7DbLxPN3Cm7e4JLireOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkf
-n118HQ4hwGsTg_24ZsiV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N
-5m4zLwljEWssVakmr__aq7MUBniv5vtA
+B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61BgWsaE_tXI
+LGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbhTls9utFReQgg7OpXNB
+r9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJTcEQOoZPf16YigOl39Vifani_qY
+Qr0FLzSd0WTdO7M3b4WRCRYHGZQ9ssZXvFQ2A2C73zDARzKj3YBuUvgzKkTB_H
+_aoCUH8tOhjE6XU5A6Uil508sldyYo-sYIe9waWWchM4snN_uWCAMecr4WmRIO
+sb8rz7cRXK9MeH_6w8YntuDtgkCScdxQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_1 title="Signature #1, base64url-encoded"}
 
@@ -810,17 +822,17 @@ The following is the assembled first signature serialized as JSON:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
+  "protected": "eyJhbGciOiJSUzI1NiJ9",
   "header": {
-    "alg": "RS256",
     "kid": "bilbo.baggins@hobbiton.example"
   },
   "signature":
-    "ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1
-     vzQX3Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIiPTkw1iWG
-     YUsKOHFEWyQ3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4wF3f2s0RWpm8j
-     UC5u-1KPwqFmGR3JsDxIIITaD7DbLxPN3Cm7e4JLireOrZtaeQxypKT1_
-     D0OMMo0L3EejyPB6FKkfn118HQ4hwGsTg_24ZsiV94ep64nROWR-R4Gkx
-     pr61uQFvy6IeS4kV6n--USD8N5m4zLwljEWssVakmr__aq7MUBniv5vtA"
+    "B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61BgWsa
+     E_tXILGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbhTls9utFR
+     eQgg7OpXNBr9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJTcEQOoZPf16Y
+     igOl39Vifani_qYQr0FLzSd0WTdO7M3b4WRCRYHGZQ9ssZXvFQ2A2C73z
+     DARzKj3YBuUvgzKkTB_H_aoCUH8tOhjE6XU5A6Uil508sldyYo-sYIe9w
+     aWWchM4snN_uWCAMecr4WmRIOsb8rz7cRXK9MeH_6w8YntuDtgkCScdxQ"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_1 title="Signature #1 JSON"}
@@ -869,7 +881,7 @@ The following is the assembled second signature serialized as JSON:
 
 The following are generated before completing the third signing operation:
 
-* Unprotected JWS Header; this example uses the header from {{jws-multi-unprotected_3}}.
+* Protected JWS Header; this example uses the header from {{jws-multi-protected_3}}, encoded using {{RFC4648}} base64url to produce {{jws-multi-protected_b64u_3}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -877,9 +889,15 @@ The following are generated before completing the third signing operation:
   "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-multi-unprotected_3 title="Signatures #3 JWS Header JSON" }
+{: #jws-multi-protected_3 title="Signature #3 Protected JWS Header JSON" }
 
-Performing the third signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
+VlZjMxNGJjNzAzNyJ9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-multi-protected_b64u_3 title="Signature #3 Protected JWS Header, base64url-encoded" }
+
+Performing the third signature operation over the combined protected JWS header ({{jws-multi-protected_b64u_3}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
@@ -890,12 +908,11 @@ The following is the assembled third signature serialized as JSON:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "header": {
-    "alg": "HS256",
-    "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-  },
+  "protected":
+   "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZm
+    Q2LWVlZjMxNGJjNzAzNyJ9",
   "signature":
-   "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+   "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_3 title="Signature #3 JSON"}
@@ -920,18 +937,18 @@ The resulting JWS object using the JSON serialization:
      uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
   "signatures": [
     {
+      "protected": "eyJhbGciOiJSUzI1NiJ9",
       "header": {
-        "alg": "RS256",
         "kid": "bilbo.baggins@hobbiton.example"
       },
       "signature":
-        "ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVka
-         nmE1vzQX3Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIi
-         PTkw1iWGYUsKOHFEWyQ3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4w
-         F3f2s0RWpm8jUC5u-1KPwqFmGR3JsDxIIITaD7DbLxPN3Cm7e4JLi
-         reOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkfn118HQ4hwGsTg_24Z
-         siV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N5m4zLwlj
-         EWssVakmr__aq7MUBniv5vtA"
+        "B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61B
+         gWsaE_tXILGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbh
+         Tls9utFReQgg7OpXNBr9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJ
+         TcEQOoZPf16YigOl39Vifani_qYQr0FLzSd0WTdO7M3b4WRCRYHGZ
+         Q9ssZXvFQ2A2C73zDARzKj3YBuUvgzKkTB_H_aoCUH8tOhjE6XU5A
+         6Uil508sldyYo-sYIe9waWWchM4snN_uWCAMecr4WmRIOsb8rz7cR
+         XK9MeH_6w8YntuDtgkCScdxQ"
     },
     {
       "header": {
@@ -945,12 +962,11 @@ The resulting JWS object using the JSON serialization:
          DoA1hEyUoqeY50A"
     },
     {
-      "header": {
-        "alg": "HS256",
-        "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-      },
+      "protected":
+       "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi
+        1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
       "signature":
-        "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+       "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
     }
   ]
 }
@@ -1038,7 +1054,7 @@ The following are supplied before beginning the encryption process:
 The following are generated before encrypting:
 
 * AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jwe-rsa15-cek}}
-* Initialization vector/none; this example uses the initialization vector from {{jwe-rsa15-iv}}
+* Initialization vector/nonce; this example uses the initialization vector from {{jwe-rsa15-iv}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 vQ6_Pof-pnIBBB_qhAxzuusbc25hFCB1pJuBIN7yMNU
@@ -3130,7 +3146,7 @@ OYs79m0f3LEuMZzmWBCywRn4u8B09BVidJb9j0ojDsY
 {: #jwe-multi-cek title="Content Encryption Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-qP1KgJY-vTLW-nMrMSfMYw
+nY-xFgdef1LrsU7u
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-iv title="Initialization Vector, base64url-encoded"}
 
@@ -3313,11 +3329,27 @@ The following is the assembled third recipient JSON:
 
 ### Encrypting the Content ### {#jwe-multi-contentenc}
 
+The following are generated before encrypting the content:
+
+* Protected JWE Header; this example uses the header from {{jwe-multi-protected}}, encoded to {{RFC4648}} base64url as {{jwe-multi-protected_b64u}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "enc": "A128GCM"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-multi-protected title="Protected JWE Header JSON" }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJlbmMiOiJBMTI4R0NNIn0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwe-multi-protected_b64u title="Protected JWE Header, base64url-encoded" }
+
 Performing the content encryption operation over the Plaintext ({{jwe-plaintext}}) with the following:
 
 * CEK ({{jwe-multi-cek}}),
 * Initialization vector/nonce ({{jwe-multi-iv}}), and
-* Empty string for authenticated data
+* Protected JWE header ({{jwe-multi-protected_b64u}}) as the authenticated data
 
 produces the following:
 
@@ -3325,17 +3357,17 @@ produces the following:
 * Authentication tag from {{jwe-multi-tag}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-VJqUdp2MfoO_U2SSK-KWgoUIGe9BJcgDvr8XgndANCOAcXMCsQvg7c1BUtdX9C
-asB_QGgscjcU-FsUHOt_RrAOAUEWCqInU1TpLX40Oub05I1QMeRnbQP4CPS-2W
-pZVhx5Z2RYCXVLftSKjPbjjdnxdj6qWhp6Wtzkd-qpf3zLwMFwhXYTkO0zZi-S
-brQDrHXPizk3eyi-8fVmN6aG7tUkFWodU14c9DshpUqV5yuQn-nl-O7oU_Jsum
-9NSyGFuL35PEkjKSf0tQm8ukNfgLi6FJFECjUrmP7hw4LADjr3ypqU6u5yzk6T
-lbNT6u9KmVsgln0wVIT4wI5IDS2bjyWB-ndz6WyXxXFJkVc8Xqr98
+aG6vvrUIPIE5AunujYfPvgO1ypah6leCfYeW721swK9Nr8ERrKJn-HFkEkcx2r
+HnLgp33hKX6jPBWlSwilwGl2e2xg3SxQiA9OYncXBkpUcUK4KoIg7qCvtTsVFp
+sVRJYTBDqpGuecYdYOeZPWUuB1vX4jrCFIpHh3BIraAE6iTxdmxhHP-OXGZQpU
+N4Y2qcromUQP2jSreVGp2Gn9b4bWELfLny4WqRVmB_bySnyUxdglzGAQEse7s_
+o1s_6i1fOZnB5WzcoNo2aTZIKWLjJ347XL95KcF9aYwMAZSi7N4n41Zs2Yaa8-
+u07LpV9fQ7ubDQj1fQ4clpxPv_IDbHJ3tgdlH2lWSHwZADwgpIOA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-viYGRDbo5-F0Mj2Cy4FiKQ
+ESZx8edqbU4osp8P8H0a5Q
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-tag title="Authentication Tag, base64url-encoded"}
 
@@ -3345,7 +3377,7 @@ The following is generated after encrypting the plaintext:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "enc": "A128CBC-HS256"
+  "cty": "text/plain"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-unprotected title="Unprotected JWE Header JSON"}
@@ -3410,21 +3442,22 @@ The resulting JWE object using the JSON serialization:
       }
     }
   ],
+  "protected": "eyJlbmMiOiJBMTI4R0NNIn0",
   "unprotected": {
-    "enc": "A128GCM"
+    "cty": "text/plain"
   },
   "iv":
-    "qP1KgJY-vTLW-nMrMSfMYw",
+    "nY-xFgdef1LrsU7u",
   "ciphertext":
-    "VJqUdp2MfoO_U2SSK-KWgoUIGe9BJcgDvr8XgndANCOAcXMCsQvg7c1BU
-     tdX9CasB_QGgscjcU-FsUHOt_RrAOAUEWCqInU1TpLX40Oub05I1QMeRn
-     bQP4CPS-2WpZVhx5Z2RYCXVLftSKjPbjjdnxdj6qWhp6Wtzkd-qpf3zLw
-     MFwhXYTkO0zZi-SbrQDrHXPizk3eyi-8fVmN6aG7tUkFWodU14c9DshpU
-     qV5yuQn-nl-O7oU_Jsum9NSyGFuL35PEkjKSf0tQm8ukNfgLi6FJFECjU
-     rmP7hw4LADjr3ypqU6u5yzk6TlbNT6u9KmVsgln0wVIT4wI5IDS2bjyWB
-     -ndz6WyXxXFJkVc8Xqr98",
+    "aG6vvrUIPIE5AunujYfPvgO1ypah6leCfYeW721swK9Nr8ERrKJn-HFkE
+     kcx2rHnLgp33hKX6jPBWlSwilwGl2e2xg3SxQiA9OYncXBkpUcUK4KoIg
+     7qCvtTsVFpsVRJYTBDqpGuecYdYOeZPWUuB1vX4jrCFIpHh3BIraAE6iT
+     xdmxhHP-OXGZQpUN4Y2qcromUQP2jSreVGp2Gn9b4bWELfLny4WqRVmB_
+     bySnyUxdglzGAQEse7s_o1s_6i1fOZnB5WzcoNo2aTZIKWLjJ347XL95K
+     cF9aYwMAZSi7N4n41Zs2Yaa8-u07LpV9fQ7ubDQj1fQ4clpxPv_IDbHJ3
+     tgdlH2lWSHwZADwgpIOA",
   "tag":
-    "viYGRDbo5-F0Mj2Cy4FiKQ"
+    "ESZx8edqbU4osp8P8H0a5Q"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-json title="JSON Serialization"}

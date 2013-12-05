@@ -4,8 +4,8 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Informational                         December 03, 2013
-Expires: June 6, 2014
+Intended status: Informational                         December 04, 2013
+Expires: June 7, 2014
 
 
    Examples of Protecting Content using JavaScript Object Signing and
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 6, 2014.
+   This Internet-Draft will expire on June 7, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                    Expires June 6, 2014                  [Page 1]
+Miller                    Expires June 7, 2014                  [Page 1]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -95,42 +95,42 @@ Table of Contents
      3.8.  Multiple Signatures . . . . . . . . . . . . . . . . . . .  21
        3.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  21
        3.8.2.  First Signing Operation . . . . . . . . . . . . . . .  21
-       3.8.3.  Second Signing Operation  . . . . . . . . . . . . . .  22
-       3.8.4.  Third Signing Operation . . . . . . . . . . . . . . .  23
-       3.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  24
-   4.  JSON Web Encryption Examples  . . . . . . . . . . . . . . . .  25
+       3.8.3.  Second Signing Operation  . . . . . . . . . . . . . .  23
+       3.8.4.  Third Signing Operation . . . . . . . . . . . . . . .  24
+       3.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  25
+   4.  JSON Web Encryption Examples  . . . . . . . . . . . . . . . .  26
      4.1.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2 . . . . .  26
        4.1.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  26
        4.1.2.  Generated Factors . . . . . . . . . . . . . . . . . .  27
        4.1.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  28
        4.1.4.  Encrypting the Content  . . . . . . . . . . . . . . .  28
        4.1.5.  Output Results  . . . . . . . . . . . . . . . . . . .  29
-     4.2.  Key Encryption using RSA-OAEP with A256GCM  . . . . . . .  30
+     4.2.  Key Encryption using RSA-OAEP with A256GCM  . . . . . . .  31
 
 
 
-Miller                    Expires June 6, 2014                  [Page 2]
+Miller                    Expires June 7, 2014                  [Page 2]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-       4.2.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  30
-       4.2.2.  Generated Factors . . . . . . . . . . . . . . . . . .  32
+       4.2.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  31
+       4.2.2.  Generated Factors . . . . . . . . . . . . . . . . . .  33
        4.2.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  33
        4.2.4.  Encrypting the Content  . . . . . . . . . . . . . . .  33
        4.2.5.  Output Results  . . . . . . . . . . . . . . . . . . .  34
      4.3.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  36
        4.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  36
        4.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  37
-       4.3.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  37
+       4.3.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  38
        4.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  38
        4.3.5.  Output Results  . . . . . . . . . . . . . . . . . . .  39
      4.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-
            KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  41
        4.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  41
-       4.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  41
+       4.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  42
        4.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  42
-       4.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  42
+       4.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  43
        4.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  44
      4.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  45
        4.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  45
@@ -150,10 +150,10 @@ Internet-Draft                JOSE Cookbook                December 2013
        4.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  54
        4.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  55
      4.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  56
-       4.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  56
+       4.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  57
        4.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  57
        4.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  57
-       4.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  57
+       4.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  58
        4.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  59
      4.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  60
        4.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  60
@@ -165,12 +165,12 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 3]
+Miller                    Expires June 7, 2014                  [Page 3]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-       4.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  63
+       4.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  64
        4.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  64
        4.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  65
        4.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  65
@@ -195,11 +195,11 @@ Internet-Draft                JOSE Cookbook                December 2013
        4.13.5.  Encrypting the Key to the Third Recipient  . . . . .  76
        4.13.6.  Encrypting the Content . . . . . . . . . . . . . . .  78
        4.13.7.  Output Results . . . . . . . . . . . . . . . . . . .  79
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  80
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  80
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  80
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  81
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  81
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  81
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  81
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  81
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  82
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  82
 
 1.  Introduction
 
@@ -221,7 +221,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 4]
+Miller                    Expires June 7, 2014                  [Page 4]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -277,7 +277,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 5]
+Miller                    Expires June 7, 2014                  [Page 5]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -333,7 +333,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 6]
+Miller                    Expires June 7, 2014                  [Page 6]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -389,7 +389,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 7]
+Miller                    Expires June 7, 2014                  [Page 7]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -445,7 +445,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 8]
+Miller                    Expires June 7, 2014                  [Page 8]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -501,7 +501,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                  [Page 9]
+Miller                    Expires June 7, 2014                  [Page 9]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -557,7 +557,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 10]
+Miller                    Expires June 7, 2014                 [Page 10]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -613,7 +613,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 11]
+Miller                    Expires June 7, 2014                 [Page 11]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -669,7 +669,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 12]
+Miller                    Expires June 7, 2014                 [Page 12]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -725,7 +725,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 13]
+Miller                    Expires June 7, 2014                 [Page 13]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -781,7 +781,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 14]
+Miller                    Expires June 7, 2014                 [Page 14]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -837,7 +837,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 15]
+Miller                    Expires June 7, 2014                 [Page 15]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -893,7 +893,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 16]
+Miller                    Expires June 7, 2014                 [Page 16]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -949,7 +949,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 17]
+Miller                    Expires June 7, 2014                 [Page 17]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -1005,7 +1005,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 18]
+Miller                    Expires June 7, 2014                 [Page 18]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -1061,7 +1061,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 19]
+Miller                    Expires June 7, 2014                 [Page 19]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -1117,7 +1117,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
 
 
-Miller                    Expires June 6, 2014                 [Page 20]
+Miller                    Expires June 7, 2014                 [Page 20]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
@@ -1166,55 +1166,89 @@ Internet-Draft                JOSE Cookbook                December 2013
    The following are generated before completing the first signing
    operation:
 
+   o  Protected JWS Header; this example uses the header from Figure 38,
+      encoded using [RFC4648] base64url to produce Figure 39.
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 21]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    o  Unprotected JWS Header; this example uses the header from Figure
-      38.
+      40.
+
+   {
+     "alg": "RS256"
+   }
+
+             Figure 38: Signature #1 Protected JWS Header JSON
+
+   eyJhbGciOiJSUzI1NiJ9
+
+      Figure 39: Signature #1 Protected JWS Header, base64url-encoded
+
+   {
+     "kid": "bilbo.baggins@hobbiton.example"
+   }
+
+                  Figure 40: Signature #1 JWS Header JSON
+
+   Performing the first signature operation over the combined protected
+   JWS header (Figure 39) and the Payload content (Figure 2) produces
+   the following signature:
+
+   B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61BgWsaE_tXI
+   LGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbhTls9utFReQgg7OpXNB
+   r9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJTcEQOoZPf16YigOl39Vifani_qY
+   Qr0FLzSd0WTdO7M3b4WRCRYHGZQ9ssZXvFQ2A2C73zDARzKj3YBuUvgzKkTB_H
+   _aoCUH8tOhjE6XU5A6Uil508sldyYo-sYIe9waWWchM4snN_uWCAMecr4WmRIO
+   sb8rz7cRXK9MeH_6w8YntuDtgkCScdxQ
+
+                Figure 41: Signature #1, base64url-encoded
+
+   The following is the assembled first signature serialized as JSON:
 
 
 
 
 
-Miller                    Expires June 6, 2014                 [Page 21]
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 22]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
    {
-     "alg": "RS256",
-     "kid": "bilbo.baggins@hobbiton.example"
-   }
-
-                  Figure 38: Signature #1 JWS Header JSON
-
-   Performing the first signature operation over the combined empty
-   string (as there is no proteced JWS header) and the Payload content
-   (Figure 2) produces the following signature:
-
-   ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1vzQX3
-   Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIiPTkw1iWGYUsKOHFEWy
-   Q3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4wF3f2s0RWpm8jUC5u-1KPwqFmGR3
-   JsDxIIITaD7DbLxPN3Cm7e4JLireOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkf
-   n118HQ4hwGsTg_24ZsiV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N
-   5m4zLwljEWssVakmr__aq7MUBniv5vtA
-
-                Figure 39: Signature #1, base64url-encoded
-
-   The following is the assembled first signature serialized as JSON:
-
-   {
+     "protected": "eyJhbGciOiJSUzI1NiJ9",
      "header": {
-       "alg": "RS256",
        "kid": "bilbo.baggins@hobbiton.example"
      },
      "signature":
-       "ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVkanmE1
-        vzQX3Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIiPTkw1iWG
-        YUsKOHFEWyQ3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4wF3f2s0RWpm8j
-        UC5u-1KPwqFmGR3JsDxIIITaD7DbLxPN3Cm7e4JLireOrZtaeQxypKT1_
-        D0OMMo0L3EejyPB6FKkfn118HQ4hwGsTg_24ZsiV94ep64nROWR-R4Gkx
-        pr61uQFvy6IeS4kV6n--USD8N5m4zLwljEWssVakmr__aq7MUBniv5vtA"
+       "B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61BgWsa
+        E_tXILGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbhTls9utFR
+        eQgg7OpXNBr9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJTcEQOoZPf16Y
+        igOl39Vifani_qYQr0FLzSd0WTdO7M3b4WRCRYHGZQ9ssZXvFQ2A2C73z
+        DARzKj3YBuUvgzKkTB_H_aoCUH8tOhjE6XU5A6Uil508sldyYo-sYIe9w
+        aWWchM4snN_uWCAMecr4WmRIOsb8rz7cRXK9MeH_6w8YntuDtgkCScdxQ"
    }
 
-                       Figure 40: Signature #1 JSON
+                       Figure 42: Signature #1 JSON
 
 3.8.3.  Second Signing Operation
 
@@ -1222,22 +1256,14 @@ Internet-Draft                JOSE Cookbook                December 2013
    operation:
 
    o  Unprotected JWS Header; this example uses the header from Figure
-      41.
+      43.
 
    {
      "alg": "ES512",
-
-
-
-Miller                    Expires June 6, 2014                 [Page 22]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
      "kid": "bilbo.baggins@hobbiton.example"
    }
 
-                  Figure 41: Signature #2 JWS Header JSON
+                  Figure 43: Signature #2 JWS Header JSON
 
    Performing the second signature operation over the combined empty
    string (as there is no protected JWS header) and Payload content
@@ -1247,7 +1273,7 @@ Internet-Draft                JOSE Cookbook                December 2013
    UkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh2UCW-jF6WA
    H1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLfDoA1hEyUoqeY50A
 
-                Figure 42: Signature #2, base64url-encoded
+                Figure 44: Signature #2, base64url-encoded
 
    The following is the assembled second signature serialized as JSON:
 
@@ -1256,6 +1282,14 @@ Internet-Draft                JOSE Cookbook                December 2013
        "alg": "ES512",
        "kid": "bilbo.baggins@hobbiton.example"
      },
+
+
+
+Miller                    Expires June 7, 2014                 [Page 23]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
      "signature":
        "GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1YRp9m
         Bn7wqUkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh
@@ -1263,53 +1297,54 @@ Internet-Draft                JOSE Cookbook                December 2013
         50A"
    }
 
-                       Figure 43: Signature #2 JSON
+                       Figure 45: Signature #2 JSON
 
 3.8.4.  Third Signing Operation
 
    The following are generated before completing the third signing
    operation:
 
-   o  Unprotected JWS Header; this example uses the header from Figure
-      44.
+   o  Protected JWS Header; this example uses the header from Figure 46,
+      encoded using [RFC4648] base64url to produce Figure 47.
 
    {
      "alg": "HS256",
      "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
    }
 
-                 Figure 44: Signatures #3 JWS Header JSON
+             Figure 46: Signature #3 Protected JWS Header JSON
 
+   eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
+   VlZjMxNGJjNzAzNyJ9
 
+      Figure 47: Signature #3 Protected JWS Header, base64url-encoded
 
-
-
-
-Miller                    Expires June 6, 2014                 [Page 23]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
-   Performing the third signature operation over the combined empty
-   string (as there is no protected JWS header) and Payload content
-   (Figure 2) produces the following signature:
+   Performing the third signature operation over the combined protected
+   JWS header (Figure 47) and Payload content (Figure 2) produces the
+   following signature:
 
    RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
 
-                Figure 45: Signature #3, base64url-encoded
+                Figure 48: Signature #3, base64url-encoded
 
    The following is the assembled third signature serialized as JSON:
 
    {
-     "header": {
-       "alg": "HS256",
-       "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-     },
+     "protected":
+      "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZm
+       Q2LWVlZjMxNGJjNzAzNyJ9",
      "signature":
-      "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+      "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
    }
 
-                       Figure 46: Signature #3 JSON
+                       Figure 49: Signature #3 JSON
+
+
+
+Miller                    Expires June 7, 2014                 [Page 24]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
 3.8.5.  Output Results
 
@@ -1317,11 +1352,11 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    o  Payload content (Figure 2)
 
-   o  Signature #1 JSON (Figure 40)
+   o  Signature #1 JSON (Figure 42)
 
-   o  Signature #2 JSON (Figure 43)
+   o  Signature #2 JSON (Figure 45)
 
-   o  Signature #3 JSON (Figure 46)
+   o  Signature #3 JSON (Figure 49)
 
    The resulting JWS object using the JSON serialization:
 
@@ -1333,26 +1368,18 @@ Internet-Draft                JOSE Cookbook                December 2013
         uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
      "signatures": [
        {
+         "protected": "eyJhbGciOiJSUzI1NiJ9",
          "header": {
-           "alg": "RS256",
            "kid": "bilbo.baggins@hobbiton.example"
          },
          "signature":
-
-
-
-Miller                    Expires June 6, 2014                 [Page 24]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
-           "ZWNbrJhJ2h8tU2VRuSRiyfNQzcTyOzEHAXJtUrW5rfhbDQ0BvTVka
-            nmE1vzQX3Nv6CUMbNSsgcPVtk445t8fD-A8Eo_2Czi5STRFVNDVIi
-            PTkw1iWGYUsKOHFEWyQ3lcKOI77ppFgmkBypdqtYQ1E4OB6gOuK4w
-            F3f2s0RWpm8jUC5u-1KPwqFmGR3JsDxIIITaD7DbLxPN3Cm7e4JLi
-            reOrZtaeQxypKT1_D0OMMo0L3EejyPB6FKkfn118HQ4hwGsTg_24Z
-            siV94ep64nROWR-R4Gkxpr61uQFvy6IeS4kV6n--USD8N5m4zLwlj
-            EWssVakmr__aq7MUBniv5vtA"
+           "B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61B
+            gWsaE_tXILGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbh
+            Tls9utFReQgg7OpXNBr9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJ
+            TcEQOoZPf16YigOl39Vifani_qYQr0FLzSd0WTdO7M3b4WRCRYHGZ
+            Q9ssZXvFQ2A2C73zDARzKj3YBuUvgzKkTB_H_aoCUH8tOhjE6XU5A
+            6Uil508sldyYo-sYIe9waWWchM4snN_uWCAMecr4WmRIOsb8rz7cR
+            XK9MeH_6w8YntuDtgkCScdxQ"
        },
        {
          "header": {
@@ -1366,17 +1393,24 @@ Internet-Draft                JOSE Cookbook                December 2013
             DoA1hEyUoqeY50A"
        },
        {
-         "header": {
-           "alg": "HS256",
-           "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-         },
+         "protected":
+
+
+
+Miller                    Expires June 7, 2014                 [Page 25]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+          "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi
+           1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
          "signature":
-           "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+          "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
        }
      ]
    }
 
-                       Figure 47: JSON Serialization
+                       Figure 50: JSON Serialization
 
 4.  JSON Web Encryption Examples
 
@@ -1388,27 +1422,13 @@ Internet-Draft                JOSE Cookbook                December 2013
    (U+000A LINE FEED) replacing some " " (U+0020 SPACE) characters to
    improve formatting:
 
-
-
-
-
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 25]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    You can trust us to stick with you through thick and thin--to
    the bitter end. And you can trust us to keep any secret of
    yours--closer than you keep it yourself. But you cannot trust
    us to let you face trouble alone, and go off without a word.
    We are your friends, Frodo.
 
-                       Figure 48: Plaintext content
+                       Figure 51: Plaintext content
 
 4.1.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2
 
@@ -1420,9 +1440,9 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
+   o  Plaintext content; this example uses the content from Figure 51.
 
-   o  RSA public key; this example uses the key from Figure 49.
+   o  RSA public key; this example uses the key from Figure 52.
 
    o  "alg" parameter of "RSA1_5".
 
@@ -1430,6 +1450,14 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    {
      "kty": "RSA",
+
+
+
+Miller                    Expires June 7, 2014                 [Page 26]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
      "kid": "frodo.baggins@hobbiton.example",
      "use": "enc",
      "n":   "maxhbsmBtdQ3CNrKvprUE6n9lYcregDMLYNeTAWcLj8NnPU9XIYe
@@ -1450,14 +1478,6 @@ Internet-Draft                JOSE Cookbook                December 2013
      "p":    "2DwQmZ43FoTnQ8IkUj3BmKRf5Eh2mizZA5xEJ2MinUE3sdTYKSL
              taEoekX9vbBZuWxHdVhM6UnKCJ_2iNk8Z0ayLYHL0_G21aXf9-un
              ynEpUsH7HHTklLpYAzOOx1ZgVljoxAdWNn3hiEFrjZLZGS7lOH-a
-
-
-
-Miller                    Expires June 6, 2014                 [Page 26]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
              3QQlDDQoJOJ2VFmU",
      "q":   "te8LY4-W7IyaqH1ExujjMqkTAlTeRbv0VLQnfLY2xINnrWdwiQ93
              _VF099aP1ESeLja2nw-6iKIe-qT7mtCPozKfVtUYfz5HrJ_XY2kf
@@ -1477,7 +1497,7 @@ Internet-Draft                JOSE Cookbook                December 2013
              DcIyPrBXx2bQ_mM"
    }
 
-                Figure 49: RSA 2048-bit Key, in JWK format
+                Figure 52: RSA 2048-bit Key, in JWK format
 
    (*NOTE*: While the key includes the private parameters, only the
    public parameters "e" and "n" are necessary for the encryption
@@ -1487,37 +1507,31 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are generated before encrypting:
 
-   o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 50
-
-   o  Initialization vector/none; this example uses the initialization
-      vector from Figure 51
-
-   vQ6_Pof-pnIBBB_qhAxzuusbc25hFCB1pJuBIN7yMNU
-
-           Figure 50: Content Encryption Key, base64url-encoded
-
-   mR-7lneQlGq9vxe_udL4LA
-
-            Figure 51: Initialization Vector, base64url-encoded
 
 
-
-
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 27]
+Miller                    Expires June 7, 2014                 [Page 27]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+   o  AES symmetric key as the Content Encryption Key (CEK); this
+      example uses the key from Figure 53
+
+   o  Initialization vector/nonce; this example uses the initialization
+      vector from Figure 54
+
+   vQ6_Pof-pnIBBB_qhAxzuusbc25hFCB1pJuBIN7yMNU
+
+           Figure 53: Content Encryption Key, base64url-encoded
+
+   mR-7lneQlGq9vxe_udL4LA
+
+            Figure 54: Initialization Vector, base64url-encoded
+
 4.1.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 50) with
-   the RSA key (Figure 49) results in the following encrypted key:
+   Performing the key encryption operation over the CEK (Figure 53) with
+   the RSA key (Figure 52) results in the following encrypted key:
 
    IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
    vR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1vQuC_TYslbSDLHx
@@ -1526,14 +1540,14 @@ Internet-Draft                JOSE Cookbook                December 2013
    UqEt8oo0OHlYTicOwwwwhyiNshdrA4zQSeC2M0yxzDcQvXswQHQs1bXA8K-KJa
    B-u6qkDMAwA1tJEch4R58z9WsYKyrhAw
 
-                Figure 52: Encrypted Key, base64url-encoded
+                Figure 55: Encrypted Key, base64url-encoded
 
 4.1.4.  Encrypting the Content
 
    The following are generated before encrypting the plaintext:
 
-   o  Protected JWE Header; this example uses the header from Figure 53,
-      encoded using [RFC4648] base64url to produce Figure 54.
+   o  Protected JWE Header; this example uses the header from Figure 56,
+      encoded using [RFC4648] base64url to produce Figure 57.
 
    {
      "alg": "RSA1_5",
@@ -1541,34 +1555,35 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128CBC-HS256"
    }
 
-                   Figure 53: Protected JWE Header JSON
+                   Figure 56: Protected JWE Header JSON
 
    eyJhbGciOiJSU0ExXzUiLCJraWQiOiJmcm9kby5iYWdnaW5zQGhvYmJpdG9uLm
    V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
 
-            Figure 54: Protected JWE Header, base64url-encoded
-
-   Performing the content encryption operation on the Plaintext (Figure
-   48) using the following:
-
-   o  CEK (Figure 50);
-
-   o  Initialization vector/nonce (Figure 51); and
-
-   o  Protected JWE header (Figure 53) as authenticated data
-
-   produces the following:
-
-   o  Ciphertext from Figure 55.
-
-   o  Authentication tag from Figure 56.
+            Figure 57: Protected JWE Header, base64url-encoded
 
 
 
-Miller                    Expires June 6, 2014                 [Page 28]
+
+Miller                    Expires June 7, 2014                 [Page 28]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
+
+   Performing the content encryption operation on the Plaintext (Figure
+   51) using the following:
+
+   o  CEK (Figure 53);
+
+   o  Initialization vector/nonce (Figure 54); and
+
+   o  Protected JWE header (Figure 56) as authenticated data
+
+   produces the following:
+
+   o  Ciphertext from Figure 58.
+
+   o  Authentication tag from Figure 59.
 
    LecEGK89HoOzWbbh97km04mExBgZp0kO8LMFTJgfTqNjHW5VSPh0QMww7zqSkl
    a_8ZPoWIzm1Y6xGtKLA9enpRFTrHZxZxTH9eG9P9PjsIC20NsGVweYeYc_l7m2
@@ -1577,25 +1592,25 @@ Internet-Draft                JOSE Cookbook                December 2013
    VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
    op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
 
-                 Figure 55: Ciphertext, base64url-encoded
+                 Figure 58: Ciphertext, base64url-encoded
 
    3AIdtJkgAkWuhBdFo8iL8A
 
-             Figure 56: Authentication Tag, base64url-encoded
+             Figure 59: Authentication Tag, base64url-encoded
 
 4.1.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 54).
+   o  Protected JWE header (Figure 57).
 
-   o  Encrypted Key (Figure 52).
+   o  Encrypted Key (Figure 55).
 
-   o  Initialization vector/nonce (Figure 51).
+   o  Initialization vector/nonce (Figure 54).
 
-   o  Ciphertext (Figure 55).
+   o  Ciphertext (Figure 58).
 
-   o  Authentication Tag (Figure 56).
+   o  Authentication Tag (Figure 59).
 
    The resulting JWE object using the Compact serialization:
 
@@ -1603,6 +1618,14 @@ Internet-Draft                JOSE Cookbook                December 2013
    V4YW1wbGUiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0
    .
    IDNYysyXa21oifTY_cy7sB7vAa9oHkE4RZZ78r88TdrGlKWbzltMJw4sJ7xpNo
+
+
+
+Miller                    Expires June 7, 2014                 [Page 29]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    vR8KZDHLeJUwiaQKIjWBFs2Dytdk4gHhVDc2rx9F2vHN2S1vQuC_TYslbSDLHx
    nnZkH2_ymlJz2saY5RJAjh-9OHCMcTJI-j7hJpMEJmvWt_XrDp9tBby0xyjdwd
    teAtwyJxD5nyzBUGTsfaCzfqZTF_3BJu2AKyuE10KEMbBo8EJVf1PP1JSS73qy
@@ -1618,17 +1641,9 @@ Internet-Draft                JOSE Cookbook                December 2013
    VB4pNOQMY7e9BTyvm-DwVSS3Ul2bX3jz9kB--aTLxGtl9sR7z1ZgAyfRqoSs0S
    op9J35heE89JveLIAjnuXH2ShsF0lW6T4HEYXFh9QsAF4TRdnpRs4
    .
-
-
-
-Miller                    Expires June 6, 2014                 [Page 29]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    3AIdtJkgAkWuhBdFo8iL8A
 
-                     Figure 57: Compact Serialization
+                     Figure 60: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -1660,7 +1675,14 @@ Internet-Draft                JOSE Cookbook                December 2013
        "3AIdtJkgAkWuhBdFo8iL8A"
    }
 
-                       Figure 58: JSON Serialization
+
+
+Miller                    Expires June 7, 2014                 [Page 30]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+                       Figure 61: JSON Serialization
 
 4.2.  Key Encryption using RSA-OAEP with A256GCM
 
@@ -1672,17 +1694,9 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the plaintext from Figure 48.
+   o  Plaintext content; this example uses the plaintext from Figure 51.
 
-
-
-
-Miller                    Expires June 6, 2014                 [Page 30]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
-   o  RSA public key; this example uses the key from Figure 59.
+   o  RSA public key; this example uses the key from Figure 62.
 
    o  "alg" parameter of "RSA-OAEP"
 
@@ -1716,6 +1730,14 @@ Internet-Draft                JOSE Cookbook                December 2013
              cNcHkRvp9E7ook0876DhkO8v4UOZLwA1OlUX98mkoqwc58A_Y2lB
              YbVx1_s5lpPsEqbbH-nqIjh1fL0gdNfihLxnclWtW7pCztLnImZA
              yeCWAG7ZIfv-Rn9fLIv9jZ6r7r-MSH9sqbuziHN2grGjD_jfRluM
+
+
+
+Miller                    Expires June 7, 2014                 [Page 31]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
              Ha0l84fFKl6bcqN1JWxPVhzNZo01yDF-1LiQnqUYSepPf6X3a2SO
              dkqBRiquE6EvLuSYIDpJq3jDIsgoL8Mo1LoomgiJxUwL_GWEOGu2
              8gplyzm-9Q0U0nyhEf1uhSR8aJAQWAiFImWH5W_IQT9I7-yrindr
@@ -1730,14 +1752,6 @@ Internet-Draft                JOSE Cookbook                December 2013
              SCFCKnQmn4GQLmRj9sfbZRqL94bbtE4_e0Zrpo8RNo8vxRLqQNwI
              y85fc6BRgBJomt8QdQvIgPgWCv5HoQ",
      "q":   "zqOHk1P6WN_rHuM7ZF1cXH0x6RuOHq67WuHiSknqQeefGBA9PWs6
-
-
-
-Miller                    Expires June 6, 2014                 [Page 31]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
              ZyKQCO-O6mKXtcgE8_Q_hA2kMRcKOcvHil1hqMCNSXlflM7WPRPZ
              u2qCDcqssd_uMbP-DqYthH_EzwL9KnYoH7JQFxxmcv5An8oXUtTw
              k4knKjkIYGRuUwfQTus0w1NfjFAyxOOiAQ37ussIcE6C6ZSsM3n4
@@ -1767,41 +1781,41 @@ Internet-Draft                JOSE Cookbook                December 2013
              oI4KX6SNMNVcyVS9IWjlq8EzqZEKIA"
    }
 
-                        Figure 59: RSA 4096-bit Key
+                        Figure 62: RSA 4096-bit Key
 
    (*NOTE*: While the key includes the private parameters, only the
    public parameters "e" and "n" are necessary for the encryption
    operation.)
+
+
+
+Miller                    Expires June 7, 2014                 [Page 32]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
 4.2.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption CEK (CEK); this
-      example uses the key from Figure 60.
+      example uses the key from Figure 63.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 61.
+      vector/nonce from Figure 64.
 
    09EnDWfdf6KCP09QbQQdhhoyFE5GoGAjdShgLGLol8k
 
-           Figure 60: Content Encryption Key, base64url-encoded
-
-
-
-Miller                    Expires June 6, 2014                 [Page 32]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+           Figure 63: Content Encryption Key, base64url-encoded
 
    MKccO3TLKaMB67zj
 
-            Figure 61: Initialization Vector, base64url-encoded
+            Figure 64: Initialization Vector, base64url-encoded
 
 4.2.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 60))
-   with the RSA key (Figure 59) produces the following encrypted key:
+   Performing the key encryption operation over the CEK (Figure 63))
+   with the RSA key (Figure 62) produces the following encrypted key:
 
    WaQnEArx6u7NRlv6o08qNgsMpo-UFVXs_ALqEbAhQJVOXMyNqacRhYoujIOFlt
    i0u_ofz6Yh93Pu83iTZYIGk0fFD4C62-kSiX5Enl-UyORiMca925XxPItbOE6v
@@ -1816,49 +1830,50 @@ Internet-Draft                JOSE Cookbook                December 2013
    ikwSP2dG3grGlrl6EtTuhA-j_ArrqLzvSoJU51Nu_1k3usrvgIWLZ89i8Zt05S
    A
 
-                Figure 62: Encrypted Key, base64url-encoded
+                Figure 65: Encrypted Key, base64url-encoded
 
 4.2.4.  Encrypting the Content
 
    The following are generated before encrypting the plaintext:
 
    o  Protected JWE Header; this example uses the the header from Figure
-      63, encoded using [RFC4648] base64url to produce Figure 64.
+      66, encoded using [RFC4648] base64url to produce Figure 67.
 
    {
      "alg": "RSA-OAEP",
      "kid": "samwise.gamgee@hobbiton.example",
-     "enc": "A256GCM"
-   }
-
-                   Figure 63: Protected JWE Header JSON
-
-   eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
-   9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
-
-            Figure 64: Protected JWE Header, base64url-encoded
-
-   Performing the content encryption operation over the Plaintext
-   (Figure 48) with the following:
-
-   o  CEK (Figure 60);
 
 
 
-Miller                    Expires June 6, 2014                 [Page 33]
+Miller                    Expires June 7, 2014                 [Page 33]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-   o  Initialization vector/nonce (Figure 61); and
+     "enc": "A256GCM"
+   }
 
-   o  Protected JWE Header (Figure 64) as authenticated data
+                   Figure 66: Protected JWE Header JSON
+
+   eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6InNhbXdpc2UuZ2FtZ2VlQGhvYmJpdG
+   9uLmV4YW1wbGUiLCJlbmMiOiJBMjU2R0NNIn0
+
+            Figure 67: Protected JWE Header, base64url-encoded
+
+   Performing the content encryption operation over the Plaintext
+   (Figure 51) with the following:
+
+   o  CEK (Figure 63);
+
+   o  Initialization vector/nonce (Figure 64); and
+
+   o  Protected JWE Header (Figure 67) as authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 65.
+   o  Ciphertext from Figure 68.
 
-   o  Authentication tag from Figure 66.
+   o  Authentication tag from Figure 69.
 
    dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_qhZgJ
    3bVLTVPr1p8JcThDcqTZtrA4ShYpyyTrBnEzOOyyzv4h6WWiuoCJTfI1Gxzm-J
@@ -1867,25 +1882,33 @@ Internet-Draft                JOSE Cookbook                December 2013
    uXvTpbUWSGna1LKaup-UC1PkOUGvHFa83WgkarkJbSkA0ZoVtebBJ_XvwNlfe1
    VRDk8hxh0AmPvvsMiantgQ4oE6LCjOWKj6C4UNSWgla8zhousjSQ
 
-                 Figure 65: Ciphertext, base64url-encoded
+                 Figure 68: Ciphertext, base64url-encoded
 
    vCmVSWBtadRAKUhtizP5tw
 
-             Figure 66: Authentication Tag, base64url-encoded
+             Figure 69: Authentication Tag, base64url-encoded
 
 4.2.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 64)
+   o  Protected JWE header (Figure 67)
 
-   o  Encrypted key (Figure 62)
+   o  Encrypted key (Figure 65)
 
-   o  Initialization vector/nonce (Figure 61)
+   o  Initialization vector/nonce (Figure 64)
 
-   o  Ciphertext (Figure 65)
 
-   o  Authentication tag (Figure 66)
+
+
+Miller                    Expires June 7, 2014                 [Page 34]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+   o  Ciphertext (Figure 68)
+
+   o  Authentication tag (Figure 69)
 
    The resulting JWE object using the Compact serialization:
 
@@ -1898,14 +1921,6 @@ Internet-Draft                JOSE Cookbook                December 2013
    9TCvNH8ahrC93O1Qp_rZIPdkt92A8yhAje_cxMMaMHZ4YmlN_u05120iJhp6bg
    5S_zPlpqmd5-BrpUIGmH0hwuBk2Z5Djbm47YlosNZUWIB69JBFazaDhGGRhsfM
    eceRRhhGaG94gP2uZS42h1fZjYDH9zNxvXXHJ-4zqj8sM-LHLH16uDTVkvYaUw
-
-
-
-Miller                    Expires June 6, 2014                 [Page 34]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    ZPTUAj55fBKBs-o8o7rLCce8AWXEDBuqm-8rTnakLss5_Hc7l61RC8K4IJWnWB
    zGLFlM1jRApbEwA5HZO61ku45WLGC64NLDdnyGahFxW9EikKXcE21Jc716oRfF
    EeiOXaZGtJhYTjsuPr5IYJr8fWX_NC1y1xqYW1JnfLKklIemtznHTXvq7de6Vx
@@ -1924,7 +1939,7 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    vCmVSWBtadRAKUhtizP5tw
 
-                     Figure 67: Compact Serialization
+                     Figure 70: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -1939,6 +1954,14 @@ Internet-Draft                JOSE Cookbook                December 2013
             2A8yhAje_cxMMaMHZ4YmlN_u05120iJhp6bg5S_zPlpqmd5-BrpUI
             GmH0hwuBk2Z5Djbm47YlosNZUWIB69JBFazaDhGGRhsfMeceRRhhG
             aG94gP2uZS42h1fZjYDH9zNxvXXHJ-4zqj8sM-LHLH16uDTVkvYaU
+
+
+
+Miller                    Expires June 7, 2014                 [Page 35]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
             wZPTUAj55fBKBs-o8o7rLCce8AWXEDBuqm-8rTnakLss5_Hc7l61R
             C8K4IJWnWBzGLFlM1jRApbEwA5HZO61ku45WLGC64NLDdnyGahFxW
             9EikKXcE21Jc716oRfFEeiOXaZGtJhYTjsuPr5IYJr8fWX_NC1y1x
@@ -1954,14 +1977,6 @@ Internet-Draft                JOSE Cookbook                December 2013
        "MKccO3TLKaMB67zj",
      "ciphertext":
        "dLMYOKvvtY8Adfc8Tg4lSKElvvzBi2MJcSKDssll-jj0S_NIjI3P956z_
-
-
-
-Miller                    Expires June 6, 2014                 [Page 35]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
         qhZgJ3bVLTVPr1p8JcThDcqTZtrA4ShYpyyTrBnEzOOyyzv4h6WWiuoCJ
         TfI1Gxzm-JPJNdPYifgOS0E5RKk5L64yDtotBP9AMTZZ4WjatyAlRcgD5
         hVhP2HrqIVG0j1Sb5g5tz4fi5vmSwIhGOeOxwgLvuryjn-8ECi_5LkdUi
@@ -1972,7 +1987,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "vCmVSWBtadRAKUhtizP5tw"
    }
 
-                       Figure 68: JSON Serialization
+                       Figure 71: JSON Serialization
 
 4.3.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2
 
@@ -1986,14 +2001,22 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the plaintext from Figure 69
+   o  Plaintext content; this example uses the plaintext from Figure 72
       (*NOTE* all whitespace added for readability)
 
-   o  Password; this example uses the password from Figure 70
+   o  Password; this example uses the password from Figure 73
 
    o  "alg" parameter of "PBES2-HS512+A256KW"
 
    o  "enc" parameter of "A128CBC-HS256"
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 36]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    {
      "keys": [
@@ -2010,14 +2033,6 @@ Internet-Draft                JOSE Cookbook                December 2013
          "use": "enc",
          "alg": "A128KW",
          "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
-
-
-
-Miller                    Expires June 6, 2014                 [Page 36]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
        },
        {
          "kty": "oct",
@@ -2029,57 +2044,58 @@ Internet-Draft                JOSE Cookbook                December 2013
      ]
    }
 
-                       Figure 69: Plaintext Content
+                       Figure 72: Plaintext Content
 
    entrap_o_peter_long_credit_tun
 
-                            Figure 70: Password
+                            Figure 73: Password
 
 4.3.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 71.
+      example uses the key from Figure 74.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 72.
+      vector/nonce from Figure 75.
 
    LbIgtUgy3OYW-gpNaXZro-2naGkhnyw9NnXDrijI4EI
 
-           Figure 71: Content Encryption Key, base64url-encoded
+           Figure 74: Content Encryption Key, base64url-encoded
+
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 37]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    HnJqms6_fz9N6mpsML9NHA
 
-            Figure 72: Initialization Vector, base64url-encoded
+            Figure 75: Initialization Vector, base64url-encoded
 
 4.3.3.  Encrypting the Key
 
    The following are generated before encrypting the CEK:
 
-   o  Salt; this example uses the salt from Figure 73.
+   o  Salt; this example uses the salt from Figure 76.
 
    o  Iteration count; this example uses the interaction count 8192.
 
    8Q1SzinasR3xchYz6ZZcHA
 
-                    Figure 73: Salt, base64url-encoded
+                    Figure 76: Salt, base64url-encoded
 
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 37]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
-   Performing the key encryption operation over the CEK (Figure 71))
+   Performing the key encryption operation over the CEK (Figure 74))
    with the following:
 
-   o  Password (Figure 70;
+   o  Password (Figure 73;
 
-   o  Salt (Figure 73), encoded as an octet string; and
+   o  Salt (Figure 76), encoded as an octet string; and
 
    o  Iteration count (8192)
 
@@ -2087,14 +2103,14 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    WY1x1MsMrbQogWOeXDasyESSjYi-3iS4p8UjlWMwNJOS0j7_KFQE0w
 
-                Figure 74: Encrypted Key, base64url-encoded
+                Figure 77: Encrypted Key, base64url-encoded
 
 4.3.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
-   o  Protected JWE Header; this example uses the header from Figure 75,
-      encoded using [RFC4648] base64url to produce Figure 76.
+   o  Protected JWE Header; this example uses the header from Figure 78,
+      encoded using [RFC4648] base64url to produce Figure 79.
 
    {
      "p2s": "8Q1SzinasR3xchYz6ZZcHA",
@@ -2104,35 +2120,36 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128CBC-HS256"
    }
 
-                   Figure 75: Protected JWE Header JSON
+                   Figure 78: Protected JWE Header JSON
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 38]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    eyJwMnMiOiI4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJhbG
    ciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJKV0stU0VUK0pTT04iLCJl
    bmMiOiJBMTI4Q0JDLUhTMjU2In0
 
-            Figure 76: Protected JWE Header, base64url-encoded
+            Figure 79: Protected JWE Header, base64url-encoded
 
    Performing the content encryption operation over the Plaintext
-   (Figure 69) with the the following:
+   (Figure 72) with the the following:
 
-   o  CEK (Figure 71);
+   o  CEK (Figure 74);
 
-   o  Initialization vector/nonce (Figure 72); and
+   o  Initialization vector/nonce (Figure 75); and
 
-   o  Protected JWE header (Figure 76) as authenticated data
+   o  Protected JWE header (Figure 79) as authenticated data
 
    produces the following:
 
+   o  Ciphertext from Figure 80.
 
-
-Miller                    Expires June 6, 2014                 [Page 38]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
-   o  Ciphertext from Figure 77.
-
-   o  Authentication tag from Figure 78.
+   o  Authentication tag from Figure 81.
 
    B39o2LfmeYhS_FiszP560P1VkHWNS6vukmQrUL2DdoQgzwz8debUcWgo1A9JXE
    BUk4rr4ALHcn8wA1yRuzWOUlpk0LNBmBfrvdRpgItUQiknWa5U1KY_PqWIZKpJ
@@ -2144,25 +2161,32 @@ Internet-Draft                JOSE Cookbook                December 2013
    BW1WyCWnVK8M7mHJUHQqBL0FWZMKjpgWa00uZOnpZteZO4eyQKYSsBgyMRSuhF
    6tceKFfxIWtclIno
 
-                 Figure 77: Ciphertext, base64url-encoded
+                 Figure 80: Ciphertext, base64url-encoded
 
    YLeY6UpSeM3dUNqg5lEu0Q
 
-             Figure 78: Authentication Tag, base64url-encoded
+             Figure 81: Authentication Tag, base64url-encoded
 
 4.3.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 76)
+   o  Protected JWE header (Figure 79)
 
-   o  Encrypted key (Figure 74)
+   o  Encrypted key (Figure 77)
 
-   o  Initialization vector/nonce (Figure 72)
+   o  Initialization vector/nonce (Figure 75)
 
-   o  Ciphertext (Figure 77)
+   o  Ciphertext (Figure 80)
 
-   o  Authentication tag (Figure 78)
+
+
+Miller                    Expires June 7, 2014                 [Page 39]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+   o  Authentication tag (Figure 81)
 
    The resulting JWE object using the Compact serialization:
 
@@ -2178,14 +2202,6 @@ Internet-Draft                JOSE Cookbook                December 2013
    BUk4rr4ALHcn8wA1yRuzWOUlpk0LNBmBfrvdRpgItUQiknWa5U1KY_PqWIZKpJ
    J-Gq0QTaBTsfnffUbk3BD7eillUdg3poI7EFHLsE7GN3nyuJKaCCdIkFngEekt
    jM2WMUPPMuXracPftXsxJDPnUAwtCAEsShnHozPEUpMIIgWnnlM8dlofYaDewX
-
-
-
-Miller                    Expires June 6, 2014                 [Page 39]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    WySoYn321leWpLGCZVaJIEEgAttFH2iZpbb3MNV1UifDMgMCUS-Xbq4ohDcgu3
    dv9xWg81PNib-GyXoFU93HN9HEblg8iZ6CfKVZ_KKvNS1oCVaoMKqPIf6Jgo-i
    G4S_bblOma9esofjwIp-RU9h3fpx-taoMRvjb2pLEm1FQrYXkx5i3hfN0ESsHR
@@ -2194,7 +2210,7 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    YLeY6UpSeM3dUNqg5lEu0Q
 
-                     Figure 79: Compact Serialization
+                     Figure 82: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -2218,6 +2234,14 @@ Internet-Draft                JOSE Cookbook                December 2013
         Y_PqWIZKpJJ-Gq0QTaBTsfnffUbk3BD7eillUdg3poI7EFHLsE7GN3nyu
         JKaCCdIkFngEektjM2WMUPPMuXracPftXsxJDPnUAwtCAEsShnHozPEUp
         MIIgWnnlM8dlofYaDewXWySoYn321leWpLGCZVaJIEEgAttFH2iZpbb3M
+
+
+
+Miller                    Expires June 7, 2014                 [Page 40]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
         NV1UifDMgMCUS-Xbq4ohDcgu3dv9xWg81PNib-GyXoFU93HN9HEblg8iZ
         6CfKVZ_KKvNS1oCVaoMKqPIf6Jgo-iG4S_bblOma9esofjwIp-RU9h3fp
         x-taoMRvjb2pLEm1FQrYXkx5i3hfN0ESsHRBW1WyCWnVK8M7mHJUHQqBL
@@ -2226,21 +2250,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "YLeY6UpSeM3dUNqg5lEu0Q"
    }
 
-                       Figure 80: JSON Serialization
-
-
-
-
-
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 40]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+                       Figure 83: JSON Serialization
 
 4.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with
       AES-GCM
@@ -2254,9 +2264,9 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48
+   o  Plaintext content; this example uses the content from Figure 51
 
-   o  EC public key; this example uses the public key from Figure 81
+   o  EC public key; this example uses the public key from Figure 84
 
    o  "alg" parameter of "ECDH-ES+A128KW"
 
@@ -2275,36 +2285,36 @@ Internet-Draft                JOSE Cookbook                December 2013
              dnYK2xDlZh-j"
    }
 
-            Figure 81: Elliptic Curve P-384 Key, in JWK format
+            Figure 84: Elliptic Curve P-384 Key, in JWK format
 
    (*NOTE*: While the key includes the private parameters, only the
    public parameters "crv", "x", and "y" are necessary for the
    encryption operation.)
+
+
+
+Miller                    Expires June 7, 2014                 [Page 41]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
 4.4.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  Symmetric AES key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 82.
+      example uses the key from Figure 85.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 83
-
-
-
-Miller                    Expires June 6, 2014                 [Page 41]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+      vector/nonce from Figure 86
 
    C3eS2iNXmSTA7W8tBpjs3w
 
-           Figure 82: Content Encryption Key, base64url-encoded
+           Figure 85: Content Encryption Key, base64url-encoded
 
    ubzqaTluloMJR8Ec
 
-            Figure 83: Initialization Vector, base64url-encoded
+            Figure 86: Initialization Vector, base64url-encoded
 
 4.4.3.  Encrypting the Key
 
@@ -2312,7 +2322,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    o  Ephemeral EC private key on the same curve as the EC public key;
       this example uses the private key that matches the public key from
-      Figure 84.
+      Figure 87.
 
    {
      "kty": "EC",
@@ -2323,36 +2333,37 @@ Internet-Draft                JOSE Cookbook                December 2013
              BBwQISq9grWe"
    }
 
-       Figure 84: Ephemeral Elliptic Curve P-384 Key, in JWK format
+       Figure 87: Ephemeral Elliptic Curve P-384 Key, in JWK format
 
-   Performing the key encryption operation over the CEK (Figure 82) with
+   Performing the key encryption operation over the CEK (Figure 85) with
    the following:
 
-   o  The static Elliptic Curve public key (Figure 81); and
+   o  The static Elliptic Curve public key (Figure 84); and
 
-   o  The ephemeral Elliptic Curve private key (Figure 84);
+   o  The ephemeral Elliptic Curve private key (Figure 87);
 
    produces the following JWE encrypted key:
 
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 42]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY
 
-                Figure 85: Encrypted Key, base64url-encoded
+                Figure 88: Encrypted Key, base64url-encoded
 
 4.4.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
-   o  Protected JWE header; this example uses the header from Figure 86,
-      encoded to [RFC4648] base64url as Figure 87.
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 42]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+   o  Protected JWE header; this example uses the header from Figure 89,
+      encoded to [RFC4648] base64url as Figure 90.
 
    {
      "alg": "ECDH-ES+A128KW",
@@ -2368,7 +2379,7 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128GCM"
    }
 
-                   Figure 86: Protected JWE Header JSON
+                   Figure 89: Protected JWE Header JSON
 
    eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
    Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
@@ -2377,22 +2388,29 @@ Internet-Draft                JOSE Cookbook                December 2013
    REpfNU8zWUNNb1gydFhYejF5c2o5TUZSbnVjQnlJUW9SMHkzU1ZtcUJCd1FJU3
    E5Z3JXZSJ9LCJlbmMiOiJBMTI4R0NNIn0
 
-            Figure 87: Protected JWE Header, base64url-encoded
+            Figure 90: Protected JWE Header, base64url-encoded
 
    Performing the content encryption operation on the Plaintext (Figure
-   48) using the following:
+   51) using the following:
 
-   o  CEK (Figure 82);
+   o  CEK (Figure 85);
 
-   o  Initialization vector/nonce (Figure 83); and
+   o  Initialization vector/nonce (Figure 86); and
 
-   o  Protected JWE header (Figure 87) as authenticated data
+   o  Protected JWE header (Figure 90) as authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 88.
+   o  Ciphertext from Figure 91.
 
-   o  Authentication tag from Figure 89.
+
+
+Miller                    Expires June 7, 2014                 [Page 43]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+   o  Authentication tag from Figure 92.
 
    zQVvyDdwBRvUVkPxQCHD0YtCihhKu462TdE4s4U8VDsCEvJ2t24YRChqKa-xC2
    Ai-l1AvpPIYpwWYgwk3r9QBDTXsHbyn7FVhoVes0YAMthhmnLgbgf0_TQqG9PK
@@ -2401,32 +2419,25 @@ Internet-Draft                JOSE Cookbook                December 2013
    htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
    VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
 
-                 Figure 88: Ciphertext, base64url-encoded
-
-
-
-Miller                    Expires June 6, 2014                 [Page 43]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+                 Figure 91: Ciphertext, base64url-encoded
 
    5cJTRUT3kQRrw_UGwtMtDQ
 
-             Figure 89: Authentication Tag, base64url-encoded
+             Figure 92: Authentication Tag, base64url-encoded
 
 4.4.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 87)
+   o  Protected JWE header (Figure 90)
 
-   o  Encrypted key (Figure 85)
+   o  Encrypted key (Figure 88)
 
-   o  Initialization vector/nonce (Figure 83)
+   o  Initialization vector/nonce (Figure 86)
 
-   o  Ciphertext (Figure 88)
+   o  Ciphertext (Figure 91)
 
-   o  Authentication tag (Figure 89)
+   o  Authentication tag (Figure 92)
 
    The resulting JWE object using the Compact serialization:
 
@@ -2447,10 +2458,18 @@ Internet-Draft                JOSE Cookbook                December 2013
    _-4Ne6lZj4gFLunBEDGVcfhLiviyAF2BjlJG7mhToPq57d2Q99N10WfPmXVQ38
    htg8thQ2qcenxi5Axd2PJXNjDsDroleU-ObLE3Bb8IJ1a04LzqB4Xmp_wgbwHC
    VR-bqTKgth3h_NoDLqCxQ0QcG9E78i36iPJuLAzVgS0ChHzo5ULw
+
+
+
+Miller                    Expires June 7, 2014                 [Page 44]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    .
    5cJTRUT3kQRrw_UGwtMtDQ
 
-                     Figure 90: Compact Serialization
+                     Figure 93: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -2458,14 +2477,6 @@ Internet-Draft                JOSE Cookbook                December 2013
      "recipients": [
        {
          "encrypted_key":
-
-
-
-Miller                    Expires June 6, 2014                 [Page 44]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
            "zPCB2OMxJSGs6zA7zIYO2cUE4Yz5p7TY"
        }
      ],
@@ -2491,7 +2502,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "5cJTRUT3kQRrw_UGwtMtDQ"
    }
 
-                       Figure 91: JSON Serialization
+                       Figure 94: JSON Serialization
 
 4.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2
 
@@ -2504,9 +2515,16 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
 
-   o  EC public key; this example uses the public key from Figure 92.
+
+Miller                    Expires June 7, 2014                 [Page 45]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+   o  Plaintext content; this example uses the content from Figure 51.
+
+   o  EC public key; this example uses the public key from Figure 95.
 
    o  "alg" parameter of "ECDH-ES"
 
@@ -2514,14 +2532,6 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    {
      "kty": "EC",
-
-
-
-Miller                    Expires June 6, 2014                 [Page 45]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
      "kid": "meriadoc.brandybuck@buckland.example",
      "use": "enc",
      "crv": "P-256",
@@ -2530,7 +2540,7 @@ Internet-Draft                JOSE Cookbook                December 2013
      "d":   "44eY-VRWsn1zdz3VaWS6idEpOGt1ErydBARq7Iyh9pY"
    }
 
-                    Figure 92: Elliptic Curve P-256 Key
+                    Figure 95: Elliptic Curve P-256 Key
 
    (*NOTE*: While the key includes the private parameters, only the
    public parameters "crv", "x", and "y" are necessary for the
@@ -2541,11 +2551,11 @@ Internet-Draft                JOSE Cookbook                December 2013
    The following are generated before encrypting:
 
    o  Initialization vector/nonce; this examples uses the initialization
-      vector/nonce from Figure 93.
+      vector/nonce from Figure 96.
 
    BMbSNYW2uC7RX3xql1gbQw
 
-            Figure 93: Initialization Vector, base64url-encoded
+            Figure 96: Initialization Vector, base64url-encoded
 
    *NOTE*: The Content Encryption Key (CEK) is not randomly generated;
    instead it is determined using key agreement.
@@ -2555,39 +2565,39 @@ Internet-Draft                JOSE Cookbook                December 2013
    The following are generated to agree on a CEK:
 
    o  Ephemeral private key; this example uses the private that matches
-      the public key from Figure 94.
+      the public key from Figure 97.
 
    {
      "kty": "EC",
      "crv": "P-256",
-     "x":   "h_ImuH3OW5JxZNQZWIWCFTYAIigZYs1-QzsQR9tCEQ4",
-     "y":   "4ZWJVVrTOWdEVbH266nb4Wy2QiwH_9XAcdpNh4S2oX0"
-   }
-
-              Figure 94: Ephemeral public key, in JWK format
-
-   Performing the ECDH operation using the static EC public key (Figure
-   92) over the ephemeral private key Figure 94) produces the following
-   CEK:
 
 
 
-
-Miller                    Expires June 6, 2014                 [Page 46]
+Miller                    Expires June 7, 2014                 [Page 46]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+     "x":   "h_ImuH3OW5JxZNQZWIWCFTYAIigZYs1-QzsQR9tCEQ4",
+     "y":   "4ZWJVVrTOWdEVbH266nb4Wy2QiwH_9XAcdpNh4S2oX0"
+   }
+
+              Figure 97: Ephemeral public key, in JWK format
+
+   Performing the ECDH operation using the static EC public key (Figure
+   95) over the ephemeral private key Figure 97) produces the following
+   CEK:
+
    W7j3XePj-Id6Zn71dv1b_QUQaNqJSMuxWhutlLqxLFE
 
-      Figure 95: Agreed-to Content Encryption Key, base64url-encoded
+      Figure 98: Agreed-to Content Encryption Key, base64url-encoded
 
 4.5.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
-   o  Protected JWE Header; this example uses the header from Figure 96,
-      encoded to [RFC4648] as Figure 97.
+   o  Protected JWE Header; this example uses the header from Figure 99,
+      encoded to [RFC4648] as Figure 100.
 
    {
      "alg": "ECDH-ES",
@@ -2601,7 +2611,7 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128CBC-HS256"
    }
 
-                   Figure 96: Protected JWE Header JSON
+                   Figure 99: Protected JWE Header JSON
 
    eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
    NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
@@ -2609,30 +2619,30 @@ Internet-Draft                JOSE Cookbook                December 2013
    VRNCIsInkiOiI0WldKVlZyVE9XZEVWYkgyNjZuYjRXeTJRaXdIXzlYQWNkcE5o
    NFMyb1gwIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 
-            Figure 97: Protected JWE Header, base64url-encoded
+            Figure 100: Protected JWE Header, base64url-encoded
 
    Performing the content encryption operation on the Plaintext (Figure
-   48) using the following:
+   51) using the following:
 
-   o  CEK (Figure 95);
-
-   o  Initialization vector/nonce (Figure 93); and
-
-   o  Protected JWE header (Figure 97) as authenticated data
-
-   produces the following:
-
-   o  Ciphertext from Figure 98.
-
-   o  Authentication tag from Figure 99.
+   o  CEK (Figure 98);
 
 
 
 
-Miller                    Expires June 6, 2014                 [Page 47]
+Miller                    Expires June 7, 2014                 [Page 47]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
+
+   o  Initialization vector/nonce (Figure 96); and
+
+   o  Protected JWE header (Figure 100) as authenticated data
+
+   produces the following:
+
+   o  Ciphertext from Figure 101.
+
+   o  Authentication tag from Figure 102.
 
    mwSOHtsJDtD1R4Y4r0Ads9Bc8nTgk_Y4wVe_4pJsb7RERAgnfFRYRmlgjSaGPM
    M7PytxfLss6clZI7YW366xh8DiqOWUavR7VFGLZIOHkrMsTPaehWlQZrQz77Ie
@@ -2641,23 +2651,23 @@ Internet-Draft                JOSE Cookbook                December 2013
    gA1dFU28Zs_boX-mm4UYseIJfaZAX_eqs7NDMpbrb29frJCFI-rYfahoVz6QhN
    QXQMNmzL93pDo5QE_i9pIzR4KJu-uaItKTKNAdBKgSa9JZfc21dSw
 
-                 Figure 98: Ciphertext, base64url-encoded
+                 Figure 101: Ciphertext, base64url-encoded
 
    kqeubaGyskAjcj8mDymY6A
 
-             Figure 99: Authentication Tag, base64url-encoded
+             Figure 102: Authentication Tag, base64url-encoded
 
 4.5.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 87)
+   o  Protected JWE header (Figure 90)
 
-   o  Initialization vector/nonce (Figure 83)
+   o  Initialization vector/nonce (Figure 86)
 
-   o  Ciphertext (Figure 88)
+   o  Ciphertext (Figure 91)
 
-   o  Authentication tag (Figure 89)
+   o  Authentication tag (Figure 92)
 
    the resulting JWE object using the Compact serialization:
 
@@ -2672,6 +2682,14 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    mwSOHtsJDtD1R4Y4r0Ads9Bc8nTgk_Y4wVe_4pJsb7RERAgnfFRYRmlgjSaGPM
    M7PytxfLss6clZI7YW366xh8DiqOWUavR7VFGLZIOHkrMsTPaehWlQZrQz77Ie
+
+
+
+Miller                    Expires June 7, 2014                 [Page 48]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    dSM20wSGVj-E4T0KRtX3CrZsEPjtXqNbm_EmDPgxVYTaTthGdWbyDnPMvp6eGL
    T6gsMkctSLIHgaGvI2VWB0oNYdKnCRU-p2JFkLu5XQfOww4E5zKW9Xycx3mkh_
    gA1dFU28Zs_boX-mm4UYseIJfaZAX_eqs7NDMpbrb29frJCFI-rYfahoVz6QhN
@@ -2679,16 +2697,9 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    kqeubaGyskAjcj8mDymY6A
 
-                     Figure 100: Compact Serialization
+                     Figure 103: Compact Serialization
 
    the resulting JWE object using the JSON serialization:
-
-
-
-Miller                    Expires June 6, 2014                 [Page 48]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
 
    {
      "protected":
@@ -2712,7 +2723,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "kqeubaGyskAjcj8mDymY6A"
    }
 
-                      Figure 101: JSON Serialization
+                      Figure 104: JSON Serialization
 
 4.6.  Direct Encryption using AES-GCM
 
@@ -2724,10 +2735,19 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
+   o  Plaintext content; this example uses the content from Figure 51.
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 49]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 102.
+      example uses the key from Figure 105.
 
    o  "alg" parameter of "dir"
 
@@ -2738,36 +2758,28 @@ Internet-Draft                JOSE Cookbook                December 2013
      "kid": "77c7e2b8-6e13-45cf-8672-617b5b45243a",
      "use": "enc",
      "alg": "A128GCM",
-
-
-
-Miller                    Expires June 6, 2014                 [Page 49]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
      "k":   "XctOhJAkA-pD9Lh7ZgW_2A"
    }
 
-                Figure 102: AES 128-bit key, in JWK format
+                Figure 105: AES 128-bit key, in JWK format
 
 4.6.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 103.
+      vector/nonce from Figure 106.
 
    OI-fESJKbHHk1-rA
 
-           Figure 103: Initialization Vector, base64url-encoded
+           Figure 106: Initialization Vector, base64url-encoded
 
 4.6.3.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
    o  Protected JWE Header; this example uses the header from Figure
-      104, encoded as [RFC4648] base64url to produce Figure 105.
+      107, encoded as [RFC4648] base64url to produce Figure 108.
 
    {
      "alg": "dir",
@@ -2775,36 +2787,40 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128GCM"
    }
 
-                   Figure 104: Protected JWE Header JSON
+                   Figure 107: Protected JWE Header JSON
 
    Encoded as [RFC4648] base64url:
 
-   eyJhbGciOiJkaXIiLCJraWQiOiI3N2M3ZTJiOC02ZTEzLTQ1Y2YtODY3Mi02MT
-   diNWI0NTI0M2EiLCJlbmMiOiJBMTI4R0NNIn0
-
-            Figure 105: Protected JWE Header, base64url-encoded
-
-   Performing the encryption operation on the Plaintext (Figure 48)
-   using the following:
-
-   o  CEK (Figure 102);
-
-   o  Initialization vector/nonce (Figure 103); and
-
-   o  Protected JWE header (Figure 105) as authenticated data
-
-   produces the following:
 
 
 
-Miller                    Expires June 6, 2014                 [Page 50]
+
+
+
+Miller                    Expires June 7, 2014                 [Page 50]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-   o  Ciphertext from Figure 106.
+   eyJhbGciOiJkaXIiLCJraWQiOiI3N2M3ZTJiOC02ZTEzLTQ1Y2YtODY3Mi02MT
+   diNWI0NTI0M2EiLCJlbmMiOiJBMTI4R0NNIn0
 
-   o  Authentication tag from Figure 107.
+            Figure 108: Protected JWE Header, base64url-encoded
+
+   Performing the encryption operation on the Plaintext (Figure 51)
+   using the following:
+
+   o  CEK (Figure 105);
+
+   o  Initialization vector/nonce (Figure 106); and
+
+   o  Protected JWE header (Figure 108) as authenticated data
+
+   produces the following:
+
+   o  Ciphertext from Figure 109.
+
+   o  Authentication tag from Figure 110.
 
    18KNUnRDhesDLn7Ec4ui6q0aptYFNkbx6Vf64wWItX7hMQe2XgbNTt-GVG_3Dz
    -5mscM9bKe0TkgEecWAovlTFkuwhL-TZhbcnYdMXtaNtqYe2TEZ5fFlRiEr9is
@@ -2813,25 +2829,34 @@ Internet-Draft                JOSE Cookbook                December 2013
    3KVDj-MZehUb2FivjT7FecB3Yz-m-KhYXvXR5l5XnoqCT0ioaFzeW9zbiAMj_o
    1gvWgPLv8HRD9OxMERTCwbJt4O3baG9Roz-5We10hx-sb2EKtN0g
 
-                 Figure 106: Ciphertext, base64url-encoded
+                 Figure 109: Ciphertext, base64url-encoded
 
    mBCmmmn0W0j4BS7ln3nxVA
 
-             Figure 107: Authentication Tag, base64url-encoded
+             Figure 110: Authentication Tag, base64url-encoded
 
 4.6.4.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 105)
+   o  Protected JWE header (Figure 108)
 
-   o  Initialization vector/nonce (Figure 103)
+   o  Initialization vector/nonce (Figure 106)
 
-   o  Ciphertext (Figure 106)
+   o  Ciphertext (Figure 109)
 
-   o  Authentication tag (Figure 107)
+   o  Authentication tag (Figure 110)
 
    The resulting JWE object using the Compact serialization:
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 51]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    eyJhbGciOiJkaXIiLCJraWQiOiI3N2M3ZTJiOC02ZTEzLTQ1Y2YtODY3Mi02MT
    diNWI0NTI0M2EiLCJlbmMiOiJBMTI4R0NNIn0
@@ -2848,15 +2873,7 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    mBCmmmn0W0j4BS7ln3nxVA
 
-                     Figure 108: Compact Serialization
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 51]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+                     Figure 111: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -2878,7 +2895,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "mBCmmmn0W0j4BS7ln3nxVA"
    }
 
-                      Figure 109: JSON Serialization
+                      Figure 112: JSON Serialization
 
 4.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2
 
@@ -2890,29 +2907,20 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
 
-   o  AES symmetric key; this example uses the key from Figure 110.
+
+Miller                    Expires June 7, 2014                 [Page 52]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+   o  Plaintext content; this example uses the content from Figure 51.
+
+   o  AES symmetric key; this example uses the key from Figure 113.
 
    o  "alg" parameter of "A256GCMKW"
 
    o  "enc" parameter of "A128CBC-HS256"
-
-
-
-
-
-
-
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 52]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
 
    {
      "kty": "oct",
@@ -2922,74 +2930,75 @@ Internet-Draft                JOSE Cookbook                December 2013
      "k":   "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
    }
 
-                        Figure 110: AES 256-bit Key
+                        Figure 113: AES 256-bit Key
 
 4.7.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 111.
+      example uses the key from Figure 114.
 
    o  Initialization vector/nonce for content encryption; this example
-      uses the initilization vector/nonce from Figure 112.
+      uses the initilization vector/nonce from Figure 115.
 
    a2gN8ASDdVKI86lMJC8rKI8RV8U8OltRlVzygIo48NA
 
-           Figure 111: Content Encryption Key, base64url-encoded
+           Figure 114: Content Encryption Key, base64url-encoded
 
    Z3wPFyzW8czy88sUmzcnlg
 
-           Figure 112: Initialization Vector, base64url-encoded
+           Figure 115: Initialization Vector, base64url-encoded
 
 4.7.3.  Encrypting the Key
 
    The following are generated before encrypting the CEK:
 
    o  Initialization vector/nonce for key wrapping; this example uses
-      the initialization vector/nonce from Figure 113.
+      the initialization vector/nonce from Figure 116.
 
    3llIgu3y7Vu5dZW7
 
-       Figure 113: Key Wrap Initialization Vector, base64url-encoded
-
-   Performing the key encryption operation over the CEK (Figure 111)
-   with the following:
-
-   o  AES symmetric key (Figure 110);
-
-   o  Key wrap initialization vector/nonce (Figure 113); and
-
-   o  The empty string as authenticated data
+       Figure 116: Key Wrap Initialization Vector, base64url-encoded
 
 
 
 
-Miller                    Expires June 6, 2014                 [Page 53]
+
+Miller                    Expires June 7, 2014                 [Page 53]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+   Performing the key encryption operation over the CEK (Figure 114)
+   with the following:
+
+   o  AES symmetric key (Figure 113);
+
+   o  Key wrap initialization vector/nonce (Figure 116); and
+
+   o  The empty string as authenticated data
+
    produces the following:
 
-   o  Encrypted Key from Figure 114.
+   o  Encrypted Key from Figure 117.
 
-   o  Key wrap authentication tag from Figure 115.
+   o  Key wrap authentication tag from Figure 118.
 
    cfBkmK29hCy31FM6VhHHgqbGa2DQvXZgnqSSl8zcOsE
 
-               Figure 114: Encrypted Key, base64url-encoded
+               Figure 117: Encrypted Key, base64url-encoded
 
    7qiY1gOLorD7ro67FZqYRw
 
-        Figure 115: Key Wrap Authentication Tag, base64url-encoded
+        Figure 118: Key Wrap Authentication Tag, base64url-encoded
 
 4.7.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
    o  Protected JWE Header; this example uses the header from Figure
-      116, encoded to [RFC4648] base64url as Figure 117.
+      119, encoded to [RFC4648] base64url as Figure 120.
 
    {
      "alg": "A256GCMKW",
@@ -2999,36 +3008,38 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128CBC-HS256"
    }
 
-                   Figure 116: Protected JWE Header JSON
+                   Figure 119: Protected JWE Header JSON
 
    eyJhbGciOiJBMjU2R0NNS1ciLCJraWQiOiIxOGVjMDhlMS1iZmE5LTRkOTUtYj
    IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiI3cWlZMWdPTG9yRDdybzY3RlpxWVJ3
    IiwiaXYiOiIzbGxJZ3UzeTdWdTVkWlc3IiwiZW5jIjoiQTEyOENCQy1IUzI1Ni
    J9
 
-            Figure 117: Protected JWE Header, base64url-encoded
-
-   Performing the content encryption operation over the Plaintext
-   (Figure 48) with the following:
-
-   o  CEK (Figure 111);
-
-   o  Initialization vector/nonce (Figure 112); and
-
-   o  Protected JWE header (Figure 117) as authenticated data
-
-   produces the following:
+            Figure 120: Protected JWE Header, base64url-encoded
 
 
 
-Miller                    Expires June 6, 2014                 [Page 54]
+
+
+Miller                    Expires June 7, 2014                 [Page 54]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-   o  Ciphertext from Figure 118.
+   Performing the content encryption operation over the Plaintext
+   (Figure 51) with the following:
 
-   o  Authentication tag from Figure 119.
+   o  CEK (Figure 114);
+
+   o  Initialization vector/nonce (Figure 115); and
+
+   o  Protected JWE header (Figure 120) as authenticated data
+
+   produces the following:
+
+   o  Ciphertext from Figure 121.
+
+   o  Authentication tag from Figure 122.
 
    YSoJLPEGGMUoFM7zbKAwZivdakcAZWsyoQycpRG-4haDdLdXXGtLCev_HEs-Tu
    5xRlK-4FFIQJ8l6bfSTR9glEa2FaVS8tgkZO1X9BbPAY9_4SCuLLO4n5LFK0mI
@@ -3037,25 +3048,25 @@ Internet-Draft                JOSE Cookbook                December 2013
    tMshzm0sgbroEBFU-vCHWzt5fVx_A9oUn5szL7RlkXU12fOCc7VJ2X5TtYPPr_
    bM4z6KB5FBLS3hVVfHZee83e9IDrk0k7AIcf3KpfzapJmZ3kdZgOg
 
-                 Figure 118: Ciphertext, base64url-encoded
+                 Figure 121: Ciphertext, base64url-encoded
 
    d7dahIDc06hrpWqDiQzaXQ
 
-             Figure 119: Authentication Tag, base64url-encoded
+             Figure 122: Authentication Tag, base64url-encoded
 
 4.7.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 117)
+   o  Protected JWE header (Figure 120)
 
-   o  encrypted key (Figure 114)
+   o  encrypted key (Figure 117)
 
-   o  Initialization vector/nonce (Figure 112)
+   o  Initialization vector/nonce (Figure 115)
 
-   o  Ciphertext (Figure 118)
+   o  Ciphertext (Figure 121)
 
-   o  Authentication tag (Figure 119)
+   o  Authentication tag (Figure 122)
 
    The resulting JWE object using the Compact serialization:
 
@@ -3063,6 +3074,14 @@ Internet-Draft                JOSE Cookbook                December 2013
    IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiI3cWlZMWdPTG9yRDdybzY3RlpxWVJ3
    IiwiaXYiOiIzbGxJZ3UzeTdWdTVkWlc3IiwiZW5jIjoiQTEyOENCQy1IUzI1Ni
    J9
+
+
+
+Miller                    Expires June 7, 2014                 [Page 55]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    .
    cfBkmK29hCy31FM6VhHHgqbGa2DQvXZgnqSSl8zcOsE
    .
@@ -3074,18 +3093,10 @@ Internet-Draft                JOSE Cookbook                December 2013
    K3HjQhQkvfKbpSFLFRkH3xsHyYYkKiH2PEOCZOzHNzc8PRMavtkBO64zmpWTfy
    tMshzm0sgbroEBFU-vCHWzt5fVx_A9oUn5szL7RlkXU12fOCc7VJ2X5TtYPPr_
    bM4z6KB5FBLS3hVVfHZee83e9IDrk0k7AIcf3KpfzapJmZ3kdZgOg
-
-
-
-Miller                    Expires June 6, 2014                 [Page 55]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    .
    W7cYYn27uUYttxShJ2yYhQ
 
-                     Figure 120: Compact Serialization
+                     Figure 123: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -3115,9 +3126,17 @@ Internet-Draft                JOSE Cookbook                December 2013
        "W7cYYn27uUYttxShJ2yYhQ"
    }
 
-                      Figure 121: JSON Serialization
+                      Figure 124: JSON Serialization
 
 4.8.  Key Wrap using AES-KeyWrap with AES-GCM
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 56]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    The following example illustrates content encryption using the
    "A128KW" (AES-128-KeyWrap) key encryption algorithm and the "A128GCM"
@@ -3127,16 +3146,9 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
+   o  Plaintext content; this example uses the content from Figure 51.
 
-   o  AES symmetric key; this example uses the key from Figure 122.
-
-
-
-Miller                    Expires June 6, 2014                 [Page 56]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+   o  AES symmetric key; this example uses the key from Figure 125.
 
    o  "alg" parameter of "A128KW"
 
@@ -3150,49 +3162,48 @@ Internet-Draft                JOSE Cookbook                December 2013
      "k":   "GZy6sIZ6wl9NJOKB-jnmVQ"
    }
 
-                        Figure 122: AES 128-Bit Key
+                        Figure 125: AES 128-Bit Key
 
 4.8.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key; this example uses
-      the key from Figure 123.
+      the key from Figure 126.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 124.
+      vector/nonce from Figure 127.
 
    'Hv3Kmjt7vR2in57dLm-Pfw
 
-           Figure 123: Content Encryption Key, base64url-encoded
+           Figure 126: Content Encryption Key, base64url-encoded
 
    wxdDTG0-QnGvBZew
 
-           Figure 124: Initialization Vector, base64url-encoded
+           Figure 127: Initialization Vector, base64url-encoded
 
 4.8.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 123)
-   with the AES key (Figure 122) produces the following encrypted key:
+   Performing the key encryption operation over the CEK (Figure 126)
+   with the AES key (Figure 125) produces the following encrypted key:
+
+
+
+Miller                    Expires June 7, 2014                 [Page 57]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    RMMWwegPo5GY-5DeqC51gevcIOQpc4CH
 
-               Figure 125: Encrypted Key, base64url-encoded
+               Figure 128: Encrypted Key, base64url-encoded
 
 4.8.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
    o  Protected JWE Header; this example uses the header from Figure
-      126, encoded to [RFC4648] base64url as Figure 127.
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 57]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+      129, encoded to [RFC4648] base64url as Figure 130.
 
    {
      "alg": "A128KW",
@@ -3200,27 +3211,27 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128GCM"
    }
 
-                   Figure 126: Protected JWE Header JSON
+                   Figure 129: Protected JWE Header JSON
 
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0
 
-            Figure 127: Protected JWE Header, base64url-encoded
+            Figure 130: Protected JWE Header, base64url-encoded
 
-   Performing the content encryption over the Plaintext (Figure 48) with
+   Performing the content encryption over the Plaintext (Figure 51) with
    the following:
 
-   o  CEK (Figure 123);
+   o  CEK (Figure 126);
 
-   o  Initialization vector/nonce (Figure 124); and
+   o  Initialization vector/nonce (Figure 127); and
 
-   o  Protected JWE header (Figure 127) as authenticated data
+   o  Protected JWE header (Figure 130) as authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 128.
+   o  Ciphertext from Figure 131.
 
-   o  Authentication tag from Figure 129.
+   o  Authentication tag from Figure 132.
 
    DoM1vi13RWus_t3EsvGWk4gDH3F8TGRnBo4p3uImtmboRrT1pniDLDQTipfOin
    86hMl343jhxcRObGyiKgIyPI-tG8M9E92VkHeOE8O77-s6wRj9XxxEs8zw9YPX
@@ -3229,40 +3240,35 @@ Internet-Draft                JOSE Cookbook                December 2013
    tGg16H5JAutG9a6GqFUdkSZ-mKSothgDEHv9gnAqYnWKLaE3E2hzhxcgtNwNKf
    lLSfmV247xbRYZhR8NeJ_GoKCjrH7isFvUM0Uzx43cPpPDypyiGA
 
-                 Figure 128: Ciphertext, base64url-encoded
+                 Figure 131: Ciphertext, base64url-encoded
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 58]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    And authentication tag:
 
    N7CDBxgruPcQozgqPeihlw
 
-             Figure 129: Authentication Tag, base64url-encoded
-
-
-
-
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 58]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+             Figure 132: Authentication Tag, base64url-encoded
 
 4.8.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 127)
+   o  Protected JWE header (Figure 130)
 
-   o  encrypted key (Figure 125)
+   o  encrypted key (Figure 128)
 
-   o  Initialization vector/nonce (Figure 124)
+   o  Initialization vector/nonce (Figure 127)
 
-   o  Ciphertext (Figure 128)
+   o  Ciphertext (Figure 131)
 
-   o  Authentication tag (Figure 129)
+   o  Authentication tag (Figure 132)
 
    The resulting JWE object using the Compact serialization:
 
@@ -3282,7 +3288,7 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    N7CDBxgruPcQozgqPeihlw
 
-                     Figure 130: Compact Serialization
+                     Figure 133: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -3292,20 +3298,20 @@ Internet-Draft                JOSE Cookbook                December 2013
          "encrypted_key":
            "RMMWwegPo5GY-5DeqC51gevcIOQpc4CH"
        }
+
+
+
+Miller                    Expires June 7, 2014                 [Page 59]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
      ],
      "protected":
        "eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktY
         TQ2OC04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0",
      "iv":
        "wxdDTG0-QnGvBZew",
-
-
-
-Miller                    Expires June 6, 2014                 [Page 59]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
      "ciphertext":
        "DoM1vi13RWus_t3EsvGWk4gDH3F8TGRnBo4p3uImtmboRrT1pniDLDQTi
         pfOin86hMl343jhxcRObGyiKgIyPI-tG8M9E92VkHeOE8O77-s6wRj9Xx
@@ -3318,7 +3324,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "N7CDBxgruPcQozgqPeihlw"
    }
 
-                      Figure 131: JSON Serialization
+                      Figure 134: JSON Serialization
 
 4.9.  Compressed Content
 
@@ -3330,10 +3336,10 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
+   o  Plaintext content; this example uses the content from Figure 51.
 
    o  Recipient encryption key; this example uses the key from Figure
-      122.
+      125.
 
    o  Key encryption algorithm; this example uses "A128KW".
 
@@ -3346,53 +3352,53 @@ Internet-Draft                JOSE Cookbook                December 2013
    The following are generated before encrypting:
 
    o  Compressed plaintext from the original plaintext content;
-      compressing Figure 48 using the DEFLATE [RFC1951] algorithm
-      produces the compressed plaintext from Figure 132.
-
-   o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 133.
-
-   o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 134.
+      compressing Figure 51 using the DEFLATE [RFC1951] algorithm
+      produces the compressed plaintext from Figure 135.
 
 
 
-Miller                    Expires June 6, 2014                 [Page 60]
+Miller                    Expires June 7, 2014                 [Page 60]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
+
+   o  AES symmetric key as the Content Encryption Key (CEK); this
+      example uses the key from Figure 136.
+
+   o  Initialization vector/nonce; this example uses the initialization
+      vector/nonce from Figure 137.
 
    eJxtj0EOwyAMBL-yD0jyh_bQL1Q9EmICCsKVMYry-zpEPVTqycizu15e3OBdgU
    qrilahjKrJb9iTRhyGNQq3Ndo8164s56uMoyk1EuakSgIqy4SbweNP4kb0NueB
    Sl5IweGUSR1Hn7maW6M5TmdXJr0w5TDh3vSbWVh_YjNdKDhPBrjNmeAyFxp6z5
    XtUug_YUtx2Fms5dNEQv0EgiRrXgc8hBeePt1uYQ0
 
-            Figure 132: Compressed Plaintext, base64url-encoded
+            Figure 135: Compressed Plaintext, base64url-encoded
 
    03x4Y5d1Lk0K2VbMmePmMw
 
-           Figure 133: Content Encryption Key, base64url-encoded
+           Figure 136: Content Encryption Key, base64url-encoded
 
    9UnGd0z8-Yx3BFV3
 
-           Figure 134: Initialization Vector, base64url-encoded
+           Figure 137: Initialization Vector, base64url-encoded
 
 4.9.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 133)
+   Performing the key encryption operation over the CEK (Figure 136)
    with the AES key ({{jwe-aeskw-key) produces the following encrypted
    key:
 
    fUGYywsd6dWWr5JpNP0EMMN2XkXk8_h5
 
-               Figure 135: Encrypted Key, base64url-encoded
+               Figure 138: Encrypted Key, base64url-encoded
 
 4.9.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
    o  Protected JWE Header; this example uses the header from Figure
-      136, encoded as [RFC4648] base64url as Figure 137.
+      139, encoded as [RFC4648] base64url as Figure 140.
 
    {
      "alg": "A128KW",
@@ -3401,79 +3407,78 @@ Internet-Draft                JOSE Cookbook                December 2013
      "zip": "DEF"
    }
 
-                   Figure 136: Protected JWE Header JSON
-
-   eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
-   04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
-
-            Figure 137: Protected JWE Header, base64url-encoded
+                   Figure 139: Protected JWE Header JSON
 
 
 
 
 
-
-Miller                    Expires June 6, 2014                 [Page 61]
+Miller                    Expires June 7, 2014                 [Page 61]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+   eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
+   04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
+
+            Figure 140: Protected JWE Header, base64url-encoded
+
    Performing the content encryption operation over the compressed
-   Plaintext (Figure 132, encoded as an octet string) with the
+   Plaintext (Figure 135, encoded as an octet string) with the
    following:
 
-   o  CEK (Figure 133);
+   o  CEK (Figure 136);
 
-   o  Initialization vector/nonce (Figure 134); and
+   o  Initialization vector/nonce (Figure 137); and
 
-   o  Protected JWE header (Figure 137) as authenticated data
+   o  Protected JWE header (Figure 140) as authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 138.
+   o  Ciphertext from Figure 141.
 
-   o  Authentication tag from Figure 139.
+   o  Authentication tag from Figure 142.
 
    b962BmHXeA9iYY8u9GnpxtXnme1MNm7vhhBqcxJHof08hGn1ltC7Mpf0dnlB0y
    ZqAlqBWDJrGs3eVseTlFEFm0pDHDlIven74xwZPdJdEylDKPTeZLaCf6TjK46C
    UfWJBajPZ2wiupjQJb5FYz_1KsWYCXAE4k6xt9v5wkwm_FHpYevNXuE7hokcim
    LRiCi1R_xjnG7sHCTWKb56L0ZsqacWn_52jkO9B3Q
 
-                 Figure 138: Ciphertext, base64url-encoded
+                 Figure 141: Ciphertext, base64url-encoded
 
    And authentication tag:
 
    Im5q_DU2ZafibIuj5GNI5Q
 
-             Figure 139: Authentication Tag, base64url-encoded
+             Figure 142: Authentication Tag, base64url-encoded
 
 4.9.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 137)
+   o  Protected JWE header (Figure 140)
 
-   o  encrypted key (Figure 135)
+   o  encrypted key (Figure 138)
 
-   o  Initialization vector/nonce (Figure 134)
+   o  Initialization vector/nonce (Figure 137)
 
-   o  Ciphertext (Figure 138)
+   o  Ciphertext (Figure 141)
 
-   o  Authentication tag (Figure 139)
+   o  Authentication tag (Figure 142)
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 62]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    The resulting JWE object using the Compact serialization:
 
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIiwiemlwIjoiREVGIn0
    .
-
-
-
-Miller                    Expires June 6, 2014                 [Page 62]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    fUGYywsd6dWWr5JpNP0EMMN2XkXk8_h5
    .
    9UnGd0z8-Yx3BFV3
@@ -3485,7 +3490,7 @@ Internet-Draft                JOSE Cookbook                December 2013
    .
    Im5q_DU2ZafibIuj5GNI5Q
 
-                     Figure 140: Compact Serialization
+                     Figure 143: Compact Serialization
 
    The resulting JWE object using the JSON serialization:
 
@@ -3511,38 +3516,38 @@ Internet-Draft                JOSE Cookbook                December 2013
        "Im5q_DU2ZafibIuj5GNI5Q"
    }
 
-                      Figure 141: JSON Serialization
+                      Figure 144: JSON Serialization
 
 4.10.  Including Additional Authenticated Data
 
    This example illustrates encrypting content that includes additional
    authenticated data.  As this example includes an additional top-level
+
+
+
+Miller                    Expires June 7, 2014                 [Page 63]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
    property not present in the Compact serialization, only the JSON
    serialization is possible.
 
 4.10.1.  Input Factors
 
-
-
-
-Miller                    Expires June 6, 2014                 [Page 63]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
+   o  Plaintext content; this example uses the content from Figure 51.
 
    o  Recipient encryption key; this example uses the key from Figure
-      122.
+      125.
 
    o  Key encryption algorithm; this example uses "A128KW".
 
    o  Content encryption algorithm; this example uses "A128GCM".
 
    o  Additional authenticated data; this example uses a
-      [I-D.ietf-jcardcal-jcard] vCard from Figure 142, serialized to
+      [I-D.ietf-jcardcal-jcard] vCard from Figure 145, serialized to
       UTF-8.
 
    [
@@ -3560,7 +3565,7 @@ Internet-Draft                JOSE Cookbook                December 2013
      ]
    ]
 
-         Figure 142: Additional Authenticated Data, in JSON format
+         Figure 145: Additional Authenticated Data, in JSON format
 
    *NOTE* whitespace between JSON values added for readability.
 
@@ -3569,53 +3574,52 @@ Internet-Draft                JOSE Cookbook                December 2013
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 143.
+      example uses the key from Figure 146.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 144.
-
-   o  Encoded additional authenticated data (AAD); this example uses the
-      additional authenticated data from Figure 142, encoded to
-      [RFC4648] base64url as Figure 145.
+      vector/nonce from Figure 147.
 
 
 
-
-Miller                    Expires June 6, 2014                 [Page 64]
+Miller                    Expires June 7, 2014                 [Page 64]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+   o  Encoded additional authenticated data (AAD); this example uses the
+      additional authenticated data from Figure 145, encoded to
+      [RFC4648] base64url as Figure 148.
+
    uGL3QU7R3HMR3ik-oTW82w
 
-           Figure 143: Content Encryption Key, base64url-encoded
+           Figure 146: Content Encryption Key, base64url-encoded
 
    HorZstLCLfNNC7TN
 
-           Figure 144: Initialization Vector, base64url-encoded
+           Figure 147: Initialization Vector, base64url-encoded
 
    WyJ2Y2FyZCIsW1sidmVyc2lvbiIse30sInRleHQiLCI0LjAiXSxbImZuIix7fS
    widGV4dCIsIk1lcmlhZG9jIEJyYW5keWJ1Y2siXSxbIm4iLHt9LCJ0ZXh0Iixb
    IkJyYW5keWJ1Y2siLCJNZXJpYWRvYyIsIk1yLiIsIiJdXSxbImJkYXkiLHt9LC
    J0ZXh0IiwiVEEgMjk4MiJdLFsiZ2VuZGVyIix7fSwidGV4dCIsIk0iXV1d
 
-       Figure 145: Additional Authenticated Data, base64url-encoded
+       Figure 148: Additional Authenticated Data, base64url-encoded
 
 4.10.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 143)
-   with the AES key (Figure 122) produces the following encrypted key:
+   Performing the key encryption operation over the CEK (Figure 146)
+   with the AES key (Figure 125) produces the following encrypted key:
 
    MJjYoJ6DKa__0KTJP5PT8pR0T_tybLRc
 
-               Figure 146: Encrypted Key, base64url-encoded
+               Figure 149: Encrypted Key, base64url-encoded
 
 4.10.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
    o  Protected JWE Header; this example uses the header from Figure
-      147, encoded to [RFC4648] base64url as Figure 148.
+      150, encoded to [RFC4648] base64url as Figure 151.
 
    {
      "alg": "A128KW",
@@ -3623,36 +3627,37 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128GCM"
    }
 
-                   Figure 147: Protected JWE Header JSON
+                   Figure 150: Protected JWE Header JSON
 
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0
 
-            Figure 148: Protected JWE Header, base64url-encoded
-
-   Performing the content encryption operation over the Plaintext with
-   the following:
-
-   o  CEK (Figure 143);
+            Figure 151: Protected JWE Header, base64url-encoded
 
 
 
-Miller                    Expires June 6, 2014                 [Page 65]
+
+Miller                    Expires June 7, 2014                 [Page 65]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-   o  Initialization vector/nonce (Figure 144); and
+   Performing the content encryption operation over the Plaintext with
+   the following:
 
-   o  Concatenation of the protected JWE header (Figure 148), ".", and
-      the [RFC4648] base64url encoding of Figure 142 as authenticated
+   o  CEK (Figure 146);
+
+   o  Initialization vector/nonce (Figure 147); and
+
+   o  Concatenation of the protected JWE header (Figure 151), ".", and
+      the [RFC4648] base64url encoding of Figure 145 as authenticated
       data
 
    produces the following:
 
-   o  Ciphertext from Figure 149.
+   o  Ciphertext from Figure 152.
 
-   o  Authentication tag from Figure 150.
+   o  Authentication tag from Figure 153.
 
    36qblaXJa6XlM7EHkAWVcrAvUA-w0zUsaSiK9ajj1CsPp-oHpElk7bktsA2u9p
    b_T0yeXpjeaGKc0tWO6VKMIpIEJed-reIzaHva_JrHKt63tKWRmGDtQ9EHDCgw
@@ -3661,43 +3666,43 @@ Internet-Draft                JOSE Cookbook                December 2013
    pzxEgja4X6UlSkY6uTQR-mBBpwlA4rAnjP-pn0zuq0T13vkCplokt2GKhRLysE
    6UqLjnyfexHGjC349nzsBHoCXk2tKJwrqPpssCnsqPaffU
 
-                 Figure 149: Ciphertext, base64url-encoded
+                 Figure 152: Ciphertext, base64url-encoded
 
    tp_Idm6BMHn3iJQ86T4sRA
 
-             Figure 150: Authentication Tag, base64url-encoded
+             Figure 153: Authentication Tag, base64url-encoded
 
 4.10.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Protected JWE header (Figure 148)
+   o  Protected JWE header (Figure 151)
 
-   o  encrypted key (Figure 146)
+   o  encrypted key (Figure 149)
 
-   o  Initialization vector/nonce (Figure 144)
+   o  Initialization vector/nonce (Figure 147)
 
-   o  Additional authenticated data (Figure 145)
+   o  Additional authenticated data (Figure 148)
 
-   o  Ciphertext (Figure 149)
+   o  Ciphertext (Figure 152)
 
-   o  Authentication tag (Figure 150)
+   o  Authentication tag (Figure 153)
 
    The resulting JWE object using the JSON serialization:
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 66]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    {
      "recipients": [
        {
          "encrypted_key":
            "Aa2ArPkcYIHxdlA3lsGWtcC9sBkqTYHr"
-
-
-
-Miller                    Expires June 6, 2014                 [Page 66]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
        }
      ],
      "protected":
@@ -3723,7 +3728,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "tp_Idm6BMHn3iJQ86T4sRA"
    }
 
-                      Figure 151: JSON Serialization
+                      Figure 154: JSON Serialization
 
 4.11.  Protecting Specific Header Fields
 
@@ -3736,89 +3741,89 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
+   o  Plaintext content; this example uses the content from Figure 51.
 
    o  Recipient encryption key; this example uses the key from Figure
-      122.
+      125.
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 67]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    o  Key encryption algorithm; this example uses "A128KW".
 
    o  Content encryption algorithm; this example uses "A128GCM".
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 67]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
 
 4.11.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 152.
+      example uses the key from Figure 155.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 153.
+      vector/nonce from Figure 156.
 
    uGL3QU7R3HMR3ik-oTW82w
 
-           Figure 152: Content Encryption Key, base64url-encoded
+           Figure 155: Content Encryption Key, base64url-encoded
 
    HorZstLCLfNNC7TN
 
-           Figure 153: Initialization Vector, base64url-encoded
+           Figure 156: Initialization Vector, base64url-encoded
 
 4.11.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 152)
-   with the AES key (Figure 122) produces the following encrypted key:
+   Performing the key encryption operation over the CEK (Figure 155)
+   with the AES key (Figure 125) produces the following encrypted key:
 
    MJjYoJ6DKa__0KTJP5PT8pR0T_tybLRc
 
-               Figure 154: Encrypted Key, base64url-encoded
+               Figure 157: Encrypted Key, base64url-encoded
 
 4.11.4.  Encrypting the Content
 
    The following are generated before encrypting the content:
 
    o  Protected JWE Header; this example uses the header from Figure
-      155, encoded to [RFC4648] base64url as Figure 156.
+      158, encoded to [RFC4648] base64url as Figure 159.
 
    {
      "enc": "A128GCM"
    }
 
-                   Figure 155: Protected JWE Header JSON
+                   Figure 158: Protected JWE Header JSON
 
    eyJlbmMiOiJBMTI4R0NNIn0
 
-            Figure 156: Protected JWE Header, base64url-encoded
-
-   Performing the content encryption operation over the Plaintext with
-   the following:
-
-   o  CEK (Figure 152);
+            Figure 159: Protected JWE Header, base64url-encoded
 
 
 
-Miller                    Expires June 6, 2014                 [Page 68]
+
+Miller                    Expires June 7, 2014                 [Page 68]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
-   o  Initialization vector/nonce (Figure 153); and
+   Performing the content encryption operation over the Plaintext with
+   the following:
 
-   o  Protected JWE header (Figure 156) as authenticated data
+   o  CEK (Figure 155);
+
+   o  Initialization vector/nonce (Figure 156); and
+
+   o  Protected JWE header (Figure 159) as authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 157.
+   o  Ciphertext from Figure 160.
 
-   o  Authentication tag from Figure 158.
+   o  Authentication tag from Figure 161.
 
    XR98Or5bnT-qBoQ0-K8WbR6hphUsSoJZdE6W0c3CYJ2kSk-6NuycqF4ZrKy6YC
    -Gs3jfCwkCmW955kmDgTIlc-fSQ-w__kwrM8wepy1h61OeY2HCM8-vJpK3yHcW
@@ -3827,44 +3832,46 @@ Internet-Draft                JOSE Cookbook                December 2013
    gpw510A5yt0E5W8qkcCrezJZtCSFeHTJFqspCcnTvdfDqkGVQwo1cxKr0Wu-2K
    wb3dP8TlZJ2dMSOxXyMQav1nqZcfKn2qg4xI87D5mhfCrW
 
-                 Figure 157: Ciphertext, base64url-encoded
+                 Figure 160: Ciphertext, base64url-encoded
 
    Hjccc2tFAQi12LH6FF-jFA
 
-             Figure 158: Authentication Tag, base64url-encoded
+             Figure 161: Authentication Tag, base64url-encoded
 
 4.11.5.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Unprotected JWE header (Figure 159)
+   o  Unprotected JWE header (Figure 162)
 
-   o  Protected JWE header (Figure 156)
+   o  Protected JWE header (Figure 159)
 
-   o  encrypted key (Figure 154)
+   o  encrypted key (Figure 157)
 
-   o  Initialization vector/nonce (Figure 153)
+   o  Initialization vector/nonce (Figure 156)
 
-   o  Ciphertext (Figure 157)
+   o  Ciphertext (Figure 160)
 
-   o  Authentication tag (Figure 158)
+   o  Authentication tag (Figure 161)
 
    The following unprotected JWE header is generated before assembling
    the output results:
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 69]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    {
      "alg": "A128KW",
      "kid": "81b20965-8332-43d9-a468-82160ad91ac8"
    }
 
-                  Figure 159: Unprotected JWE Header JSON
-
-
-
-Miller                    Expires June 6, 2014                 [Page 69]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+                  Figure 162: Unprotected JWE Header JSON
 
    The resulting JWE object using the JSON serialization:
 
@@ -3895,7 +3902,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "Hjccc2tFAQi12LH6FF-jFA"
    }
 
-                      Figure 160: JSON Serialization
+                      Figure 163: JSON Serialization
 
 4.12.  Protecting Content Only
 
@@ -3908,19 +3915,19 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the content from Figure 48.
-
-   o  Recipient encryption key; this example uses the key from Figure
-      122.
-
-   o  Key encryption algorithm; this example uses "A128KW".
 
 
-
-Miller                    Expires June 6, 2014                 [Page 70]
+Miller                    Expires June 7, 2014                 [Page 70]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
+
+   o  Plaintext content; this example uses the content from Figure 51.
+
+   o  Recipient encryption key; this example uses the key from Figure
+      125.
+
+   o  Key encryption algorithm; this example uses "A128KW".
 
    o  Content encryption algorithm; this example uses "A128GCM".
 
@@ -3929,65 +3936,64 @@ Internet-Draft                JOSE Cookbook                December 2013
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key; this example the
-      key from Figure 161.
+      key from Figure 164.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 162.
+      vector/nonce from Figure 165.
 
    5UVirgqilMhbWpSnM3alUQ
 
-           Figure 161: Content Encryption Key, base64url-encoded
+           Figure 164: Content Encryption Key, base64url-encoded
 
    zdbIl4BrrziYK55_
 
-           Figure 162: Initialization Vector, base64url-encoded
+           Figure 165: Initialization Vector, base64url-encoded
 
 4.12.3.  Encrypting the Key
 
-   Performing the key encryption operation over the CEK (Figure 161 with
-   the AES key (Figure 122 produces the following encrypted key:
+   Performing the key encryption operation over the CEK (Figure 164 with
+   the AES key (Figure 125 produces the following encrypted key:
 
    yyuirCy7Hd_nY0gL5Jfq6sJ7RXRR0DtF
 
-               Figure 163: Encrypted Key, base64url-encoded
+               Figure 166: Encrypted Key, base64url-encoded
 
 4.12.4.  Encrypting the Content
 
    Performing the content encryption operation over the Plaintext
-   (Figure 48) using the following:
+   (Figure 51) using the following:
 
-   o  CEK (Figure 161);
+   o  CEK (Figure 164);
 
-   o  Initialization vector/nonce (Figure 162); and
+   o  Initialization vector/nonce (Figure 165); and
 
    o  Empty string as authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 164.
-
-   o  Authenticated data from Figure 165.
-
-   3MtsMr7GhYafTv6KNiWMEg5vl4tE2FHfmvfxhTJnioynNBD7G6LEEI6uLDHK-p
-   A2vINROgEAEiN9srAPN2qxl1kxJs4FBBin21pErXalJF_yqotv5OX-sXpyMSd2
 
 
-
-Miller                    Expires June 6, 2014                 [Page 71]
+Miller                    Expires June 7, 2014                 [Page 71]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+   o  Ciphertext from Figure 167.
+
+   o  Authenticated data from Figure 168.
+
+   3MtsMr7GhYafTv6KNiWMEg5vl4tE2FHfmvfxhTJnioynNBD7G6LEEI6uLDHK-p
+   A2vINROgEAEiN9srAPN2qxl1kxJs4FBBin21pErXalJF_yqotv5OX-sXpyMSd2
    X4peV29PRKVI2gaeVH8QjhuV5ar1UYaFW9qTqxwsN_NrbN8x709Exvhl3LoX6H
    5XH9KFAc0nEk_AXvAvtYbq3GpWu3OONrXQuq6Oy7LCvBwCjlSKUEMR094sPim5
    GVB7p_CX_xDuWGkPiaCTru0qJOfPjIbzzAjnf5m4Nw9kB1bMmYl4k_nvBSbUa1
    -ybdYyGcK1ldGbWzYsCYZFII4DmK8rXHYDHRA1jR8StGEo
 
-                 Figure 164: Ciphertext, base64url-encoded
+                 Figure 167: Ciphertext, base64url-encoded
 
    0qbCArWBoY_iqVMwfjNC4Q
 
-             Figure 165: Authentication Tag, base64url-encoded
+             Figure 168: Authentication Tag, base64url-encoded
 
 4.12.5.  Output Results
 
@@ -4000,19 +4006,19 @@ Internet-Draft                JOSE Cookbook                December 2013
      "enc": "A128GCM"
    }
 
-                  Figure 166: Unprotected JWE Header JSON
+                  Figure 169: Unprotected JWE Header JSON
 
    The following compose the resulting JWE object:
 
-   o  Unprotected JWE header (Figure 166)
+   o  Unprotected JWE header (Figure 169)
 
-   o  encrypted key (Figure 163)
+   o  encrypted key (Figure 166)
 
-   o  Initialization vector/nonce (Figure 162)
+   o  Initialization vector/nonce (Figure 165)
 
-   o  Ciphertext (Figure 164)
+   o  Ciphertext (Figure 167)
 
-   o  Authentication tag (Figure 165)
+   o  Authentication tag (Figure 168)
 
    The resulting JWE object using the JSON serialization:
 
@@ -4020,20 +4026,20 @@ Internet-Draft                JOSE Cookbook                December 2013
      "recipients": [
        {
          "encrypted_key":
+
+
+
+Miller                    Expires June 7, 2014                 [Page 72]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
            "yyuirCy7Hd_nY0gL5Jfq6sJ7RXRR0DtF"
        }
      ],
      "unprotected": {
        "alg": "A128KW",
        "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
-
-
-
-Miller                    Expires June 6, 2014                 [Page 72]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
        "enc": "A128GCM"
      },
      "iv":
@@ -4050,7 +4056,7 @@ Internet-Draft                JOSE Cookbook                December 2013
        "0qbCArWBoY_iqVMwfjNC4Q"
    }
 
-                      Figure 167: JSON Serialization
+                      Figure 170: JSON Serialization
 
 4.13.  Encrypting to Multiple Recipients
 
@@ -4062,19 +4068,27 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the plaintext from Figure 48.
+   o  Plaintext content; this example uses the plaintext from Figure 51.
 
    o  Recipient keys; this example uses the following:
 
-      *  The RSA public key from Figure 49 for the first recipient.
+      *  The RSA public key from Figure 52 for the first recipient.
 
-      *  The EC public key from Figure 81 for the second recipient.
+      *  The EC public key from Figure 84 for the second recipient.
 
-      *  The AES symmetric key from Figure 110 for the third recipient.
+      *  The AES symmetric key from Figure 113 for the third recipient.
 
    o  Key encryption algorithms; this example uses the following:
 
       *  "RSA1_5" for the first recipient.
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 73]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
       *  "ECDH-ES+A256KW" for the second recipient.
 
@@ -4082,36 +4096,28 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    o  Content encryption algorithm; this example uses "A128CBC-HS256"
 
-
-
-
-Miller                    Expires June 6, 2014                 [Page 73]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
 4.13.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
-      example uses the key from Figure 168.
+      example uses the key from Figure 171.
 
    o  Initialization vector/nonce; this example uses the initialization
-      vector/nonce from Figure 169.
+      vector/nonce from Figure 172.
 
    OYs79m0f3LEuMZzmWBCywRn4u8B09BVidJb9j0ojDsY
 
-           Figure 168: Content Encryption Key, base64url-encoded
+           Figure 171: Content Encryption Key, base64url-encoded
 
-   qP1KgJY-vTLW-nMrMSfMYw
+   nY-xFgdef1LrsU7u
 
-           Figure 169: Initialization Vector, base64url-encoded
+           Figure 172: Initialization Vector, base64url-encoded
 
 4.13.3.  Encrypting the Key to the First Recipient
 
    Performing the "RSA1_5" key encryption operation over the CEK (Figure
-   168 with the first recipient's RSA key (Figure 49 produces the
+   171 with the first recipient's RSA key (Figure 52 produces the
    following encrypted key:
 
    EBbDunXtz-j0Gn0q4c9vtueHlb0E-oBkSMno9PUg8eR7Y5T71aU9t0JkvxtKiO
@@ -4121,30 +4127,28 @@ Internet-Draft                JOSE Cookbook                December 2013
    bEyRYlUet8PRH_CjINMipv7LCDRsKVnr3oHwZEfCJFGNC-w_-Qn4xcmkmxyaz1
    -kZEpS_t2kWJsFqx3mg7QAXJBxdGmy6A
 
-         Figure 170: Recipient #1 Encrypted Key, base64url-encoded
+         Figure 173: Recipient #1 Encrypted Key, base64url-encoded
 
    The following are generated after encrypting the CEK for the first
    recipient:
 
-   o  Recipient JWE header from Figure 171
+   o  Recipient JWE header from Figure 174
 
    {
      "alg": "RSA1_5",
      "kid": "frodo.baggins@hobbiton.example"
    }
 
-                 Figure 171: Recipient #1 JWE Header JSON
-
-   The following is the assembled first recipient JSON:
 
 
-
-
-
-Miller                    Expires June 6, 2014                 [Page 74]
+Miller                    Expires June 7, 2014                 [Page 74]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
+
+                 Figure 174: Recipient #1 JWE Header JSON
+
+   The following is the assembled first recipient JSON:
 
    {
      "encrypted_key":
@@ -4160,7 +4164,7 @@ Internet-Draft                JOSE Cookbook                December 2013
      }
    }
 
-                       Figure 172: Recipient #1 JSON
+                       Figure 175: Recipient #1 JSON
 
 4.13.4.  Encrypting the Key to the Second Recipient
 
@@ -4169,7 +4173,7 @@ Internet-Draft                JOSE Cookbook                December 2013
 
    o  Ephemeral EC private key on the same curve as the EC public key;
       this example uses the private key that matches the public key from
-      Figure 173.
+      Figure 176.
 
    {
      "kty": "EC",
@@ -4180,32 +4184,32 @@ Internet-Draft                JOSE Cookbook                December 2013
              CwXwxtgkNeZ32T"
    }
 
-     Figure 173: Ephemeral public key for Recipient #2, in JWK format
+     Figure 176: Ephemeral public key for Recipient #2, in JWK format
 
    Performing the "ECDH-ES+A256KW" key encryption operation over the CEK
-   (Figure 168 with the following:
+   (Figure 171 with the following:
 
-   o  Static Elliptic Curve public key (Figure 81).
+   o  Static Elliptic Curve public key (Figure 84).
 
-   o  Ephemeral Elliptic Curve private key (Figure 173.
+   o  Ephemeral Elliptic Curve private key (Figure 176.
 
    produces the following encrypted key:
 
-   Dd1kQYNhhSIlKEAyE9UYhjtUBGahteiYVnRUg_tWf8S9VJZKL_8YOw
-
-         Figure 174: Recipient #2 Encrypted Key, base64url-encoded
 
 
-
-Miller                    Expires June 6, 2014                 [Page 75]
+Miller                    Expires June 7, 2014                 [Page 75]
 
 Internet-Draft                JOSE Cookbook                December 2013
 
 
+   Dd1kQYNhhSIlKEAyE9UYhjtUBGahteiYVnRUg_tWf8S9VJZKL_8YOw
+
+         Figure 177: Recipient #2 Encrypted Key, base64url-encoded
+
    The following are generated after encrypting the CEK for the second
    recipient:
 
-   o  Recipient JWE Header from Figure 175.
+   o  Recipient JWE Header from Figure 178.
 
    {
      "alg": "ECDH-ES+A256KW",
@@ -4220,7 +4224,7 @@ Internet-Draft                JOSE Cookbook                December 2013
      }
    }
 
-                 Figure 175: Recipient #2 JWE Header JSON
+                 Figure 178: Recipient #2 JWE Header JSON
 
    The following is the assembled second recipient JSON:
 
@@ -4241,9 +4245,18 @@ Internet-Draft                JOSE Cookbook                December 2013
      }
    }
 
-                       Figure 176: Recipient #2 JSON
+                       Figure 179: Recipient #2 JSON
 
 4.13.5.  Encrypting the Key to the Third Recipient
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 76]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    The following are generated before encrypting the CEK for the third
    recipient:
@@ -4251,43 +4264,36 @@ Internet-Draft                JOSE Cookbook                December 2013
    o  Initialization vector/nonce for key wrapping; this example uses
       the initialization vector/nonce from {{jwe-multi-kwiv_3}
 
-
-
-Miller                    Expires June 6, 2014                 [Page 76]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
    kZtitxRDXfzCS6ZK
 
-                                Figure 177
+                                Figure 180
 
    Performing the "A256GCMKW" key encryption operation over the CEK
-   (Figure 168) with the following:
+   (Figure 171) with the following:
 
-   o  AES symmetric key (Figure 110; and
+   o  AES symmetric key (Figure 113; and
 
-   o  Initialization vector/nonce ((Figure 177
+   o  Initialization vector/nonce ((Figure 180
 
    produces the following:
 
-   o  Encrypted key from Figure 178.
+   o  Encrypted key from Figure 181.
 
-   o  Key wrap authentication tag from Figure 179
+   o  Key wrap authentication tag from Figure 182
 
    iiVL4XCDCnsWCSZCTysGxl41vdnJqIThbumNa9wSQBo
 
-         Figure 178: Recipient #3 Encrypted Key, base64url-encoded
+         Figure 181: Recipient #3 Encrypted Key, base64url-encoded
 
    DOVpODvbotRWOHEqTRcXkg
 
-         Figure 179: Recipient #3 Encrypted Key, base64url-encoded
+         Figure 182: Recipient #3 Encrypted Key, base64url-encoded
 
    The following are generated after encrypting the CEK for the third
    recipient:
 
    o  Recipient JWE header; this example uses the header from Figure
-      180.
+      183.
 
    {
      "alg": "A256GCMKW",
@@ -4296,9 +4302,17 @@ Internet-Draft                JOSE Cookbook                December 2013
      "iv":  "kZtitxRDXfzCS6ZK"
    }
 
-                 Figure 180: Recipient #3 JWE Header JSON
+                 Figure 183: Recipient #3 JWE Header JSON
 
    The following is the assembled third recipient JSON:
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 77]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
 
    {
      "encrypted_key":
@@ -4306,85 +4320,91 @@ Internet-Draft                JOSE Cookbook                December 2013
      "header": {
        "alg": "A256GCMKW",
        "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-
-
-
-Miller                    Expires June 6, 2014                 [Page 77]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
        "tag": "DOVpODvbotRWOHEqTRcXkg",
        "iv":  "kZtitxRDXfzCS6ZK"
      }
 
-                       Figure 181: Recipient #3 JSON
+                       Figure 184: Recipient #3 JSON
 
 4.13.6.  Encrypting the Content
 
+   The following are generated before encrypting the content:
+
+   o  Protected JWE Header; this example uses the header from Figure
+      185, encoded to [RFC4648] base64url as Figure 186.
+
+   {
+     "enc": "A128GCM"
+   }
+
+                   Figure 185: Protected JWE Header JSON
+
+   eyJlbmMiOiJBMTI4R0NNIn0
+
+            Figure 186: Protected JWE Header, base64url-encoded
+
    Performing the content encryption operation over the Plaintext
-   (Figure 48) with the following:
+   (Figure 51) with the following:
 
-   o  CEK (Figure 168),
+   o  CEK (Figure 171),
 
-   o  Initialization vector/nonce (Figure 169), and
+   o  Initialization vector/nonce (Figure 172), and
 
-   o  Empty string for authenticated data
+   o  Protected JWE header (Figure 186) as the authenticated data
 
    produces the following:
 
-   o  Ciphertext from Figure 182
+   o  Ciphertext from Figure 187
 
-   o  Authentication tag from Figure 183
+   o  Authentication tag from Figure 188
 
-   VJqUdp2MfoO_U2SSK-KWgoUIGe9BJcgDvr8XgndANCOAcXMCsQvg7c1BUtdX9C
-   asB_QGgscjcU-FsUHOt_RrAOAUEWCqInU1TpLX40Oub05I1QMeRnbQP4CPS-2W
-   pZVhx5Z2RYCXVLftSKjPbjjdnxdj6qWhp6Wtzkd-qpf3zLwMFwhXYTkO0zZi-S
-   brQDrHXPizk3eyi-8fVmN6aG7tUkFWodU14c9DshpUqV5yuQn-nl-O7oU_Jsum
-   9NSyGFuL35PEkjKSf0tQm8ukNfgLi6FJFECjUrmP7hw4LADjr3ypqU6u5yzk6T
-   lbNT6u9KmVsgln0wVIT4wI5IDS2bjyWB-ndz6WyXxXFJkVc8Xqr98
+   aG6vvrUIPIE5AunujYfPvgO1ypah6leCfYeW721swK9Nr8ERrKJn-HFkEkcx2r
+   HnLgp33hKX6jPBWlSwilwGl2e2xg3SxQiA9OYncXBkpUcUK4KoIg7qCvtTsVFp
+   sVRJYTBDqpGuecYdYOeZPWUuB1vX4jrCFIpHh3BIraAE6iTxdmxhHP-OXGZQpU
+   N4Y2qcromUQP2jSreVGp2Gn9b4bWELfLny4WqRVmB_bySnyUxdglzGAQEse7s_
 
-                 Figure 182: Ciphertext, base64url-encoded
 
-   viYGRDbo5-F0Mj2Cy4FiKQ
 
-             Figure 183: Authentication Tag, base64url-encoded
+Miller                    Expires June 7, 2014                 [Page 78]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+   o1s_6i1fOZnB5WzcoNo2aTZIKWLjJ347XL95KcF9aYwMAZSi7N4n41Zs2Yaa8-
+   u07LpV9fQ7ubDQj1fQ4clpxPv_IDbHJ3tgdlH2lWSHwZADwgpIOA
+
+                 Figure 187: Ciphertext, base64url-encoded
+
+   ESZx8edqbU4osp8P8H0a5Q
+
+             Figure 188: Authentication Tag, base64url-encoded
 
    The following is generated after encrypting the plaintext:
 
    o  Unprotected JWE header parameters; this example uses the header
-      from Figure 184.
+      from Figure 189.
 
    {
-     "enc": "A128CBC-HS256"
+     "cty": "text/plain"
    }
 
-                  Figure 184: Unprotected JWE Header JSON
-
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 78]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
+                  Figure 189: Unprotected JWE Header JSON
 
 4.13.7.  Output Results
 
    The following compose the resulting JWE object:
 
-   o  Recipient #1 JSON (Figure 172)
+   o  Recipient #1 JSON (Figure 175)
 
-   o  Recipient #2 JSON (Figure 176)
+   o  Recipient #2 JSON (Figure 179)
 
-   o  Recipient #3 JSON (Figure 181)
+   o  Recipient #3 JSON (Figure 184)
 
-   o  Initialization vector/nonce (Figure 169)
+   o  Initialization vector/nonce (Figure 172)
 
-   o  Ciphertext (Figure 182)
+   o  Ciphertext (Figure 187)
 
-   o  Authentication tag (Figure 183)
+   o  Authentication tag (Figure 188)
 
    The resulting JWE object using the JSON serialization:
 
@@ -4398,6 +4418,14 @@ Internet-Draft                JOSE Cookbook                December 2013
             tk7KKjyw38LBuvSOVdokkHWMP4pVLeUJB1ovbT4M1j3pxUzyM2426
             sD6LfjorQhY8vsChyDaFST0Oe8uBvcRyA5mabEyRYlUet8PRH_CjI
             NMipv7LCDRsKVnr3oHwZEfCJFGNC-w_-Qn4xcmkmxyaz1-kZEpS_t
+
+
+
+Miller                    Expires June 7, 2014                 [Page 79]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
             2kWJsFqx3mg7QAXJBxdGmy6A",
          "header": {
            "alg": "RSA1_5",
@@ -4418,14 +4446,6 @@ Internet-Draft                JOSE Cookbook                December 2013
                "-fcIsKguXqJTTsWdHbJ4iRY_xARz9O_JdAxVEJnrxo7sJRbkw
                 HmwlMi4AxCVzG_I",
              "y":
-
-
-
-Miller                    Expires June 6, 2014                 [Page 79]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
-
                "JcuN_3pD0dbTjry07BoFoJ-_W-SumUHH9XIAvXkKeFkJV4s5G
                 MCwXwxtgkNeZ32T"
            }
@@ -4442,24 +4462,33 @@ Internet-Draft                JOSE Cookbook                December 2013
          }
        }
      ],
+     "protected": "eyJlbmMiOiJBMTI4R0NNIn0",
      "unprotected": {
-       "enc": "A128GCM"
+       "cty": "text/plain"
      },
      "iv":
-       "qP1KgJY-vTLW-nMrMSfMYw",
+       "nY-xFgdef1LrsU7u",
      "ciphertext":
-       "VJqUdp2MfoO_U2SSK-KWgoUIGe9BJcgDvr8XgndANCOAcXMCsQvg7c1BU
-        tdX9CasB_QGgscjcU-FsUHOt_RrAOAUEWCqInU1TpLX40Oub05I1QMeRn
-        bQP4CPS-2WpZVhx5Z2RYCXVLftSKjPbjjdnxdj6qWhp6Wtzkd-qpf3zLw
-        MFwhXYTkO0zZi-SbrQDrHXPizk3eyi-8fVmN6aG7tUkFWodU14c9DshpU
-        qV5yuQn-nl-O7oU_Jsum9NSyGFuL35PEkjKSf0tQm8ukNfgLi6FJFECjU
-        rmP7hw4LADjr3ypqU6u5yzk6TlbNT6u9KmVsgln0wVIT4wI5IDS2bjyWB
-        -ndz6WyXxXFJkVc8Xqr98",
+       "aG6vvrUIPIE5AunujYfPvgO1ypah6leCfYeW721swK9Nr8ERrKJn-HFkE
+        kcx2rHnLgp33hKX6jPBWlSwilwGl2e2xg3SxQiA9OYncXBkpUcUK4KoIg
+        7qCvtTsVFpsVRJYTBDqpGuecYdYOeZPWUuB1vX4jrCFIpHh3BIraAE6iT
+        xdmxhHP-OXGZQpUN4Y2qcromUQP2jSreVGp2Gn9b4bWELfLny4WqRVmB_
+        bySnyUxdglzGAQEse7s_o1s_6i1fOZnB5WzcoNo2aTZIKWLjJ347XL95K
+
+
+
+Miller                    Expires June 7, 2014                 [Page 80]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
+        cF9aYwMAZSi7N4n41Zs2Yaa8-u07LpV9fQ7ubDQj1fQ4clpxPv_IDbHJ3
+        tgdlH2lWSHwZADwgpIOA",
      "tag":
-       "viYGRDbo5-F0Mj2Cy4FiKQ"
+       "ESZx8edqbU4osp8P8H0a5Q"
    }
 
-                      Figure 185: JSON Serialization
+                      Figure 190: JSON Serialization
 
 5.  Security Considerations
 
@@ -4473,14 +4502,6 @@ Internet-Draft                JOSE Cookbook                December 2013
    This document has no actions for IANA.
 
 7.  Informative References
-
-
-
-
-Miller                    Expires June 6, 2014                 [Page 80]
-
-Internet-Draft                JOSE Cookbook                December 2013
-
 
    [I-D.ietf-jcardcal-jcard]
               Kewisch, P., "jCard: The JSON format for vCard", draft-
@@ -4510,6 +4531,13 @@ Internet-Draft                JOSE Cookbook                December 2013
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
 
+
+
+Miller                    Expires June 7, 2014                 [Page 81]
+
+Internet-Draft                JOSE Cookbook                December 2013
+
+
 Appendix A.  Acknowledgements
 
    All of the examples herein use quotes and character names found in
@@ -4533,4 +4561,32 @@ Author's Address
 
 
 
-Miller                    Expires June 6, 2014                 [Page 81]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                    Expires June 7, 2014                 [Page 82]
