@@ -1,0 +1,12 @@
+{
+    "name": "jose-cookbook",
+    "version": "0.2.0",
+    "repository": {
+        "type":"git",
+        "url":"https://github.com/linuxwolf/jose-more.git"
+    },
+    "dependencies": {
+        "q": "~0.9",
+        "jose":"git+http://outer-planes.net/git/node-jose.git"
+    }
+}
