@@ -1,3 +1,4 @@
 .html
 .xml
 .refcache/
+node_modules/
