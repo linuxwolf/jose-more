@@ -1,85 +1,19 @@
+/*!
+ * cook-sig - Generats signature examples
+ *
+ * This content is in the public domain.
+ */
 
 var jose = require("jose"),
     Q = require("q"),
-    fs = require("fs");
+    fs = require("fs"),
+    common = require("./common.js");
 
 var keys = fs.readFileSync(__dirname + "/../pki/signatures.json", "utf8");
 keys = JSON.parse(keys);
 keys = jose.JWK.asKeyStore(keys);
 
 var input = "It’s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there’s no knowing where you might be swept off to.";
-
-var chunk = function(str) {
-    var segments = Math.ceil(str.length / 64);
-    var results = [],
-        seglen,
-        idx;
-    for (idx = 1; idx <= segments; idx++) {
-        seglen = idx * 64;
-        results.push(str.substring(seglen - 64, seglen));
-    }
-    
-    return results.join("\n");
-}
-var splitit = function(str) {
-    var results = [],
-        line,
-        pos;
-    
-    while (str.length) {
-        if (str.length < 64) {
-            pos = -1;
-        } else {
-            pos = str.lastIndexOf(" ", 64);
-        }
-        
-        if (pos === -1) {
-            line = str;
-            str = "";
-        } else {
-            line = str.substring(0, pos);
-            str = str.substring(pos);
-        }
-        results.push(line);
-    }
-    
-    return results.join("\n");
-}
-
-var prettify = function(input) {
-    var str;
-    if (typeof(input) === "string") {
-        str = input.trim();
-    } else {
-        str = JSON.stringify(input, null, 2);
-    }
-    str = str.split("\n").
-              map(chunk).
-              join("\n");
-    
-    return str;
-}
-
-var makeCompact = function(json) {
-    var jws = [];
-    
-    if (typeof(json) === "string") {
-        jws = json.split(".");
-    } else {
-        if (json.signatures.length > 1) {
-            return [];
-        }
-        if (json.signatures[0].header) {
-            return [];
-        }
-    
-        jws[0] = json.signatures[0].protected || "";
-        jws[1] = json.payload || "";
-        jws[2] = json.signatures[0].signature || "";
-    }
-    
-    return jws;
-}
 
 var ops = [
     {
@@ -109,7 +43,7 @@ var ops = [
                 key: keys.get({"kty":"RSA"}),
                 protect: "*",
                 header: {
-                    alg: "PS256"
+                    alg: "PS384"
                 }
             }
         ]
@@ -208,14 +142,14 @@ var ops = [
         signers: [
             {
                 key: keys.get({"kty":"RSA"}),
-                protect: "*",
+                protect: "alg",
                 header: {
                     alg: "RS256"
                 }
             },
             {
                 key: keys.get({"kty":"EC"}),
-                protect: "*",
+                protect: null,
                 header: {
                     alg: "ES512"
                 }
@@ -245,54 +179,59 @@ var doOp = function(op) {
     
     results = results.then(function(jws) {
         console.log("Example '%s:'", op.name);
-        console.log("================================================================");
+        console.log("==============================================================");
 
         
         var compact, json;
-        compact = makeCompact(jws);
-        json = prettify(jws);
+        compact = common.makeCompact(jws);
+        json = common.prettify(jws);
         
         var __outputSig = function(idx) {
             var key = op.signers[idx].key;
-            key = prettify(key.toJSON(true));
+            key = common.prettify(key.toJSON(true));
             console.log("\nSignature #%d Key:",
                         idx+1);
-            console.log("----------------------------------------------------------------");
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(key);
-            console.log("----------------------------------------------------------------");
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     
             var header;
             header = jws.signatures[idx].protected;
             if (header) {
                 header = {
-                    b64u: prettify(header),
-                    json: prettify(JSON.parse(jose.base64url.decode(header, "utf8")))
+                    b64u: common.prettify(header),
+                    json: common.prettify(JSON.parse(jose.base64url.decode(header, "utf8")))
                 };
-                console.log("\nSignature #%d protected JWS Header (JSON):", idx+1);
-                console.log("----------------------------------------------------------------");
+                console.log("\nSignature #%d Protected JWS Header (JSON):", idx+1);
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 console.log(header.json);
-                console.log("----------------------------------------------------------------");
-                console.log("\nSignature #%d protected JWS Header (base64url):", idx+1);
-                console.log("----------------------------------------------------------------");
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                console.log("\nSignature #%d Protected JWS Header (base64url):", idx+1);
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 console.log(header.b64u);
-                console.log("----------------------------------------------------------------");
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         
             header = jws.signatures[idx].header;
             if (header) {
-                header = prettify(header);
-                console.log("\nSignature #%d unprotected JWS Header (JSON):\n%s", idx+1);
-                console.log("----------------------------------------------------------------");
+                header = common.prettify(header);
+                console.log("\nSignature #%d Unprotected JWS Header (JSON):\n", idx+1);
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 console.log(header);
-                console.log("----------------------------------------------------------------");
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         
             var sig = jws.signatures[idx].signature;
-            sig = prettify(sig);
+            sig = common.prettify(sig);
             console.log("\nSignature #%d:", idx+1);
-            console.log("----------------------------------------------------------------");
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(sig);
-            console.log("----------------------------------------------------------------");
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            
+            console.log("\nSignature #%d JSON:", idx+1);
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            console.log(common.prettify(jws.signatures[idx]));
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
         for (var idx = 0; idx < op.signers.length; idx++) {
             __outputSig(idx);
@@ -309,17 +248,17 @@ var doOp = function(op) {
                               }).
                               join(".").
                               trim();
-            console.log("\nCompact serialization:");
-            console.log("----------------------------------------------------------------");
+            console.log("\nCompact Serialization:");
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(compact);
-            console.log("----------------------------------------------------------------");
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
         
-        console.log("\nJSON serialization:");
-        console.log("----------------------------------------------------------------");
+        console.log("\nJSON Serialization:");
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.log(json);
-        console.log("----------------------------------------------------------------");
-        console.log("================================================================");
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log("==============================================================");
         console.log("\n\n");
     }, function(err) {
         console.log("Example '%s' failed: %s", op.name, err.message);
@@ -329,14 +268,14 @@ var doOp = function(op) {
 }
 
 console.log("\nPayload (utf-8):");
-console.log("----------------------------------------------------------------");
-console.log(splitit(input));
-console.log("----------------------------------------------------------------");
+console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+console.log(common.splitit(input));
+console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 console.log("\nPayload (base64url):");
-console.log("----------------------------------------------------------------");
-console.log(prettify(jose.base64url.encode(input, "utf8")));
-console.log("----------------------------------------------------------------");
-console.log("================================================================");
+console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+console.log(common.prettify(jose.base64url.encode(input, "utf8")));
+console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+console.log("==============================================================");
 console.log("\n\n");
 
 ops.reduce(function(chain, op) {
