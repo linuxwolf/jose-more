@@ -54,7 +54,7 @@ All instances of binary octet strings are represented using {{RFC4648}} base64ur
 
 Wherever possible, the examples include both the Compact and JSON serializations.
 
-All of the examples in this document have whitespace added to improve formatting and readability.  Except for plaintext or payload content, whitespace is not part of the cryptographic operations.  Plaintext or payload content does include whitespace (unless otherwise noted), although line breaks (U+000A LINE FEED) have replaced spaces (U+0020 SPACE) is some cases to improve readability.
+All of the examples in this document have whitespace added to improve formatting and readability.  Except for plaintext or payload content, whitespace is not part of the cryptographic operations.  Plaintext or payload content does include whitespace (unless otherwise noted), with line breaks (U+000A LINE FEED) added to improve readability.
 
 
 # Terminology  # {#terms}
@@ -65,22 +65,23 @@ This document inherits terminology regarding JSON Web Key (JWK) technology from 
 
 The following sections demonstrate how to generate various JWS objects.
 
-All of the succeeding examples use the following payload plaintext, serialized as UTF-8, with line breaks (U+000A LINE FEED) replacing some " " (U+0020 SPACE) characters to improve formatting:
+All of the succeeding examples use the following payload plaintext, serialized as UTF-8;  the sequence "\xe2\x80\x99" substituted for (U+2019 RIGHT SINGLE QUOTATION MARK) and line breaks (U+000A LINE FEED) replacing some " " (U+0020 SPACE) to improve readability:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-It's a dangerous business, Frodo, going out your door. You
-step onto the road, and if you don't keep your feet, there's
-no knowing where you might be swept off to.
+It\xe2\x80\x99s a dangerous business, Frodo, going out your
+door. You step onto the road, and if you don't keep your feet,
+there\xe2\x80\x99s no knowing where you might be swept off
+to.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-payload title="Payload content plaintext" }
 
-The Payload -- with line breaks (U+000A LINE FEED) replaced with " " (U+0020 SPACE) -- encoded as {{RFC4648}} base64url:
+The Payload -- with the sequence "\x2x80\x99" replaced with (U+2019 RIGHT SINGLE QUOTATION MARK) and line breaks (U+000A LINE FEED) replaced with " " (U+0020 SPACE) -- encoded as UTF-8 then as {{RFC4648}} base64url:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
+lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
+b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
+UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-payload_b64u title="Payload content, base64url-encoded" }
 
@@ -102,41 +103,41 @@ The following are supplied before beginning the signing operation:
   "kty": "RSA",
   "kid": "bilbo.baggins@hobbiton.example",
   "use": "sig",
-  "n":   "n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rH
-          VTeT-O-XV2jRojdNhxJWTDvNd7nqQ0VEiZQHz_AJmSCpMaJMRB
-          SFKrKb2wqVwGU_NsYOYL-QtiWN2lbzcEe6XC0dApr5ydQLrHqk
-          HHig3RBordaZ6Aj-oBHqFEHYpPe7Tpe-OfVfHd1E6cS6M1FZcD
-          1NNLYD5lFHpPI9bTwJlsde3uhGqC0ZCuEHg8lhzwOHrtIQbS0F
-          Vbb9k3-tVTU4fg_3L_vniUFAKwuCLqKnS2BYwdq_mzSnbLY7h_
-          qixoR7jig3__kRhuaxwUkRz5iaiQkqgc5gHdrNP5zw",
-  "e":   "AQAB",
-  "d":   "bWUC9B-EFRIo8kpGfh0ZuyGPvMNKvYWNtB_ikiH9k20eT-O1q_
-          I78eiZkpXxXQ0UTEs2LsNRS-8uJbvQ-A1irkwMSMkK1J3XTGgd
-          rhCku9gRldY7sNA_AKZGh-Q661_42rINLRCe8W-nZ34ui_qOfk
-          LnK9QWDDqpaIsA-bMwWWSDFu2MUBYwkHTMEzLYGqOe04noqeq1
-          hExBTHBOBdkMXiuFhUq1BU6l-DqEiWxqg82sXt2h-LMnT3046A
-          OYJoRioz75tSUQfGCshWTBnP5uDjd18kKhyv07lhfSJdrPdM5P
-          lyl21hsFf4L_mHCuoFau7gdsPfHPxxjVOcOpBrQzwQ",
-  "p":   "3Slxg_DwTXJcb6095RoXygQCAZ5RnAvZlno1yhHtnUex_fp7AZ
-          _9nRaO7HX_-SFfGQeutao2TDjDAWU4Vupk8rw9JR0AzZ0N2fvu
-          IAmr_WCsmGpeNqQnev1T7IyEsnh8UMt-n5CafhkikzhEsrmndH
-          6LxOrvRJlsPp6Zv8bUq0k",
-  "q":   "uKE2dh-cTf6ERF4k4e_jy78GfPYUIaUyoSSJuBzp3Cubk3OCqs
-          6grT8bR_cu0Dm1MZwWmtdqDyI95HrUeq3MP15vMMON8lHTeZu2
-          lmKvwqW7anV5UzhM1iZ7z4yMkuUwFWoBvyY898EXvRD-hdqRxH
-          lSqAZ192zB3pVFJ0s7pFc",
-  "dp":  "B8PVvXkvJrj2L-GYQ7v3y9r6Kw5g9SahXBwsWUzp19TVlgI-YV
-          85q1NIb1rxQtD-IsXXR3-TanevuRPRt5OBOdiMGQp8pbt26glj
-          YfKU_E9xn-RULHz0-ed9E9gXLKD4VGngpz-PfQ_q29pk5xWHoJ
-          p009Qf1HvChixRX59ehik",
-  "dq":  "CLDmDGduhylc9o7r84rEUVn7pzQ6PF83Y-iBZx5NT-TpnOZKF1
-          pErAMVeKzFEl41DlHHqqBLSM0W1sOFbwTxYWZDm6sI6og5iTbw
-          QGIC3gnJKbi_7k_vJgGHwHxgPaX2PnvP-zyEkDERuf-ry4c_Z1
-          1Cq9AqC2yeL6kdKT1cYF8",
-  "qi":  "3PiqvXQN0zwMeE-sBvZgi289XP9XCQF3VWqPzMKnIgQp7_Tugo
-          6-NZBKCQsMf3HaEGBjTVJs_jcK8-TRXvaKe-7ZMaQj8VfBdYks
-          sbu0NKDDhjJ-GtiseaDVWt7dcH0cfwxgFUHpQh7FoCrjFJ6h6Z
-          EpMF6xmujs4qMpPz8aaI4"
+  "n": "n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rHVTeT
+      -O-XV2jRojdNhxJWTDvNd7nqQ0VEiZQHz_AJmSCpMaJMRBSFKrKb2wqV
+      wGU_NsYOYL-QtiWN2lbzcEe6XC0dApr5ydQLrHqkHHig3RBordaZ6Aj-
+      oBHqFEHYpPe7Tpe-OfVfHd1E6cS6M1FZcD1NNLYD5lFHpPI9bTwJlsde
+      3uhGqC0ZCuEHg8lhzwOHrtIQbS0FVbb9k3-tVTU4fg_3L_vniUFAKwuC
+      LqKnS2BYwdq_mzSnbLY7h_qixoR7jig3__kRhuaxwUkRz5iaiQkqgc5g
+      HdrNP5zw",
+  "e": "AQAB",
+  "d": "bWUC9B-EFRIo8kpGfh0ZuyGPvMNKvYWNtB_ikiH9k20eT-O1q_I78e
+      iZkpXxXQ0UTEs2LsNRS-8uJbvQ-A1irkwMSMkK1J3XTGgdrhCku9gRld
+      Y7sNA_AKZGh-Q661_42rINLRCe8W-nZ34ui_qOfkLnK9QWDDqpaIsA-b
+      MwWWSDFu2MUBYwkHTMEzLYGqOe04noqeq1hExBTHBOBdkMXiuFhUq1BU
+      6l-DqEiWxqg82sXt2h-LMnT3046AOYJoRioz75tSUQfGCshWTBnP5uDj
+      d18kKhyv07lhfSJdrPdM5Plyl21hsFf4L_mHCuoFau7gdsPfHPxxjVOc
+      OpBrQzwQ",
+  "p": "3Slxg_DwTXJcb6095RoXygQCAZ5RnAvZlno1yhHtnUex_fp7AZ_9nR
+      aO7HX_-SFfGQeutao2TDjDAWU4Vupk8rw9JR0AzZ0N2fvuIAmr_WCsmG
+      peNqQnev1T7IyEsnh8UMt-n5CafhkikzhEsrmndH6LxOrvRJlsPp6Zv8
+      bUq0k",
+  "q": "uKE2dh-cTf6ERF4k4e_jy78GfPYUIaUyoSSJuBzp3Cubk3OCqs6grT
+      8bR_cu0Dm1MZwWmtdqDyI95HrUeq3MP15vMMON8lHTeZu2lmKvwqW7an
+      V5UzhM1iZ7z4yMkuUwFWoBvyY898EXvRD-hdqRxHlSqAZ192zB3pVFJ0
+      s7pFc",
+  "dp": "B8PVvXkvJrj2L-GYQ7v3y9r6Kw5g9SahXBwsWUzp19TVlgI-YV85q
+      1NIb1rxQtD-IsXXR3-TanevuRPRt5OBOdiMGQp8pbt26gljYfKU_E9xn
+      -RULHz0-ed9E9gXLKD4VGngpz-PfQ_q29pk5xWHoJp009Qf1HvChixRX
+      59ehik",
+  "dq": "CLDmDGduhylc9o7r84rEUVn7pzQ6PF83Y-iBZx5NT-TpnOZKF1pEr
+      AMVeKzFEl41DlHHqqBLSM0W1sOFbwTxYWZDm6sI6og5iTbwQGIC3gnJK
+      bi_7k_vJgGHwHxgPaX2PnvP-zyEkDERuf-ry4c_Z11Cq9AqC2yeL6kdK
+      T1cYF8",
+  "qi": "3PiqvXQN0zwMeE-sBvZgi289XP9XCQF3VWqPzMKnIgQp7_Tugo6-N
+      ZBKCQsMf3HaEGBjTVJs_jcK8-TRXvaKe-7ZMaQj8VfBdYkssbu0NKDDh
+      jJ-GtiseaDVWt7dcH0cfwxgFUHpQh7FoCrjFJ6h6ZEpMF6xmujs4qMpP
+      z8aaI4"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsa-key title="RSA 2048-bit Private Key, in JWK format"}
@@ -164,12 +165,12 @@ hhbXBsZSJ9
 Performing the signature operation over the combined protected JWS header ({{jws-rsa-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
-8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweDy8L_6XBy6JjcxGne_o
-GDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuMpkd675wX8lPtiiEmswOqph6aCtA
-LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
--UR_XcxxvQ1b7gYAhh5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxW
-dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
+MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHoxnW2e5CZ5NlKtainoFmK
+ZopdHM1O2U4mwzJdQx996ivp83xuglII7PNDi84wnB-BDkoBwA78185hX-Es4J
+IwmDLJK3lfWRa-XtL0RnltuYv746iYTh_qHRD68BNt1uSNCrUCTJDt5aAE6x8w
+W1Kt9eRo4QPocSadnHXFxnt8Is9UzpERV0ePPQdLuW3IS_de3xyIrDaLGdjluP
+xUAhb6L2aXic1U12podGU0KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJushZ41Axf_f
+cIe8u9ipH84ogoree7vjbU5y18kDquDg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsa-sig title="Signature, base64url-encoded"}
 
@@ -187,17 +188,17 @@ The resulting JWS object using the Compact serialization:
 eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 .
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
+lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
+b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
+UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 .
-jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmINxPHuBZyNb
-8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweDy8L_6XBy6JjcxGne_o
-GDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuMpkd675wX8lPtiiEmswOqph6aCtA
-LnBDMTUOlFzPpOb6B6OXctf4AG1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R
--UR_XcxxvQ1b7gYAhh5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxW
-dD6kVwiEIYeHPT4uhaRe2XgbTSx2pTQg
+MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHoxnW2e5CZ5NlKtainoFmK
+ZopdHM1O2U4mwzJdQx996ivp83xuglII7PNDi84wnB-BDkoBwA78185hX-Es4J
+IwmDLJK3lfWRa-XtL0RnltuYv746iYTh_qHRD68BNt1uSNCrUCTJDt5aAE6x8w
+W1Kt9eRo4QPocSadnHXFxnt8Is9UzpERV0ePPQdLuW3IS_de3xyIrDaLGdjluP
+xUAhb6L2aXic1U12podGU0KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJushZ41Axf_f
+cIe8u9ipH84ogoree7vjbU5y18kDquDg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsa-compact title="Compact Serialization" }
 
@@ -205,24 +206,22 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
-      "protected":
-        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
-         ml0b24uZXhhbXBsZSJ9",
-      "signature":
-        "jYc0gEV3V-RogN63dfD39ubQDvRFpqT0pYN2zmDfhxzLEqvWNFmIN
-         xPHuBZyNb8FDgfU7oFPgLMdbzWP8dzebwCAQH1j_MV98HMMoaQweD
-         y8L_6XBy6JjcxGne_oGDyMM-gBm6VyW_xqK03pLEvmUrUlFLAVWuM
-         pkd675wX8lPtiiEmswOqph6aCtALnBDMTUOlFzPpOb6B6OXctf4AG
-         1cTfzcbyLWIGhGjqnPdqmoHldn-57eRT-G-R-UR_XcxxvQ1b7gYAh
-         h5_367tNnlnhIvv0RNr2UaqtnSG50B3TUVdDuJ0eHmPxWdD6kVwiE
-         IYeHPT4uhaRe2XgbTSx2pTQg"
+      "protected": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2
+          dpbnNAaG9iYml0b24uZXhhbXBsZSJ9",
+      "signature": "MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHo
+          xnW2e5CZ5NlKtainoFmKZopdHM1O2U4mwzJdQx996ivp83xuglII
+          7PNDi84wnB-BDkoBwA78185hX-Es4JIwmDLJK3lfWRa-XtL0Rnlt
+          uYv746iYTh_qHRD68BNt1uSNCrUCTJDt5aAE6x8wW1Kt9eRo4QPo
+          cSadnHXFxnt8Is9UzpERV0ePPQdLuW3IS_de3xyIrDaLGdjluPxU
+          Ahb6L2aXic1U12podGU0KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJush
+          Z41Axf_fcIe8u9ipH84ogoree7vjbU5y18kDquDg"
     }
   ]
 }
@@ -264,12 +263,12 @@ hhbXBsZSJ9
 Performing the signature operation over the combined protected JWS header ({{jws-rsapss-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQlT698iBkiy
-wXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1AaphZObG94tYCdyQlwdrCy
-lBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rAUK9VL_HmKRcjo2dQ_VRfbaCSmmI
--aohWvcdptMyI6kZhHL_zLCOWO5RoY5YWV42u46ZdW-e06QgBZkzdHEmS2Aimx
-EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
-6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
+cu22eBqkYDKgIlTpzDXGvaFfz6WGoz7fUDcfT0kkOy42miAh2qyBzk1xEsnk2I
+pN6-tPid6VrklHkqsGqDqHCdP6O8TTB5dDDItllVo6_1OLPpcbUrhiUSMxbbXU
+vdvWXzg-UD8biiReQFlfz28zGWVsdiNAUf8ZnyPEgVFn442ZdNqiVJRmBqrYRX
+e8P_ijQ7p8Vdz0TTrxUeT3lm8d9shnr2lfJT8ImUjvAA2Xez2Mlp8cBE5awDzT
+0qI0n6uiP1aCN_2_jLAeQTlqRHtfa64QQSUmFAAjVKPbByi7xho0uTOcbH510a
+6GYmJUAfmWjwZ6oD4ifKo8DYM-X72Eaw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsapss-sig title="Signature, base64url-encoded"}
 
@@ -287,17 +286,17 @@ The resulting JWS object using the Compact serialization:
 eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 .
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
+lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
+b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
+UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 .
-kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQlT698iBkiy
-wXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1AaphZObG94tYCdyQlwdrCy
-lBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rAUK9VL_HmKRcjo2dQ_VRfbaCSmmI
--aohWvcdptMyI6kZhHL_zLCOWO5RoY5YWV42u46ZdW-e06QgBZkzdHEmS2Aimx
-EIy6PamU6FKvRLR3s8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU
-6jN1AwrFGwe7kd33X6AX9CaMtOJaUZVw
+cu22eBqkYDKgIlTpzDXGvaFfz6WGoz7fUDcfT0kkOy42miAh2qyBzk1xEsnk2I
+pN6-tPid6VrklHkqsGqDqHCdP6O8TTB5dDDItllVo6_1OLPpcbUrhiUSMxbbXU
+vdvWXzg-UD8biiReQFlfz28zGWVsdiNAUf8ZnyPEgVFn442ZdNqiVJRmBqrYRX
+e8P_ijQ7p8Vdz0TTrxUeT3lm8d9shnr2lfJT8ImUjvAA2Xez2Mlp8cBE5awDzT
+0qI0n6uiP1aCN_2_jLAeQTlqRHtfa64QQSUmFAAjVKPbByi7xho0uTOcbH510a
+6GYmJUAfmWjwZ6oD4ifKo8DYM-X72Eaw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsapss-compact title="Compact Serialization" }
 
@@ -305,24 +304,22 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
-      "protected":
-        "eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
-         ml0b24uZXhhbXBsZSJ9",
-      "signature":
-        "kmV2DSGzAWL3qq4fZOpOfW1Jn-qFa0OyEOtaL-XiDt_JQVnhurpQl
-         T698iBkiywXRzcvwyY-UgeTrCDT6kPAZHN3Tj6l_bsPwHt7B1Aaph
-         ZObG94tYCdyQlwdrCylBBaDMwwjQuSvL9MP40KLAlV5BGmnps-2rA
-         UK9VL_HmKRcjo2dQ_VRfbaCSmmI-aohWvcdptMyI6kZhHL_zLCOWO
-         5RoY5YWV42u46ZdW-e06QgBZkzdHEmS2AimxEIy6PamU6FKvRLR3s
-         8tiagdmBEwqiXUoRq5i3VL-XRvGMtk6jUonloTOii-nsU6jN1AwrF
-         Gwe7kd33X6AX9CaMtOJaUZVw"
+      "protected": "eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2
+          dpbnNAaG9iYml0b24uZXhhbXBsZSJ9",
+      "signature": "cu22eBqkYDKgIlTpzDXGvaFfz6WGoz7fUDcfT0kkOy
+          42miAh2qyBzk1xEsnk2IpN6-tPid6VrklHkqsGqDqHCdP6O8TTB5
+          dDDItllVo6_1OLPpcbUrhiUSMxbbXUvdvWXzg-UD8biiReQFlfz2
+          8zGWVsdiNAUf8ZnyPEgVFn442ZdNqiVJRmBqrYRXe8P_ijQ7p8Vd
+          z0TTrxUeT3lm8d9shnr2lfJT8ImUjvAA2Xez2Mlp8cBE5awDzT0q
+          I0n6uiP1aCN_2_jLAeQTlqRHtfa64QQSUmFAAjVKPbByi7xho0uT
+          OcbH510a6GYmJUAfmWjwZ6oD4ifKo8DYM-X72Eaw"
     }
   ]
 }
@@ -347,12 +344,12 @@ The following are supplied before beginning the signing operation:
   "kid": "bilbo.baggins@hobbiton.example",
   "use": "sig",
   "crv": "P-521",
-  "x":   "AHKZLLOsCOzz5cY97ewNUajB957y-C-U88c3v13nmGZx6sYl_oJX
-          u9A5RkTKqjqvjyekWF-7ytDyRXYgCF5cj0Kt",
-  "y":   "AdymlHvOiLxXkEhayXQnNCvDX4h9htZaCJN34kfmC6pV5OhQHira
-          VySsUdaQkAgDPrwQrJmbnX9cwlGfP-HqHZR1",
-  "d":   "CFE43av1ypdfWGD5GgjpHW1fmnatQBh2akdmgLVc0znoq2xytfrN
-          sqKlCsJb0IZkfdPi5umehMosNgn98Xf-sm0"
+  "x": "AHKZLLOsCOzz5cY97ewNUajB957y-C-U88c3v13nmGZx6sYl_oJXu9
+      A5RkTKqjqvjyekWF-7ytDyRXYgCF5cj0Kt",
+  "y": "AdymlHvOiLxXkEhayXQnNCvDX4h9htZaCJN34kfmC6pV5OhQHiraVy
+      SsUdaQkAgDPrwQrJmbnX9cwlGfP-HqHZR1",
+  "d": "AAhRON2r9cqXX1hg-RoI6R1tX5p2rUAYdmpHZoC1XNM56KtscrX6zb
+      KipQrCW9CGZH3T4ubpnoTKLDYJ_fF3_rJt"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-key title="Elliptic Curve P-521 Private Key"}
@@ -380,9 +377,9 @@ hhbXBsZSJ9
 Performing the signature operation over the combined protected JWS header ({{jws-ecdsa-protected_b64u}}) and Payload content ({{jws-payload_b64u) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
-dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
-cLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6Nh-KcNJmViDeD2gA
+EvRCJgYnTh--MujbaxJCs6ulxanF5-XZ1BG2nPSnffu8aTzD9JkFZuGf5eSRoJ
+Bmb3as3A_Qg1oSh7VGRYqqIkwZ9RIUM-k66Zf08mnpBxeSzu9KAQ8ZVF3sOPP1
+TShgv03CE1Hq0LDvHR2WZvzZJsZClzB_nYaC_-oeNt-oKB7dxQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-sig title="Signature, base64url-encoded"}
 
@@ -400,14 +397,14 @@ The resulting JWS object using the Compact serialization:
 eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZX
 hhbXBsZSJ9
 .
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3V
-yIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9uJ3
-Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3Ugb
-WlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
+lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
+b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
+UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 .
-GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHAHuOIuH9RD
-dnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6TyH7feCxMpfZ8BEqLSL
-cLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6Nh-KcNJmViDeD2gA
+EvRCJgYnTh--MujbaxJCs6ulxanF5-XZ1BG2nPSnffu8aTzD9JkFZuGf5eSRoJ
+Bmb3as3A_Qg1oSh7VGRYqqIkwZ9RIUM-k66Zf08mnpBxeSzu9KAQ8ZVF3sOPP1
+TShgv03CE1Hq0LDvHR2WZvzZJsZClzB_nYaC_-oeNt-oKB7dxQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-compact title="Compact Serialization" }
 
@@ -415,21 +412,19 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
-      "protected":
-        "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iY
-         ml0b24uZXhhbXBsZSJ9",
-      "signature":
-        "GU4icJRWWqP0nDHX2HqiIZGueMWosZnx-RHjbNkkuJuVtW6ylbiHA
-         HuOIuH9RDdnildrg7VGvnjVK2Jv_47gyLQc8kweURgG5Zg6vauw6T
-         yH7feCxMpfZ8BEqLSLcLa_UUwYNLAFMB3FwQMIgSJJi7u510k1B6N
-         h-KcNJmViDeD2gA"
+      "protected": "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2
+          dpbnNAaG9iYml0b24uZXhhbXBsZSJ9",
+      "signature": "EvRCJgYnTh--MujbaxJCs6ulxanF5-XZ1BG2nPSnff
+          u8aTzD9JkFZuGf5eSRoJBmb3as3A_Qg1oSh7VGRYqqIkwZ9RIUM-
+          k66Zf08mnpBxeSzu9KAQ8ZVF3sOPP1TShgv03CE1Hq0LDvHR2WZv
+          zZJsZClzB_nYaC_-oeNt-oKB7dxQ"
     }
   ]
 }
@@ -453,7 +448,7 @@ The following are supplied before beginning the signing operation:
   "kty": "oct",
   "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
   "use": "sig",
-  "k":   "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
+  "k": "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-hmac-key title="AES 256-bit symmetric key"}
@@ -481,7 +476,7 @@ VlZjMxNGJjNzAzNyJ9
 Performing the signature operation over the combined protected JWS header ({{jws-hmac-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
+s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-hmac-sig title="Signature, base64url-encoded"}
 
@@ -499,12 +494,12 @@ The resulting JWS object using the Compact serialization:
 eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
 VlZjMxNGJjNzAzNyJ9
 .
-SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91dCB5b3
-VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZiB5b3UgZG9u
-J3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2luZyB3aGVyZSB5b3
-UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg
+SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
+lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
+b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
+UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 .
-BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM
+s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-hmac-compact title="Compact Serialization" }
 
@@ -512,18 +507,17 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
-      "protected":
-        "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxY
-         i1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
-      "signature":
-        "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
+      "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LT
+          RkOWItNDcxYi1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+      "signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p
+          0"
     }
   ]
 }
@@ -567,7 +561,7 @@ VlZjMxNGJjNzAzNyJ9
 Performing the signature operation over the combined protected JWS header ({{jws-detached-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ns-fxWMR0YjG5KJK5VAVdE9c9zEHL4SlnjJvw2yiRQw
+s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-detached-sig title="Signature, base64url-encoded"}
 
@@ -585,7 +579,7 @@ eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZmQ2LW
 VlZjMxNGJjNzAzNyJ9
 .
 .
-ns-fxWMR0YjG5KJK5VAVdE9c9zEHL4SlnjJvw2yiRQw
+s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-detached-compact title="JSON Serialization" }
 
@@ -595,14 +589,10 @@ The resulting JWS object using the JSON serialization:
 {
   "signatures": [
     {
-      "protected":
-        "eyJhbGciOiJIUzI1NiJ9",
-      "header": {
-        "kid":
-          "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
-      },
-      "signature":
-        "LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM"
+      "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LT
+          RkOWItNDcxYi1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+      "signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p
+          0"
     }
   ]
 }
@@ -653,7 +643,7 @@ eyJhbGciOiJIUzI1NiJ9
 Performing the signature operation over the combined protected JWS header ({{jws-somefields-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM
+bWUSVaxorn7bEF1djytBd0kHv70Ly5pvbomzMWSOr20
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-somefields-sig title="Signature, base64url-encoded"}
 
@@ -670,21 +660,19 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
-      "protected":
-        "eyJhbGciOiJIUzI1NiJ9",
+      "protected": "eyJhbGciOiJIUzI1NiJ9",
       "header": {
-        "kid":
-          "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+        "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
       },
-      "signature":
-        "LHbXRdr8vWfAWIPsViW2RDE5edTLiChP_6fRTDbwHBM"
+      "signature": "bWUSVaxorn7bEF1djytBd0kHv70Ly5pvbomzMWSOr2
+          0"
     }
   ]
 }
@@ -721,7 +709,7 @@ The following are generated before completing the signing operation:
 Performing the signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
+xuLifqLGiblpv9zBpuZczWhNj1gARaLV3UxvxhJxZuk
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-nofields-sig title="Signature, base64url-encoded"}
 
@@ -737,21 +725,19 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
       "header": {
-        "alg":
-          "HS256",
-        "kid":
-          "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+        "alg": "HS256",
+        "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
       },
-      "signature":
-        "RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08"
+      "signature": "xuLifqLGiblpv9zBpuZczWhNj1gARaLV3UxvxhJxZu
+          k"
     }
   ]
 }
@@ -809,12 +795,12 @@ eyJhbGciOiJSUzI1NiJ9
 Performing the first signature operation over the combined protected JWS header ({{jws-multi-protected_b64u_1}}) and the Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61BgWsaE_tXI
-LGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbhTls9utFReQgg7OpXNB
-r9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJTcEQOoZPf16YigOl39Vifani_qY
-Qr0FLzSd0WTdO7M3b4WRCRYHGZQ9ssZXvFQ2A2C73zDARzKj3YBuUvgzKkTB_H
-_aoCUH8tOhjE6XU5A6Uil508sldyYo-sYIe9waWWchM4snN_uWCAMecr4WmRIO
-sb8rz7cRXK9MeH_6w8YntuDtgkCScdxQ
+MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5NvyG53uoimic1tcMdSg-qpt
+rzZc7CG6Svw2Y13TDIqHzTUrL_lR2ZFcryNFiHkSw129EghGpwkpxaTn_THJTC
+glNbADko1MZBCdwzJxwqZc-1RlpO2HibUYyXSwO97BSe0_evZKdjvvKSgsIqjy
+tKSeAMbhMBdMma622_BG5t4sdbuCHtFjp9iJmkio47AIwqkZV1aIZsv33uPUqB
+BCXbYoQJwt7mxPftHmNlGoOSMxR_3thmXTCm4US-xiNOyhbm8afKK64jU6_TPt
+QHiJeQJxz9G3Tx-083B745_AfYOnlC9w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_1 title="Signature #1, base64url-encoded"}
 
@@ -826,13 +812,13 @@ The following is the assembled first signature serialized as JSON:
   "header": {
     "kid": "bilbo.baggins@hobbiton.example"
   },
-  "signature":
-    "B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61BgWsa
-     E_tXILGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbhTls9utFR
-     eQgg7OpXNBr9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJTcEQOoZPf16Y
-     igOl39Vifani_qYQr0FLzSd0WTdO7M3b4WRCRYHGZQ9ssZXvFQ2A2C73z
-     DARzKj3YBuUvgzKkTB_H_aoCUH8tOhjE6XU5A6Uil508sldyYo-sYIe9w
-     aWWchM4snN_uWCAMecr4WmRIOsb8rz7cRXK9MeH_6w8YntuDtgkCScdxQ"
+  "signature": "MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5NvyG53u
+      oimic1tcMdSg-qptrzZc7CG6Svw2Y13TDIqHzTUrL_lR2ZFcryNFiHkS
+      w129EghGpwkpxaTn_THJTCglNbADko1MZBCdwzJxwqZc-1RlpO2HibUY
+      yXSwO97BSe0_evZKdjvvKSgsIqjytKSeAMbhMBdMma622_BG5t4sdbuC
+      HtFjp9iJmkio47AIwqkZV1aIZsv33uPUqBBCXbYoQJwt7mxPftHmNlGo
+      OSMxR_3thmXTCm4US-xiNOyhbm8afKK64jU6_TPtQHiJeQJxz9G3Tx-0
+      83B745_AfYOnlC9w"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_1 title="Signature #1 JSON"}
@@ -854,9 +840,9 @@ The following are generated before completing the second signing operation:
 Performing the second signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1YRp9mBn7wq
-UkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh2UCW-jF6WA
-H1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLfDoA1hEyUoqeY50A
+GjTxjbTg7oJxNl3UJISdCPHZjEFxrKDutWiXlRPUecb-Glch3dkAtxOxrP1lxO
+j3p65-iSVrjuN6RaQDln4-zyQZ_UAJtJdDgauT6q9AROvbsQac5IRX21pj7XyT
+XuAnL-kqaSR0NeTw3SoEcUdns4YR-12V_iFSruMsVtrawJ2w-w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_2 title="Signature #2, base64url-encoded"}
 
@@ -868,11 +854,10 @@ The following is the assembled second signature serialized as JSON:
     "alg": "ES512",
     "kid": "bilbo.baggins@hobbiton.example"
   },
-  "signature":
-    "GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1YRp9m
-     Bn7wqUkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_usLDyzlSh
-     2UCW-jF6WAH1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLfDoA1hEyUoqeY
-     50A"
+  "signature": "GjTxjbTg7oJxNl3UJISdCPHZjEFxrKDutWiXlRPUecb-Gl
+      ch3dkAtxOxrP1lxOj3p65-iSVrjuN6RaQDln4-zyQZ_UAJtJdDgauT6q
+      9AROvbsQac5IRX21pj7XyTXuAnL-kqaSR0NeTw3SoEcUdns4YR-12V_i
+      FSruMsVtrawJ2w-w"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_2 title="Signature #2 JSON"}
@@ -900,7 +885,7 @@ VlZjMxNGJjNzAzNyJ9
 Performing the third signature operation over the combined protected JWS header ({{jws-multi-protected_b64u_3}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-RDrY7zngV8Mi0agUZpWOyS2WSIziPslf9tQllQYXC08
+s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_3 title="Signature #3, base64url-encoded"}
 
@@ -908,11 +893,9 @@ The following is the assembled third signature serialized as JSON:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "protected":
-   "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi1iZm
-    Q2LWVlZjMxNGJjNzAzNyJ9",
-  "signature":
-   "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
+  "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOW
+      ItNDcxYi1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+  "signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_3 title="Signature #3 JSON"}
@@ -930,43 +913,40 @@ The resulting JWS object using the JSON serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "payload":
-    "SXQncyBhIGRhbmdlcm91cyBidXNpbmVzcywgRnJvZG8sIGdvaW5nIG91d
-     CB5b3VyIGRvb3IuIFlvdSBzdGVwIG9udG8gdGhlIHJvYWQsIGFuZCBpZi
-     B5b3UgZG9uJ3Qga2VlcCB5b3VyIGZlZXQsIHRoZXJlJ3Mgbm8ga25vd2l
-     uZyB3aGVyZSB5b3UgbWlnaHQgYmUgc3dlcHQgb2ZmIHRvLg",
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
   "signatures": [
     {
       "protected": "eyJhbGciOiJSUzI1NiJ9",
       "header": {
         "kid": "bilbo.baggins@hobbiton.example"
       },
-      "signature":
-        "B4yWtHdhlWkVAB7hYEczTe4fNixKRbOV6XnTZ_LMIRabj3WLZe61B
-         gWsaE_tXILGjS_hxIkY1YluKOOmC80vmGF-0j5T6mGKqcHxApoXbh
-         Tls9utFReQgg7OpXNBr9F1-Dn4K1kTEiVWZMJqSEJljrGcznKj3bJ
-         TcEQOoZPf16YigOl39Vifani_qYQr0FLzSd0WTdO7M3b4WRCRYHGZ
-         Q9ssZXvFQ2A2C73zDARzKj3YBuUvgzKkTB_H_aoCUH8tOhjE6XU5A
-         6Uil508sldyYo-sYIe9waWWchM4snN_uWCAMecr4WmRIOsb8rz7cR
-         XK9MeH_6w8YntuDtgkCScdxQ"
+      "signature": "MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5Nvy
+          G53uoimic1tcMdSg-qptrzZc7CG6Svw2Y13TDIqHzTUrL_lR2ZFc
+          ryNFiHkSw129EghGpwkpxaTn_THJTCglNbADko1MZBCdwzJxwqZc
+          -1RlpO2HibUYyXSwO97BSe0_evZKdjvvKSgsIqjytKSeAMbhMBdM
+          ma622_BG5t4sdbuCHtFjp9iJmkio47AIwqkZV1aIZsv33uPUqBBC
+          XbYoQJwt7mxPftHmNlGoOSMxR_3thmXTCm4US-xiNOyhbm8afKK6
+          4jU6_TPtQHiJeQJxz9G3Tx-083B745_AfYOnlC9w"
     },
     {
       "header": {
         "alg": "ES512",
         "kid": "bilbo.baggins@hobbiton.example"
       },
-      "signature":
-        "GliCVJY7BmN6pRTLfpWIKBjczIXDJjFlXluppc24eYWPCJCNP8z1Y
-         Rp9mBn7wqUkU0xPaSzcq-GppxhQTUq27TsORK11Ab3i74DiNmsy_u
-         sLDyzlSh2UCW-jF6WAH1jq0fCa32H4zxnTIJV_uwMDyLuuXdwgHLf
-         DoA1hEyUoqeY50A"
+      "signature": "GjTxjbTg7oJxNl3UJISdCPHZjEFxrKDutWiXlRPUec
+          b-Glch3dkAtxOxrP1lxOj3p65-iSVrjuN6RaQDln4-zyQZ_UAJtJ
+          dDgauT6q9AROvbsQac5IRX21pj7XyTXuAnL-kqaSR0NeTw3SoEcU
+          dns4YR-12V_iFSruMsVtrawJ2w-w"
     },
     {
-      "protected":
-       "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOWItNDcxYi
-        1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
-      "signature":
-       "BC8xgQaFNKeZieRI0z7wDzbpRyG_ombR9gDU22IBJEM"
+      "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LT
+          RkOWItNDcxYi1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+      "signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p
+          0"
     }
   ]
 }
