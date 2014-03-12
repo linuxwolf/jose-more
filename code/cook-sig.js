@@ -15,6 +15,27 @@ keys = jose.JWK.asKeyStore(keys);
 
 var input = "It’s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there’s no knowing where you might be swept off to.";
 
+var makeCompact = function(json) {
+    var jws = [];
+    
+    if (typeof(json) === "string") {
+        jws = json.split(".");
+    } else {
+        if (json.signatures.length > 1) {
+            return [];
+        }
+        if (json.signatures[0].header) {
+            return [];
+        }
+    
+        jws[0] = json.signatures[0].protected || "";
+        jws[1] = json.payload || "";
+        jws[2] = json.signatures[0].signature || "";
+    }
+    
+    return jws;
+}
+
 var ops = [
     {
         name: "RSA v1.5 Signature",
@@ -183,7 +204,7 @@ var doOp = function(op) {
 
         
         var compact, json;
-        compact = common.makeCompact(jws);
+        compact = makeCompact(jws);
         json = common.prettify(jws);
         
         var __outputSig = function(idx) {
@@ -238,7 +259,7 @@ var doOp = function(op) {
         }
         
         if (compact.length) {
-            compact = compact.map(chunk).
+            compact = compact.map(common.chunk).
                               map(function(v) {
                                 if (!v) {
                                     return "\n";

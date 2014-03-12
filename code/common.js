@@ -90,24 +90,4 @@ var prettify = exports.prettify = function(input) {
     return str;
 }
 
-var makeCompact = exports.makeCompact = function(json) {
-    var jws = [];
-    
-    if (typeof(json) === "string") {
-        jws = json.split(".");
-    } else {
-        if (json.signatures.length > 1) {
-            return [];
-        }
-        if (json.signatures[0].header) {
-            return [];
-        }
-    
-        jws[0] = json.signatures[0].protected || "";
-        jws[1] = json.payload || "";
-        jws[2] = json.signatures[0].signature || "";
-    }
-    
-    return jws;
-}
 

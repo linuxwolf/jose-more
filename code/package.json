@@ -6,6 +6,7 @@
         "url":"https://github.com/linuxwolf/jose-more.git"
     },
     "dependencies": {
+        "cloneextend": "*",
         "q": "~0.9",
         "jose":"git+http://outer-planes.net/git/node-jose.git"
     }
