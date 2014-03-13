@@ -4,8 +4,8 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Informational                            March 11, 2014
-Expires: September 12, 2014
+Intended status: Informational                            March 13, 2014
+Expires: September 14, 2014
 
 
    Examples of Protecting Content using JavaScript Object Signing and
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 12, 2014.
+   This Internet-Draft will expire on September 14, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                 Expires September 12, 2014               [Page 1]
+Miller                 Expires September 14, 2014               [Page 1]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Miller                 Expires September 12, 2014               [Page 2]
+Miller                 Expires September 14, 2014               [Page 2]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 3]
+Miller                 Expires September 14, 2014               [Page 3]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -221,7 +221,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 4]
+Miller                 Expires September 14, 2014               [Page 4]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 5]
+Miller                 Expires September 14, 2014               [Page 5]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -333,7 +333,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 6]
+Miller                 Expires September 14, 2014               [Page 6]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -389,7 +389,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 7]
+Miller                 Expires September 14, 2014               [Page 7]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -445,7 +445,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 8]
+Miller                 Expires September 14, 2014               [Page 8]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -501,7 +501,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014               [Page 9]
+Miller                 Expires September 14, 2014               [Page 9]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -557,7 +557,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 10]
+Miller                 Expires September 14, 2014              [Page 10]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -613,7 +613,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 11]
+Miller                 Expires September 14, 2014              [Page 11]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -669,7 +669,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 12]
+Miller                 Expires September 14, 2014              [Page 12]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -725,7 +725,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 13]
+Miller                 Expires September 14, 2014              [Page 13]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -781,7 +781,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 14]
+Miller                 Expires September 14, 2014              [Page 14]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -837,7 +837,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 15]
+Miller                 Expires September 14, 2014              [Page 15]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -893,7 +893,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 16]
+Miller                 Expires September 14, 2014              [Page 16]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -949,7 +949,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 17]
+Miller                 Expires September 14, 2014              [Page 17]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1005,7 +1005,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 18]
+Miller                 Expires September 14, 2014              [Page 18]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1061,7 +1061,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 19]
+Miller                 Expires September 14, 2014              [Page 19]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1117,7 +1117,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 20]
+Miller                 Expires September 14, 2014              [Page 20]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1173,7 +1173,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 21]
+Miller                 Expires September 14, 2014              [Page 21]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1229,7 +1229,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 22]
+Miller                 Expires September 14, 2014              [Page 22]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1285,7 +1285,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 23]
+Miller                 Expires September 14, 2014              [Page 23]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1341,7 +1341,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 24]
+Miller                 Expires September 14, 2014              [Page 24]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1397,7 +1397,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 25]
+Miller                 Expires September 14, 2014              [Page 25]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1453,7 +1453,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 26]
+Miller                 Expires September 14, 2014              [Page 26]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1509,7 +1509,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 27]
+Miller                 Expires September 14, 2014              [Page 27]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1565,7 +1565,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 28]
+Miller                 Expires September 14, 2014              [Page 28]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1621,7 +1621,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 29]
+Miller                 Expires September 14, 2014              [Page 29]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1677,7 +1677,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 30]
+Miller                 Expires September 14, 2014              [Page 30]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1733,7 +1733,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 31]
+Miller                 Expires September 14, 2014              [Page 31]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1789,7 +1789,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 32]
+Miller                 Expires September 14, 2014              [Page 32]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1845,7 +1845,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 33]
+Miller                 Expires September 14, 2014              [Page 33]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1901,7 +1901,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 34]
+Miller                 Expires September 14, 2014              [Page 34]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -1957,7 +1957,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 35]
+Miller                 Expires September 14, 2014              [Page 35]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2013,7 +2013,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 36]
+Miller                 Expires September 14, 2014              [Page 36]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2069,7 +2069,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 37]
+Miller                 Expires September 14, 2014              [Page 37]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2125,7 +2125,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 38]
+Miller                 Expires September 14, 2014              [Page 38]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2181,7 +2181,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 39]
+Miller                 Expires September 14, 2014              [Page 39]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2237,7 +2237,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 40]
+Miller                 Expires September 14, 2014              [Page 40]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2293,7 +2293,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 41]
+Miller                 Expires September 14, 2014              [Page 41]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2349,7 +2349,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 42]
+Miller                 Expires September 14, 2014              [Page 42]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2405,7 +2405,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 43]
+Miller                 Expires September 14, 2014              [Page 43]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2461,7 +2461,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 44]
+Miller                 Expires September 14, 2014              [Page 44]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2517,7 +2517,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 45]
+Miller                 Expires September 14, 2014              [Page 45]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2573,7 +2573,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 46]
+Miller                 Expires September 14, 2014              [Page 46]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2629,7 +2629,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 47]
+Miller                 Expires September 14, 2014              [Page 47]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2685,7 +2685,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 48]
+Miller                 Expires September 14, 2014              [Page 48]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2741,7 +2741,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 49]
+Miller                 Expires September 14, 2014              [Page 49]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2797,7 +2797,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 50]
+Miller                 Expires September 14, 2014              [Page 50]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2853,7 +2853,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 51]
+Miller                 Expires September 14, 2014              [Page 51]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2909,7 +2909,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 52]
+Miller                 Expires September 14, 2014              [Page 52]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2965,7 +2965,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 53]
+Miller                 Expires September 14, 2014              [Page 53]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3021,7 +3021,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 54]
+Miller                 Expires September 14, 2014              [Page 54]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3077,7 +3077,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 55]
+Miller                 Expires September 14, 2014              [Page 55]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3133,7 +3133,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 56]
+Miller                 Expires September 14, 2014              [Page 56]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3189,7 +3189,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 57]
+Miller                 Expires September 14, 2014              [Page 57]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3245,7 +3245,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 58]
+Miller                 Expires September 14, 2014              [Page 58]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3301,7 +3301,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 59]
+Miller                 Expires September 14, 2014              [Page 59]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3357,7 +3357,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 60]
+Miller                 Expires September 14, 2014              [Page 60]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3413,7 +3413,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 61]
+Miller                 Expires September 14, 2014              [Page 61]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3469,7 +3469,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 62]
+Miller                 Expires September 14, 2014              [Page 62]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3525,7 +3525,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 63]
+Miller                 Expires September 14, 2014              [Page 63]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3581,7 +3581,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 64]
+Miller                 Expires September 14, 2014              [Page 64]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3637,7 +3637,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 65]
+Miller                 Expires September 14, 2014              [Page 65]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3693,7 +3693,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 66]
+Miller                 Expires September 14, 2014              [Page 66]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3749,7 +3749,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 67]
+Miller                 Expires September 14, 2014              [Page 67]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3805,7 +3805,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 68]
+Miller                 Expires September 14, 2014              [Page 68]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3854,14 +3854,14 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
    o  Content encryption algorithm; this example uses "A128GCM".
 
-   o  Additional authenticated data; this example uses a
-      [I-D.ietf-jcardcal-jcard] vCard from Figure 145, serialized to
-      UTF-8.
+   o  Additional authenticated data; this example uses a [RFC7095] vCard
+      from Figure 145, serialized to UTF-8.
 
 
 
 
-Miller                 Expires September 12, 2014              [Page 69]
+
+Miller                 Expires September 14, 2014              [Page 69]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3917,7 +3917,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 70]
+Miller                 Expires September 14, 2014              [Page 70]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3973,7 +3973,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 71]
+Miller                 Expires September 14, 2014              [Page 71]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4029,7 +4029,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 72]
+Miller                 Expires September 14, 2014              [Page 72]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4085,7 +4085,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 73]
+Miller                 Expires September 14, 2014              [Page 73]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4141,7 +4141,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 74]
+Miller                 Expires September 14, 2014              [Page 74]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4197,7 +4197,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 75]
+Miller                 Expires September 14, 2014              [Page 75]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4253,7 +4253,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 76]
+Miller                 Expires September 14, 2014              [Page 76]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4309,7 +4309,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 77]
+Miller                 Expires September 14, 2014              [Page 77]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4365,7 +4365,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 78]
+Miller                 Expires September 14, 2014              [Page 78]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4421,7 +4421,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 79]
+Miller                 Expires September 14, 2014              [Page 79]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4477,7 +4477,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 80]
+Miller                 Expires September 14, 2014              [Page 80]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4533,7 +4533,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 81]
+Miller                 Expires September 14, 2014              [Page 81]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4589,7 +4589,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 82]
+Miller                 Expires September 14, 2014              [Page 82]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4645,7 +4645,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 83]
+Miller                 Expires September 14, 2014              [Page 83]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4701,7 +4701,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 84]
+Miller                 Expires September 14, 2014              [Page 84]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4757,7 +4757,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 85]
+Miller                 Expires September 14, 2014              [Page 85]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4813,7 +4813,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 12, 2014              [Page 86]
+Miller                 Expires September 14, 2014              [Page 86]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4861,22 +4861,18 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 7.  Informative References
 
-   [I-D.ietf-jcardcal-jcard]
-              Kewisch, P., "jCard: The JSON format for vCard", draft-
-              ietf-jcardcal-jcard-07 (work in progress), October 2013.
-
-
-
-
-
-Miller                 Expires September 12, 2014              [Page 87]
-
-Internet-Draft                JOSE Cookbook                   March 2014
-
-
    [I-D.ietf-jose-json-web-algorithms]
               Jones, M., "JSON Web Algorithms (JWA)", draft-ietf-jose-
               json-web-algorithms-23 (work in progress), March 2014.
+
+
+
+
+
+Miller                 Expires September 14, 2014              [Page 87]
+
+Internet-Draft                JOSE Cookbook                   March 2014
+
 
    [I-D.ietf-jose-json-web-encryption]
               Jones, M., Rescorla, E., and J. Hildebrand, "JSON Web
@@ -4897,6 +4893,9 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
+
+   [RFC7095]  Kewisch, P., "jCard: The JSON Format for vCard", RFC 7095,
+              January 2014.
 
 Appendix A.  Acknowledgements
 
@@ -4925,4 +4924,5 @@ Author's Address
 
 
 
-Miller                 Expires September 12, 2014              [Page 88]
+
+Miller                 Expires September 14, 2014              [Page 88]

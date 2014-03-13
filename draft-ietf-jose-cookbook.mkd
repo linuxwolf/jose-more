@@ -31,9 +31,9 @@ informative:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
-    I-D.ietf-jcardcal-jcard:
     RFC1951:
     RFC4648:
+    RFC7095:
 
 --- abstract
 
@@ -2682,7 +2682,7 @@ The following are supplied before beginning the encryption process:
 * Recipient encryption key; this example uses the key from {{jwe-aeskw-key}}.
 * Key encryption algorithm; this example uses "A128KW".
 * Content encryption algorithm; this example uses "A128GCM".
-* Additional authenticated data; this example uses a {{I-D.ietf-jcardcal-jcard}} vCard from {{jwe-aad-data}}, serialized to UTF-8.
+* Additional authenticated data; this example uses a {{RFC7095}} vCard from {{jwe-aad-data}}, serialized to UTF-8.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [
