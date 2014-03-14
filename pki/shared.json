@@ -25,7 +25,7 @@
             "kty": "oct",
             "use": "sig",
             "alg": "HS256",
-            "kid": "0efa3772-9922-40b1-8f34-468cf47fad78",
+            "kid": "hobbiton.example",
             "k": "5TIwcgXI0XuqW5g_T86B_6MbeKzsf5n5_KeNMae8Uxs"
         }
     ]
