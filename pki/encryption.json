@@ -41,9 +41,9 @@
       "kid": "peregrin.took@tuckborough.example",
       "use": "enc",
       "crv": "P-384",
-      "x": "y8c1QdngUfyBE4UhUZkSHvKU2q8YNYbNrrjSKjC8WPQlliP8QwwcyJSxyQeN63kF",
-      "y": "4vWr_jl2VbMxVgf893X0M6vmxMZFfxzXlj8ogK7GSl4M5Wlt8aCks8Af41zef-bP",
-      "d": "QP5qabC_d42fA9g7-pr8ZYOLmIkqbBBwDQR2H0ouEzQvBuVA62sOQSrvHfLAu8YB"
+      "x": "YU4rRUzdmVqmRtWOs2OpDE_T5fsNIodcG8G5FWPrTPMyxpzsSOGaQLpe2FpxBmu2",
+      "y": "A8-yxCHxkfBz3hKZfI1jUYMjUhsEveZ9THuwFjH2sCNdtksRJU7D5-SkgaFL1ETP",
+      "d": "iTx2pk7wW-GqJkHcEkFQb2EFyYcO7RugmaW3mRrQVAOUiPommT0IdnYK2xDlZh-j"
     },
     {
       "kty": "oct",
