@@ -9,6 +9,7 @@ var jose = require("jose"),
     Q = require("q"),
     fs = require("fs"),
     util = require("util"),
+    zlib = require("zlib"),
     common = require("./common.js");
 
 var keys = fs.readFileSync(__dirname + "/../pki/encryption.json", "utf8");
@@ -19,7 +20,7 @@ var inputs = {
     common: "You can trust us to stick with you through thick and thin–to the bitter end. And you can trust us to keep any secret of yours–closer than you keep it yourself. But you cannot trust us to let you face trouble alone, and go off without a word. We are your friends, Frodo.",
     "jwk-set+json": fs.readFileSync(__dirname + "/../pki/shared.json", "utf8")
 }
-inputs.keys = JSON.stringify(JSON.parse(inputs["jwk-set+json"]))
+inputs["jwk-set+json"] = JSON.stringify(JSON.parse(inputs["jwk-set+json"]))
 
 var makeCompact = function(json) {
     var jwe = [];
@@ -28,6 +29,12 @@ var makeCompact = function(json) {
         jwe = json.split(".");
     } else {
         if (!json.ciphertext) {
+            return [];
+        }
+        if (json.aad) {
+            return [];
+        }
+        if (json.unprotected) {
             return [];
         }
     
@@ -43,7 +50,7 @@ var makeCompact = function(json) {
 
 
 var ops = {
-    "RSA1_5/A128CBC-HS256": {
+    "rsa15": {
         name: "RSA 1.5 and AES-HMAC-SHA2",
         opts: {
             zip: false,
@@ -64,7 +71,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "RSA-OAEP/A256GCM": {
+    "rsa_oaep": {
         name: "RSA-OAEP and AES-GCM",
         opts: {
             zip: false,
@@ -85,7 +92,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "PBES2-HS256+A128KW/A128CBC-HS256": {
+    "pbes2": {
         name: "PBES2-AES-KeyWrap and AES-CBC-HMAC-SHA2",
         opts: {
             zip: false,
@@ -112,7 +119,7 @@ var ops = {
         ],
         plaintext: "jwk-set+json"
     },
-    "ECDH-ES+A128KW/A128GCM": {
+    "ecdh_aeskw": {
         name: "ECDH-ES with AES KeyWrap and AES-GCM",
         opts: {
             zip: false,
@@ -133,7 +140,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "ECDH-ES/A128CBC-HS256": {
+    "ecdh": {
         name: "ECDH-ES and AES-CBC-HMAC-SHA2",
         opts: {
             zip: false,
@@ -154,7 +161,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "dir/A128GCM": {
+    "dir_gcm": {
         name: "direct AES-GCM",
         opts: {
             zip: false,
@@ -175,7 +182,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "A256GCMKW/A128CBC-HS256": {
+    "aesgcmkw": {
         name: "AES-GCM KeyWrap and AES-CBC-HMAC-SHA2",
         opts: {
             zip: false,
@@ -196,7 +203,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "A128KW/A128GCM": {
+    "aeskw": {
         name: "AES KeyWrap and AES-GCM",
         opts: {
             zip: false,
@@ -260,7 +267,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "protect-some": {
+    "somefields": {
         name: "Protecting Specific Header Fields",
         opts: {
             zip: false,
@@ -282,7 +289,7 @@ var ops = {
         ],
         plaintext: "common"
     },
-    "protect-none": {
+    "nofields": {
         name: "Protect Content Only",
         opts: {
             zip: false,
@@ -309,7 +316,7 @@ var ops = {
         opts: {
             zip: false,
             compact: false,
-            contentAlg: "A128GCM",
+            contentAlg: "A128CBC-HS256",
             protect: "enc",
             fields: {
                 cty: "text/plain"
@@ -350,6 +357,18 @@ var ops = {
 
 
 var doOp = function(op) {
+    if (op.opts.aad) {
+        var aad = op.opts.aad;
+        console.log("\nAdditional Authenticated Data (JSON):");
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(common.prettify(JSON.parse(aad)));
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log("\nAdditional Authenticated Data (base64url):");
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(common.prettify(jose.base64url.encode(aad, "utf8")));
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
     var enc = jose.JWE.createEncrypt(op.opts, op.recipients);
     enc.update(inputs[op.plaintext], "utf8");
     
@@ -363,12 +382,13 @@ var doOp = function(op) {
         console.log("==============================================================");
         
         // assemble common properties
+        var hlogs = [];
         var cprops = {};
         if (jwe.unprotected) {
-            console.log("\nJWE Unprotected Header (JSON):");
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.log(common.prettify(jwe.unprotected));
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            hlogs.push(util.format("\nJWE Unprotected Header (JSON):"));
+            hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            hlogs.push(util.format(common.prettify(jwe.unprotected)));
+            hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
             cprops = $.extend(cprops, jwe.unprotected);
         }
         if (jwe.protected) {
@@ -376,14 +396,14 @@ var doOp = function(op) {
             pheader = jose.base64url.decode(jwe.protected, "utf8");
             pheader = JSON.parse(pheader);
 
-            console.log("\nJWE Protected Header (JSON):");
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.log(common.prettify(pheader));
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.log("\nJWE Protected Header (base64url):");
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.log(common.prettify(jwe.protected));
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            hlogs.push(util.format("\nJWE Protected Header (JSON):"));
+            hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            hlogs.push(util.format(common.prettify(pheader)));
+            hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            hlogs.push(util.format("\nJWE Protected Header (base64url):"));
+            hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            hlogs.push(util.format(common.prettify(jwe.protected)));
+            hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
             cprops = $.extend(cprops, pheader);
         }
         
@@ -421,6 +441,12 @@ var doOp = function(op) {
             }
             
             if (rprops.epk) {
+                // log it separate
+                log.push(util.format("\nRecipient #%d Ephemeral Public Key (JSON):", idx+1));
+                log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                log.push(util.format(common.prettify(rprops.epk)));
+                log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            
                 // convert to binary
                 rprops.epk.x = jose.base64url.decode(rprops.epk.x, "binary");
                 rprops.epk.y = jose.base64url.decode(rprops.epk.y, "binary");
@@ -483,6 +509,9 @@ var doOp = function(op) {
             // output recipients
             console.log(logs.join("\n"));
             
+            // output common headers
+            console.log(hlogs.join("\n"));
+            
             console.log("\nCiphertext:");
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(common.prettify(jwe.ciphertext));
@@ -526,36 +555,60 @@ if (!exec.length) {
     exec = Object.keys(ops);
 }
 
-var displayed = {};
-exec.forEach(function(opkey) {
+var displayed = {},
+    promise = Q.resolve();
+exec = exec.filter(function(opkey) {
     var op = ops[opkey];
+    if (!op) {
+        return false;
+    }
+
     if (displayed[op.plaintext]) {
-        return;
+        return true;
     }
     displayed[op.plaintext] = true;
     
     var plaintext = inputs[op.plaintext],
         printtext;
     if (op.plaintext === "jwk-set+json") {
-        printtext = common.prettify(JSON.parse(inputs.keys));
+        printtext = common.prettify(JSON.parse(plaintext));
     } else {
         printtext = common.splitit(plaintext);
     }
     
-    console.log("\n%s Plaintext (utf-8):", op.plaintext);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(printtext);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log("\n%s Plaintext (base64url):", op.plaintext);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(common.prettify(jose.base64url.encode(plaintext, "utf8")));
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log("==============================================================");
+    promise = promise.then(function() {
+        console.log("\n%s Plaintext (utf-8):", op.plaintext);
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(printtext);
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log("\n%s Plaintext (base64url):", op.plaintext);
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(common.prettify(jose.base64url.encode(plaintext, "utf8")));
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    });
+    if (op.opts.zip) {
+        promise = promise.then(function() {
+            return Q.nfcall(zlib.deflate, new Buffer(plaintext, "utf8"));
+        }).then(function(deflated) {
+            deflated = jose.base64url.encode(deflated);
+            console.log("\n%s Compressed Plaintext (base64url):", op.plaintext);
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            console.log(common.prettify(deflated));
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        });
+    }
+    promise = promise.then(function() {
+        console.log("==============================================================");
+    });
+
+    return true;
 });
-console.log("\n\n");
+promise = promise.then(function() {
+    console.log("\n\n");
+});
 
 exec.reduce(function(chain, opkey) {
     return chain.then(function() {
         return doOp(ops[opkey]);
     });
-}, Q.resolve());
+}, promise);

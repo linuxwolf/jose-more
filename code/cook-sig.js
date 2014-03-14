@@ -36,8 +36,8 @@ var makeCompact = function(json) {
     return jws;
 }
 
-var ops = [
-    {
+var ops = {
+    "rsa": {
         name: "RSA v1.5 Signature",
         payload: input,
         opts: {
@@ -53,7 +53,7 @@ var ops = [
             }
         ]
     },
-    {
+    "rsapss": {
         name: "RSA-PSS Signature",
         payload: input,
         opts: {
@@ -69,7 +69,7 @@ var ops = [
             }
         ]
     },
-    {
+    "ecdsa": {
         name: "ECDSA Signature",
         payload: input,
         opts: {
@@ -85,7 +85,7 @@ var ops = [
             }
         ]
     },
-    {
+    "hmac": {
         name: "HMAC-SHA2 Integrity Protection",
         payload: input,
         opts: {
@@ -101,7 +101,7 @@ var ops = [
             }
         ]
     },
-    {
+    "detached": {
         name: "Detached Signature",
         payload: input,
         opts: {
@@ -122,7 +122,7 @@ var ops = [
             return jws;
         }
     },
-    {
+    "somefields": {
         name: "Protecting Specific Header Fields",
         payload: input,
         opts: {
@@ -138,7 +138,7 @@ var ops = [
             }
         ]
     },
-    {
+    "nofields": {
         name: "Protecting Content Only",
         payload: input,
         opts: {
@@ -154,7 +154,7 @@ var ops = [
             }
         ]
     },
-    {
+    "multi": {
         name: "Multiple Signatures",
         payload: input,
         opts: {
@@ -184,7 +184,7 @@ var ops = [
             }
         ]
     }
-]
+}
 
 var doOp = function(op) {
     var sig,
@@ -288,6 +288,18 @@ var doOp = function(op) {
     return op;
 }
 
+var exec = Array.prototype.slice.call(process.argv, 2);
+if (!exec.length) {
+    exec = Object.keys(ops);
+}
+
+exec = exec.filter(function(opkey) {
+    if (!ops[opkey]) {
+        return false;
+    }
+    
+    return true;
+});
 console.log("\nPayload (utf-8):");
 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 console.log(common.splitit(input));
@@ -299,8 +311,8 @@ console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 console.log("==============================================================");
 console.log("\n\n");
 
-ops.reduce(function(chain, op) {
+exec.reduce(function(chain, opkey) {
     return chain.then(function() {
-        return doOp(op);
+        return doOp(ops[opkey]);
     });
 }, Q.resolve());
