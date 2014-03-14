@@ -121,47 +121,47 @@ Internet-Draft                JOSE Cookbook                   March 2014
        4.2.5.  Output Results  . . . . . . . . . . . . . . . . . . .  36
      4.3.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  38
        4.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  38
-       4.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  39
+       4.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  40
        4.3.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  40
-       4.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  40
+       4.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  41
        4.3.5.  Output Results  . . . . . . . . . . . . . . . . . . .  42
      4.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-
-           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  43
-       4.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  43
-       4.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  44
-       4.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  44
-       4.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  45
-       4.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  46
-     4.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  48
-       4.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  48
-       4.5.2.  Generated Factors . . . . . . . . . . . . . . . . . .  49
-       4.5.3.  Key Agreement . . . . . . . . . . . . . . . . . . . .  49
-       4.5.4.  Encrypting the Content  . . . . . . . . . . . . . . .  50
-       4.5.5.  Output Results  . . . . . . . . . . . . . . . . . . .  51
-     4.6.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  53
-       4.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  53
-       4.6.2.  Generated Factors . . . . . . . . . . . . . . . . . .  53
-       4.6.3.  Encrypting the Content  . . . . . . . . . . . . . . .  53
-       4.6.4.  Output Results  . . . . . . . . . . . . . . . . . . .  54
-     4.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  55
-       4.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  56
-       4.7.2.  Generated Factors . . . . . . . . . . . . . . . . . .  56
-       4.7.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  56
-       4.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  57
-       4.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  58
-     4.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  60
-       4.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  60
-       4.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  61
-       4.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  61
-       4.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  61
-       4.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  62
-     4.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  64
-       4.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  64
-       4.9.2.  Generated Factors . . . . . . . . . . . . . . . . . .  64
-       4.9.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  65
-       4.9.4.  Encrypting the Content  . . . . . . . . . . . . . . .  65
-       4.9.5.  Output Results  . . . . . . . . . . . . . . . . . . .  66
-     4.10. Including Additional Authenticated Data . . . . . . . . .  68
+           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  44
+       4.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  44
+       4.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  45
+       4.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  45
+       4.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  46
+       4.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  47
+     4.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  49
+       4.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  49
+       4.5.2.  Generated Factors . . . . . . . . . . . . . . . . . .  50
+       4.5.3.  Key Agreement . . . . . . . . . . . . . . . . . . . .  50
+       4.5.4.  Encrypting the Content  . . . . . . . . . . . . . . .  51
+       4.5.5.  Output Results  . . . . . . . . . . . . . . . . . . .  52
+     4.6.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  54
+       4.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  54
+       4.6.2.  Generated Factors . . . . . . . . . . . . . . . . . .  54
+       4.6.3.  Encrypting the Content  . . . . . . . . . . . . . . .  54
+       4.6.4.  Output Results  . . . . . . . . . . . . . . . . . . .  55
+     4.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  56
+       4.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  57
+       4.7.2.  Generated Factors . . . . . . . . . . . . . . . . . .  57
+       4.7.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  57
+       4.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  58
+       4.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  59
+     4.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  61
+       4.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  61
+       4.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  62
+       4.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  62
+       4.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  62
+       4.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  63
+     4.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  65
+       4.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  65
+       4.9.2.  Generated Factors . . . . . . . . . . . . . . . . . .  65
+       4.9.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  66
+       4.9.4.  Encrypting the Content  . . . . . . . . . . . . . . .  66
+       4.9.5.  Output Results  . . . . . . . . . . . . . . . . . . .  67
+     4.10. Including Additional Authenticated Data . . . . . . . . .  69
 
 
 
@@ -170,36 +170,36 @@ Miller                 Expires September 15, 2014               [Page 3]
 Internet-Draft                JOSE Cookbook                   March 2014
 
 
-       4.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  68
-       4.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  68
-       4.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  69
-       4.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  69
-       4.10.5.  Output Results . . . . . . . . . . . . . . . . . . .  70
-     4.11. Protecting Specific Header Fields . . . . . . . . . . . .  71
-       4.11.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  71
-       4.11.2.  Generated Factors  . . . . . . . . . . . . . . . . .  72
-       4.11.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  72
-       4.11.4.  Encrypting the Content . . . . . . . . . . . . . . .  72
-       4.11.5.  Output Results . . . . . . . . . . . . . . . . . . .  73
-     4.12. Protecting Content Only . . . . . . . . . . . . . . . . .  74
-       4.12.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  74
-       4.12.2.  Generated Factors  . . . . . . . . . . . . . . . . .  75
-       4.12.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  75
-       4.12.4.  Encrypting the Content . . . . . . . . . . . . . . .  75
-       4.12.5.  Output Results . . . . . . . . . . . . . . . . . . .  76
-     4.13. Encrypting to Multiple Recipients . . . . . . . . . . . .  77
-       4.13.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  77
-       4.13.2.  Generated Factors  . . . . . . . . . . . . . . . . .  78
-       4.13.3.  Encrypting the Key to the First Recipient  . . . . .  78
-       4.13.4.  Encrypting the Key to the Second Recipient . . . . .  79
-       4.13.5.  Encrypting the Key to the Third Recipient  . . . . .  81
-       4.13.6.  Encrypting the Content . . . . . . . . . . . . . . .  82
-       4.13.7.  Output Results . . . . . . . . . . . . . . . . . . .  84
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  85
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  85
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  85
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  86
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  86
+       4.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  69
+       4.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  69
+       4.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  70
+       4.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  70
+       4.10.5.  Output Results . . . . . . . . . . . . . . . . . . .  71
+     4.11. Protecting Specific Header Fields . . . . . . . . . . . .  72
+       4.11.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  72
+       4.11.2.  Generated Factors  . . . . . . . . . . . . . . . . .  73
+       4.11.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  73
+       4.11.4.  Encrypting the Content . . . . . . . . . . . . . . .  73
+       4.11.5.  Output Results . . . . . . . . . . . . . . . . . . .  74
+     4.12. Protecting Content Only . . . . . . . . . . . . . . . . .  75
+       4.12.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  75
+       4.12.2.  Generated Factors  . . . . . . . . . . . . . . . . .  76
+       4.12.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  76
+       4.12.4.  Encrypting the Content . . . . . . . . . . . . . . .  76
+       4.12.5.  Output Results . . . . . . . . . . . . . . . . . . .  77
+     4.13. Encrypting to Multiple Recipients . . . . . . . . . . . .  78
+       4.13.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  78
+       4.13.2.  Generated Factors  . . . . . . . . . . . . . . . . .  79
+       4.13.3.  Encrypting the Key to the First Recipient  . . . . .  79
+       4.13.4.  Encrypting the Key to the Second Recipient . . . . .  80
+       4.13.5.  Encrypting the Key to the Third Recipient  . . . . .  82
+       4.13.6.  Encrypting the Content . . . . . . . . . . . . . . .  83
+       4.13.7.  Output Results . . . . . . . . . . . . . . . . . . .  85
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  86
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  86
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  86
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  87
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  87
 
 1.  Introduction
 
@@ -2158,6 +2158,13 @@ Internet-Draft                JOSE Cookbook                   March 2014
          "use": "enc",
          "alg": "A256GCMKW",
          "k": "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
+       },
+       {
+         "kty": "oct",
+         "use": "sig",
+         "alg": "HS256",
+         "kid": "0efa3772-9922-40b1-8f34-468cf47fad78",
+         "k": "5TIwcgXI0XuqW5g_T86B_6MbeKzsf5n5_KeNMae8Uxs"
        }
      ]
    }
@@ -2167,6 +2174,17 @@ Internet-Draft                JOSE Cookbook                   March 2014
    entrap_o_peter_long_credit_tun
 
                             Figure 73: Password
+
+
+
+
+
+
+
+Miller                 Expires September 15, 2014              [Page 39]
+
+Internet-Draft                JOSE Cookbook                   March 2014
+
 
 4.3.2.  Generated Factors
 
@@ -2178,19 +2196,11 @@ Internet-Draft                JOSE Cookbook                   March 2014
    o  Initialization vector/nonce; this example uses the initialization
       vector/nonce from Figure 75.
 
-
-
-
-Miller                 Expires September 15, 2014              [Page 39]
-
-Internet-Draft                JOSE Cookbook                   March 2014
-
-
-   GUqdBjgsMQUzgEoqmXYNVXkLAZ2dhFabB0Dxzzstc_4
+   zwyKfPDnCduwjby2HdsaidT_mRP3hJXClI7qNEbHfcw
 
            Figure 74: Content Encryption Key, base64url-encoded
 
-   QcSliRvUHHZpA8mmO_eHfg
+   azJetU5rxKb_XuWHxwgZIQ
 
             Figure 75: Initialization Vector, base64url-encoded
 
@@ -2217,19 +2227,9 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
    produces the following encrypted key:
 
-   G9dAdb4XjKRJo6iYctx9AFznEC3g3wmwUEtym1yED_rih-evGDPWtQ
+   mF-4bpZci3Bd716pWs6ImZ_FCVaxfAFyHmmJAlPWGVpk0RNxWEgPBw
 
                 Figure 77: Encrypted Key, base64url-encoded
-
-4.3.4.  Encrypting the Content
-
-   The following are generated before encrypting the content:
-
-   o  Protected JWE Header; this example uses the header from Figure 78,
-      encoded using [RFC4648] base64url to produce Figure 79.
-
-
-
 
 
 
@@ -2241,6 +2241,13 @@ Miller                 Expires September 15, 2014              [Page 40]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
+
+4.3.4.  Encrypting the Content
+
+   The following are generated before encrypting the content:
+
+   o  Protected JWE Header; this example uses the header from Figure 78,
+      encoded using [RFC4648] base64url to produce Figure 79.
 
    {
      "alg": "PBES2-HS256+A128KW",
@@ -2273,20 +2280,13 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
    o  Authentication tag from Figure 81.
 
-   cLKGQbOYpRg4cLVlx5lXkZG8YrO2dCZS6458UT9uZUEC8ipqZzIU8EGgT977DP
-   ZgRPtDrfUYBnLqE9bzOtR3FwqcbRMuvUjKSN9OJ2uh-bfsvSN2Zn5UG2A4icLg
-   GhVl51ZBUaKEMD17bxqsfKcXCyJxzMF8p9PRHd_DTReJ6Gv1jinmdXxGMuq9eD
-   abH8zPnm1flhe7xmOqqtZA41gdCMQQRt23967oftKx0C8DhUVgZdQ1e4AA_L3S
-   4YS_Vo0h1083rpm1Wd2B9WluR2SUcFpR_YhlOKftkDPvaPi-o86fs7Zot2H5si
-   pctznqECInoomZmOvmxNTTt9AcRk4s-wMYS4Ar_VFV9Y9ro4p636x0BY1l6CEl
-   vRK52dxFPW7nznSyuyEUQ5oqD1km89ZjyQS-MpXt86u3fCTH3JWUmfC2aBzyR3
-   -xOYoVuTNGKw6MvBE7YbkjRquNuNWylnSKcaU9Kq8fYGetBvyL5NSfovwH90J4
-   7t8JZSLttKMRDE_jtzwcNaj79qRB5hgVNyj2ZZ3fDhMh-iBcUUiSp3qbIhUJhO
-   iAMf2RfGc-Z8Z2xdWW8jFm1r2th-NuCNPKyuWQG78TponVeTVkrvI12devvWb3
-   EsnbAFlGg-p_V_9oxfgQGAAjhvgZfDHS-ix25mcf5UYMpYtF1HhA-A5GxAGFwo
-   YxJATHiDy0xjoiR_IbLkzKpVJlrw9s79otiQyWGZa57w
 
-                 Figure 80: Ciphertext, base64url-encoded
+
+
+
+
+
+
 
 
 
@@ -2298,7 +2298,22 @@ Miller                 Expires September 15, 2014              [Page 41]
 Internet-Draft                JOSE Cookbook                   March 2014
 
 
-   xNJS9Ae0PcrniAsFaShQDA
+   Zjgr5KkF8d8QB2OgHUyyLBeB5wV36FERauqdCqbGUeKfRnYCJEwex-UrGYUxB5
+   UF0MsA4NMKPNEFbzKLTQwJ5H-aPxPMVTV3VqQJ0vOEf_qVOtpbKb6kFuY9iZ3B
+   MtcCb5wC8NL_3vKku0yT1jA5yz9g2RYqwbky0r34V3ruRZcCjukDymmvtV4418
+   BTTObS905unxVJEuxAbJf1Xqu3cDO-zE0BuVEioXkyxyzAvCYkKyRSf4-129Ov
+   t6VQOtYOS2z_9fmbS04SNIrOxdPazRNgkRkx29AVVKswSk-UhAPYXa-m23txPE
+   OKF_Nq-2sFYNHMd1btegGpvcUhfI3IHiII_RcWwTlxYTOF-yqsNi4E7k-l2JE4
+   7rb533m9-pSIdwyh8avvcNE202Ge_mRQRoi230aWbTD4vAYBxpY5FjlO7YWyDT
+   OELcH3lssXVUtGNT2txEqfuYE-RijbBtq5qTO8iRQ2qt2QRhMRXm80UWMfRCwF
+   SFRl_5DyFlb2B_i41uP4KI_G2oVwCXJedZI5jbs_lOCH_R5dFTgC0OBS605HMv
+   oxLLvgwW9utzxZYrqBLdV8WAU4ymOtLmwOl3PNCUS6-bWpjRuNZy169vCZH4EV
+   koyNqDT5op1A6o5m0a39N5QZdpPC4eU5hxfwZ0jc7JMBZEL5rz1Bn-vlSyHFvb
+   jg57U7udUNtMZirYvkjjc4
+
+                 Figure 80: Ciphertext, base64url-encoded
+
+   pPq-Jk8dMVrvNnT-yMhCUQ
 
              Figure 81: Authentication Tag, base64url-encoded
 
@@ -2318,32 +2333,17 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
    The resulting JWE object using the Compact serialization:
 
-   eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOiI4UTFTemluYXNSM3
-   hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
-   bmMiOiJBMTI4Q0JDLUhTMjU2In0
-   .
-   G9dAdb4XjKRJo6iYctx9AFznEC3g3wmwUEtym1yED_rih-evGDPWtQ
-   .
-   QcSliRvUHHZpA8mmO_eHfg
-   .
-   cLKGQbOYpRg4cLVlx5lXkZG8YrO2dCZS6458UT9uZUEC8ipqZzIU8EGgT977DP
-   ZgRPtDrfUYBnLqE9bzOtR3FwqcbRMuvUjKSN9OJ2uh-bfsvSN2Zn5UG2A4icLg
-   GhVl51ZBUaKEMD17bxqsfKcXCyJxzMF8p9PRHd_DTReJ6Gv1jinmdXxGMuq9eD
-   abH8zPnm1flhe7xmOqqtZA41gdCMQQRt23967oftKx0C8DhUVgZdQ1e4AA_L3S
-   4YS_Vo0h1083rpm1Wd2B9WluR2SUcFpR_YhlOKftkDPvaPi-o86fs7Zot2H5si
-   pctznqECInoomZmOvmxNTTt9AcRk4s-wMYS4Ar_VFV9Y9ro4p636x0BY1l6CEl
-   vRK52dxFPW7nznSyuyEUQ5oqD1km89ZjyQS-MpXt86u3fCTH3JWUmfC2aBzyR3
-   -xOYoVuTNGKw6MvBE7YbkjRquNuNWylnSKcaU9Kq8fYGetBvyL5NSfovwH90J4
-   7t8JZSLttKMRDE_jtzwcNaj79qRB5hgVNyj2ZZ3fDhMh-iBcUUiSp3qbIhUJhO
-   iAMf2RfGc-Z8Z2xdWW8jFm1r2th-NuCNPKyuWQG78TponVeTVkrvI12devvWb3
-   EsnbAFlGg-p_V_9oxfgQGAAjhvgZfDHS-ix25mcf5UYMpYtF1HhA-A5GxAGFwo
-   YxJATHiDy0xjoiR_IbLkzKpVJlrw9s79otiQyWGZa57w
-   .
-   xNJS9Ae0PcrniAsFaShQDA
 
-                     Figure 82: Compact Serialization
 
-   The resulting JWE object using the JSON serialization:
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2354,32 +2354,87 @@ Miller                 Expires September 15, 2014              [Page 42]
 Internet-Draft                JOSE Cookbook                   March 2014
 
 
+   eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOiI4UTFTemluYXNSM3
+   hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
+   bmMiOiJBMTI4Q0JDLUhTMjU2In0
+   .
+   mF-4bpZci3Bd716pWs6ImZ_FCVaxfAFyHmmJAlPWGVpk0RNxWEgPBw
+   .
+   azJetU5rxKb_XuWHxwgZIQ
+   .
+   Zjgr5KkF8d8QB2OgHUyyLBeB5wV36FERauqdCqbGUeKfRnYCJEwex-UrGYUxB5
+   UF0MsA4NMKPNEFbzKLTQwJ5H-aPxPMVTV3VqQJ0vOEf_qVOtpbKb6kFuY9iZ3B
+   MtcCb5wC8NL_3vKku0yT1jA5yz9g2RYqwbky0r34V3ruRZcCjukDymmvtV4418
+   BTTObS905unxVJEuxAbJf1Xqu3cDO-zE0BuVEioXkyxyzAvCYkKyRSf4-129Ov
+   t6VQOtYOS2z_9fmbS04SNIrOxdPazRNgkRkx29AVVKswSk-UhAPYXa-m23txPE
+   OKF_Nq-2sFYNHMd1btegGpvcUhfI3IHiII_RcWwTlxYTOF-yqsNi4E7k-l2JE4
+   7rb533m9-pSIdwyh8avvcNE202Ge_mRQRoi230aWbTD4vAYBxpY5FjlO7YWyDT
+   OELcH3lssXVUtGNT2txEqfuYE-RijbBtq5qTO8iRQ2qt2QRhMRXm80UWMfRCwF
+   SFRl_5DyFlb2B_i41uP4KI_G2oVwCXJedZI5jbs_lOCH_R5dFTgC0OBS605HMv
+   oxLLvgwW9utzxZYrqBLdV8WAU4ymOtLmwOl3PNCUS6-bWpjRuNZy169vCZH4EV
+   koyNqDT5op1A6o5m0a39N5QZdpPC4eU5hxfwZ0jc7JMBZEL5rz1Bn-vlSyHFvb
+   jg57U7udUNtMZirYvkjjc4
+   .
+   pPq-Jk8dMVrvNnT-yMhCUQ
+
+                     Figure 82: Compact Serialization
+
+   The resulting JWE object using the JSON serialization:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                 Expires September 15, 2014              [Page 43]
+
+Internet-Draft                JOSE Cookbook                   March 2014
+
+
    {
      "recipients": [
        {
-         "encrypted_key": "G9dAdb4XjKRJo6iYctx9AFznEC3g3wmwUEtym1
-             yED_rih-evGDPWtQ"
+         "encrypted_key": "mF-4bpZci3Bd716pWs6ImZ_FCVaxfAFyHmmJAl
+             PWGVpk0RNxWEgPBw"
        }
      ],
      "protected": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOi
          I4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOi
          Jqd2stc2V0K2pzb24iLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
-     "iv": "QcSliRvUHHZpA8mmO_eHfg",
-     "ciphertext": "cLKGQbOYpRg4cLVlx5lXkZG8YrO2dCZS6458UT9uZUEC8
-         ipqZzIU8EGgT977DPZgRPtDrfUYBnLqE9bzOtR3FwqcbRMuvUjKSN9OJ
-         2uh-bfsvSN2Zn5UG2A4icLgGhVl51ZBUaKEMD17bxqsfKcXCyJxzMF8p
-         9PRHd_DTReJ6Gv1jinmdXxGMuq9eDabH8zPnm1flhe7xmOqqtZA41gdC
-         MQQRt23967oftKx0C8DhUVgZdQ1e4AA_L3S4YS_Vo0h1083rpm1Wd2B9
-         WluR2SUcFpR_YhlOKftkDPvaPi-o86fs7Zot2H5sipctznqECInoomZm
-         OvmxNTTt9AcRk4s-wMYS4Ar_VFV9Y9ro4p636x0BY1l6CElvRK52dxFP
-         W7nznSyuyEUQ5oqD1km89ZjyQS-MpXt86u3fCTH3JWUmfC2aBzyR3-xO
-         YoVuTNGKw6MvBE7YbkjRquNuNWylnSKcaU9Kq8fYGetBvyL5NSfovwH9
-         0J47t8JZSLttKMRDE_jtzwcNaj79qRB5hgVNyj2ZZ3fDhMh-iBcUUiSp
-         3qbIhUJhOiAMf2RfGc-Z8Z2xdWW8jFm1r2th-NuCNPKyuWQG78TponVe
-         TVkrvI12devvWb3EsnbAFlGg-p_V_9oxfgQGAAjhvgZfDHS-ix25mcf5
-         UYMpYtF1HhA-A5GxAGFwoYxJATHiDy0xjoiR_IbLkzKpVJlrw9s79oti
-         QyWGZa57w",
-     "tag": "xNJS9Ae0PcrniAsFaShQDA"
+     "iv": "azJetU5rxKb_XuWHxwgZIQ",
+     "ciphertext": "Zjgr5KkF8d8QB2OgHUyyLBeB5wV36FERauqdCqbGUeKfR
+         nYCJEwex-UrGYUxB5UF0MsA4NMKPNEFbzKLTQwJ5H-aPxPMVTV3VqQJ0
+         vOEf_qVOtpbKb6kFuY9iZ3BMtcCb5wC8NL_3vKku0yT1jA5yz9g2RYqw
+         bky0r34V3ruRZcCjukDymmvtV4418BTTObS905unxVJEuxAbJf1Xqu3c
+         DO-zE0BuVEioXkyxyzAvCYkKyRSf4-129Ovt6VQOtYOS2z_9fmbS04SN
+         IrOxdPazRNgkRkx29AVVKswSk-UhAPYXa-m23txPEOKF_Nq-2sFYNHMd
+         1btegGpvcUhfI3IHiII_RcWwTlxYTOF-yqsNi4E7k-l2JE47rb533m9-
+         pSIdwyh8avvcNE202Ge_mRQRoi230aWbTD4vAYBxpY5FjlO7YWyDTOEL
+         cH3lssXVUtGNT2txEqfuYE-RijbBtq5qTO8iRQ2qt2QRhMRXm80UWMfR
+         CwFSFRl_5DyFlb2B_i41uP4KI_G2oVwCXJedZI5jbs_lOCH_R5dFTgC0
+         OBS605HMvoxLLvgwW9utzxZYrqBLdV8WAU4ymOtLmwOl3PNCUS6-bWpj
+         RuNZy169vCZH4EVkoyNqDT5op1A6o5m0a39N5QZdpPC4eU5hxfwZ0jc7
+         JMBZEL5rz1Bn-vlSyHFvbjg57U7udUNtMZirYvkjjc4",
+     "tag": "pPq-Jk8dMVrvNnT-yMhCUQ"
    }
 
                        Figure 83: JSON Serialization
@@ -2402,15 +2457,14 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
    o  "alg" parameter of "ECDH-ES+A128KW"
 
+   o  "enc" parameter of "A128GCM"
 
 
 
-Miller                 Expires September 15, 2014              [Page 43]
+Miller                 Expires September 15, 2014              [Page 44]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
-
-   o  "enc" parameter of "A128GCM"
 
    {
      "kty": "EC",
@@ -2461,7 +2515,9 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 44]
+
+
+Miller                 Expires September 15, 2014              [Page 45]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2517,7 +2573,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 45]
+Miller                 Expires September 15, 2014              [Page 46]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2573,7 +2629,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 46]
+Miller                 Expires September 15, 2014              [Page 47]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2629,7 +2685,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 47]
+Miller                 Expires September 15, 2014              [Page 48]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2685,7 +2741,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 48]
+Miller                 Expires September 15, 2014              [Page 49]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2741,7 +2797,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 49]
+Miller                 Expires September 15, 2014              [Page 50]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2797,7 +2853,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 50]
+Miller                 Expires September 15, 2014              [Page 51]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2853,7 +2909,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 51]
+Miller                 Expires September 15, 2014              [Page 52]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2909,7 +2965,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 52]
+Miller                 Expires September 15, 2014              [Page 53]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -2965,7 +3021,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 53]
+Miller                 Expires September 15, 2014              [Page 54]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3021,7 +3077,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 54]
+Miller                 Expires September 15, 2014              [Page 55]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3077,7 +3133,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 55]
+Miller                 Expires September 15, 2014              [Page 56]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3133,7 +3189,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 56]
+Miller                 Expires September 15, 2014              [Page 57]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3189,7 +3245,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 57]
+Miller                 Expires September 15, 2014              [Page 58]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3245,7 +3301,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 58]
+Miller                 Expires September 15, 2014              [Page 59]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3301,7 +3357,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 59]
+Miller                 Expires September 15, 2014              [Page 60]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3357,7 +3413,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 60]
+Miller                 Expires September 15, 2014              [Page 61]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3413,7 +3469,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 61]
+Miller                 Expires September 15, 2014              [Page 62]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3469,7 +3525,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 62]
+Miller                 Expires September 15, 2014              [Page 63]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3525,7 +3581,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 63]
+Miller                 Expires September 15, 2014              [Page 64]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3581,7 +3637,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 64]
+Miller                 Expires September 15, 2014              [Page 65]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3637,7 +3693,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 65]
+Miller                 Expires September 15, 2014              [Page 66]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3693,7 +3749,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 66]
+Miller                 Expires September 15, 2014              [Page 67]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3749,7 +3805,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 67]
+Miller                 Expires September 15, 2014              [Page 68]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3805,7 +3861,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 68]
+Miller                 Expires September 15, 2014              [Page 69]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3861,7 +3917,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 69]
+Miller                 Expires September 15, 2014              [Page 70]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3917,7 +3973,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 70]
+Miller                 Expires September 15, 2014              [Page 71]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -3973,7 +4029,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 71]
+Miller                 Expires September 15, 2014              [Page 72]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4029,7 +4085,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 72]
+Miller                 Expires September 15, 2014              [Page 73]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4085,7 +4141,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 73]
+Miller                 Expires September 15, 2014              [Page 74]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4141,7 +4197,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 74]
+Miller                 Expires September 15, 2014              [Page 75]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4197,7 +4253,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 75]
+Miller                 Expires September 15, 2014              [Page 76]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4253,7 +4309,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 76]
+Miller                 Expires September 15, 2014              [Page 77]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4309,7 +4365,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 77]
+Miller                 Expires September 15, 2014              [Page 78]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4365,7 +4421,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 78]
+Miller                 Expires September 15, 2014              [Page 79]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4421,7 +4477,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 79]
+Miller                 Expires September 15, 2014              [Page 80]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4477,7 +4533,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 80]
+Miller                 Expires September 15, 2014              [Page 81]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4533,7 +4589,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 81]
+Miller                 Expires September 15, 2014              [Page 82]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4589,7 +4645,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 82]
+Miller                 Expires September 15, 2014              [Page 83]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4645,7 +4701,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 83]
+Miller                 Expires September 15, 2014              [Page 84]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4701,7 +4757,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 84]
+Miller                 Expires September 15, 2014              [Page 85]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4757,7 +4813,7 @@ Internet-Draft                JOSE Cookbook                   March 2014
 
 
 
-Miller                 Expires September 15, 2014              [Page 85]
+Miller                 Expires September 15, 2014              [Page 86]
 
 Internet-Draft                JOSE Cookbook                   March 2014
 
@@ -4813,4 +4869,4 @@ Author's Address
 
 
 
-Miller                 Expires September 15, 2014              [Page 86]
+Miller                 Expires September 15, 2014              [Page 87]

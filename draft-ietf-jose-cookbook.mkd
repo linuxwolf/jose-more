@@ -1464,6 +1464,13 @@ The following are supplied before beginning the encryption process:
       "use": "enc",
       "alg": "A256GCMKW",
       "k": "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
+    },
+    {
+      "kty": "oct",
+      "use": "sig",
+      "alg": "HS256",
+      "kid": "0efa3772-9922-40b1-8f34-468cf47fad78",
+      "k": "5TIwcgXI0XuqW5g_T86B_6MbeKzsf5n5_KeNMae8Uxs"
     }
   ]
 }
@@ -1483,12 +1490,12 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-pbes2-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-GUqdBjgsMQUzgEoqmXYNVXkLAZ2dhFabB0Dxzzstc_4
+zwyKfPDnCduwjby2HdsaidT_mRP3hJXClI7qNEbHfcw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-cek title="Content Encryption Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-QcSliRvUHHZpA8mmO_eHfg
+azJetU5rxKb_XuWHxwgZIQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-iv title="Initialization Vector, base64url-encoded"}
 
@@ -1513,7 +1520,7 @@ Performing the key encryption operation over the CEK ({{jwe-pbes2-cek}})) with t
 produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-G9dAdb4XjKRJo6iYctx9AFznEC3g3wmwUEtym1yED_rih-evGDPWtQ
+mF-4bpZci3Bd716pWs6ImZ_FCVaxfAFyHmmJAlPWGVpk0RNxWEgPBw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-encdkey title="Encrypted Key, base64url-encoded"}
 
@@ -1553,23 +1560,23 @@ produces the following:
 * Authentication tag from {{jwe-pbes2-tag}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cLKGQbOYpRg4cLVlx5lXkZG8YrO2dCZS6458UT9uZUEC8ipqZzIU8EGgT977DP
-ZgRPtDrfUYBnLqE9bzOtR3FwqcbRMuvUjKSN9OJ2uh-bfsvSN2Zn5UG2A4icLg
-GhVl51ZBUaKEMD17bxqsfKcXCyJxzMF8p9PRHd_DTReJ6Gv1jinmdXxGMuq9eD
-abH8zPnm1flhe7xmOqqtZA41gdCMQQRt23967oftKx0C8DhUVgZdQ1e4AA_L3S
-4YS_Vo0h1083rpm1Wd2B9WluR2SUcFpR_YhlOKftkDPvaPi-o86fs7Zot2H5si
-pctznqECInoomZmOvmxNTTt9AcRk4s-wMYS4Ar_VFV9Y9ro4p636x0BY1l6CEl
-vRK52dxFPW7nznSyuyEUQ5oqD1km89ZjyQS-MpXt86u3fCTH3JWUmfC2aBzyR3
--xOYoVuTNGKw6MvBE7YbkjRquNuNWylnSKcaU9Kq8fYGetBvyL5NSfovwH90J4
-7t8JZSLttKMRDE_jtzwcNaj79qRB5hgVNyj2ZZ3fDhMh-iBcUUiSp3qbIhUJhO
-iAMf2RfGc-Z8Z2xdWW8jFm1r2th-NuCNPKyuWQG78TponVeTVkrvI12devvWb3
-EsnbAFlGg-p_V_9oxfgQGAAjhvgZfDHS-ix25mcf5UYMpYtF1HhA-A5GxAGFwo
-YxJATHiDy0xjoiR_IbLkzKpVJlrw9s79otiQyWGZa57w
+Zjgr5KkF8d8QB2OgHUyyLBeB5wV36FERauqdCqbGUeKfRnYCJEwex-UrGYUxB5
+UF0MsA4NMKPNEFbzKLTQwJ5H-aPxPMVTV3VqQJ0vOEf_qVOtpbKb6kFuY9iZ3B
+MtcCb5wC8NL_3vKku0yT1jA5yz9g2RYqwbky0r34V3ruRZcCjukDymmvtV4418
+BTTObS905unxVJEuxAbJf1Xqu3cDO-zE0BuVEioXkyxyzAvCYkKyRSf4-129Ov
+t6VQOtYOS2z_9fmbS04SNIrOxdPazRNgkRkx29AVVKswSk-UhAPYXa-m23txPE
+OKF_Nq-2sFYNHMd1btegGpvcUhfI3IHiII_RcWwTlxYTOF-yqsNi4E7k-l2JE4
+7rb533m9-pSIdwyh8avvcNE202Ge_mRQRoi230aWbTD4vAYBxpY5FjlO7YWyDT
+OELcH3lssXVUtGNT2txEqfuYE-RijbBtq5qTO8iRQ2qt2QRhMRXm80UWMfRCwF
+SFRl_5DyFlb2B_i41uP4KI_G2oVwCXJedZI5jbs_lOCH_R5dFTgC0OBS605HMv
+oxLLvgwW9utzxZYrqBLdV8WAU4ymOtLmwOl3PNCUS6-bWpjRuNZy169vCZH4EV
+koyNqDT5op1A6o5m0a39N5QZdpPC4eU5hxfwZ0jc7JMBZEL5rz1Bn-vlSyHFvb
+jg57U7udUNtMZirYvkjjc4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-xNJS9Ae0PcrniAsFaShQDA
+pPq-Jk8dMVrvNnT-yMhCUQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-tag title="Authentication Tag, base64url-encoded"}
 
@@ -1590,24 +1597,24 @@ eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOiI4UTFTemluYXNSM3
 hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
 bmMiOiJBMTI4Q0JDLUhTMjU2In0
 .
-G9dAdb4XjKRJo6iYctx9AFznEC3g3wmwUEtym1yED_rih-evGDPWtQ
+mF-4bpZci3Bd716pWs6ImZ_FCVaxfAFyHmmJAlPWGVpk0RNxWEgPBw
 .
-QcSliRvUHHZpA8mmO_eHfg
+azJetU5rxKb_XuWHxwgZIQ
 .
-cLKGQbOYpRg4cLVlx5lXkZG8YrO2dCZS6458UT9uZUEC8ipqZzIU8EGgT977DP
-ZgRPtDrfUYBnLqE9bzOtR3FwqcbRMuvUjKSN9OJ2uh-bfsvSN2Zn5UG2A4icLg
-GhVl51ZBUaKEMD17bxqsfKcXCyJxzMF8p9PRHd_DTReJ6Gv1jinmdXxGMuq9eD
-abH8zPnm1flhe7xmOqqtZA41gdCMQQRt23967oftKx0C8DhUVgZdQ1e4AA_L3S
-4YS_Vo0h1083rpm1Wd2B9WluR2SUcFpR_YhlOKftkDPvaPi-o86fs7Zot2H5si
-pctznqECInoomZmOvmxNTTt9AcRk4s-wMYS4Ar_VFV9Y9ro4p636x0BY1l6CEl
-vRK52dxFPW7nznSyuyEUQ5oqD1km89ZjyQS-MpXt86u3fCTH3JWUmfC2aBzyR3
--xOYoVuTNGKw6MvBE7YbkjRquNuNWylnSKcaU9Kq8fYGetBvyL5NSfovwH90J4
-7t8JZSLttKMRDE_jtzwcNaj79qRB5hgVNyj2ZZ3fDhMh-iBcUUiSp3qbIhUJhO
-iAMf2RfGc-Z8Z2xdWW8jFm1r2th-NuCNPKyuWQG78TponVeTVkrvI12devvWb3
-EsnbAFlGg-p_V_9oxfgQGAAjhvgZfDHS-ix25mcf5UYMpYtF1HhA-A5GxAGFwo
-YxJATHiDy0xjoiR_IbLkzKpVJlrw9s79otiQyWGZa57w
+Zjgr5KkF8d8QB2OgHUyyLBeB5wV36FERauqdCqbGUeKfRnYCJEwex-UrGYUxB5
+UF0MsA4NMKPNEFbzKLTQwJ5H-aPxPMVTV3VqQJ0vOEf_qVOtpbKb6kFuY9iZ3B
+MtcCb5wC8NL_3vKku0yT1jA5yz9g2RYqwbky0r34V3ruRZcCjukDymmvtV4418
+BTTObS905unxVJEuxAbJf1Xqu3cDO-zE0BuVEioXkyxyzAvCYkKyRSf4-129Ov
+t6VQOtYOS2z_9fmbS04SNIrOxdPazRNgkRkx29AVVKswSk-UhAPYXa-m23txPE
+OKF_Nq-2sFYNHMd1btegGpvcUhfI3IHiII_RcWwTlxYTOF-yqsNi4E7k-l2JE4
+7rb533m9-pSIdwyh8avvcNE202Ge_mRQRoi230aWbTD4vAYBxpY5FjlO7YWyDT
+OELcH3lssXVUtGNT2txEqfuYE-RijbBtq5qTO8iRQ2qt2QRhMRXm80UWMfRCwF
+SFRl_5DyFlb2B_i41uP4KI_G2oVwCXJedZI5jbs_lOCH_R5dFTgC0OBS605HMv
+oxLLvgwW9utzxZYrqBLdV8WAU4ymOtLmwOl3PNCUS6-bWpjRuNZy169vCZH4EV
+koyNqDT5op1A6o5m0a39N5QZdpPC4eU5hxfwZ0jc7JMBZEL5rz1Bn-vlSyHFvb
+jg57U7udUNtMZirYvkjjc4
 .
-xNJS9Ae0PcrniAsFaShQDA
+pPq-Jk8dMVrvNnT-yMhCUQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-compact title="Compact Serialization"}
 
@@ -1617,29 +1624,28 @@ The resulting JWE object using the JSON serialization:
 {
   "recipients": [
     {
-      "encrypted_key": "G9dAdb4XjKRJo6iYctx9AFznEC3g3wmwUEtym1
-          yED_rih-evGDPWtQ"
+      "encrypted_key": "mF-4bpZci3Bd716pWs6ImZ_FCVaxfAFyHmmJAl
+          PWGVpk0RNxWEgPBw"
     }
   ],
   "protected": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOi
       I4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOi
       Jqd2stc2V0K2pzb24iLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
-  "iv": "QcSliRvUHHZpA8mmO_eHfg",
-  "ciphertext": "cLKGQbOYpRg4cLVlx5lXkZG8YrO2dCZS6458UT9uZUEC8
-      ipqZzIU8EGgT977DPZgRPtDrfUYBnLqE9bzOtR3FwqcbRMuvUjKSN9OJ
-      2uh-bfsvSN2Zn5UG2A4icLgGhVl51ZBUaKEMD17bxqsfKcXCyJxzMF8p
-      9PRHd_DTReJ6Gv1jinmdXxGMuq9eDabH8zPnm1flhe7xmOqqtZA41gdC
-      MQQRt23967oftKx0C8DhUVgZdQ1e4AA_L3S4YS_Vo0h1083rpm1Wd2B9
-      WluR2SUcFpR_YhlOKftkDPvaPi-o86fs7Zot2H5sipctznqECInoomZm
-      OvmxNTTt9AcRk4s-wMYS4Ar_VFV9Y9ro4p636x0BY1l6CElvRK52dxFP
-      W7nznSyuyEUQ5oqD1km89ZjyQS-MpXt86u3fCTH3JWUmfC2aBzyR3-xO
-      YoVuTNGKw6MvBE7YbkjRquNuNWylnSKcaU9Kq8fYGetBvyL5NSfovwH9
-      0J47t8JZSLttKMRDE_jtzwcNaj79qRB5hgVNyj2ZZ3fDhMh-iBcUUiSp
-      3qbIhUJhOiAMf2RfGc-Z8Z2xdWW8jFm1r2th-NuCNPKyuWQG78TponVe
-      TVkrvI12devvWb3EsnbAFlGg-p_V_9oxfgQGAAjhvgZfDHS-ix25mcf5
-      UYMpYtF1HhA-A5GxAGFwoYxJATHiDy0xjoiR_IbLkzKpVJlrw9s79oti
-      QyWGZa57w",
-  "tag": "xNJS9Ae0PcrniAsFaShQDA"
+  "iv": "azJetU5rxKb_XuWHxwgZIQ",
+  "ciphertext": "Zjgr5KkF8d8QB2OgHUyyLBeB5wV36FERauqdCqbGUeKfR
+      nYCJEwex-UrGYUxB5UF0MsA4NMKPNEFbzKLTQwJ5H-aPxPMVTV3VqQJ0
+      vOEf_qVOtpbKb6kFuY9iZ3BMtcCb5wC8NL_3vKku0yT1jA5yz9g2RYqw
+      bky0r34V3ruRZcCjukDymmvtV4418BTTObS905unxVJEuxAbJf1Xqu3c
+      DO-zE0BuVEioXkyxyzAvCYkKyRSf4-129Ovt6VQOtYOS2z_9fmbS04SN
+      IrOxdPazRNgkRkx29AVVKswSk-UhAPYXa-m23txPEOKF_Nq-2sFYNHMd
+      1btegGpvcUhfI3IHiII_RcWwTlxYTOF-yqsNi4E7k-l2JE47rb533m9-
+      pSIdwyh8avvcNE202Ge_mRQRoi230aWbTD4vAYBxpY5FjlO7YWyDTOEL
+      cH3lssXVUtGNT2txEqfuYE-RijbBtq5qTO8iRQ2qt2QRhMRXm80UWMfR
+      CwFSFRl_5DyFlb2B_i41uP4KI_G2oVwCXJedZI5jbs_lOCH_R5dFTgC0
+      OBS605HMvoxLLvgwW9utzxZYrqBLdV8WAU4ymOtLmwOl3PNCUS6-bWpj
+      RuNZy169vCZH4EVkoyNqDT5op1A6o5m0a39N5QZdpPC4eU5hxfwZ0jc7
+      JMBZEL5rz1Bn-vlSyHFvbjg57U7udUNtMZirYvkjjc4",
+  "tag": "pPq-Jk8dMVrvNnT-yMhCUQ"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-json title="JSON Serialization"}
