@@ -90,4 +90,49 @@ var prettify = exports.prettify = function(input) {
     return str;
 }
 
+var makeCompactJWE = exports.makeCompactJWE = function(json) {
+    var jwe = [];
+    
+    if (typeof(json) === "string") {
+        jwe = json.split(".");
+    } else {
+        if (!json.ciphertext) {
+            return [];
+        }
+        if (json.aad) {
+            return [];
+        }
+        if (json.unprotected) {
+            return [];
+        }
+    
+        jwe[0] = json.protected || "";
+        jwe[1] = (json.recipients && json.recipients[0] && json.recipients[0].encrypted_key) || "";
+        jwe[2] = json.iv || "";
+        jwe[3] = json.ciphertext || "";
+        jwe[4] = json.tag || "";
+    }
+    
+    return jwe;
+}
 
+var makeCompactJWS = exports.makeCompactJWS = function(json) {
+    var jws = [];
+    
+    if (typeof(json) === "string") {
+        jws = json.split(".");
+    } else {
+        if (json.signatures.length > 1) {
+            return [];
+        }
+        if (json.signatures[0].header) {
+            return [];
+        }
+    
+        jws[0] = json.signatures[0].protected || "";
+        jws[1] = json.payload || "";
+        jws[2] = json.signatures[0].signature || "";
+    }
+    
+    return jws;
+}

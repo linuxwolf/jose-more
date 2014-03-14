@@ -22,33 +22,6 @@ var inputs = {
 }
 inputs["jwk-set+json"] = JSON.stringify(JSON.parse(inputs["jwk-set+json"]))
 
-var makeCompact = function(json) {
-    var jwe = [];
-    
-    if (typeof(json) === "string") {
-        jwe = json.split(".");
-    } else {
-        if (!json.ciphertext) {
-            return [];
-        }
-        if (json.aad) {
-            return [];
-        }
-        if (json.unprotected) {
-            return [];
-        }
-    
-        jwe[0] = json.protected || "";
-        jwe[1] = (json.recipients && json.recipients[0] && json.recipients[0].encrypted_key) || "";
-        jwe[2] = json.iv || "";
-        jwe[3] = json.ciphertext || "";
-        jwe[4] = json.tag || "";
-    }
-    
-    return jwe;
-}
-
-
 var ops = {
     "rsa15": {
         name: "RSA 1.5 and AES-HMAC-SHA2",
@@ -375,7 +348,7 @@ var doOp = function(op) {
     var results = enc.final();
     results = results.then(function(jwe) {
         var compact = [], json;
-        compact = makeCompact(jwe);
+        compact = common.makeCompactJWE(jwe);
         json = common.prettify(jwe);
     
         console.log("\nExample '%s'", op.name);
