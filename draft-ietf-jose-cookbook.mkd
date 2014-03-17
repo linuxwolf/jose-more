@@ -1,7 +1,7 @@
 ---
 title: Examples of Protecting Content using JavaScript Object Signing and Encryption (JOSE)
 abbrev: JOSE Cookbook
-docname: draft-ietf-jose-cookbook-00
+docname: draft-ietf-jose-cookbook-01
 date: 
 category: info
 
@@ -440,7 +440,7 @@ This example illustrates integrity protecting content using the "HS256" (HMAC-SH
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* AES symmetric key; this example uses the key from {{jws-hmac-key}}.
+* HMAC symmetric key; this example uses the key from {{jws-hmac-key}}.
 * "alg" parameter of "HS256".
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1464,13 +1464,6 @@ The following are supplied before beginning the encryption process:
       "use": "enc",
       "alg": "A256GCMKW",
       "k": "qC57l_uxcm7Nm3K-ct4GFjx8tM1U8CZ0NLBvdQstiS8"
-    },
-    {
-      "kty": "oct",
-      "use": "sig",
-      "alg": "HS256",
-      "kid": "hobbiton.example",
-      "k": "5TIwcgXI0XuqW5g_T86B_6MbeKzsf5n5_KeNMae8Uxs"
     }
   ]
 }
@@ -1490,12 +1483,12 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-pbes2-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sj-dginhPB6hX-J9JAsqRWMkweHG2Vi8uemNNz7x0FA
+uwsjJXaBK407Qaf0_zpcpmr1Cs0CC50hIUEyGNEt3m0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-cek title="Content Encryption Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-6bPfeHq_Uj2I0nAxA4K-Uw
+VBiCzVHNoLiR3F4V82uoTQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-iv title="Initialization Vector, base64url-encoded"}
 
@@ -1520,7 +1513,7 @@ Performing the key encryption operation over the CEK ({{jwe-pbes2-cek}})) with t
 produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Y25WjM_cANYKrMH-8lUVDyyFKP0B_rXOFyCJVzKCSNdRli8c37BRxw
+YKbKLsEoyw_JoNvhtuHo9aaeRNSEhhAW2OVHcuF_HLqS0n6hA_fgCA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-encdkey title="Encrypted Key, base64url-encoded"}
 
@@ -1560,22 +1553,20 @@ produces the following:
 * Authentication tag from {{jwe-pbes2-tag}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bNJr7MLCSu66j9I86pekZUqNtN5CnvsUWIQ25Yreedl5AyyphEzz2YqL8DYlap
-9VCC6mGaqC_ZFs7PVUDT1JqTZSKEvvo2V6RKSM84P80mPw-zogGyWZDycLQaRz
-HNlVA7WCldwmB5oD_2Obm9ImWPgVReUqnQHBdTNwEaP1tMTUqqS5GTbQq3iDcW
-_JbyObIaJArNuOCiQJ1-1GmsYFLyL-PC5M3Yps-lFSTjsK7sDkCUQDfsKgetCk
-aSArmxkgl3Vk9UHCGcz8R33MxocUB1QuQtsmSZlDgEvkpFOZYnKJgLV7WQCZGE
-_YVUD2jOOci36vGGRRfpT-OOrGiCrm16lBLDb012g6LhIEHBAeXTgH4sQkK7R6
-zgepiUEeJFUnE6-LzskmBO86QCliZKfUmW_2iB5dr7f00kP31Vv1enxVSXyHjJ
-LeN7lEGT3-O4bBxOOfLFQ0hzKpzPqzXX6nyrgv41sMYKqZ2dTs6GFNr41zpkML
-oouHksFZrdL51-2QmQclFAHGwrUJr0cBsnGEq8f-WcD-TEn0v58hl8uN6MwkBH
-lSB8lRzV9uEZI0nubjG1DQkTJ6sYOGmfHaoRBnnbY-tBnnUzDjeJNOPWBAWa8c
-HNUT34JC8Z0J9_LZpk-A1hq7iySgKN37KqZhWCAxWw
+23i-Tb1AV4n0WKVSSgcQrdg6GRqsUKxjruHXYsTHAJLZ2nsnGIX86vMXqIi6IR
+sfywCRFzLxEcZBRnTvG3nhzPk0GDD7FMyXhUHpDjEYCNA_XOmzg8yZR9oyjo6l
+TF6si4q9FZ2EhzgFQCLO_6h5EVg3vR75_hkBsnuoqoM3dwejXBtIodN84PeqMb
+6asmas_dpSsz7H10fC5ni9xIz424givB1YLldF6exVmL93R3fOoOJbmk2GBQZL
+_SEGllv2cQsBgeprARsaQ7Bq99tT80coH8ItBjgV08AtzXFFsx9qKvC982KLKd
+PQMTlVJKkqtV4Ru5LEVpBZXBnZrtViSOgyg6AiuwaS-rCrcD_ePOGSuxvgtrok
+AKYPqmXUeRdjFJwafkYEkiuDCV9vWGAi1DH2xTafhJwcmywIyzi4BqRpmdn_N-
+zl5tuJYyuvKhjKv6ihbsV_k1hJGPGAxJ6wUpmwC4PTQ2izEm0TuSE8oMKdTw8V
+3kobXZ77ulMwDs4p
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-5k3Xun63yBF0cslFroktFw
+ALTKwxvAefeL-32NY7eTAQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-tag title="Authentication Tag, base64url-encoded"}
 
@@ -1596,23 +1587,21 @@ eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOiI4UTFTemluYXNSM3
 hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
 bmMiOiJBMTI4Q0JDLUhTMjU2In0
 .
-Y25WjM_cANYKrMH-8lUVDyyFKP0B_rXOFyCJVzKCSNdRli8c37BRxw
+YKbKLsEoyw_JoNvhtuHo9aaeRNSEhhAW2OVHcuF_HLqS0n6hA_fgCA
 .
-6bPfeHq_Uj2I0nAxA4K-Uw
+VBiCzVHNoLiR3F4V82uoTQ
 .
-bNJr7MLCSu66j9I86pekZUqNtN5CnvsUWIQ25Yreedl5AyyphEzz2YqL8DYlap
-9VCC6mGaqC_ZFs7PVUDT1JqTZSKEvvo2V6RKSM84P80mPw-zogGyWZDycLQaRz
-HNlVA7WCldwmB5oD_2Obm9ImWPgVReUqnQHBdTNwEaP1tMTUqqS5GTbQq3iDcW
-_JbyObIaJArNuOCiQJ1-1GmsYFLyL-PC5M3Yps-lFSTjsK7sDkCUQDfsKgetCk
-aSArmxkgl3Vk9UHCGcz8R33MxocUB1QuQtsmSZlDgEvkpFOZYnKJgLV7WQCZGE
-_YVUD2jOOci36vGGRRfpT-OOrGiCrm16lBLDb012g6LhIEHBAeXTgH4sQkK7R6
-zgepiUEeJFUnE6-LzskmBO86QCliZKfUmW_2iB5dr7f00kP31Vv1enxVSXyHjJ
-LeN7lEGT3-O4bBxOOfLFQ0hzKpzPqzXX6nyrgv41sMYKqZ2dTs6GFNr41zpkML
-oouHksFZrdL51-2QmQclFAHGwrUJr0cBsnGEq8f-WcD-TEn0v58hl8uN6MwkBH
-lSB8lRzV9uEZI0nubjG1DQkTJ6sYOGmfHaoRBnnbY-tBnnUzDjeJNOPWBAWa8c
-HNUT34JC8Z0J9_LZpk-A1hq7iySgKN37KqZhWCAxWw
+23i-Tb1AV4n0WKVSSgcQrdg6GRqsUKxjruHXYsTHAJLZ2nsnGIX86vMXqIi6IR
+sfywCRFzLxEcZBRnTvG3nhzPk0GDD7FMyXhUHpDjEYCNA_XOmzg8yZR9oyjo6l
+TF6si4q9FZ2EhzgFQCLO_6h5EVg3vR75_hkBsnuoqoM3dwejXBtIodN84PeqMb
+6asmas_dpSsz7H10fC5ni9xIz424givB1YLldF6exVmL93R3fOoOJbmk2GBQZL
+_SEGllv2cQsBgeprARsaQ7Bq99tT80coH8ItBjgV08AtzXFFsx9qKvC982KLKd
+PQMTlVJKkqtV4Ru5LEVpBZXBnZrtViSOgyg6AiuwaS-rCrcD_ePOGSuxvgtrok
+AKYPqmXUeRdjFJwafkYEkiuDCV9vWGAi1DH2xTafhJwcmywIyzi4BqRpmdn_N-
+zl5tuJYyuvKhjKv6ihbsV_k1hJGPGAxJ6wUpmwC4PTQ2izEm0TuSE8oMKdTw8V
+3kobXZ77ulMwDs4p
 .
-5k3Xun63yBF0cslFroktFw
+ALTKwxvAefeL-32NY7eTAQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-compact title="Compact Serialization"}
 
@@ -1622,28 +1611,25 @@ The resulting JWE object using the JSON serialization:
 {
   "recipients": [
     {
-      "encrypted_key": "Y25WjM_cANYKrMH-8lUVDyyFKP0B_rXOFyCJVz
-          KCSNdRli8c37BRxw"
+      "encrypted_key": "YKbKLsEoyw_JoNvhtuHo9aaeRNSEhhAW2OVHcu
+          F_HLqS0n6hA_fgCA"
     }
   ],
   "protected": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJwMnMiOi
       I4UTFTemluYXNSM3hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOi
       Jqd2stc2V0K2pzb24iLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
-  "iv": "6bPfeHq_Uj2I0nAxA4K-Uw",
-  "ciphertext": "bNJr7MLCSu66j9I86pekZUqNtN5CnvsUWIQ25Yreedl5A
-      yyphEzz2YqL8DYlap9VCC6mGaqC_ZFs7PVUDT1JqTZSKEvvo2V6RKSM8
-      4P80mPw-zogGyWZDycLQaRzHNlVA7WCldwmB5oD_2Obm9ImWPgVReUqn
-      QHBdTNwEaP1tMTUqqS5GTbQq3iDcW_JbyObIaJArNuOCiQJ1-1GmsYFL
-      yL-PC5M3Yps-lFSTjsK7sDkCUQDfsKgetCkaSArmxkgl3Vk9UHCGcz8R
-      33MxocUB1QuQtsmSZlDgEvkpFOZYnKJgLV7WQCZGE_YVUD2jOOci36vG
-      GRRfpT-OOrGiCrm16lBLDb012g6LhIEHBAeXTgH4sQkK7R6zgepiUEeJ
-      FUnE6-LzskmBO86QCliZKfUmW_2iB5dr7f00kP31Vv1enxVSXyHjJLeN
-      7lEGT3-O4bBxOOfLFQ0hzKpzPqzXX6nyrgv41sMYKqZ2dTs6GFNr41zp
-      kMLoouHksFZrdL51-2QmQclFAHGwrUJr0cBsnGEq8f-WcD-TEn0v58hl
-      8uN6MwkBHlSB8lRzV9uEZI0nubjG1DQkTJ6sYOGmfHaoRBnnbY-tBnnU
-      zDjeJNOPWBAWa8cHNUT34JC8Z0J9_LZpk-A1hq7iySgKN37KqZhWCAxW
-      w",
-  "tag": "5k3Xun63yBF0cslFroktFw"
+  "iv": "VBiCzVHNoLiR3F4V82uoTQ",
+  "ciphertext": "23i-Tb1AV4n0WKVSSgcQrdg6GRqsUKxjruHXYsTHAJLZ2
+      nsnGIX86vMXqIi6IRsfywCRFzLxEcZBRnTvG3nhzPk0GDD7FMyXhUHpD
+      jEYCNA_XOmzg8yZR9oyjo6lTF6si4q9FZ2EhzgFQCLO_6h5EVg3vR75_
+      hkBsnuoqoM3dwejXBtIodN84PeqMb6asmas_dpSsz7H10fC5ni9xIz42
+      4givB1YLldF6exVmL93R3fOoOJbmk2GBQZL_SEGllv2cQsBgeprARsaQ
+      7Bq99tT80coH8ItBjgV08AtzXFFsx9qKvC982KLKdPQMTlVJKkqtV4Ru
+      5LEVpBZXBnZrtViSOgyg6AiuwaS-rCrcD_ePOGSuxvgtrokAKYPqmXUe
+      RdjFJwafkYEkiuDCV9vWGAi1DH2xTafhJwcmywIyzi4BqRpmdn_N-zl5
+      tuJYyuvKhjKv6ihbsV_k1hJGPGAxJ6wUpmwC4PTQ2izEm0TuSE8oMKdT
+      w8V3kobXZ77ulMwDs4p",
+  "tag": "ALTKwxvAefeL-32NY7eTAQ"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-json title="JSON Serialization"}
@@ -3410,6 +3396,314 @@ The resulting JWE object using the JSON serialization:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-json title="JSON Serialization"}
 
+# Nesting Signatures and Encryption # {#jw-nested}
+
+This example illustrates nesting a JSON Web Signature (JWS) structure within a JSON Web Encryption (JWE) structure.  The signature uses the "PS256" (RSASSA-PSS) algorithm; the encryption uses the "RSA-OAEP" (RSAES-OAEP) key encryption algorithm and the "A128GCM" (AES-GCM) content encryption algorithm.
+
+## Signing Input Factors ## {#jw-nested-sig-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jw-nested-sig-payload}}, encoded as {{RFC4648}} base64url to produce {{jw-nested-sig-payload_b64u}}.
+* RSA private key; this example uses the key from {{jw-nested-sig-rsa}}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "iss": "hobbiton.example",
+  "exp": 1300819380,
+  "http://example.com/is_root": true
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-payload title="Payload content, in JSON format"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJpc3MiOiJob2JiaXRvbi5leGFtcGxlIiwiZXhwIjoxMzAwODE5MzgwLCJodH
+RwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZX0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-payload_b64u title="Payload content, base64url-encoded"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "kty": "RSA",
+  "kid": "hobbiton.example",
+  "use": "sig",
+  "n": "kNrPIBDXMU6fcyv5i-QHQAQ-K8gsC3HJb7FYhYaw8hXbNJa-t8q0lD
+      KwLZgQXYV-ffWxXJv5GGrlZE4GU52lfMEegTDzYTrRQ3tepgKFjMGg6I
+      y6fkl1ZNsx2gEonsnlShfzA9GJwRTmtKPbk1s-hwx1IU5AT-AIelNqBg
+      cF2vE5W25_SGGBoaROVdUYxqETDggM1z5cKV4ZjDZ8-lh4oVB07bkac6
+      LQdHpJUUySH_Er20DXx30Kyi97PciXKTS-QKXnmm8ivyRCmux22ZoPUi
+      nd2BKC5OiG4MwALhaL2Z2k8CsRdfy-7dg7z41Rp6D0ZeEvtaUp4bX4aK
+      raL4rTfw",
+  "e": "AQAB",
+  "d": "ZLe_TIxpE9-W_n2VBa-HWvuYPtjvxwVXClJFOpJsdea8g9RMx34qEO
+      EtnoYc2un3CZ3LtJi-mju5RAT8YSc76YJds3ZVw0UiO8mMBeG6-iOnvg
+      obobNx7K57-xjTJZU72EjOr9kB7z6ZKwDDq7HFyCDhUEcYcHFVc7iL_6
+      TibVhAhOFONWlqlJgEgwVYd0rybNGKifdnpEbwyHoMwY6HM1qvnEFgP7
+      iZ0YzHUT535x6jj4VKcdA7ZduFkhUauysySEW7mxZM6fj1vdjJIy9LD1
+      fIz30Xv4ckoqhKF5GONU6tNmMmNgAD6gIViyEle1PrIxl1tBhCI14bRW
+      -zrpHgAQ",
+  "p": "yKWYoNIAqwMRQlgIBOdT1NIcbDNUUs2Rh-pBaxD_mIkweMt4Mg-0-B
+      2iSYvMrs8horhonV7vxCQagcBAATGW-hAafUehWjxWSH-3KccRM8toL4
+      e0q7M-idRDOBXSoe7Z2-CV2x_ZCY3RP8qp642R13WgXqGDIM4MbUkZSj
+      cY9-c",
+  "q": "uND4o15V30KDzf8vFJw589p1vlQVQ3NEilrinRUPHkkxaAzDzccGgr
+      WMWpGxGFFnNL3w5CqPLeU76-5IVYQq0HwYVl0hVXQHr7sgaGu-483Ad3
+      ENcL23FrOnF45m7_2ooAstJDe49MeLTTQKrSIBl_SKvqpYvfSPTczPcZ
+      kh9Kk",
+  "dp": "jmTnEoq2qqa8ouaymjhJSCnsveUXnMQC2gAneQJRQkFqQu-zV2PKP
+      KNbPvKVyiF5b2-L3tM3OW2d2iNDyRUWXlT7V5l0KwPTABSTOnTqAmYCh
+      Gi8kXXdlhcrtSvXldBakC6saxwI_TzGGY2MVXzc2ZnCvCXHV4qjSxOrf
+      P3pHFU",
+  "dq": "R9FUvU88OVzEkTkXl3-5-WusE4DjHmndeZIlu3rifBdfLpq_P-iWP
+      BbGaq9wzQ1c-J7SzCdJqkEJDv5yd2C7rnZ6kpzwBh_nmL8zscAk1qsun
+      nt9CJGAYz7-sGWy1JGShFazfP52ThB4rlCJ0YuEaQMrIzpY77_oLAhpm
+      DA0hLk",
+  "qi": "S8tC7ZknW6hPITkjcwttQOPLVmRfwirRlFAViuDb8NW9CrV_7F2Oq
+      UZCqmzHTYAumwGFHI1WVRep7anleWaJjxC_1b3fq_al4qH3Pe-EKiHg6
+      IMazuRtZLUROcThrExDbF5dYbsciDnfRUWLErZ4N1Be0bnxYuPqxwKd9
+      QZwMo0"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-rsa title="RSA 2048-bit Private Key, in JWK format"}
+
+## Signing Operation ## {#jw-nested-sig-op}
+
+The following are generated to complete the signing operation:
+
+* Protected JWS Header; this example uses header from {{jw-nested-sig-protected}}, encoded using {{RFC4648}} base64url to produce {{jw-nested-sig-protected_b64u}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "alg": "PS256",
+  "typ": "JWT"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-protected title="Protected JWS Header JSON"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-protected_b64u title="Protected JWS Header, base64url-encoded"}
+
+Performing the signature operation over the combined protected JWS header ({{jw-nested-sig-protected_b64u}}) and Payload content ({{jw-nested-sig-payload}}) produces the following signature:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+dPpMqwRZxFYi1UfcDAaf8M99o7kwUWtiXZ-ByvVuJih4MhJ_aZqciprz0OWaIA
+kIvn1qskChirjKvY9ESZNUCP4JjvfyPS-nqjJxYoA5ztWOyFk2cZNIPXjcJXSQ
+wXPO9tEe-v4VSqgD0aKHqPxYog4N6Cz1lKph1U1sYDSI67_bLL7elg_vkjfMp5
+_W5l5LuUYGMeh6hxQIaIUXf9EwV2JmvTMuZ-vBOWy0Sniy1EFo72CRTvmtrIf5
+AROo5MNliY3KtUxeP-SOmD-LEYwW9SlkohYzMVAZDDOrVbv7KVRHpeYNaK75KE
+QqdCEEkS_rskZS-Qtt_nlegTWh1mEYaA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-sig title="Signature, base64url-encoded"}
+
+## Signing Output ## {#jw-nested-sig-output}
+
+The following compose the resulting JWS object:
+
+* Protected JWS header ({{jw-nested-sig-protected_b64u}}))
+* Payload content ({{jw-nested-sig-payload_b64u}})
+* Signature ({{jw-nested-sig-sig}})
+
+The resulting JWS object using the Compact Serialization (which is the plaintext input to the proceeding encryption operation):
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9
+.
+eyJpc3MiOiJob2JiaXRvbi5leGFtcGxlIiwiZXhwIjoxMzAwODE5MzgwLCJodH
+RwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZX0
+.
+dPpMqwRZxFYi1UfcDAaf8M99o7kwUWtiXZ-ByvVuJih4MhJ_aZqciprz0OWaIA
+kIvn1qskChirjKvY9ESZNUCP4JjvfyPS-nqjJxYoA5ztWOyFk2cZNIPXjcJXSQ
+wXPO9tEe-v4VSqgD0aKHqPxYog4N6Cz1lKph1U1sYDSI67_bLL7elg_vkjfMp5
+_W5l5LuUYGMeh6hxQIaIUXf9EwV2JmvTMuZ-vBOWy0Sniy1EFo72CRTvmtrIf5
+AROo5MNliY3KtUxeP-SOmD-LEYwW9SlkohYzMVAZDDOrVbv7KVRHpeYNaK75KE
+QqdCEEkS_rskZS-Qtt_nlegTWh1mEYaA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-sig-compact title="Compact Serialization"}
+
+## Encryption Input Factors ## {#jw-nested-enc-input}
+
+The following are supplied before beginning the encryption process:
+
+* Plaintext content; this example uses the content from {{jw-nested-sig-compact}}.
+* RSA public key; this example use the key from {{jwe-rsa_oaep-key}}.
+
+## Encryption Generated Factors ## {#jw-nested-enc-gen}
+
+The following are generated before encrypting:
+
+* AES symmetric key as the Content Encryption CEK (CEK); this example uses the key from {{jw-nested-enc-cek}}.
+* Initialization vector/nonce; this example uses the initialization vector/nonce from {{jw-nested-enc-iv}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+0RHSNYwN-6-2QBGsYTZLSQ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-cek title="Content Encryption Key, base64url-encoded"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GbX1i9kXz0sxXPmA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-iv title="Initialization vector, base64url-encoded"}
+
+## Encrypting the Key ## {#jw-nested-keyenc}
+
+Performing the key encryption operation over the CEK ({{jw-nested-enc-cek}}) with the RSA key ({{jwe-rsa_oaep-key}}) produces the following encrypted key:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+a0JHRoITfpX4qRewImjlStn8m3CPxBV1ueYlVhjurCyrBg3I7YhCRYjphDOOS4
+E7rXbr2Fn6NyQq-A-gqT0FXqNjVOGrG-bi13mwy7RoYhjTkBEC6P7sMYMXXx4g
+zMedpiJHQVeyI-zkZV7A9matpgevAJWrXzOUysYGTtwoSN6gtUVtlLaivjvb21
+O0ul4YxSHV-ByK1kyeetRp_fuYJxHoKLQL9P424sKx2WGYb4zsBIPF4ssl_e5I
+R7nany-25_UmC2urosNkoFz9cQ82MypZP8gqbQJyPN-Fpp4Z-5o6yV64x6yzDU
+F_5JCIdl-Qv6H5dMVIY7q1eKpXcV1lWO_2FefEBqXxXvIjLeZivjNkzogCq3-I
+apSjVFnMjBxjpYLT8muaawo1yy1XXMuinIpNcOY3n4KKrXLrCcteX85m4IIHMZ
+a38s1Hpr56fPPseMA-Jltmt-a9iEDtOzhtxz8AXy9tsCAZV2XBWNG8c3kJusAa
+mBKOYwfk7JhLRDgOnJjlJLhn7TI4UxDp9dCmUXEN6z0v23W15qJIEXNJtqnblp
+ymooeWAHCT4e_Owbim1g0AEpTHUdA2iiLNs9WTX_H_TXuPC8yDDhi1smxS_X_x
+pkIHkiIHWDOLx03BpqDTivpKkBYwqP2UZkcxqX2Fo_GnVrNwlK7Lgxw6FSQvDO
+0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-encdkey title="Encrypted Key, base64url-encoded"}
+
+## Encrypting the Content ## {#jw-nested-contentenc}
+
+The following are generated before encrypting the plaintext:
+
+* Protected JWE Header; this example uses the the header from {{jw-nested-enc-protected}}, encoded using {{RFC4648}} base64url to produce {{jw-nested-enc-protected_b64u}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "alg": "RSA-OAEP",
+  "cty": "JWT",
+  "enc": "A128GCM"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-protected title="Protected JWE Header JSON"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYyI6IkExMjhHQ00ifQ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-protected_b64u title="Protected JWE Header, base64url-encoded"}
+
+Performing the content encryption operation over the Plaintext ({{jw-nested-sig-compact}}) with the following:
+
+* CEK ({{jw-nested-enc-cek}});
+* Initialization vector/nonce ({{jw-nested-enc-iv}}); and
+* Protected JWE Header ({{jw-nested-enc-protected_b64u}}) as authenticated data.
+
+produces the following:
+
+* Ciphertext from {{jw-nested-enc-ciphertext}}.
+* Authentication tag from {{jw-nested-enc-tag}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SZI4IvKHmwpazl_pJQXX3mHv1ANnOU4Wf9-utWYUcKrBNgCe2OFMf66cSJ8k2Q
+kxaQD3_R60MGE9ofomwtky3GFxMeGRjtpMt9OAvVLsAXB0_UTCBGyBg3C2bWLX
+qZlfJAAoJRUPRk-BimYZY81zVBuIhc7HsQePCpu33SzMsFHjn4lP_idrJz_glZ
+TNgKDt8zdnUPauKTKDNOH1DD4fuzvDYfDIAfqGPyL5sVRwbiXpXdGokEszM-9C
+hMPqW1QNhzuX_Zul3bvrJwr7nuGZs4cUScY3n8yE3AHCLurgls-A9mz1X38xEa
+ulV18l4Fg9tLejdkAuQZjPbqeHQBJe4IwGD5Ee0dQ-Mtz4NnhkIWx-YKBb_Xo2
+zI3Q_1sYjKUuis7yWW-HTr_vqvFt0bj7WJf2vzB0TZ3dvsoGaTvPH2dyWwumUr
+lx4gmPUzBdwTO6ubfYSDUEEz5py0d_OtWeUSYcCYBKD-aM7tXg26qJo21gYjLf
+hn9zy-W19sOCZGuzgFjPhawXHpvnj_t-0_ES96kogjJLxS1IMU9Y5XmnwZMyNc
+9EIwnogsCg-hVuvzyP0sIruktmI94_SL1xgMl7o03phcTMxtlMizR88NKU1WkB
+siXMCjy1Noue7MD-ShDp5dmM
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-ciphertext title="Ciphertext, base64url-encoded"}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+KnIKEhN8U-3C9s4gtSpjSw
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-tag title="Authentication tag, base64url-encoded"}
+
+## Encryption Output ## {#jw-nested-enc-output}
+
+The following compose the resulting JWE object:
+
+* Protected JWE Header ({{jw-nested-enc-protected_b64u}})
+* Encrypted key ({{jw-nested-enc-encdkey}})
+* Initialization vector/nonce ({{jw-nested-enc-iv}})
+* Ciphertext ({{jw-nested-enc-ciphertext}})
+* Authentication Tag ({{jw-nested-enc-tag}})
+
+The resulting JWE object using the Compact serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYyI6IkExMjhHQ00ifQ
+.
+a0JHRoITfpX4qRewImjlStn8m3CPxBV1ueYlVhjurCyrBg3I7YhCRYjphDOOS4
+E7rXbr2Fn6NyQq-A-gqT0FXqNjVOGrG-bi13mwy7RoYhjTkBEC6P7sMYMXXx4g
+zMedpiJHQVeyI-zkZV7A9matpgevAJWrXzOUysYGTtwoSN6gtUVtlLaivjvb21
+O0ul4YxSHV-ByK1kyeetRp_fuYJxHoKLQL9P424sKx2WGYb4zsBIPF4ssl_e5I
+R7nany-25_UmC2urosNkoFz9cQ82MypZP8gqbQJyPN-Fpp4Z-5o6yV64x6yzDU
+F_5JCIdl-Qv6H5dMVIY7q1eKpXcV1lWO_2FefEBqXxXvIjLeZivjNkzogCq3-I
+apSjVFnMjBxjpYLT8muaawo1yy1XXMuinIpNcOY3n4KKrXLrCcteX85m4IIHMZ
+a38s1Hpr56fPPseMA-Jltmt-a9iEDtOzhtxz8AXy9tsCAZV2XBWNG8c3kJusAa
+mBKOYwfk7JhLRDgOnJjlJLhn7TI4UxDp9dCmUXEN6z0v23W15qJIEXNJtqnblp
+ymooeWAHCT4e_Owbim1g0AEpTHUdA2iiLNs9WTX_H_TXuPC8yDDhi1smxS_X_x
+pkIHkiIHWDOLx03BpqDTivpKkBYwqP2UZkcxqX2Fo_GnVrNwlK7Lgxw6FSQvDO
+0
+.
+GbX1i9kXz0sxXPmA
+.
+SZI4IvKHmwpazl_pJQXX3mHv1ANnOU4Wf9-utWYUcKrBNgCe2OFMf66cSJ8k2Q
+kxaQD3_R60MGE9ofomwtky3GFxMeGRjtpMt9OAvVLsAXB0_UTCBGyBg3C2bWLX
+qZlfJAAoJRUPRk-BimYZY81zVBuIhc7HsQePCpu33SzMsFHjn4lP_idrJz_glZ
+TNgKDt8zdnUPauKTKDNOH1DD4fuzvDYfDIAfqGPyL5sVRwbiXpXdGokEszM-9C
+hMPqW1QNhzuX_Zul3bvrJwr7nuGZs4cUScY3n8yE3AHCLurgls-A9mz1X38xEa
+ulV18l4Fg9tLejdkAuQZjPbqeHQBJe4IwGD5Ee0dQ-Mtz4NnhkIWx-YKBb_Xo2
+zI3Q_1sYjKUuis7yWW-HTr_vqvFt0bj7WJf2vzB0TZ3dvsoGaTvPH2dyWwumUr
+lx4gmPUzBdwTO6ubfYSDUEEz5py0d_OtWeUSYcCYBKD-aM7tXg26qJo21gYjLf
+hn9zy-W19sOCZGuzgFjPhawXHpvnj_t-0_ES96kogjJLxS1IMU9Y5XmnwZMyNc
+9EIwnogsCg-hVuvzyP0sIruktmI94_SL1xgMl7o03phcTMxtlMizR88NKU1WkB
+siXMCjy1Noue7MD-ShDp5dmM
+.
+KnIKEhN8U-3C9s4gtSpjSw
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-compact title="Compact Serialization"}
+
+The resulting JWE object using the JSON serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "recipients": [
+    {
+      "encrypted_key": "a0JHRoITfpX4qRewImjlStn8m3CPxBV1ueYlVh
+          jurCyrBg3I7YhCRYjphDOOS4E7rXbr2Fn6NyQq-A-gqT0FXqNjVO
+          GrG-bi13mwy7RoYhjTkBEC6P7sMYMXXx4gzMedpiJHQVeyI-zkZV
+          7A9matpgevAJWrXzOUysYGTtwoSN6gtUVtlLaivjvb21O0ul4YxS
+          HV-ByK1kyeetRp_fuYJxHoKLQL9P424sKx2WGYb4zsBIPF4ssl_e
+          5IR7nany-25_UmC2urosNkoFz9cQ82MypZP8gqbQJyPN-Fpp4Z-5
+          o6yV64x6yzDUF_5JCIdl-Qv6H5dMVIY7q1eKpXcV1lWO_2FefEBq
+          XxXvIjLeZivjNkzogCq3-IapSjVFnMjBxjpYLT8muaawo1yy1XXM
+          uinIpNcOY3n4KKrXLrCcteX85m4IIHMZa38s1Hpr56fPPseMA-Jl
+          tmt-a9iEDtOzhtxz8AXy9tsCAZV2XBWNG8c3kJusAamBKOYwfk7J
+          hLRDgOnJjlJLhn7TI4UxDp9dCmUXEN6z0v23W15qJIEXNJtqnblp
+          ymooeWAHCT4e_Owbim1g0AEpTHUdA2iiLNs9WTX_H_TXuPC8yDDh
+          i1smxS_X_xpkIHkiIHWDOLx03BpqDTivpKkBYwqP2UZkcxqX2Fo_
+          GnVrNwlK7Lgxw6FSQvDO0"
+    }
+  ],
+  "protected": "eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYy
+      I6IkExMjhHQ00ifQ",
+  "iv": "GbX1i9kXz0sxXPmA",
+  "ciphertext": "SZI4IvKHmwpazl_pJQXX3mHv1ANnOU4Wf9-utWYUcKrBN
+      gCe2OFMf66cSJ8k2QkxaQD3_R60MGE9ofomwtky3GFxMeGRjtpMt9OAv
+      VLsAXB0_UTCBGyBg3C2bWLXqZlfJAAoJRUPRk-BimYZY81zVBuIhc7Hs
+      QePCpu33SzMsFHjn4lP_idrJz_glZTNgKDt8zdnUPauKTKDNOH1DD4fu
+      zvDYfDIAfqGPyL5sVRwbiXpXdGokEszM-9ChMPqW1QNhzuX_Zul3bvrJ
+      wr7nuGZs4cUScY3n8yE3AHCLurgls-A9mz1X38xEaulV18l4Fg9tLejd
+      kAuQZjPbqeHQBJe4IwGD5Ee0dQ-Mtz4NnhkIWx-YKBb_Xo2zI3Q_1sYj
+      KUuis7yWW-HTr_vqvFt0bj7WJf2vzB0TZ3dvsoGaTvPH2dyWwumUrlx4
+      gmPUzBdwTO6ubfYSDUEEz5py0d_OtWeUSYcCYBKD-aM7tXg26qJo21gY
+      jLfhn9zy-W19sOCZGuzgFjPhawXHpvnj_t-0_ES96kogjJLxS1IMU9Y5
+      XmnwZMyNc9EIwnogsCg-hVuvzyP0sIruktmI94_SL1xgMl7o03phcTMx
+      tlMizR88NKU1WkBsiXMCjy1Noue7MD-ShDp5dmM",
+  "tag": "KnIKEhN8U-3C9s4gtSpjSw"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jw-nested-enc-json title="JSON Serialiation"}
 
 # Security Considerations # {#security}
 
