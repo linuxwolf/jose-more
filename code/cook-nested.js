@@ -15,7 +15,8 @@ var jose = require("jose"),
 var tmpKeys = [
     JSON.parse(fs.readFileSync(__dirname + "/../pki/signatures.json", "utf8")).keys,
     JSON.parse(fs.readFileSync(__dirname + "/../pki/encryption.json", "utf8")).keys,
-    JSON.parse(fs.readFileSync(__dirname + "/../pki/shared.json", "utf8")).keys
+    JSON.parse(fs.readFileSync(__dirname + "/../pki/shared.json", "utf8")).keys,
+    JSON.parse(fs.readFileSync(__dirname + "/../pki/hobbiton.json", "utf8")).keys
 ];
 
 var keys = jose.JWK.createKeyStore();
@@ -41,7 +42,7 @@ var ops = {
             {
                 key: keys.get({kid:"hobbiton.example"}),
                 header: {
-                    alg:"HS256",
+                    alg:"PS256",
                     typ: "JWT"
                 },
                 reference: null,
@@ -62,7 +63,10 @@ var ops = {
         recipients: [
             {
                 key: keys.get({kid:"samwise.gamgee@hobbiton.example"}),
-                reference: null
+                reference: null,
+                header: {
+                    alg: "RSA-OAEP"
+                }
             }
         ]
     }
@@ -171,11 +175,28 @@ then(function(input) {
         console.log(json);
         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         
-        return compact.replace(/\s+/g, "");
+        compact = compact.replace(/\s+/g, "");
+        return compact;
     });
     
     return promise;
 }).then(function(plaintext) {
+    var printout = plaintext.split(".").
+                             map(common.chunk).
+                             map(function(v) {
+                                if (!v) {
+                                    return "\n";
+                                } else {
+                                    return "\n" + v + "\n"
+                                }
+                             }).
+                             join(".").
+                             trim();
+    console.log("\nPlaintext:");
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log(printout);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
     var op = ops["enc"];
     var enc = jose.JWE.createEncrypt(op.opts, op.recipients);
     enc.update(plaintext, "utf8");
