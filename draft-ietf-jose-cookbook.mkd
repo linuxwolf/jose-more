@@ -31,6 +31,7 @@ informative:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
+    I-D.ietf-oauth-json-web-token:
     RFC1951:
     RFC4648:
     RFC7095:
@@ -3404,7 +3405,7 @@ This example illustrates nesting a JSON Web Signature (JWS) structure within a J
 
 The following are supplied before beginning the signing operation:
 
-* Payload content; this example uses the content from {{jw-nested-sig-payload}}, encoded as {{RFC4648}} base64url to produce {{jw-nested-sig-payload_b64u}}.
+* Payload content; this example uses the JSON Web Token (JWT) {{I-D.ietf-oauth-json-web-token}} content from {{jw-nested-sig-payload}}, encoded as {{RFC4648}} base64url to produce {{jw-nested-sig-payload_b64u}}.
 * RSA private key; this example uses the key from {{jw-nested-sig-rsa}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
