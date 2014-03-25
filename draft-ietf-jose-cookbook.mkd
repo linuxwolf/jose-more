@@ -378,9 +378,9 @@ hhbXBsZSJ9
 Performing the signature operation over the combined protected JWS header ({{jws-ecdsa-protected_b64u}}) and Payload content ({{jws-payload_b64u) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-EvRCJgYnTh--MujbaxJCs6ulxanF5-XZ1BG2nPSnffu8aTzD9JkFZuGf5eSRoJ
-Bmb3as3A_Qg1oSh7VGRYqqIkwZ9RIUM-k66Zf08mnpBxeSzu9KAQ8ZVF3sOPP1
-TShgv03CE1Hq0LDvHR2WZvzZJsZClzB_nYaC_-oeNt-oKB7dxQ
+ALU65ZQ18uHdbBdT_albcMfmPu1ITjaMMNFCEyTtatJZ4vJzKLVE_M2faZMcsq
+juXs8bzz_Wa5vtFkpwoMWG5MNWAFpHsV376y-OfRf5OZs9uQCaMDfjgDl586G-
+bwSBoAsxBcxb5aUHcrCFKTSfde9K9RU-fc2qX4vMqlDg_snlZOl2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-sig title="Signature, base64url-encoded"}
 
@@ -403,9 +403,9 @@ lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
 b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
 UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 .
-EvRCJgYnTh--MujbaxJCs6ulxanF5-XZ1BG2nPSnffu8aTzD9JkFZuGf5eSRoJ
-Bmb3as3A_Qg1oSh7VGRYqqIkwZ9RIUM-k66Zf08mnpBxeSzu9KAQ8ZVF3sOPP1
-TShgv03CE1Hq0LDvHR2WZvzZJsZClzB_nYaC_-oeNt-oKB7dxQ
+ALU65ZQ18uHdbBdT_albcMfmPu1ITjaMMNFCEyTtatJZ4vJzKLVE_M2faZMcsq
+juXs8bzz_Wa5vtFkpwoMWG5MNWAFpHsV376y-OfRf5OZs9uQCaMDfjgDl586G-
+bwSBoAsxBcxb5aUHcrCFKTSfde9K9RU-fc2qX4vMqlDg_snlZOl2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-compact title="Compact Serialization" }
 
@@ -422,10 +422,10 @@ The resulting JWS object using the JSON serialization:
     {
       "protected": "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2
           dpbnNAaG9iYml0b24uZXhhbXBsZSJ9",
-      "signature": "EvRCJgYnTh--MujbaxJCs6ulxanF5-XZ1BG2nPSnff
-          u8aTzD9JkFZuGf5eSRoJBmb3as3A_Qg1oSh7VGRYqqIkwZ9RIUM-
-          k66Zf08mnpBxeSzu9KAQ8ZVF3sOPP1TShgv03CE1Hq0LDvHR2WZv
-          zZJsZClzB_nYaC_-oeNt-oKB7dxQ"
+      "signature": "ALU65ZQ18uHdbBdT_albcMfmPu1ITjaMMNFCEyTtat
+          JZ4vJzKLVE_M2faZMcsqjuXs8bzz_Wa5vtFkpwoMWG5MNWAFpHsV
+          376y-OfRf5OZs9uQCaMDfjgDl586G-bwSBoAsxBcxb5aUHcrCFKT
+          Sfde9K9RU-fc2qX4vMqlDg_snlZOl2"
     }
   ]
 }
@@ -841,9 +841,9 @@ The following are generated before completing the second signing operation:
 Performing the second signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-GjTxjbTg7oJxNl3UJISdCPHZjEFxrKDutWiXlRPUecb-Glch3dkAtxOxrP1lxO
-j3p65-iSVrjuN6RaQDln4-zyQZ_UAJtJdDgauT6q9AROvbsQac5IRX21pj7XyT
-XuAnL-kqaSR0NeTw3SoEcUdns4YR-12V_iFSruMsVtrawJ2w-w
+Ab0Gu1aChm0fEjUFgGbwngMA7ZsubwFBhHdTz4nNbsAv4byNDWj8UBHLJBar_M
+lj3d0m-IGK_70iHZr_fqvFNDW-AGrXM6th9KtiSZnJv2nACAtGY87nZBfv4zqH
+zkIwTxXQHC_NsTeuR9xwJUp5YwnWfD0hfmSEp8HzvILPrAHCAZw9
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_2 title="Signature #2, base64url-encoded"}
 
@@ -855,10 +855,10 @@ The following is the assembled second signature serialized as JSON:
     "alg": "ES512",
     "kid": "bilbo.baggins@hobbiton.example"
   },
-  "signature": "GjTxjbTg7oJxNl3UJISdCPHZjEFxrKDutWiXlRPUecb-Gl
-      ch3dkAtxOxrP1lxOj3p65-iSVrjuN6RaQDln4-zyQZ_UAJtJdDgauT6q
-      9AROvbsQac5IRX21pj7XyTXuAnL-kqaSR0NeTw3SoEcUdns4YR-12V_i
-      FSruMsVtrawJ2w-w"
+  "signature": "Ab0Gu1aChm0fEjUFgGbwngMA7ZsubwFBhHdTz4nNbsAv4b
+      yNDWj8UBHLJBar_Mlj3d0m-IGK_70iHZr_fqvFNDW-AGrXM6th9KtiSZ
+      nJv2nACAtGY87nZBfv4zqHzkIwTxXQHC_NsTeuR9xwJUp5YwnWfD0hfm
+      SEp8HzvILPrAHCAZw9"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_2 title="Signature #2 JSON"}
@@ -938,10 +938,10 @@ The resulting JWS object using the JSON serialization:
         "alg": "ES512",
         "kid": "bilbo.baggins@hobbiton.example"
       },
-      "signature": "GjTxjbTg7oJxNl3UJISdCPHZjEFxrKDutWiXlRPUec
-          b-Glch3dkAtxOxrP1lxOj3p65-iSVrjuN6RaQDln4-zyQZ_UAJtJ
-          dDgauT6q9AROvbsQac5IRX21pj7XyTXuAnL-kqaSR0NeTw3SoEcU
-          dns4YR-12V_iFSruMsVtrawJ2w-w"
+      "signature": "Ab0Gu1aChm0fEjUFgGbwngMA7ZsubwFBhHdTz4nNbs
+          Av4byNDWj8UBHLJBar_Mlj3d0m-IGK_70iHZr_fqvFNDW-AGrXM6
+          th9KtiSZnJv2nACAtGY87nZBfv4zqHzkIwTxXQHC_NsTeuR9xwJU
+          p5YwnWfD0hfmSEp8HzvILPrAHCAZw9"
     },
     {
       "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LT
@@ -1873,7 +1873,7 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this examples uses the initialization vector/nonce from {{jwe-ecdh-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--Mn-fJAUbrPBmliI7UgrsA
+8sgniCI_Pq8Cy3Z3GND0lA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-iv title="Initialization Vector, base64url-encoded"}
 
@@ -1889,8 +1889,8 @@ The following are generated to agree on a CEK:
 {
   "kty": "EC",
   "crv": "P-256",
-  "x": "_HvWE1c6H5AOdcw-fHKpIN49qQLQ8DU8Sa6oTQ_Lpr4",
-  "y": "I5o0Nf1SSkgx_D1Nl2fSsGMIf8GWNZ7MDFJRS4yC2k8"
+  "x": "9dnelVqsn5jG4PWr04nuVrprzE58c08XmmQypplBSHY",
+  "y": "McMcgqR-kcl4hi5etNYLvUQexQmRysTAxwbYVXpPtW8"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-epk title="Ephemeral public key, in JWK format"}
@@ -1898,7 +1898,7 @@ The following are generated to agree on a CEK:
 Performing the ECDH operation using the static EC public key ({{jwe-ecdh-key}}) over the ephemeral private key {{jwe-ecdh-epk}}) produces the following CEK:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-alFuoBYfIZ3inRG9wCF6gW6-PWvgyi7vZGfeTkYaO5M
+yP7hYI2uZOEPDniojSCCR8pQe5ydXhACmwpX7RAs3cE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-cek title="Agreed-to Content Encryption Key, base64url-encoded"}
 
@@ -1915,8 +1915,8 @@ The following are generated before encrypting the content:
   "epk": {
     "kty": "EC",
     "crv": "P-256",
-    "x": "_HvWE1c6H5AOdcw-fHKpIN49qQLQ8DU8Sa6oTQ_Lpr4",
-    "y": "I5o0Nf1SSkgx_D1Nl2fSsGMIf8GWNZ7MDFJRS4yC2k8"
+    "x": "9dnelVqsn5jG4PWr04nuVrprzE58c08XmmQypplBSHY",
+    "y": "McMcgqR-kcl4hi5etNYLvUQexQmRysTAxwbYVXpPtW8"
   },
   "enc": "A128CBC-HS256"
 }
@@ -1926,9 +1926,9 @@ The following are generated before encrypting the content:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
 NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
-LCJ4IjoiX0h2V0UxYzZINUFPZGN3LWZIS3BJTjQ5cVFMUThEVThTYTZvVFFfTH
-ByNCIsInkiOiJJNW8wTmYxU1NrZ3hfRDFObDJmU3NHTUlmOEdXTlo3TURGSlJT
-NHlDMms4In0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+LCJ4IjoiOWRuZWxWcXNuNWpHNFBXcjA0bnVWcnByekU1OGMwOFhtbVF5cHBsQl
+NIWSIsInkiOiJNY01jZ3FSLWtjbDRoaTVldE5ZTHZVUWV4UW1SeXNUQXh3YllW
+WHBQdFc4In0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-protected_b64u title="Protected JWE Header, base64url-encoded"}
 
@@ -1944,18 +1944,18 @@ produces the following:
 * Authentication tag from {{jwe-ecdh-tag}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-PmBuk86YR72slvVGrVMGI3E9mc_tLK8mpzvCcnk6Jwsdpncl0qDBnjqoW99cs4
-mDMhjlHDCXuBSkGHFxpUPQXiwDu8abeD9sGyYfkUvMBDLjSxJQcltX57JzOSvq
-T2xUf6uAJ2r-WgTIMRFTzyWS7zUZWkMFdFM5Yg61BpHN_nS87trNEl8z38_NZ0
-eubfEQIAFKg3wymMh8LJqNgUop4pBz1Ojhin4IjIaW6v5Pt36iFMxB-xTtNG4x
-ZQva3V9t3vzZEXBH7gVK-oXFsP0QEoaWzv67an53BjZx0BJ5K2z6RCRuVXGmya
-fLWjOC5JhY_ekdw0CtQ72j3wBHxVf3oV5yHzSi8Szqon72_kdo1a4WUxSMnlhz
-05k1NmKHN6GI
+hAKtCu1zv5aBZ-929KTYoYZY766_qagjaN5PebhZsMl07GZosXjbmizkGMihdv
+NZ3QMX5JdJdfklKPUGx4pyeUHyijmrzrGtA7GZlwqkMyXeF9RynFYSmtaYwSDG
+qeBF5SABtsSoUnsaELMXwwLhx5d5iVeD_qJAEIRoO9l70FEeRLTMEyDvNiudMy
+elykaBwKfmpfBNdnCb-2BD1gtLdhZQ5Ex7X9QcaBoFNz7pZhTD3AipntFcMz_w
+6fyrtvBl0q9Tho9auDKPaynoY8-BIFZLR3XhJvnuWV7Iaa2KZPh9tMhAX78QTh
+1rOCUbnKXg74uspglBCfY3HQUxEj1vwSZYSzgW82UOGcgQgPseevm7gZOYPBB3
+bOLJ4fuB33QH
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-TUSVEHqipB7wIOkTC_JJsQ
+2O8JRndU8Yct8waNxxpmEg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-tag title="Authentication Tag, base64url-encoded"}
 
@@ -1973,22 +1973,22 @@ the resulting JWE object using the Compact serialization:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
 NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
-LCJ4IjoiX0h2V0UxYzZINUFPZGN3LWZIS3BJTjQ5cVFMUThEVThTYTZvVFFfTH
-ByNCIsInkiOiJJNW8wTmYxU1NrZ3hfRDFObDJmU3NHTUlmOEdXTlo3TURGSlJT
-NHlDMms4In0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+LCJ4IjoiOWRuZWxWcXNuNWpHNFBXcjA0bnVWcnByekU1OGMwOFhtbVF5cHBsQl
+NIWSIsInkiOiJNY01jZ3FSLWtjbDRoaTVldE5ZTHZVUWV4UW1SeXNUQXh3YllW
+WHBQdFc4In0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 .
 .
--Mn-fJAUbrPBmliI7UgrsA
+8sgniCI_Pq8Cy3Z3GND0lA
 .
-PmBuk86YR72slvVGrVMGI3E9mc_tLK8mpzvCcnk6Jwsdpncl0qDBnjqoW99cs4
-mDMhjlHDCXuBSkGHFxpUPQXiwDu8abeD9sGyYfkUvMBDLjSxJQcltX57JzOSvq
-T2xUf6uAJ2r-WgTIMRFTzyWS7zUZWkMFdFM5Yg61BpHN_nS87trNEl8z38_NZ0
-eubfEQIAFKg3wymMh8LJqNgUop4pBz1Ojhin4IjIaW6v5Pt36iFMxB-xTtNG4x
-ZQva3V9t3vzZEXBH7gVK-oXFsP0QEoaWzv67an53BjZx0BJ5K2z6RCRuVXGmya
-fLWjOC5JhY_ekdw0CtQ72j3wBHxVf3oV5yHzSi8Szqon72_kdo1a4WUxSMnlhz
-05k1NmKHN6GI
+hAKtCu1zv5aBZ-929KTYoYZY766_qagjaN5PebhZsMl07GZosXjbmizkGMihdv
+NZ3QMX5JdJdfklKPUGx4pyeUHyijmrzrGtA7GZlwqkMyXeF9RynFYSmtaYwSDG
+qeBF5SABtsSoUnsaELMXwwLhx5d5iVeD_qJAEIRoO9l70FEeRLTMEyDvNiudMy
+elykaBwKfmpfBNdnCb-2BD1gtLdhZQ5Ex7X9QcaBoFNz7pZhTD3AipntFcMz_w
+6fyrtvBl0q9Tho9auDKPaynoY8-BIFZLR3XhJvnuWV7Iaa2KZPh9tMhAX78QTh
+1rOCUbnKXg74uspglBCfY3HQUxEj1vwSZYSzgW82UOGcgQgPseevm7gZOYPBB3
+bOLJ4fuB33QH
 .
-TUSVEHqipB7wIOkTC_JJsQ
+2O8JRndU8Yct8waNxxpmEg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-compact title="Compact Serialization"}
 
@@ -1998,20 +1998,20 @@ the resulting JWE object using the JSON serialization:
 {
   "protected": "eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYn
       JhbmR5YnVja0BidWNrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6Ik
-      VDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiX0h2V0UxYzZINUFPZGN3LWZIS3
-      BJTjQ5cVFMUThEVThTYTZvVFFfTHByNCIsInkiOiJJNW8wTmYxU1NrZ3
-      hfRDFObDJmU3NHTUlmOEdXTlo3TURGSlJTNHlDMms4In0sImVuYyI6Ik
+      VDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiOWRuZWxWcXNuNWpHNFBXcjA0bn
+      VWcnByekU1OGMwOFhtbVF5cHBsQlNIWSIsInkiOiJNY01jZ3FSLWtjbD
+      RoaTVldE5ZTHZVUWV4UW1SeXNUQXh3YllWWHBQdFc4In0sImVuYyI6Ik
       ExMjhDQkMtSFMyNTYifQ",
-  "iv": "-Mn-fJAUbrPBmliI7UgrsA",
-  "ciphertext": "PmBuk86YR72slvVGrVMGI3E9mc_tLK8mpzvCcnk6Jwsdp
-      ncl0qDBnjqoW99cs4mDMhjlHDCXuBSkGHFxpUPQXiwDu8abeD9sGyYfk
-      UvMBDLjSxJQcltX57JzOSvqT2xUf6uAJ2r-WgTIMRFTzyWS7zUZWkMFd
-      FM5Yg61BpHN_nS87trNEl8z38_NZ0eubfEQIAFKg3wymMh8LJqNgUop4
-      pBz1Ojhin4IjIaW6v5Pt36iFMxB-xTtNG4xZQva3V9t3vzZEXBH7gVK-
-      oXFsP0QEoaWzv67an53BjZx0BJ5K2z6RCRuVXGmyafLWjOC5JhY_ekdw
-      0CtQ72j3wBHxVf3oV5yHzSi8Szqon72_kdo1a4WUxSMnlhz05k1NmKHN
-      6GI",
-  "tag": "TUSVEHqipB7wIOkTC_JJsQ"
+  "iv": "8sgniCI_Pq8Cy3Z3GND0lA",
+  "ciphertext": "hAKtCu1zv5aBZ-929KTYoYZY766_qagjaN5PebhZsMl07
+      GZosXjbmizkGMihdvNZ3QMX5JdJdfklKPUGx4pyeUHyijmrzrGtA7GZl
+      wqkMyXeF9RynFYSmtaYwSDGqeBF5SABtsSoUnsaELMXwwLhx5d5iVeD_
+      qJAEIRoO9l70FEeRLTMEyDvNiudMyelykaBwKfmpfBNdnCb-2BD1gtLd
+      hZQ5Ex7X9QcaBoFNz7pZhTD3AipntFcMz_w6fyrtvBl0q9Tho9auDKPa
+      ynoY8-BIFZLR3XhJvnuWV7Iaa2KZPh9tMhAX78QTh1rOCUbnKXg74usp
+      glBCfY3HQUxEj1vwSZYSzgW82UOGcgQgPseevm7gZOYPBB3bOLJ4fuB3
+      3QH",
+  "tag": "2O8JRndU8Yct8waNxxpmEg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-json title="JSON Serialization"}
@@ -3722,4 +3722,4 @@ This document has no actions for IANA.
 
 All of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
 
-Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.
+Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.  Thanks to Brian Campbell for verifying the many of the signature examples.
