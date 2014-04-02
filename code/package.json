@@ -8,6 +8,6 @@
     "dependencies": {
         "cloneextend": "*",
         "q": "~0.9",
-        "jose":"git+http://outer-planes.net/git/node-jose.git"
+        "jose":"git+https://outer-planes.net/git/node-jose.git"
     }
 }
