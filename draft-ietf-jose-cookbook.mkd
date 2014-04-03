@@ -796,12 +796,12 @@ eyJhbGciOiJSUzI1NiJ9
 Performing the first signature operation over the combined protected JWS header ({{jws-multi-protected_b64u_1}}) and the Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-RVOO_bd_3BTY9FgbjFi6I0CLE1CZafLzM2EHo_hehVI_qgHHV3Ewb3c1rKJGf1
-ZM5p80sfxcpkpRBgAouQQWIFK3-XyfgOQ9pKbiXzoRNyupxzuBH8UBExyuP4vM
-KfeeIfs2DKR66S_Tw2rBrlYD_vM72DBwdvYVz77kjGdot2JrN_eYLCE5L5J3Jk
-jb2XcAcBiIxxn_OpBXL_UO5EzSg5GfMhyiqkghK_-l5ENshADztRd7eZcB0Q8_
-Os1CCcg3xKRyjc6GNjGOU6Cuh0UUvAgxoz2ZraVPlN0TUUodHHimcKxtWbCYLr
-sQj42SCdeuE28Xg6sucVEFJS-J_3bRvw
+MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5NvyG53uoimic1tcMdSg-qpt
+rzZc7CG6Svw2Y13TDIqHzTUrL_lR2ZFcryNFiHkSw129EghGpwkpxaTn_THJTC
+glNbADko1MZBCdwzJxwqZc-1RlpO2HibUYyXSwO97BSe0_evZKdjvvKSgsIqjy
+tKSeAMbhMBdMma622_BG5t4sdbuCHtFjp9iJmkio47AIwqkZV1aIZsv33uPUqB
+BCXbYoQJwt7mxPftHmNlGoOSMxR_3thmXTCm4US-xiNOyhbm8afKK64jU6_TPt
+QHiJeQJxz9G3Tx-083B745_AfYOnlC9w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_1 title="Signature #1, base64url-encoded"}
 
@@ -813,13 +813,13 @@ The following is the assembled first signature serialized as JSON:
   "header": {
     "kid": "bilbo.baggins@hobbiton.example"
   },
-  "signature": "RVOO_bd_3BTY9FgbjFi6I0CLE1CZafLzM2EHo_hehVI_qg
-      HHV3Ewb3c1rKJGf1ZM5p80sfxcpkpRBgAouQQWIFK3-XyfgOQ9pKbiXz
-      oRNyupxzuBH8UBExyuP4vMKfeeIfs2DKR66S_Tw2rBrlYD_vM72DBwdv
-      YVz77kjGdot2JrN_eYLCE5L5J3Jkjb2XcAcBiIxxn_OpBXL_UO5EzSg5
-      GfMhyiqkghK_-l5ENshADztRd7eZcB0Q8_Os1CCcg3xKRyjc6GNjGOU6
-      Cuh0UUvAgxoz2ZraVPlN0TUUodHHimcKxtWbCYLrsQj42SCdeuE28Xg6
-      sucVEFJS-J_3bRvw"
+  "signature": "MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5NvyG53u
+      oimic1tcMdSg-qptrzZc7CG6Svw2Y13TDIqHzTUrL_lR2ZFcryNFiHkS
+      w129EghGpwkpxaTn_THJTCglNbADko1MZBCdwzJxwqZc-1RlpO2HibUY
+      yXSwO97BSe0_evZKdjvvKSgsIqjytKSeAMbhMBdMma622_BG5t4sdbuC
+      HtFjp9iJmkio47AIwqkZV1aIZsv33uPUqBBCXbYoQJwt7mxPftHmNlGo
+      OSMxR_3thmXTCm4US-xiNOyhbm8afKK64jU6_TPtQHiJeQJxz9G3Tx-0
+      83B745_AfYOnlC9w"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_1 title="Signature #1 JSON"}
@@ -841,9 +841,9 @@ The following are generated before completing the second signing operation:
 Performing the second signature operation over the combined empty string (as there is no protected JWS header) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-AbJwhBppradMmWE4H2ZXDTWJI0FoY0EHOv-8AmQgWjn6SofxHb6GurdUfEdEs9
-N7ZJRzhM8mzu9Ewfc3O5FSMgF1AN54b0vJL-5-gYDTqi-aaN7vS9uy_7P_p3nc
-8-BfflLU1hjvkXLh3ZxCmu1Ev2oGK3rO4wNVe0UkHTIKkzzhMRUu
+ARcVLnaJJaUWG8fG-8t5BREVAuTY8n8YHjwDO1muhcdCoFZFFjfISu0Cdkn9Yb
+dlmi54ho0x924DUz8sK7ZXkhc7AFM8ObLfTvNCrqcI3Jkl2U5IX3utNhODH6v7
+xgy1Qahsn0fyb4zSAkje8bAWz4vIfj5pCMYxxm4fgV3q7ZYhm5eD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_2 title="Signature #2, base64url-encoded"}
 
@@ -855,10 +855,10 @@ The following is the assembled second signature serialized as JSON:
     "alg": "ES512",
     "kid": "bilbo.baggins@hobbiton.example"
   },
-  "signature": "AbJwhBppradMmWE4H2ZXDTWJI0FoY0EHOv-8AmQgWjn6So
-      fxHb6GurdUfEdEs9N7ZJRzhM8mzu9Ewfc3O5FSMgF1AN54b0vJL-5-gY
-      DTqi-aaN7vS9uy_7P_p3nc8-BfflLU1hjvkXLh3ZxCmu1Ev2oGK3rO4w
-      NVe0UkHTIKkzzhMRUu"
+  "signature": "ARcVLnaJJaUWG8fG-8t5BREVAuTY8n8YHjwDO1muhcdCoF
+      ZFFjfISu0Cdkn9Ybdlmi54ho0x924DUz8sK7ZXkhc7AFM8ObLfTvNCrq
+      cI3Jkl2U5IX3utNhODH6v7xgy1Qahsn0fyb4zSAkje8bAWz4vIfj5pCM
+      Yxxm4fgV3q7ZYhm5eD"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-sig_sig_2 title="Signature #2 JSON"}
@@ -925,23 +925,23 @@ The resulting JWS object using the JSON serialization:
       "header": {
         "kid": "bilbo.baggins@hobbiton.example"
       },
-      "signature": "RVOO_bd_3BTY9FgbjFi6I0CLE1CZafLzM2EHo_hehV
-          I_qgHHV3Ewb3c1rKJGf1ZM5p80sfxcpkpRBgAouQQWIFK3-XyfgO
-          Q9pKbiXzoRNyupxzuBH8UBExyuP4vMKfeeIfs2DKR66S_Tw2rBrl
-          YD_vM72DBwdvYVz77kjGdot2JrN_eYLCE5L5J3Jkjb2XcAcBiIxx
-          n_OpBXL_UO5EzSg5GfMhyiqkghK_-l5ENshADztRd7eZcB0Q8_Os
-          1CCcg3xKRyjc6GNjGOU6Cuh0UUvAgxoz2ZraVPlN0TUUodHHimcK
-          xtWbCYLrsQj42SCdeuE28Xg6sucVEFJS-J_3bRvw"
+      "signature": "MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5Nvy
+          G53uoimic1tcMdSg-qptrzZc7CG6Svw2Y13TDIqHzTUrL_lR2ZFc
+          ryNFiHkSw129EghGpwkpxaTn_THJTCglNbADko1MZBCdwzJxwqZc
+          -1RlpO2HibUYyXSwO97BSe0_evZKdjvvKSgsIqjytKSeAMbhMBdM
+          ma622_BG5t4sdbuCHtFjp9iJmkio47AIwqkZV1aIZsv33uPUqBBC
+          XbYoQJwt7mxPftHmNlGoOSMxR_3thmXTCm4US-xiNOyhbm8afKK6
+          4jU6_TPtQHiJeQJxz9G3Tx-083B745_AfYOnlC9w"
     },
     {
       "header": {
         "alg": "ES512",
         "kid": "bilbo.baggins@hobbiton.example"
       },
-      "signature": "AbJwhBppradMmWE4H2ZXDTWJI0FoY0EHOv-8AmQgWj
-          n6SofxHb6GurdUfEdEs9N7ZJRzhM8mzu9Ewfc3O5FSMgF1AN54b0
-          vJL-5-gYDTqi-aaN7vS9uy_7P_p3nc8-BfflLU1hjvkXLh3ZxCmu
-          1Ev2oGK3rO4wNVe0UkHTIKkzzhMRUu"
+      "signature": "ARcVLnaJJaUWG8fG-8t5BREVAuTY8n8YHjwDO1muhc
+          dCoFZFFjfISu0Cdkn9Ybdlmi54ho0x924DUz8sK7ZXkhc7AFM8Ob
+          LfTvNCrqcI3Jkl2U5IX3utNhODH6v7xgy1Qahsn0fyb4zSAkje8b
+          AWz4vIfj5pCMYxxm4fgV3q7ZYhm5eD"
     },
     {
       "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LT
