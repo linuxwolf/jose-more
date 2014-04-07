@@ -18,11 +18,6 @@ author:
     ins: M. Miller
     name: Matthew Miller
     org: Cisco Systems, Inc.
-    street: 1899 Wynkoop Street, Suite 600
-    city: Denver
-    region: CO
-    code: 80202
-    country: USA
     email: mamille2@cisco.com
 
 informative:
