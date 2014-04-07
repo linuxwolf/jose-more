@@ -23,7 +23,6 @@ author:
     region: CO
     code: 80202
     country: USA
-    phone: +1-303-308-3204
     email: mamille2@cisco.com
 
 informative:
@@ -535,7 +534,7 @@ The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
 * Signing key; this example uses the AES symmetric key from {{jws-hmac-key}}.
-* Signing algorithm; this example uses "RS256".
+* Signing algorithm; this example uses "HS256".
 
 ### Signing Operation ### {#jws-detached-op}
 
@@ -611,7 +610,7 @@ The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
 * Signing key; this example uses the AES symmetric key from {{jws-hmac-key}}.
-* Signing algorithm; this example uses "RS256".
+* Signing algorithm; this example uses "HS256".
 
 ### Signing Operation ### {#jws-somefields-op}
 
@@ -691,7 +690,7 @@ The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
 * Signing key; this example uses the AES key from {{jws-hmac-key}}.
-* Signing algorithm; this example uses "RS256"
+* Signing algorithm; this example uses "HS256"
 
 ### Signing Operation ### {#jws-nofields-op}
 
