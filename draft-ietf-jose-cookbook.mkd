@@ -369,7 +369,7 @@ hhbXBsZSJ9
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-protected_b64u title="Protected JWS Header, base64url-encoded" }
 
-Performing the signature operation over the combined protected JWS header ({{jws-ecdsa-protected_b64u}}) and Payload content ({{jws-payload_b64u) produces the following signature:
+Performing the signature operation over the combined protected JWS header ({{jws-ecdsa-protected_b64u}}) and Payload content ({{jws-payload_b64u}}) produces the following signature:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 AE_R_YZCChjn4791jSQCrdPZCNYqHXCTZH0-JZGYNlaAjP2kqaluUIIUnC9qvb
@@ -2530,7 +2530,7 @@ PzlM5rwyEkQ9O1QF
 
 ### Encrypting the Key ### {#jwe-compressed-keyenc}
 
-Performing the key encryption operation over the CEK ({{jwe-compressed-cek}}) with the AES key ({{jwe-aeskw-key) produces the following encrypted key:
+Performing the key encryption operation over the CEK ({{jwe-compressed-cek}}) with the AES key ({{jwe-aeskw-key}}) produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 UCfvTL--SuX31GNhsoyDyNqtWGudNpEj
@@ -3204,7 +3204,7 @@ The following is the assembled second recipient JSON:
 
 The following are generated before encrypting the CEK for the third recipient:
 
-* Initialization vector/nonce for key wrapping; this example uses the initialization vector/nonce from {{jwe-multi-kwiv_3}
+* Initialization vector/nonce for key wrapping; this example uses the initialization vector/nonce from {{jwe-multi-kwiv_3}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GGS-eUZFslgOFCZb
@@ -3716,4 +3716,4 @@ This document has no actions for IANA.
 
 All of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
 
-Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.  Thanks to Brian Campbell for verifying the many of the signature examples.
+Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.  Thanks to Brian Campbell for reviewing text and verifying the many of the examples.
