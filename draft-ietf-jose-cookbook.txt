@@ -2713,7 +2713,7 @@ Internet-Draft                JOSE Cookbook                   April 2014
    o  Initialization vector/nonce; this examples uses the initialization
       vector/nonce from Figure 96.
 
-   fQum9wPUungYjFzXTKLeMQ
+   bT42VuUQSgwnFW0F5_RaVQ
 
             Figure 96: Initialization Vector, base64url-encoded
 
@@ -2730,8 +2730,8 @@ Internet-Draft                JOSE Cookbook                   April 2014
    {
      "kty": "EC",
      "crv": "P-256",
-     "x": "jCbZFx9w0AFLiAYMmqGHOnHVMG2PLY-T41OVXSpAgsU",
-     "y": "cVNSq7Hxm8-NhlSJGsQ_mFzSR2pD-dRM2TzxCp9S8rI"
+     "x": "TTdaU3pRwkG2wRCGEjHbzQdWIMka2zUnjvUdahNBo80",
+     "y": "lcZdUc_yxWn1EJtsLyHB3LVdVdKs4Mit5maUvRJ680A"
    }
 
               Figure 97: Ephemeral public key, in JWK format
@@ -2750,7 +2750,7 @@ Internet-Draft                JOSE Cookbook                   April 2014
    (Figure 95) over the ephemeral private key Figure 97) produces the
    following CEK:
 
-   7XrkeTOWOoyK_fWojzvOB828xaEL4W3RmwTwuhamsvI
+   37pm7mlT1KVcmM5Fif3ziZ8GwPMPW5kG8-TfYSdJ0bg
 
       Figure 98: Agreed-to Content Encryption Key, base64url-encoded
 
@@ -2767,8 +2767,8 @@ Internet-Draft                JOSE Cookbook                   April 2014
      "epk": {
        "kty": "EC",
        "crv": "P-256",
-       "x": "jCbZFx9w0AFLiAYMmqGHOnHVMG2PLY-T41OVXSpAgsU",
-       "y": "cVNSq7Hxm8-NhlSJGsQ_mFzSR2pD-dRM2TzxCp9S8rI"
+       "x": "TTdaU3pRwkG2wRCGEjHbzQdWIMka2zUnjvUdahNBo80",
+       "y": "lcZdUc_yxWn1EJtsLyHB3LVdVdKs4Mit5maUvRJ680A"
      },
      "enc": "A128CBC-HS256"
    }
@@ -2777,9 +2777,9 @@ Internet-Draft                JOSE Cookbook                   April 2014
 
    eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
    NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
-   LCJ4IjoiakNiWkZ4OXcwQUZMaUFZTW1xR0hPbkhWTUcyUExZLVQ0MU9WWFNwQW
-   dzVSIsInkiOiJjVk5TcTdIeG04LU5obFNKR3NRX21GelNSMnBELWRSTTJUenhD
-   cDlTOHJJIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+   LCJ4IjoiVFRkYVUzcFJ3a0cyd1JDR0VqSGJ6UWRXSU1rYTJ6VW5qdlVkYWhOQm
+   84MCIsInkiOiJsY1pkVWNfeXhXbjFFSnRzTHlIQjNMVmRWZEtzNE1pdDVtYVV2
+   Uko2ODBBIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 
             Figure 100: Protected JWE Header, base64url-encoded
 
@@ -2806,17 +2806,17 @@ Internet-Draft                JOSE Cookbook                   April 2014
 
    o  Authentication tag from Figure 102.
 
-   Fvzhocgmwm5PDjK5kLDf0B-IrI8Yqd9jtg5AfgFsqSiz4F7gCri4FiObRIHotz
-   BYqVF6MCyw5hs_gWTGWqZxFS-3BSIcdZ1WupNv5k6bnZIo97Oz5YLgevLW0NHh
-   JIC3-NNkNDgFk21WCzqyjhbhyflStqYZYUiakQ-WfzMTvcxMQgMLZL0TR_vUuI
-   JaCK7AhoxdCawtJuNGW_2we97QjBgcez8KH27jA7HIZ006rgqkNfGkpzDEsvs8
-   YE5AcnTPV5MZoUZCxAuc3C_UU1y7X4paqXOz6At7RZPGN0PX83l9La1pnI925L
-   -St0QsnzB9LVky8nVUKwOcN5YtpnXb5TU910Gi6YVBxgwhvTI71Bk6f8pTaQif
-   nxs4ISMN9lj3
+   ayPFU_oBeXzXQvhNxVuGDllTRAhPDE1BgT5AVZUNrHFEwZKISaHtA3juO9lwtu
+   NjWtNrj_hcs4UjFrdY3Lt3ZmsUQCeS5Rvh8oY1zie55xk1-jp2NAa05Ocoogrg
+   pcvlJgdBr7oQCsvnUYTzNTRjoeWH0ZfeOARgbP_0jWDoI4Ko3awimdRXnu2fTO
+   uyNl_yTd_Uz92zJ1ekB3WTDt3AKad9oLpXtLG86LagizhjH85wiq3Dj7QdUsDh
+   5JpiijZwYD2foueUP88Vy0fXQ-3-SeD0mqCH_pGaCE_q_0meHxy7r2WwLvbvT9
+   5UqrG1KeaBucgVgsgwwKF97lBzrH2LUCqnmdiuCZy7saRjtiOxVaJP1mCaFHY3
+   xRWus8uUR_sc
 
                  Figure 101: Ciphertext, base64url-encoded
 
-   MG2uMNWljtqAVzkUg_oM5w
+   6sVgog8mv6ZHQgkAD23Z2Q
 
              Figure 102: Authentication Tag, base64url-encoded
 
@@ -2860,22 +2860,22 @@ Internet-Draft                JOSE Cookbook                   April 2014
 
    eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
    NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
-   LCJ4IjoiakNiWkZ4OXcwQUZMaUFZTW1xR0hPbkhWTUcyUExZLVQ0MU9WWFNwQW
-   dzVSIsInkiOiJjVk5TcTdIeG04LU5obFNKR3NRX21GelNSMnBELWRSTTJUenhD
-   cDlTOHJJIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+   LCJ4IjoiVFRkYVUzcFJ3a0cyd1JDR0VqSGJ6UWRXSU1rYTJ6VW5qdlVkYWhOQm
+   84MCIsInkiOiJsY1pkVWNfeXhXbjFFSnRzTHlIQjNMVmRWZEtzNE1pdDVtYVV2
+   Uko2ODBBIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
    .
    .
-   fQum9wPUungYjFzXTKLeMQ
+   bT42VuUQSgwnFW0F5_RaVQ
    .
-   Fvzhocgmwm5PDjK5kLDf0B-IrI8Yqd9jtg5AfgFsqSiz4F7gCri4FiObRIHotz
-   BYqVF6MCyw5hs_gWTGWqZxFS-3BSIcdZ1WupNv5k6bnZIo97Oz5YLgevLW0NHh
-   JIC3-NNkNDgFk21WCzqyjhbhyflStqYZYUiakQ-WfzMTvcxMQgMLZL0TR_vUuI
-   JaCK7AhoxdCawtJuNGW_2we97QjBgcez8KH27jA7HIZ006rgqkNfGkpzDEsvs8
-   YE5AcnTPV5MZoUZCxAuc3C_UU1y7X4paqXOz6At7RZPGN0PX83l9La1pnI925L
-   -St0QsnzB9LVky8nVUKwOcN5YtpnXb5TU910Gi6YVBxgwhvTI71Bk6f8pTaQif
-   nxs4ISMN9lj3
+   ayPFU_oBeXzXQvhNxVuGDllTRAhPDE1BgT5AVZUNrHFEwZKISaHtA3juO9lwtu
+   NjWtNrj_hcs4UjFrdY3Lt3ZmsUQCeS5Rvh8oY1zie55xk1-jp2NAa05Ocoogrg
+   pcvlJgdBr7oQCsvnUYTzNTRjoeWH0ZfeOARgbP_0jWDoI4Ko3awimdRXnu2fTO
+   uyNl_yTd_Uz92zJ1ekB3WTDt3AKad9oLpXtLG86LagizhjH85wiq3Dj7QdUsDh
+   5JpiijZwYD2foueUP88Vy0fXQ-3-SeD0mqCH_pGaCE_q_0meHxy7r2WwLvbvT9
+   5UqrG1KeaBucgVgsgwwKF97lBzrH2LUCqnmdiuCZy7saRjtiOxVaJP1mCaFHY3
+   xRWus8uUR_sc
    .
-   MG2uMNWljtqAVzkUg_oM5w
+   6sVgog8mv6ZHQgkAD23Z2Q
 
                      Figure 103: Compact Serialization
 
@@ -2884,20 +2884,20 @@ Internet-Draft                JOSE Cookbook                   April 2014
    {
      "protected": "eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYn
          JhbmR5YnVja0BidWNrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6Ik
-         VDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiakNiWkZ4OXcwQUZMaUFZTW1xR0
-         hPbkhWTUcyUExZLVQ0MU9WWFNwQWdzVSIsInkiOiJjVk5TcTdIeG04LU
-         5obFNKR3NRX21GelNSMnBELWRSTTJUenhDcDlTOHJJIn0sImVuYyI6Ik
+         VDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiVFRkYVUzcFJ3a0cyd1JDR0VqSG
+         J6UWRXSU1rYTJ6VW5qdlVkYWhOQm84MCIsInkiOiJsY1pkVWNfeXhXbj
+         FFSnRzTHlIQjNMVmRWZEtzNE1pdDVtYVV2Uko2ODBBIn0sImVuYyI6Ik
          ExMjhDQkMtSFMyNTYifQ",
-     "iv": "fQum9wPUungYjFzXTKLeMQ",
-     "ciphertext": "Fvzhocgmwm5PDjK5kLDf0B-IrI8Yqd9jtg5AfgFsqSiz4
-         F7gCri4FiObRIHotzBYqVF6MCyw5hs_gWTGWqZxFS-3BSIcdZ1WupNv5
-         k6bnZIo97Oz5YLgevLW0NHhJIC3-NNkNDgFk21WCzqyjhbhyflStqYZY
-         UiakQ-WfzMTvcxMQgMLZL0TR_vUuIJaCK7AhoxdCawtJuNGW_2we97Qj
-         Bgcez8KH27jA7HIZ006rgqkNfGkpzDEsvs8YE5AcnTPV5MZoUZCxAuc3
-         C_UU1y7X4paqXOz6At7RZPGN0PX83l9La1pnI925L-St0QsnzB9LVky8
-         nVUKwOcN5YtpnXb5TU910Gi6YVBxgwhvTI71Bk6f8pTaQifnxs4ISMN9
-         lj3",
-     "tag": "MG2uMNWljtqAVzkUg_oM5w"
+     "iv": "bT42VuUQSgwnFW0F5_RaVQ",
+     "ciphertext": "ayPFU_oBeXzXQvhNxVuGDllTRAhPDE1BgT5AVZUNrHFEw
+         ZKISaHtA3juO9lwtuNjWtNrj_hcs4UjFrdY3Lt3ZmsUQCeS5Rvh8oY1z
+         ie55xk1-jp2NAa05OcoogrgpcvlJgdBr7oQCsvnUYTzNTRjoeWH0ZfeO
+         ARgbP_0jWDoI4Ko3awimdRXnu2fTOuyNl_yTd_Uz92zJ1ekB3WTDt3AK
+         ad9oLpXtLG86LagizhjH85wiq3Dj7QdUsDh5JpiijZwYD2foueUP88Vy
+         0fXQ-3-SeD0mqCH_pGaCE_q_0meHxy7r2WwLvbvT95UqrG1KeaBucgVg
+         sgwwKF97lBzrH2LUCqnmdiuCZy7saRjtiOxVaJP1mCaFHY3xRWus8uUR
+         _sc",
+     "tag": "6sVgog8mv6ZHQgkAD23Z2Q"
    }
 
                       Figure 104: JSON Serialization
