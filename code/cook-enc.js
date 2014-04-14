@@ -413,11 +413,14 @@ var doOp = function(op) {
                 encKey = jose.base64url.decode(encKey, "binary");
             }
             
-            if (rprops.epk) {
+            var epk = op.recipients[idx].epk;
+            if (epk) {
+                epk = epk.toJSON(true, ["kid", "use", "alg"]);
+                
                 // log it separate
-                log.push(util.format("\nRecipient #%d Ephemeral Public Key (JSON):", idx+1));
+                log.push(util.format("\nRecipient #%d Ephemeral Public/Private Key (JSON):", idx+1));
                 log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
-                log.push(util.format(common.prettify(rprops.epk)));
+                log.push(util.format(common.prettify(epk)));
                 log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
             
                 // convert to binary
@@ -530,6 +533,8 @@ if (!exec.length) {
 
 var displayed = {},
     promise = Q.resolve();
+
+// prepare operations, including logging plaintext to console
 exec = exec.filter(function(opkey) {
     var op = ops[opkey];
     if (!op) {
@@ -548,6 +553,19 @@ exec = exec.filter(function(opkey) {
     } else {
         printtext = common.splitit(plaintext);
     }
+    
+    var rcpts = op.recipients.map(function(r) {
+        if (r.key.kty !== "EC") {
+            return Q.resolve();
+        }
+        
+        var crv = r.key.get("crv");
+        return jose.JWK.createKeyStore().generate("EC", crv).
+               then(function(k) {
+                    r.epk = k;
+               });
+    });
+    promise = promise.then(Q.all(rcpts));
     
     promise = promise.then(function() {
         console.log("\n%s Plaintext (utf-8):", op.plaintext);
