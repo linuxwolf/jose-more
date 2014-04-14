@@ -1669,12 +1669,12 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-ecdh_aeskw-iv}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-_Tm_fqSViyOGQVK-aPJTIQ
+Nou2ueKlP70ZXDbq9UrRwg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-cek title="Content Encryption Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-CDLFinFbjSpqzCwi
+mH-G2zVqgztUtnW_
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-iv title="Initialization Vector, base64url-encoded"}
 
@@ -1682,16 +1682,18 @@ CDLFinFbjSpqzCwi
 
 To encrypt the Content Encryption Key, the following are generated:
 
-* Ephemeral EC private key on the same curve as the EC public key; this example uses the private key that matches the public key from {{jwe-ecdh_aeskw-epk}}.
+* Ephemeral EC private key on the same curve as the EC public key; this example uses the private key from {{jwe-ecdh_aeskw-epk}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
   "kty": "EC",
   "crv": "P-384",
-  "x": "lBAtpWqEXeqnwS-7-ZeUhoxSqZ2vUZuduWeEBx8NEVabgXV1pRf6gi
-      GlsFz3mnXb",
-  "y": "sAk7egf6BOmsMlZYPXgUsbhxszDj2Q7scZ9cLAWhZLXQ01qX0-vx_u
-      OFtCHPopE8"
+  "x": "uBo4kHPw6kbjx5l0xowrd_oYzBmaz-GKFZu4xAFFkbYiWgutEK6iuE
+      DsQ6wNdNg3",
+  "y": "sp3p5SGhZVC2faXumI-e9JU2Mo8KpoYrFDr5yPNVtW4PgEwZOyQTA-
+      JdaY8tb7E0",
+  "d": "D5H4Y_5PSKZvhfVFbcCYJOtcGZygRgfZkpsBr59Icmmhe9sW6nkZ8W
+      fwhinUfWJg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-epk title="Ephemeral Elliptic Curve P-384 Key, in JWK format"}
@@ -1704,7 +1706,7 @@ Performing the key encryption operation over the CEK ({{jwe-ecdh_aeskw-cek}}) wi
 produces the following JWE encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-hRoQEtCm89pJyxPi-ZppMUheKsVcnw_u
+0DJjBXri_kBcC46IkU5_Jk9BqaQeHdv2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-encdkey title="Encrypted Key, base64url-encoded"}
 
@@ -1721,10 +1723,10 @@ The following are generated before encrypting the content:
   "epk": {
     "kty": "EC",
     "crv": "P-384",
-    "x": "lBAtpWqEXeqnwS-7-ZeUhoxSqZ2vUZuduWeEBx8NEVabgXV1pRf6
-        giGlsFz3mnXb",
-    "y": "sAk7egf6BOmsMlZYPXgUsbhxszDj2Q7scZ9cLAWhZLXQ01qX0-vx
-        _uOFtCHPopE8"
+    "x": "uBo4kHPw6kbjx5l0xowrd_oYzBmaz-GKFZu4xAFFkbYiWgutEK6i
+        uEDsQ6wNdNg3",
+    "y": "sp3p5SGhZVC2faXumI-e9JU2Mo8KpoYrFDr5yPNVtW4PgEwZOyQT
+        A-JdaY8tb7E0"
   },
   "enc": "A128GCM"
 }
@@ -1734,10 +1736,10 @@ The following are generated before encrypting the content:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
 Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
-Mzg0IiwieCI6ImxCQXRwV3FFWGVxbndTLTctWmVVaG94U3FaMnZVWnVkdVdlRU
-J4OE5FVmFiZ1hWMXBSZjZnaUdsc0Z6M21uWGIiLCJ5Ijoic0FrN2VnZjZCT21z
-TWxaWVBYZ1VzYmh4c3pEajJRN3NjWjljTEFXaFpMWFEwMXFYMC12eF91T0Z0Q0
-hQb3BFOCJ9LCJlbmMiOiJBMTI4R0NNIn0
+Mzg0IiwieCI6InVCbzRrSFB3Nmtiang1bDB4b3dyZF9vWXpCbWF6LUdLRlp1NH
+hBRkZrYllpV2d1dEVLNml1RURzUTZ3TmROZzMiLCJ5Ijoic3AzcDVTR2haVkMy
+ZmFYdW1JLWU5SlUyTW84S3BvWXJGRHI1eVBOVnRXNFBnRXdaT3lRVEEtSmRhWT
+h0YjdFMCJ9LCJlbmMiOiJBMTI4R0NNIn0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-protected_b64u title="Protected JWE Header, base64url-encoded"}
 
@@ -1753,17 +1755,17 @@ produces the following:
 * Authentication tag from {{jwe-ecdh_aeskw-tag}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-XLL2opd306uEqwYV4zouZYbw1_tbaXlN6w3e3K6lVOTNez9eAVf6NEGdgWOvjx
-Jh4Bh3x9eBYPvEI-8YJbXFSJi2K7NX6ThUTalCPfP8ehQ8aCvGMUTLovJqTIjg
-FmbinxFzz3gYZpm8UfdM2NG_iITafJRUHbp7pwCTOAUyep7c6uSMcTen_lSwYs
-xxlhMKU8mi3QG5yaZIh5TvK4ltXbd-FGg9EWDT8qE7wsnJfxByd-fyBAtyGP2o
-EAVXJ2yaYvyfXTm_5NoRJh84frylPzotosGSTkpRppb82IkDHoe6cvwIdeaVGG
-uy2yOtUBdbidIYHTjSFufN88SUIRRZftrE5WgzfplIRdoZlQb0youS
+tkZuOO9h95OgHJmkkrfLBisku8rGf6nzVxhRM3sVOhXgz5NJ76oID7lpnAi_cP
+WJRCjSpAaUZ5dOR3Spy7QuEkmKx8-3RCMhSYMzsXaEwDdXta9Mn5B7cCBoJKB0
+IgEnj_qfo1hIi-uEkUpOZ8aLTZGHfpl05jMwbKkTe2yK3mjF6SBAsgicQDVCkc
+Y9BLluzx1RmC3ORXaM0JaHPB93YcdSDGgpgBWMVrNU1ErkjcMqMoT_wtCex3w0
+3XdLkjXIuEr2hWgeP-nkUZTPU9EoGSPj6fAS-bSz87RCPrxZdj_iVyC6QWcqAu
+07WNhjzJEPc4jVntRJ6K53NgPQ5p99l3Z408OUqj4ioYezbS6vTPlQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-OPP648_B5pMGPo_VxSvlCg
+WuGzxmcreYjpHGJoa17EBg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-tag title="Authentication Tag, base64url-encoded"}
 
@@ -1782,23 +1784,23 @@ The resulting JWE object using the Compact serialization:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcmVncmluLnRvb2tAdH
 Vja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAt
-Mzg0IiwieCI6ImxCQXRwV3FFWGVxbndTLTctWmVVaG94U3FaMnZVWnVkdVdlRU
-J4OE5FVmFiZ1hWMXBSZjZnaUdsc0Z6M21uWGIiLCJ5Ijoic0FrN2VnZjZCT21z
-TWxaWVBYZ1VzYmh4c3pEajJRN3NjWjljTEFXaFpMWFEwMXFYMC12eF91T0Z0Q0
-hQb3BFOCJ9LCJlbmMiOiJBMTI4R0NNIn0
+Mzg0IiwieCI6InVCbzRrSFB3Nmtiang1bDB4b3dyZF9vWXpCbWF6LUdLRlp1NH
+hBRkZrYllpV2d1dEVLNml1RURzUTZ3TmROZzMiLCJ5Ijoic3AzcDVTR2haVkMy
+ZmFYdW1JLWU5SlUyTW84S3BvWXJGRHI1eVBOVnRXNFBnRXdaT3lRVEEtSmRhWT
+h0YjdFMCJ9LCJlbmMiOiJBMTI4R0NNIn0
 .
-hRoQEtCm89pJyxPi-ZppMUheKsVcnw_u
+0DJjBXri_kBcC46IkU5_Jk9BqaQeHdv2
 .
-CDLFinFbjSpqzCwi
+mH-G2zVqgztUtnW_
 .
-XLL2opd306uEqwYV4zouZYbw1_tbaXlN6w3e3K6lVOTNez9eAVf6NEGdgWOvjx
-Jh4Bh3x9eBYPvEI-8YJbXFSJi2K7NX6ThUTalCPfP8ehQ8aCvGMUTLovJqTIjg
-FmbinxFzz3gYZpm8UfdM2NG_iITafJRUHbp7pwCTOAUyep7c6uSMcTen_lSwYs
-xxlhMKU8mi3QG5yaZIh5TvK4ltXbd-FGg9EWDT8qE7wsnJfxByd-fyBAtyGP2o
-EAVXJ2yaYvyfXTm_5NoRJh84frylPzotosGSTkpRppb82IkDHoe6cvwIdeaVGG
-uy2yOtUBdbidIYHTjSFufN88SUIRRZftrE5WgzfplIRdoZlQb0youS
+tkZuOO9h95OgHJmkkrfLBisku8rGf6nzVxhRM3sVOhXgz5NJ76oID7lpnAi_cP
+WJRCjSpAaUZ5dOR3Spy7QuEkmKx8-3RCMhSYMzsXaEwDdXta9Mn5B7cCBoJKB0
+IgEnj_qfo1hIi-uEkUpOZ8aLTZGHfpl05jMwbKkTe2yK3mjF6SBAsgicQDVCkc
+Y9BLluzx1RmC3ORXaM0JaHPB93YcdSDGgpgBWMVrNU1ErkjcMqMoT_wtCex3w0
+3XdLkjXIuEr2hWgeP-nkUZTPU9EoGSPj6fAS-bSz87RCPrxZdj_iVyC6QWcqAu
+07WNhjzJEPc4jVntRJ6K53NgPQ5p99l3Z408OUqj4ioYezbS6vTPlQ
 .
-OPP648_B5pMGPo_VxSvlCg
+WuGzxmcreYjpHGJoa17EBg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-compact title="Compact Serialization"}
 
@@ -1808,25 +1810,25 @@ The resulting JWE object using the JSON serialization:
 {
   "recipients": [
     {
-      "encrypted_key": "hRoQEtCm89pJyxPi-ZppMUheKsVcnw_u"
+      "encrypted_key": "0DJjBXri_kBcC46IkU5_Jk9BqaQeHdv2"
     }
   ],
   "protected": "eyJhbGciOiJFQ0RILUVTK0ExMjhLVyIsImtpZCI6InBlcm
       VncmluLnRvb2tAdHVja2Jvcm91Z2guZXhhbXBsZSIsImVwayI6eyJrdH
-      kiOiJFQyIsImNydiI6IlAtMzg0IiwieCI6ImxCQXRwV3FFWGVxbndTLT
-      ctWmVVaG94U3FaMnZVWnVkdVdlRUJ4OE5FVmFiZ1hWMXBSZjZnaUdsc0
-      Z6M21uWGIiLCJ5Ijoic0FrN2VnZjZCT21zTWxaWVBYZ1VzYmh4c3pEaj
-      JRN3NjWjljTEFXaFpMWFEwMXFYMC12eF91T0Z0Q0hQb3BFOCJ9LCJlbm
+      kiOiJFQyIsImNydiI6IlAtMzg0IiwieCI6InVCbzRrSFB3Nmtiang1bD
+      B4b3dyZF9vWXpCbWF6LUdLRlp1NHhBRkZrYllpV2d1dEVLNml1RURzUT
+      Z3TmROZzMiLCJ5Ijoic3AzcDVTR2haVkMyZmFYdW1JLWU5SlUyTW84S3
+      BvWXJGRHI1eVBOVnRXNFBnRXdaT3lRVEEtSmRhWTh0YjdFMCJ9LCJlbm
       MiOiJBMTI4R0NNIn0",
-  "iv": "CDLFinFbjSpqzCwi",
-  "ciphertext": "XLL2opd306uEqwYV4zouZYbw1_tbaXlN6w3e3K6lVOTNe
-      z9eAVf6NEGdgWOvjxJh4Bh3x9eBYPvEI-8YJbXFSJi2K7NX6ThUTalCP
-      fP8ehQ8aCvGMUTLovJqTIjgFmbinxFzz3gYZpm8UfdM2NG_iITafJRUH
-      bp7pwCTOAUyep7c6uSMcTen_lSwYsxxlhMKU8mi3QG5yaZIh5TvK4ltX
-      bd-FGg9EWDT8qE7wsnJfxByd-fyBAtyGP2oEAVXJ2yaYvyfXTm_5NoRJ
-      h84frylPzotosGSTkpRppb82IkDHoe6cvwIdeaVGGuy2yOtUBdbidIYH
-      TjSFufN88SUIRRZftrE5WgzfplIRdoZlQb0youS",
-  "tag": "OPP648_B5pMGPo_VxSvlCg"
+  "iv": "mH-G2zVqgztUtnW_",
+  "ciphertext": "tkZuOO9h95OgHJmkkrfLBisku8rGf6nzVxhRM3sVOhXgz
+      5NJ76oID7lpnAi_cPWJRCjSpAaUZ5dOR3Spy7QuEkmKx8-3RCMhSYMzs
+      XaEwDdXta9Mn5B7cCBoJKB0IgEnj_qfo1hIi-uEkUpOZ8aLTZGHfpl05
+      jMwbKkTe2yK3mjF6SBAsgicQDVCkcY9BLluzx1RmC3ORXaM0JaHPB93Y
+      cdSDGgpgBWMVrNU1ErkjcMqMoT_wtCex3w03XdLkjXIuEr2hWgeP-nkU
+      ZTPU9EoGSPj6fAS-bSz87RCPrxZdj_iVyC6QWcqAu07WNhjzJEPc4jVn
+      tRJ6K53NgPQ5p99l3Z408OUqj4ioYezbS6vTPlQ",
+  "tag": "WuGzxmcreYjpHGJoa17EBg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-json title="JSON Serialization"}
@@ -1867,7 +1869,7 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this examples uses the initialization vector/nonce from {{jwe-ecdh-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-h7aTQdC79Du5VI5GuvPytg
+yc9N8v5sYyv3iGQT926IUg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-iv title="Initialization Vector, base64url-encoded"}
 
@@ -1877,14 +1879,15 @@ h7aTQdC79Du5VI5GuvPytg
 
 The following are generated to agree on a CEK:
 
-* Ephemeral private key; this example uses the private that matches the public key from {{jwe-ecdh-epk}}.
+* Ephemeral private key; this example uses the private key from {{jwe-ecdh-epk}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
   "kty": "EC",
   "crv": "P-256",
-  "x": "OCjy02FPHZmbnQWewgbSYowfyK_YetlEv41NEFuUwz4",
-  "y": "voLhfpJymG56ihXid74zr5bAAyFpnPcj7eQR0NaLdhs"
+  "x": "mPUKT_bAWGHIhg0TpjjqVsP1rXWQu_vwVOHHtNkdYoA",
+  "y": "8BQAsImGeAS46fyWw5MhYfGTT0IjBpFw2SS34Dv4Irs",
+  "d": "AtH35vJsQ9SGjYfOsjUxYXQKrPH3FjZHmEtSKoSN8cM"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-epk title="Ephemeral public key, in JWK format"}
@@ -1892,7 +1895,7 @@ The following are generated to agree on a CEK:
 Performing the ECDH operation using the static EC public key ({{jwe-ecdh-key}}) over the ephemeral private key {{jwe-ecdh-epk}}) produces the following CEK:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-RTF4Ik-aMIM7Irw2R4KK8d0Hg2aOXwVtIA5OJ3bCACI
+hzHdlfQIAEehb8Hrd_mFRhKsKLEzPfshfXs9l6areCc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-cek title="Agreed-to Content Encryption Key, base64url-encoded"}
 
@@ -1909,8 +1912,8 @@ The following are generated before encrypting the content:
   "epk": {
     "kty": "EC",
     "crv": "P-256",
-    "x": "OCjy02FPHZmbnQWewgbSYowfyK_YetlEv41NEFuUwz4",
-    "y": "voLhfpJymG56ihXid74zr5bAAyFpnPcj7eQR0NaLdhs"
+    "x": "mPUKT_bAWGHIhg0TpjjqVsP1rXWQu_vwVOHHtNkdYoA",
+    "y": "8BQAsImGeAS46fyWw5MhYfGTT0IjBpFw2SS34Dv4Irs"
   },
   "enc": "A128CBC-HS256"
 }
@@ -1920,9 +1923,9 @@ The following are generated before encrypting the content:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
 NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
-LCJ4IjoiT0NqeTAyRlBIWm1iblFXZXdnYlNZb3dmeUtfWWV0bEV2NDFORUZ1VX
-d6NCIsInkiOiJ2b0xoZnBKeW1HNTZpaFhpZDc0enI1YkFBeUZwblBjajdlUVIw
-TmFMZGhzIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+LCJ4IjoibVBVS1RfYkFXR0hJaGcwVHBqanFWc1AxclhXUXVfdndWT0hIdE5rZF
+lvQSIsInkiOiI4QlFBc0ltR2VBUzQ2ZnlXdzVNaFlmR1RUMElqQnBGdzJTUzM0
+RHY0SXJzIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-protected_b64u title="Protected JWE Header, base64url-encoded"}
 
@@ -1938,18 +1941,18 @@ produces the following:
 * Authentication tag from {{jwe-ecdh-tag}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--azKUcPKsOVai6JcqvQAV7_h5m9I1xqSctFK-QOonel_9ao5wpYnoAhpZgx7wm
-i2muKvCZOVH1PSAmdnYAdfiVzIjiFRIt8nz8I8tX1Wve2ZniXEF_NSU6vvKQ2d
-tnH2xe73EsVV1AnhAykDeyP_OBCh4x_8Z6JYSxHIMeqUSdxbA6YkDLVjR8F6hK
-isvC52YcaRUvkxJWaVZfCkkBSuJT-XU7PCk-yngzfCn_lO_k-YbpsxNskFK7CA
-yWKxmVUfufT2cHBYdWARhr7KlDsJDW4PMdSId__9YX33ZptjJ07e29wIDR0AF0
-dNLGehukDmQatxs-uXpfcNMKJ-OsV-ZMiRVLVfjmPR9sg1O4nNFagaQyyGHIek
-nywPU4YAe6bG
+BoDlwPnTypYq-ivjmQvAYJLb5Q6l-F3LIgQomlz87yW4OPKbWE1zSTEFjDfhU9
+IPIOSA9Bml4m7iDFwA-1ZXvHteLDtw4R1XRGMEsDIqAYtskTTmzmzNa-_q4F_e
+vAPUmwlO-ZG45Mnq4uhM1fm_D9rBtWolqZSF3xGNNkpOMQKF1Cl8i8wjzRli7-
+IXgyirlKQsbhhqRzkv8IcY6aHl24j03C-AR2le1r7URUhArM79BY8soZU0lzwI
+-sD5PZ3l4NDCCei9XkoIAfsXJWmySPoeRb2Ni5UZL4mYpvKDiwmyzGd65KqVw7
+MsFfI_K767G9C9Azp73gKZD0DyUn1mn0WW5LmyX_yJ-3AROq8p1WZBfG-ZyJ61
+95_JGG2m9Csg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-yJtmBD1DNmOeqe8CSyHF7Q
+WCCkNa-x4BeB9hIDIfFuhg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-tag title="Authentication Tag, base64url-encoded"}
 
@@ -1967,22 +1970,22 @@ the resulting JWE object using the Compact serialization:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYnJhbmR5YnVja0BidW
 NrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi
-LCJ4IjoiT0NqeTAyRlBIWm1iblFXZXdnYlNZb3dmeUtfWWV0bEV2NDFORUZ1VX
-d6NCIsInkiOiJ2b0xoZnBKeW1HNTZpaFhpZDc0enI1YkFBeUZwblBjajdlUVIw
-TmFMZGhzIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
+LCJ4IjoibVBVS1RfYkFXR0hJaGcwVHBqanFWc1AxclhXUXVfdndWT0hIdE5rZF
+lvQSIsInkiOiI4QlFBc0ltR2VBUzQ2ZnlXdzVNaFlmR1RUMElqQnBGdzJTUzM0
+RHY0SXJzIn0sImVuYyI6IkExMjhDQkMtSFMyNTYifQ
 .
 .
-h7aTQdC79Du5VI5GuvPytg
+yc9N8v5sYyv3iGQT926IUg
 .
--azKUcPKsOVai6JcqvQAV7_h5m9I1xqSctFK-QOonel_9ao5wpYnoAhpZgx7wm
-i2muKvCZOVH1PSAmdnYAdfiVzIjiFRIt8nz8I8tX1Wve2ZniXEF_NSU6vvKQ2d
-tnH2xe73EsVV1AnhAykDeyP_OBCh4x_8Z6JYSxHIMeqUSdxbA6YkDLVjR8F6hK
-isvC52YcaRUvkxJWaVZfCkkBSuJT-XU7PCk-yngzfCn_lO_k-YbpsxNskFK7CA
-yWKxmVUfufT2cHBYdWARhr7KlDsJDW4PMdSId__9YX33ZptjJ07e29wIDR0AF0
-dNLGehukDmQatxs-uXpfcNMKJ-OsV-ZMiRVLVfjmPR9sg1O4nNFagaQyyGHIek
-nywPU4YAe6bG
+BoDlwPnTypYq-ivjmQvAYJLb5Q6l-F3LIgQomlz87yW4OPKbWE1zSTEFjDfhU9
+IPIOSA9Bml4m7iDFwA-1ZXvHteLDtw4R1XRGMEsDIqAYtskTTmzmzNa-_q4F_e
+vAPUmwlO-ZG45Mnq4uhM1fm_D9rBtWolqZSF3xGNNkpOMQKF1Cl8i8wjzRli7-
+IXgyirlKQsbhhqRzkv8IcY6aHl24j03C-AR2le1r7URUhArM79BY8soZU0lzwI
+-sD5PZ3l4NDCCei9XkoIAfsXJWmySPoeRb2Ni5UZL4mYpvKDiwmyzGd65KqVw7
+MsFfI_K767G9C9Azp73gKZD0DyUn1mn0WW5LmyX_yJ-3AROq8p1WZBfG-ZyJ61
+95_JGG2m9Csg
 .
-yJtmBD1DNmOeqe8CSyHF7Q
+WCCkNa-x4BeB9hIDIfFuhg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-compact title="Compact Serialization"}
 
@@ -1992,20 +1995,20 @@ the resulting JWE object using the JSON serialization:
 {
   "protected": "eyJhbGciOiJFQ0RILUVTIiwia2lkIjoibWVyaWFkb2MuYn
       JhbmR5YnVja0BidWNrbGFuZC5leGFtcGxlIiwiZXBrIjp7Imt0eSI6Ik
-      VDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiT0NqeTAyRlBIWm1iblFXZXdnYl
-      NZb3dmeUtfWWV0bEV2NDFORUZ1VXd6NCIsInkiOiJ2b0xoZnBKeW1HNT
-      ZpaFhpZDc0enI1YkFBeUZwblBjajdlUVIwTmFMZGhzIn0sImVuYyI6Ik
+      VDIiwiY3J2IjoiUC0yNTYiLCJ4IjoibVBVS1RfYkFXR0hJaGcwVHBqan
+      FWc1AxclhXUXVfdndWT0hIdE5rZFlvQSIsInkiOiI4QlFBc0ltR2VBUz
+      Q2ZnlXdzVNaFlmR1RUMElqQnBGdzJTUzM0RHY0SXJzIn0sImVuYyI6Ik
       ExMjhDQkMtSFMyNTYifQ",
-  "iv": "h7aTQdC79Du5VI5GuvPytg",
-  "ciphertext": "-azKUcPKsOVai6JcqvQAV7_h5m9I1xqSctFK-QOonel_9
-      ao5wpYnoAhpZgx7wmi2muKvCZOVH1PSAmdnYAdfiVzIjiFRIt8nz8I8t
-      X1Wve2ZniXEF_NSU6vvKQ2dtnH2xe73EsVV1AnhAykDeyP_OBCh4x_8Z
-      6JYSxHIMeqUSdxbA6YkDLVjR8F6hKisvC52YcaRUvkxJWaVZfCkkBSuJ
-      T-XU7PCk-yngzfCn_lO_k-YbpsxNskFK7CAyWKxmVUfufT2cHBYdWARh
-      r7KlDsJDW4PMdSId__9YX33ZptjJ07e29wIDR0AF0dNLGehukDmQatxs
-      -uXpfcNMKJ-OsV-ZMiRVLVfjmPR9sg1O4nNFagaQyyGHIeknywPU4YAe
-      6bG",
-  "tag": "yJtmBD1DNmOeqe8CSyHF7Q"
+  "iv": "yc9N8v5sYyv3iGQT926IUg",
+  "ciphertext": "BoDlwPnTypYq-ivjmQvAYJLb5Q6l-F3LIgQomlz87yW4O
+      PKbWE1zSTEFjDfhU9IPIOSA9Bml4m7iDFwA-1ZXvHteLDtw4R1XRGMEs
+      DIqAYtskTTmzmzNa-_q4F_evAPUmwlO-ZG45Mnq4uhM1fm_D9rBtWolq
+      ZSF3xGNNkpOMQKF1Cl8i8wjzRli7-IXgyirlKQsbhhqRzkv8IcY6aHl2
+      4j03C-AR2le1r7URUhArM79BY8soZU0lzwI-sD5PZ3l4NDCCei9XkoIA
+      fsXJWmySPoeRb2Ni5UZL4mYpvKDiwmyzGd65KqVw7MsFfI_K767G9C9A
+      zp73gKZD0DyUn1mn0WW5LmyX_yJ-3AROq8p1WZBfG-ZyJ6195_JGG2m9
+      Csg",
+  "tag": "WCCkNa-x4BeB9hIDIfFuhg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-json title="JSON Serialization"}
@@ -3074,12 +3077,12 @@ The following are generated before encrypting:
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-multi-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Na7IMRrqrLsivFfHR-jMWktr4el8Epb-2OUI49fHSXk
+zXayeJ4gvm8NJr3IUInyokTUO-LbQNKEhe_zWlYbdpQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-cek title="Content Encryption Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-h3o0rNHaq0Sf5vBOVnqSLw
+VgEIHY20EnzUtZFl2RpB1g
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-iv title="Initialization Vector, base64url-encoded"}
 
@@ -3088,12 +3091,12 @@ h3o0rNHaq0Sf5vBOVnqSLw
 Performing the "RSA1_5" key encryption operation over the CEK ({{jwe-multi-cek}} with the first recipient's RSA key ({{jwe-rsa15-key}} produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Zk-xjmcZtXOEdl_4VfE7vIOJSYON6hm2on-6WTm-cRByOc_UIm6Bxxr_zgSQJN
-VhbqzgGWtz3dx6S8iUk1_REXApB_7F26ZTpTVxvhD74WiPe3KlhN5GGxuXN4Nm
-Q7dxeiNe4OhPzh0cgUMEpixJcHYE-WgXKZ-zmta9O-kiJ-RghSDh8pZqv1x086
-gYA4M54kguYE8lH9fN_cm6a-KiGmSA8NMmHGZpzeWZ8SKI6bZ-InVs8_kjc-XJ
-Rudt_MqEZsTZnUJ2Im9w1CuiPZ20fiwZ0xz9BcZxqT5NKQD-wzFFyxKG5YOSqx
-_wZt9TNLl5Agy2cRNLIyAit-Dtwjm8uQ
+dYOD28kab0Vvf4ODgxVAJXgHcSZICSOp8M51zjwj4w6Y5G4XJQsNNIBiqyvUUA
+OcpL7S7-cFe7Pio7gV_Q06WmCSa-vhW6me4bWrBf7cHwEQJdXihidAYWVajJIa
+KMXMvFRMV6iDlRr076DFthg2_AV0_tSiV6xSEIFqt1xnYPpmP91tc5WJDOGb-w
+qjw0-b-S1laS11QVbuP78dQ7Fa0zAVzzjHX-xvyM2wxj_otxr9clN1LnZMbeYS
+rRicJK5xodvWgkpIdkMHo4LvdhRRvzoKzlic89jFWPlnBq_V4n5trGuExtp_-d
+bHcGlihqc_wGgho9fLMK8JOArYLcMDNQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-encdkey_1 title="Recipient #1 Encrypted Key, base64url-encoded"}
 
@@ -3113,13 +3116,13 @@ The following is the assembled first recipient JSON:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "encrypted_key": "Zk-xjmcZtXOEdl_4VfE7vIOJSYON6hm2on-6WTm-cR
-      ByOc_UIm6Bxxr_zgSQJNVhbqzgGWtz3dx6S8iUk1_REXApB_7F26ZTpT
-      VxvhD74WiPe3KlhN5GGxuXN4NmQ7dxeiNe4OhPzh0cgUMEpixJcHYE-W
-      gXKZ-zmta9O-kiJ-RghSDh8pZqv1x086gYA4M54kguYE8lH9fN_cm6a-
-      KiGmSA8NMmHGZpzeWZ8SKI6bZ-InVs8_kjc-XJRudt_MqEZsTZnUJ2Im
-      9w1CuiPZ20fiwZ0xz9BcZxqT5NKQD-wzFFyxKG5YOSqx_wZt9TNLl5Ag
-      y2cRNLIyAit-Dtwjm8uQ",
+  "encrypted_key": "dYOD28kab0Vvf4ODgxVAJXgHcSZICSOp8M51zjwj4w
+      6Y5G4XJQsNNIBiqyvUUAOcpL7S7-cFe7Pio7gV_Q06WmCSa-vhW6me4b
+      WrBf7cHwEQJdXihidAYWVajJIaKMXMvFRMV6iDlRr076DFthg2_AV0_t
+      SiV6xSEIFqt1xnYPpmP91tc5WJDOGb-wqjw0-b-S1laS11QVbuP78dQ7
+      Fa0zAVzzjHX-xvyM2wxj_otxr9clN1LnZMbeYSrRicJK5xodvWgkpIdk
+      MHo4LvdhRRvzoKzlic89jFWPlnBq_V4n5trGuExtp_-dbHcGlihqc_wG
+      gho9fLMK8JOArYLcMDNQ",
   "header": {
     "alg": "RSA1_5",
     "kid": "frodo.baggins@hobbiton.example"
@@ -3132,16 +3135,18 @@ The following is the assembled first recipient JSON:
 
 The following are generated before encrypting the CEK for the second recipient:
 
-* Ephemeral EC private key on the same curve as the EC public key; this example uses the private key that matches the public key from {{jwe-multi-epk_2}}.
+* Ephemeral EC private key on the same curve as the EC public key; this example uses the private key from {{jwe-multi-epk_2}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
   "kty": "EC",
   "crv": "P-384",
-  "x": "6Fbs8qgetwCa1ckEhLjAW6vBO3M81RPvgBwNaQM9YZ6qlTDrsFrA90
-      mo7IXrePdb",
-  "y": "ueqnOpDbRSdcpCevDbuf_LwK-QVMqeI78nqaUCnaylB4zash_Mru8-
-      M05rXjGAhj"
+  "x": "Uzdvk3pi5wKCRc1izp5_r0OjeqT-I68i8g2b8mva8diRhsE2xAn2Dt
+      MRb25Ma2CX",
+  "y": "VDrRyFJh-Kwd1EjAgmj5Eo-CTHAZ53MC7PjjpLioy3ylEjI1pOMbw9
+      1fzZ84pbfm",
+  "d": "1DKHfTv-PiifVw2VBHM_ZiVcwOMxkOyANS_lQHJcrDxVY3jhVCvZPw
+      MxJKIE793C"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-epk_2 title="Ephemeral public key for Recipient #2, in JWK format"}
@@ -3154,7 +3159,7 @@ Performing the "ECDH-ES+A256KW" key encryption operation over the CEK ({{jwe-mul
 produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-BYEeBGqQ5uQQdCYzCcFx-Mqs6LrZ_Jx4RqKRF9JiB3UMvcD7y_M3zg
+ExInT0io9BqBMYF6-maw5tZlgoZXThD1zWKsHixJuw_elY4gSSId_w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-encdkey_2 title="Recipient #2 Encrypted Key, base64url-encoded"}
 
@@ -3169,10 +3174,10 @@ The following are generated after encrypting the CEK for the second recipient:
   "epk": {
     "kty": "EC",
     "crv": "P-384",
-    "x": "6Fbs8qgetwCa1ckEhLjAW6vBO3M81RPvgBwNaQM9YZ6qlTDrsFrA
-        90mo7IXrePdb",
-    "y": "ueqnOpDbRSdcpCevDbuf_LwK-QVMqeI78nqaUCnaylB4zash_Mru
-        8-M05rXjGAhj"
+    "x": "Uzdvk3pi5wKCRc1izp5_r0OjeqT-I68i8g2b8mva8diRhsE2xAn2
+        DtMRb25Ma2CX",
+    "y": "VDrRyFJh-Kwd1EjAgmj5Eo-CTHAZ53MC7PjjpLioy3ylEjI1pOMb
+        w91fzZ84pbfm"
   }
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3182,18 +3187,18 @@ The following is the assembled second recipient JSON:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "encrypted_key": "BYEeBGqQ5uQQdCYzCcFx-Mqs6LrZ_Jx4RqKRF9JiB3
-      UMvcD7y_M3zg",
+  "encrypted_key": "ExInT0io9BqBMYF6-maw5tZlgoZXThD1zWKsHixJuw
+      _elY4gSSId_w",
   "header": {
     "alg": "ECDH-ES+A256KW",
     "kid": "peregrin.took@tuckborough.example",
     "epk": {
       "kty": "EC",
       "crv": "P-384",
-      "x": "6Fbs8qgetwCa1ckEhLjAW6vBO3M81RPvgBwNaQM9YZ6qlTDrsF
-          rA90mo7IXrePdb",
-      "y": "ueqnOpDbRSdcpCevDbuf_LwK-QVMqeI78nqaUCnaylB4zash_M
-          ru8-M05rXjGAhj"
+      "x": "Uzdvk3pi5wKCRc1izp5_r0OjeqT-I68i8g2b8mva8diRhsE2xA
+          n2DtMRb25Ma2CX",
+      "y": "VDrRyFJh-Kwd1EjAgmj5Eo-CTHAZ53MC7PjjpLioy3ylEjI1pO
+          Mbw91fzZ84pbfm"
     }
   }
 }
@@ -3207,7 +3212,7 @@ The following are generated before encrypting the CEK for the third recipient:
 * Initialization vector/nonce for key wrapping; this example uses the initialization vector/nonce from {{jwe-multi-kwiv_3}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-GGS-eUZFslgOFCZb
+AvpeoPZ9Ncn9mkBn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-kwiv_3}
 
@@ -3222,12 +3227,12 @@ produces the following:
 * Key wrap authentication tag from {{jwe-multi-kwtag_3}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-QXS4LD3FKdy1k-A-9i1_5uKk6HpWPTyxYUvWhDoKH3g
+a7CclAejo_7JSuPB8zeagxXRam8dwCfmkt9-WyTpS1E
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-encdkey_3 title="Recipient #3 Encrypted Key, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1gsIt2sYeU6Q9qWSHenwmA
+59Nqh1LlYtVIhfD3pgRGvw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-kwtag_3 title="Recipient #3 Authentication Tag, base64url-encoded"}
 
@@ -3239,8 +3244,8 @@ The following are generated after encrypting the CEK for the third recipient:
 {
   "alg": "A256GCMKW",
   "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-  "tag": "1gsIt2sYeU6Q9qWSHenwmA",
-  "iv": "GGS-eUZFslgOFCZb"
+  "tag": "59Nqh1LlYtVIhfD3pgRGvw",
+  "iv": "AvpeoPZ9Ncn9mkBn"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-rcpt_header_3 title="Recipient #3 JWE Header JSON"}
@@ -3249,13 +3254,13 @@ The following is the assembled third recipient JSON:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
-  "encrypted_key": "QXS4LD3FKdy1k-A-9i1_5uKk6HpWPTyxYUvWhDoKH3
-      g",
+  "encrypted_key": "a7CclAejo_7JSuPB8zeagxXRam8dwCfmkt9-WyTpS1
+      E",
   "header": {
     "alg": "A256GCMKW",
     "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-    "tag": "1gsIt2sYeU6Q9qWSHenwmA",
-    "iv": "GGS-eUZFslgOFCZb"
+    "tag": "59Nqh1LlYtVIhfD3pgRGvw",
+    "iv": "AvpeoPZ9Ncn9mkBn"
   }
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3291,18 +3296,18 @@ produces the following:
 * Authentication tag from {{jwe-multi-tag}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1xRFrycVM_5xzDrKQogoUaTuJFw19cSjD7s0kB-4McIjR3NSTY36Y8deWl59Lg
-NXeliHEZROfbn64pmL0lT1Kn5MDrDv20wCm-pF6JcSwRWZDcLBA5ql28HmZicY
-Ex2BW6syEjcaAvSEg_9LKc7DcfnJHa5BzX7insHpmb_xvde6qAzKvqXmedxBfk
-N_h3sEGjOTdcA9dlZa686WTKKF0tD77irKF4jXl_iEQTDfVbC8Epvk2I9DuYm0
-BMXvty39qR5CvxHH77QyJ8rfOyqgawQpSo_PTWIOfP1jhefurFnGxI_WuCw9yV
-DhacBtZco71_37AwgOG8-rk5gHrwU6ienAbgThLYOoLc5cxMjxspK4UW_69pTw
-PCqjWfrYcNwV
+ajm2Q-OpPXCr7-MHXicknb1lsxLdXxK_yLds0KuhJzfWK04SjdxQeSw2L9mu3a
+_k1C55kCQ_3xlkcVKC5yr__Is48VOoK0k63_QRM9tBURMFqLByJ8vOYQX0oJW4
+VUHJLmGhF-tVQWB7Kz8mr8zeE7txF0MSaP6ga7-siYxStR7_G07Thd1jh-zGT0
+wxM5g-VRORtq0K6AXpLlwEqRp7pkt2zRM0ZAXqSpe1O6FJ7FHLDyEFnD-zDIZu
+kLpCbzhzMDLLw2-8I14FQrgi-iEuzHgIJFIJn2wh9Tj0cg_kOZy9BqMRZbmYXM
+Y9YQjorZ_P_JYG3ARAIF3OjDNqpdYe-K_5Q5crGJSDNyij_ygEiItR5jssQVH2
+ofDQdLChtazE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-ciphertext title="Ciphertext, base64url-encoded"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-8chdale46ZMpXSA9abtKBg
+BESYyFN7T09KY7i8zKs5_g
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-tag title="Authentication Tag, base64url-encoded"}
 
@@ -3334,42 +3339,42 @@ The resulting JWE object using the JSON serialization:
 {
   "recipients": [
     {
-      "encrypted_key": "Zk-xjmcZtXOEdl_4VfE7vIOJSYON6hm2on-6WT
-          m-cRByOc_UIm6Bxxr_zgSQJNVhbqzgGWtz3dx6S8iUk1_REXApB_
-          7F26ZTpTVxvhD74WiPe3KlhN5GGxuXN4NmQ7dxeiNe4OhPzh0cgU
-          MEpixJcHYE-WgXKZ-zmta9O-kiJ-RghSDh8pZqv1x086gYA4M54k
-          guYE8lH9fN_cm6a-KiGmSA8NMmHGZpzeWZ8SKI6bZ-InVs8_kjc-
-          XJRudt_MqEZsTZnUJ2Im9w1CuiPZ20fiwZ0xz9BcZxqT5NKQD-wz
-          FFyxKG5YOSqx_wZt9TNLl5Agy2cRNLIyAit-Dtwjm8uQ",
+      "encrypted_key": "dYOD28kab0Vvf4ODgxVAJXgHcSZICSOp8M51zj
+          wj4w6Y5G4XJQsNNIBiqyvUUAOcpL7S7-cFe7Pio7gV_Q06WmCSa-
+          vhW6me4bWrBf7cHwEQJdXihidAYWVajJIaKMXMvFRMV6iDlRr076
+          DFthg2_AV0_tSiV6xSEIFqt1xnYPpmP91tc5WJDOGb-wqjw0-b-S
+          1laS11QVbuP78dQ7Fa0zAVzzjHX-xvyM2wxj_otxr9clN1LnZMbe
+          YSrRicJK5xodvWgkpIdkMHo4LvdhRRvzoKzlic89jFWPlnBq_V4n
+          5trGuExtp_-dbHcGlihqc_wGgho9fLMK8JOArYLcMDNQ",
       "header": {
         "alg": "RSA1_5",
         "kid": "frodo.baggins@hobbiton.example"
       }
     },
     {
-      "encrypted_key": "BYEeBGqQ5uQQdCYzCcFx-Mqs6LrZ_Jx4RqKRF9
-          JiB3UMvcD7y_M3zg",
+      "encrypted_key": "ExInT0io9BqBMYF6-maw5tZlgoZXThD1zWKsHi
+          xJuw_elY4gSSId_w",
       "header": {
         "alg": "ECDH-ES+A256KW",
         "kid": "peregrin.took@tuckborough.example",
         "epk": {
           "kty": "EC",
           "crv": "P-384",
-          "x": "6Fbs8qgetwCa1ckEhLjAW6vBO3M81RPvgBwNaQM9YZ6qlT
-              DrsFrA90mo7IXrePdb",
-          "y": "ueqnOpDbRSdcpCevDbuf_LwK-QVMqeI78nqaUCnaylB4za
-              sh_Mru8-M05rXjGAhj"
+          "x": "Uzdvk3pi5wKCRc1izp5_r0OjeqT-I68i8g2b8mva8diRhs
+              E2xAn2DtMRb25Ma2CX",
+          "y": "VDrRyFJh-Kwd1EjAgmj5Eo-CTHAZ53MC7PjjpLioy3ylEj
+              I1pOMbw91fzZ84pbfm"
         }
       }
     },
     {
-      "encrypted_key": "QXS4LD3FKdy1k-A-9i1_5uKk6HpWPTyxYUvWhD
-          oKH3g",
+      "encrypted_key": "a7CclAejo_7JSuPB8zeagxXRam8dwCfmkt9-Wy
+          TpS1E",
       "header": {
         "alg": "A256GCMKW",
         "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
-        "tag": "1gsIt2sYeU6Q9qWSHenwmA",
-        "iv": "GGS-eUZFslgOFCZb"
+        "tag": "59Nqh1LlYtVIhfD3pgRGvw",
+        "iv": "AvpeoPZ9Ncn9mkBn"
       }
     }
   ],
@@ -3377,16 +3382,16 @@ The resulting JWE object using the JSON serialization:
     "cty": "text/plain"
   },
   "protected": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
-  "iv": "h3o0rNHaq0Sf5vBOVnqSLw",
-  "ciphertext": "1xRFrycVM_5xzDrKQogoUaTuJFw19cSjD7s0kB-4McIjR
-      3NSTY36Y8deWl59LgNXeliHEZROfbn64pmL0lT1Kn5MDrDv20wCm-pF6
-      JcSwRWZDcLBA5ql28HmZicYEx2BW6syEjcaAvSEg_9LKc7DcfnJHa5Bz
-      X7insHpmb_xvde6qAzKvqXmedxBfkN_h3sEGjOTdcA9dlZa686WTKKF0
-      tD77irKF4jXl_iEQTDfVbC8Epvk2I9DuYm0BMXvty39qR5CvxHH77QyJ
-      8rfOyqgawQpSo_PTWIOfP1jhefurFnGxI_WuCw9yVDhacBtZco71_37A
-      wgOG8-rk5gHrwU6ienAbgThLYOoLc5cxMjxspK4UW_69pTwPCqjWfrYc
-      NwV",
-  "tag": "8chdale46ZMpXSA9abtKBg"
+  "iv": "VgEIHY20EnzUtZFl2RpB1g",
+  "ciphertext": "ajm2Q-OpPXCr7-MHXicknb1lsxLdXxK_yLds0KuhJzfWK
+      04SjdxQeSw2L9mu3a_k1C55kCQ_3xlkcVKC5yr__Is48VOoK0k63_QRM
+      9tBURMFqLByJ8vOYQX0oJW4VUHJLmGhF-tVQWB7Kz8mr8zeE7txF0MSa
+      P6ga7-siYxStR7_G07Thd1jh-zGT0wxM5g-VRORtq0K6AXpLlwEqRp7p
+      kt2zRM0ZAXqSpe1O6FJ7FHLDyEFnD-zDIZukLpCbzhzMDLLw2-8I14FQ
+      rgi-iEuzHgIJFIJn2wh9Tj0cg_kOZy9BqMRZbmYXMY9YQjorZ_P_JYG3
+      ARAIF3OjDNqpdYe-K_5Q5crGJSDNyij_ygEiItR5jssQVH2ofDQdLCht
+      azE",
+  "tag": "BESYyFN7T09KY7i8zKs5_g"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-multi-json title="JSON Serialization"}
