@@ -32,9 +32,9 @@
       "kid": "meriadoc.brandybuck@buckland.example",
       "use": "enc",
       "crv": "P-256",
-      "x": "XnXXKEsaUU4hPZza_zSHIbt02UA505B1rDWc7JNlcDE",
-      "y": "Md5NqzfiXCytoaMglA-9MstvgOBdMSroXA2Hb6vR6dQ",
-      "d": "44eY-VRWsn1zdz3VaWS6idEpOGt1ErydBARq7Iyh9pY"
+      "x": "Ze2loSV3wrroKUN_4zhwGhCqo3Xhu1td4QjeQ5wIVR0",
+      "y": "HlLtdXARY_f55A3fnzQbPcm6hgr34Mp8p-nuzQCE0Zw",
+      "d": "r_kHyZ-a06rmxM3yESK84r1otSg-aQcVStkRhA-iCM8"
     },
     {
       "kty": "EC",
