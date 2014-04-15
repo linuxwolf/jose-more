@@ -2176,7 +2176,7 @@ The following are supplied before beginning the encryption process:
 The following are generated before encrypting:
 
 * AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jwe-aesgcmkw-cek}}.
-* Initialization vector/nonce for content encryption; this example uses the initilization vector/nonce from {{jwe-aesgcmkw-iv}}.
+* Initialization vector/nonce for content encryption; this example uses the initialization vector/nonce from {{jwe-aesgcmkw-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 UWxARpat23nL9ReIj4WG3D1ee9I4r-Mv5QLuFXdy_rE
