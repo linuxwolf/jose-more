@@ -579,7 +579,7 @@ exec = exec.filter(function(opkey) {
     });
     if (op.opts.zip) {
         promise = promise.then(function() {
-            return Q.nfcall(zlib.deflate, new Buffer(plaintext, "utf8"));
+            return Q.nfcall(zlib.deflateRaw, new Buffer(plaintext, "utf8"));
         }).then(function(deflated) {
             deflated = jose.base64url.encode(deflated);
             console.log("\n%s Compressed Plaintext (base64url):", op.plaintext);
