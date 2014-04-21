@@ -1,7 +1,7 @@
 ---
 title: Examples of Protecting Content using JavaScript Object Signing and Encryption (JOSE)
 abbrev: JOSE Cookbook
-docname: draft-ietf-jose-cookbook-01
+docname: draft-ietf-jose-cookbook-02
 date: 
 category: info
 
@@ -3721,4 +3721,4 @@ This document has no actions for IANA.
 
 All of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
 
-Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.  Thanks to Brian Campbell for reviewing text and verifying the examples.
+Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.  Thanks to Brian Campbell for reviewing text and verifying most of the examples.
