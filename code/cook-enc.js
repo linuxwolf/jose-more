@@ -74,16 +74,21 @@ var ops = {
             protect: "*",
             fields: {
                 cty: "jwk-set+json"
-            }
+            },
+            cek: {
+                kty: "oct",
+                k: "uwsjJXaBK407Qaf0_zpcpmr1Cs0CC50hIUEyGNEt3m0"
+            },
+            iv: "VBiCzVHNoLiR3F4V82uoTQ"
         },
         recipients: [
             {
                 key: jose.JWK.asKey({
-                    alg: "PBES2-HS256+A128KW",
+                    alg: "PBES2-HS512+A156KW",
                     k:jose.base64url.encode("entrap_o_peter_long_credit_tun", "utf8")
                 }),
                 header: {
-                    alg: "PBES2-HS256+A128KW",
+                    alg: "PBES2-HS512+A256KW",
                     p2s: "8Q1SzinasR3xchYz6ZZcHA",
                     p2c: 8192
                 },
@@ -344,16 +349,16 @@ var doOp = function(op) {
 
     var enc = jose.JWE.createEncrypt(op.opts, op.recipients);
     enc.update(inputs[op.plaintext], "utf8");
-    
+
     var results = enc.final();
     results = results.then(function(jwe) {
         var compact = [], json;
         compact = common.makeCompactJWE(jwe);
         json = common.prettify(jwe);
-    
+
         console.log("\nExample '%s'", op.name);
         console.log("==============================================================");
-        
+
         // assemble common properties
         var hlogs = [];
         var cprops = {};
@@ -379,11 +384,11 @@ var doOp = function(op) {
             hlogs.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
             cprops = $.extend(cprops, pheader);
         }
-        
+
         var cek;
         var __outputRcpt = function(rcpt, idx) {
             var log = [];
-        
+
             var key = op.recipients[idx].key;
             if ((key.get("alg") || "").indexOf("PBES2-") === 0) {
                 key = key.get("k", true);
@@ -405,29 +410,29 @@ var doOp = function(op) {
                 rprops = $.extend(rprops, jwe.recipients[idx].header);
             }
             rprops = $.extend(rprops, cprops);
-            
+
             var encKey = jwe.recipients &&
                          jwe.recipients[idx] &&
                          jwe.recipients[idx].encrypted_key;
             if (encKey) {
                 encKey = jose.base64url.decode(encKey, "binary");
             }
-            
+
             var epk = op.recipients[idx].epk;
             if (epk) {
                 epk = epk.toJSON(true, ["kid", "use", "alg"]);
-                
+
                 // log it separate
                 log.push(util.format("\nRecipient #%d Ephemeral Public/Private Key (JSON):", idx+1));
                 log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
                 log.push(util.format(common.prettify(epk)));
                 log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
-            
+
                 // convert to binary
                 rprops.epk.x = jose.base64url.decode(rprops.epk.x, "binary");
                 rprops.epk.y = jose.base64url.decode(rprops.epk.y, "binary");
             }
-            
+
             var key = op.recipients[idx].key;
             var unwrap = key.unwrap(rprops.alg,
                                     encKey,
@@ -438,7 +443,7 @@ var doOp = function(op) {
                 delete unwrapped.data;
                 delete unwrapped.direct;
                 delete unwrapped.once;
-                
+
                 var kprops = unwrapped.header || {};
                 if (Object.keys(kprops).length) {
                     log.push(util.format("\nRecipient #%d Content Encryption Factors:", idx+1));
@@ -446,7 +451,7 @@ var doOp = function(op) {
                     log.push(util.format(common.prettify(kprops)));
                     log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
                 }
-                
+
                 if (encKey) {
                     log.push(util.format("\nRecipient #%d JWE Encrypted Key:", idx+1));
                     log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
@@ -460,44 +465,44 @@ var doOp = function(op) {
                     log.push(util.format(common.prettify(jwe.recipients[idx])));
                     log.push(util.format("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
                 }
-                
+
                 return log.join("\n");
             });
-            
+
             return unwrap;
         }
 
         var results = Q.all(op.recipients.map(__outputRcpt));
-        
+
         results.then(function(logs) {
             console.log("\nContent Encryption Key:");
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(common.prettify(cek));
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            
+
             if (jwe.iv) {
                 console.log("\nInitialization Vector:");
                 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 console.log(common.prettify(jwe.iv));
                 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            
+
             // output recipients
             console.log(logs.join("\n"));
-            
+
             // output common headers
             console.log(hlogs.join("\n"));
-            
+
             console.log("\nCiphertext:");
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(common.prettify(jwe.ciphertext));
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            
+
             console.log("\nAuthentication Tag:");
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(common.prettify(jwe.tag));
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            
+
             if (compact.length) {
                 compact = compact.map(common.chunk).
                                   map(function(v) {
@@ -522,7 +527,7 @@ var doOp = function(op) {
             console.log("==============================================================");
         });
     });
-    
+
     return results;
 }
 
@@ -545,7 +550,7 @@ exec = exec.filter(function(opkey) {
         return true;
     }
     displayed[op.plaintext] = true;
-    
+
     var plaintext = inputs[op.plaintext],
         printtext;
     if (op.plaintext === "jwk-set+json") {
@@ -553,12 +558,12 @@ exec = exec.filter(function(opkey) {
     } else {
         printtext = common.splitit(plaintext);
     }
-    
+
     var rcpts = op.recipients.map(function(r) {
         if (r.key.kty !== "EC") {
             return Q.resolve();
         }
-        
+
         var crv = r.key.get("crv");
         return jose.JWK.createKeyStore().generate("EC", crv).
                then(function(k) {
@@ -566,7 +571,7 @@ exec = exec.filter(function(opkey) {
                });
     });
     promise = promise.then(Q.all(rcpts));
-    
+
     promise = promise.then(function() {
         console.log("\n%s Plaintext (utf-8):", op.plaintext);
         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
