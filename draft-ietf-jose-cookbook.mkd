@@ -1234,6 +1234,8 @@ This example illustrates encrypting content using the "RSA1_5" (RSAES-PKCS1-v1_5
 
 Note that RSAES-PKCS1-v1_5 uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-rsa15-input}
 
 The following are supplied before beginning the encryption process:
@@ -1442,6 +1444,8 @@ The resulting JWE object using the JSON serialization:
 This example illustrates encrypting content using the "RSA-OAEP" (RSAES-OAEP) key encryption algorithm and the "A256GCM" (AES-GCM) content encryption algorithm.
 
 Note that RSAES-OAEP uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-rsa_oaep-input}
 
@@ -1694,6 +1698,8 @@ The resulting JWE object using the JSON serialization:
 
 The example illustrates encrypting content using the "PBES2-HS512+A256KW" (PBES2 Password-based Encryption using HMAC-SHA-512 and AES-256-KeyWrap) key encryption algorithm with the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-pbes2-input}
 
 The following are supplied before beginning the encryption process:
@@ -1901,6 +1907,8 @@ The resulting JWE object using the JSON serialization:
 
 This example illustrates encrypting content using the "ECDH-ES+A128KW" (Elliptic Curve Diffie-Hellman Ephemeral-Static with AES-128-KeyWrap) key encryption algorithm and the "A128GCM" (AES-GCM) content encryption algorithm.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-ecdh_aeskw-input}
 
 The following are supplied before beginning the encryption process:
@@ -2105,6 +2113,8 @@ The resulting JWE object using the JSON serialization:
 
 This example illustrates encrypting content using the "ECDH-ES" (Elliptic Curve Diffie-Hellman Ephemeral-Static) key agreement algorithm and the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-ecdh-input}
 
 The following are supplied before beginning the encryption process:
@@ -2285,6 +2295,8 @@ the resulting JWE object using the JSON serialization:
 
 This example illustrates encrypting content using a previously exchanged key directly and the "A128GCM" (AES-GCM) content encryption algorithm.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-dir_gcm-input}
 
 The following are supplied before beginning the encryption process:
@@ -2417,6 +2429,8 @@ The resulting JWE object using the JSON serialization:
 ## Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 ## {#jwe-aesgcmkw}
 
 This example illustrates encrypting content using the "A256GCMKW" (AES-256-GCM-KeyWrap) key encryption algorithm with the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-aesgcmkw-input}
 
@@ -2606,6 +2620,8 @@ The resulting JWE object using the JSON serialization:
 
 The following example illustrates content encryption using the "A128KW" (AES-128-KeyWrap) key encryption algorithm and the "A128GCM" (AES-128-GCM) content encryption algorithm.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-aeskw-input}
 
 The following are supplied before beginning the encryption process:
@@ -2762,6 +2778,8 @@ The resulting JWE object using the JSON serialization:
 
 This example illustrates encrypting content that is first compressed.  It reuses the AES key, key encryption algorithm, and content encryption algorithm from {{jwe-aeskw}}.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-compressed-input}
 
 The following are supplied before beginning the encryption process:
@@ -2910,6 +2928,8 @@ The resulting JWE object using the JSON serialization:
 ## Including Additional Authenticated Data ## {#jwe-aad}
 
 This example illustrates encrypting content that includes additional authenticated data. As this example includes an additional top-level property not present in the Compact serialization, only the JSON serialization is possible.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-aad-input}
 
@@ -3069,6 +3089,8 @@ The resulting JWE object using the JSON serialization:
 
 This example illustrates encrypting content where only certain JOSE header parameters are protected.  As this example includes JWE Shared Unprotected Header parameters, only the JSON serialization is possible.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-somefields-input}
 
 The following are supplied before beginning the encryption process:
@@ -3201,6 +3223,8 @@ The resulting JWE object using the JSON serialization:
 
 This example illustrates encrypting content where none of the JOSE header parameters are protected.  As this example includes only JWE Shared Unprotected Header parameters, only the JSON serialization is possible.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ### Input Factors ### {#jwe-nofields-input}
 
 The following are supplied before beginning the encryption process:
@@ -3318,6 +3342,8 @@ The resulting JWE object using the JSON serialization:
 This example illustrates encryption content for multiple recipients. As this example has multiple recipients, only the JSON serialization is possible.
 
 Note that RSAES-PKCS1-v1_5 uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-multi-input}
 
@@ -3671,6 +3697,8 @@ This example illustrates nesting a JSON Web Signature (JWS) structure within a J
 
 Note that RSASSA-PSS uses random data to generate the signature, and RSAES-OAEP uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
 
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
 ## Signing Input Factors ## {#jw-nested-sig-input}
 
 The following are supplied before beginning the signing operation:
@@ -3990,6 +4018,6 @@ This document has no actions for IANA.
 
 # Acknowledgements
 
-All of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
+Most of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
 
-Thanks to Richard Barnes and Jim Schaad for providing for their input on the outline for this document.  Thanks to Brian Campbell for reviewing text and verifying most of the examples.
+Thanks to Richard Barnes, Brian Campbell, Mike Jones, and Jim Schaad for input and review of text.  Thanks to Brian Campbell for verifying examples.

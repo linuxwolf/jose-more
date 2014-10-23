@@ -130,38 +130,38 @@ Internet-Draft                JOSE Cookbook                 October 2014
        5.2.4.  Encrypting the Content  . . . . . . . . . . . . . . .  43
        5.2.5.  Output Results  . . . . . . . . . . . . . . . . . . .  44
      5.3.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  46
-       5.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  46
-       5.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  47
+       5.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  47
+       5.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  48
        5.3.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  48
-       5.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  48
+       5.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  49
        5.3.5.  Output Results  . . . . . . . . . . . . . . . . . . .  50
      5.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-
-           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  51
-       5.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  51
-       5.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  52
-       5.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  52
-       5.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  53
-       5.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  54
-     5.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  56
-       5.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  56
-       5.5.2.  Generated Factors . . . . . . . . . . . . . . . . . .  57
-       5.5.3.  Key Agreement . . . . . . . . . . . . . . . . . . . .  57
-       5.5.4.  Encrypting the Content  . . . . . . . . . . . . . . .  58
-       5.5.5.  Output Results  . . . . . . . . . . . . . . . . . . .  59
-     5.6.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  61
-       5.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  61
-       5.6.2.  Generated Factors . . . . . . . . . . . . . . . . . .  61
-       5.6.3.  Encrypting the Content  . . . . . . . . . . . . . . .  61
-       5.6.4.  Output Results  . . . . . . . . . . . . . . . . . . .  62
-     5.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  63
-       5.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  64
-       5.7.2.  Generated Factors . . . . . . . . . . . . . . . . . .  64
-       5.7.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  64
-       5.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  65
-       5.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  66
-     5.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  68
-       5.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  68
-       5.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  69
+           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  52
+       5.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  52
+       5.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  53
+       5.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  53
+       5.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  54
+       5.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  55
+     5.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  57
+       5.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  57
+       5.5.2.  Generated Factors . . . . . . . . . . . . . . . . . .  58
+       5.5.3.  Key Agreement . . . . . . . . . . . . . . . . . . . .  58
+       5.5.4.  Encrypting the Content  . . . . . . . . . . . . . . .  59
+       5.5.5.  Output Results  . . . . . . . . . . . . . . . . . . .  60
+     5.6.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  62
+       5.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  62
+       5.6.2.  Generated Factors . . . . . . . . . . . . . . . . . .  62
+       5.6.3.  Encrypting the Content  . . . . . . . . . . . . . . .  62
+       5.6.4.  Output Results  . . . . . . . . . . . . . . . . . . .  64
+     5.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  65
+       5.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  65
+       5.7.2.  Generated Factors . . . . . . . . . . . . . . . . . .  65
+       5.7.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  66
+       5.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  66
+       5.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  68
+     5.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  69
+       5.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  69
+       5.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  70
 
 
 
@@ -170,54 +170,54 @@ Miller                   Expires April 26, 2015                 [Page 3]
 Internet-Draft                JOSE Cookbook                 October 2014
 
 
-       5.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  69
-       5.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  69
-       5.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  70
-     5.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  72
-       5.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  72
-       5.9.2.  Generated Factors . . . . . . . . . . . . . . . . . .  72
-       5.9.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  73
-       5.9.4.  Encrypting the Content  . . . . . . . . . . . . . . .  73
-       5.9.5.  Output Results  . . . . . . . . . . . . . . . . . . .  74
-     5.10. Including Additional Authenticated Data . . . . . . . . .  76
-       5.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  76
-       5.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  76
-       5.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  77
-       5.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  77
-       5.10.5.  Output Results . . . . . . . . . . . . . . . . . . .  78
-     5.11. Protecting Specific Header Fields . . . . . . . . . . . .  79
-       5.11.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  79
-       5.11.2.  Generated Factors  . . . . . . . . . . . . . . . . .  80
-       5.11.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  80
-       5.11.4.  Encrypting the Content . . . . . . . . . . . . . . .  80
-       5.11.5.  Output Results . . . . . . . . . . . . . . . . . . .  81
-     5.12. Protecting Content Only . . . . . . . . . . . . . . . . .  82
-       5.12.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  82
-       5.12.2.  Generated Factors  . . . . . . . . . . . . . . . . .  83
-       5.12.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  83
-       5.12.4.  Encrypting the Content . . . . . . . . . . . . . . .  83
-       5.12.5.  Output Results . . . . . . . . . . . . . . . . . . .  84
-     5.13. Encrypting to Multiple Recipients . . . . . . . . . . . .  85
-       5.13.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  85
-       5.13.2.  Generated Factors  . . . . . . . . . . . . . . . . .  86
-       5.13.3.  Encrypting the Key to the First Recipient  . . . . .  86
-       5.13.4.  Encrypting the Key to the Second Recipient . . . . .  87
-       5.13.5.  Encrypting the Key to the Third Recipient  . . . . .  89
-       5.13.6.  Encrypting the Content . . . . . . . . . . . . . . .  90
-       5.13.7.  Output Results . . . . . . . . . . . . . . . . . . .  92
-   6.  Nesting Signatures and Encryption . . . . . . . . . . . . . .  93
-     6.1.  Signing Input Factors . . . . . . . . . . . . . . . . . .  93
-     6.2.  Signing Operation . . . . . . . . . . . . . . . . . . . .  95
-     6.3.  Signing Output  . . . . . . . . . . . . . . . . . . . . .  96
-     6.4.  Encryption Input Factors  . . . . . . . . . . . . . . . .  97
-     6.5.  Encryption Generated Factors  . . . . . . . . . . . . . .  97
-     6.6.  Encrypting the Key  . . . . . . . . . . . . . . . . . . .  97
-     6.7.  Encrypting the Content  . . . . . . . . . . . . . . . . .  98
-     6.8.  Encryption Output . . . . . . . . . . . . . . . . . . . .  99
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . . 101
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . 102
-   9.  Informative References  . . . . . . . . . . . . . . . . . . . 102
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . . 102
+       5.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  70
+       5.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  70
+       5.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  71
+     5.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  73
+       5.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  73
+       5.9.2.  Generated Factors . . . . . . . . . . . . . . . . . .  74
+       5.9.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  74
+       5.9.4.  Encrypting the Content  . . . . . . . . . . . . . . .  74
+       5.9.5.  Output Results  . . . . . . . . . . . . . . . . . . .  75
+     5.10. Including Additional Authenticated Data . . . . . . . . .  77
+       5.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  77
+       5.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  78
+       5.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  78
+       5.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  78
+       5.10.5.  Output Results . . . . . . . . . . . . . . . . . . .  79
+     5.11. Protecting Specific Header Fields . . . . . . . . . . . .  80
+       5.11.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  81
+       5.11.2.  Generated Factors  . . . . . . . . . . . . . . . . .  81
+       5.11.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  81
+       5.11.4.  Encrypting the Content . . . . . . . . . . . . . . .  81
+       5.11.5.  Output Results . . . . . . . . . . . . . . . . . . .  82
+     5.12. Protecting Content Only . . . . . . . . . . . . . . . . .  83
+       5.12.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  84
+       5.12.2.  Generated Factors  . . . . . . . . . . . . . . . . .  84
+       5.12.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  84
+       5.12.4.  Encrypting the Content . . . . . . . . . . . . . . .  84
+       5.12.5.  Output Results . . . . . . . . . . . . . . . . . . .  85
+     5.13. Encrypting to Multiple Recipients . . . . . . . . . . . .  86
+       5.13.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  86
+       5.13.2.  Generated Factors  . . . . . . . . . . . . . . . . .  87
+       5.13.3.  Encrypting the Key to the First Recipient  . . . . .  87
+       5.13.4.  Encrypting the Key to the Second Recipient . . . . .  88
+       5.13.5.  Encrypting the Key to the Third Recipient  . . . . .  90
+       5.13.6.  Encrypting the Content . . . . . . . . . . . . . . .  91
+       5.13.7.  Output Results . . . . . . . . . . . . . . . . . . .  93
+   6.  Nesting Signatures and Encryption . . . . . . . . . . . . . .  94
+     6.1.  Signing Input Factors . . . . . . . . . . . . . . . . . .  95
+     6.2.  Signing Operation . . . . . . . . . . . . . . . . . . . .  96
+     6.3.  Signing Output  . . . . . . . . . . . . . . . . . . . . .  97
+     6.4.  Encryption Input Factors  . . . . . . . . . . . . . . . .  98
+     6.5.  Encryption Generated Factors  . . . . . . . . . . . . . .  98
+     6.6.  Encrypting the Key  . . . . . . . . . . . . . . . . . . .  98
+     6.7.  Encrypting the Content  . . . . . . . . . . . . . . . . .  99
+     6.8.  Encryption Output . . . . . . . . . . . . . . . . . . . . 100
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . . 102
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . 103
+   9.  Informative References  . . . . . . . . . . . . . . . . . . . 103
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . . 103
 
 
 
@@ -226,7 +226,7 @@ Miller                   Expires April 26, 2015                 [Page 4]
 Internet-Draft                JOSE Cookbook                 October 2014
 
 
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 103
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 104
 
 1.  Introduction
 
@@ -1928,6 +1928,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    ciphertext; it might not be possible to exactly replicate the results
    in this section.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.1.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -1939,9 +1942,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  "alg" parameter of "RSA1_5".
 
    o  "enc" parameter of "A128CBC-HS256".
-
-
-
 
 
 
@@ -2225,15 +2225,15 @@ Internet-Draft                JOSE Cookbook                 October 2014
    might not be possible to exactly replicate the results in this
    section.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.2.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
 
    o  Plaintext content; this example uses the plaintext from Figure 64.
 
-   o  RSA public key; this example uses the key from Figure 75.
-
-   o  "alg" parameter of "RSA-OAEP"
 
 
 
@@ -2241,6 +2241,10 @@ Miller                   Expires April 26, 2015                [Page 40]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+   o  RSA public key; this example uses the key from Figure 75.
+
+   o  "alg" parameter of "RSA-OAEP"
 
    o  "enc" parameter of "A256GCM"
 
@@ -2286,10 +2290,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
      "q": "zqOHk1P6WN_rHuM7ZF1cXH0x6RuOHq67WuHiSknqQeefGBA9PWs6Zy
          KQCO-O6mKXtcgE8_Q_hA2kMRcKOcvHil1hqMCNSXlflM7WPRPZu2qCDc
          qssd_uMbP-DqYthH_EzwL9KnYoH7JQFxxmcv5An8oXUtTwk4knKjkIYG
-         RuUwfQTus0w1NfjFAyxOOiAQ37ussIcE6C6ZSsM3n41UlbJ7TCqewzVJ
-         aPJN5cxjySPZPD3Vp01a9YgAD6a3IIaKJdIxJS1ImnfPevSJQBE79-EX
-         e2kSwVgOzvt-gsmM29QQ8veHy4uAqca5dZzMs7hkkHtw1z0jHV90epQJ
-         JlXXnH8Q",
 
 
 
@@ -2298,6 +2298,10 @@ Miller                   Expires April 26, 2015                [Page 41]
 Internet-Draft                JOSE Cookbook                 October 2014
 
 
+         RuUwfQTus0w1NfjFAyxOOiAQ37ussIcE6C6ZSsM3n41UlbJ7TCqewzVJ
+         aPJN5cxjySPZPD3Vp01a9YgAD6a3IIaKJdIxJS1ImnfPevSJQBE79-EX
+         e2kSwVgOzvt-gsmM29QQ8veHy4uAqca5dZzMs7hkkHtw1z0jHV90epQJ
+         JlXXnH8Q",
      "dp": "19oDkBh1AXelMIxQFm2zZTqUhAzCIr4xNIGEPNoDt1jK83_FJA-xn
          x5kA7-1erdHdms_Ef67HsONNv5A60JaR7w8LHnDiBGnjdaUmmuO8XAxQ
          J_ia5mxjxNjS6E2yD44USo2JmHvzeeNczq25elqbTPLhUpGo1IZuG72F
@@ -2341,10 +2345,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
            Figure 76: Content Encryption Key, base64url-encoded
 
-   -nBoKLH0YkLZPSI9
-
-            Figure 77: Initialization Vector, base64url-encoded
-
 
 
 
@@ -2353,6 +2353,10 @@ Miller                   Expires April 26, 2015                [Page 42]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+   -nBoKLH0YkLZPSI9
+
+            Figure 77: Initialization Vector, base64url-encoded
 
 5.2.3.  Encrypting the Key
 
@@ -2399,16 +2403,16 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  CEK (Figure 76);
 
-   o  Initialization vector/nonce (Figure 77); and
-
-   o  JWE Protected Header (Figure 80) as authenticated data
-
 
 
 Miller                   Expires April 26, 2015                [Page 43]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+   o  Initialization vector/nonce (Figure 77); and
+
+   o  JWE Protected Header (Figure 80) as authenticated data
 
    produces the following:
 
@@ -2444,10 +2448,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Authentication tag (Figure 82)
 
    The resulting JWE object using the Compact serialization:
-
-
-
-
 
 
 
@@ -2564,12 +2564,12 @@ Internet-Draft                JOSE Cookbook                 October 2014
    "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption
    algorithm.
 
-5.3.1.  Input Factors
+   Note that whitespace is added for readability as described in
+   Section 1.1.
 
-   The following are supplied before beginning the encryption process:
 
-   o  Plaintext content; this example uses the plaintext from Figure 85
-      (*NOTE* all whitespace added for readability)
+
+
 
 
 
@@ -2577,6 +2577,13 @@ Miller                   Expires April 26, 2015                [Page 46]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+5.3.1.  Input Factors
+
+   The following are supplied before beginning the encryption process:
+
+   o  Plaintext content; this example uses the plaintext from Figure 85
+      (*NOTE* all whitespace added for readability)
 
    o  Password; this example uses the password from Figure 86
 
@@ -2616,6 +2623,17 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
                             Figure 86: Password
 
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 47]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.3.2.  Generated Factors
 
    The following are generated before encrypting:
@@ -2625,14 +2643,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  Initialization vector/nonce; this example uses the initialization
       vector/nonce from Figure 88.
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 47]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    uwsjJXaBK407Qaf0_zpcpmr1Cs0CC50hIUEyGNEt3m0
 
@@ -2669,16 +2679,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
                 Figure 90: Encrypted Key, base64url-encoded
 
-5.3.4.  Encrypting the Content
-
-   The following are generated before encrypting the content:
-
-   o  JWE Protected Header; this example uses the header from Figure 91,
-      encoded using [RFC4648] base64url to produce Figure 92.
-
-
-
-
 
 
 
@@ -2689,6 +2689,13 @@ Miller                   Expires April 26, 2015                [Page 48]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+5.3.4.  Encrypting the Content
+
+   The following are generated before encrypting the content:
+
+   o  JWE Protected Header; this example uses the header from Figure 91,
+      encoded using [RFC4648] base64url to produce Figure 92.
 
    {
      "alg": "PBES2-HS512+A256KW",
@@ -2721,6 +2728,24 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  Authentication tag from Figure 94.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 49]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    23i-Tb1AV4n0WKVSSgcQrdg6GRqsUKxjruHXYsTHAJLZ2nsnGIX86vMXqIi6IR
    sfywCRFzLxEcZBRnTvG3nhzPk0GDD7FMyXhUHpDjEYCNA_XOmzg8yZR9oyjo6l
    TF6si4q9FZ2EhzgFQCLO_6h5EVg3vR75_hkBsnuoqoM3dwejXBtIodN84PeqMb
@@ -2737,15 +2762,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
              Figure 94: Authentication Tag, base64url-encoded
 
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 49]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
-
 5.3.5.  Output Results
 
    The following compose the resulting JWE object:
@@ -2761,6 +2777,30 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Authentication tag (Figure 94)
 
    The resulting JWE object using the Compact serialization:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 50]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
 
    eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
    hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
@@ -2797,7 +2837,23 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 50]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 51]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -2836,6 +2892,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    128-KeyWrap) key encryption algorithm and the "A128GCM" (AES-GCM)
    content encryption algorithm.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.4.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -2850,10 +2909,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-Miller                   Expires April 26, 2015                [Page 51]
+Miller                   Expires April 26, 2015                [Page 52]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -2909,7 +2965,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 52]
+Miller                   Expires April 26, 2015                [Page 53]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -2965,7 +3021,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 53]
+Miller                   Expires April 26, 2015                [Page 54]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3021,7 +3077,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 54]
+Miller                   Expires April 26, 2015                [Page 55]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3077,7 +3133,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 55]
+Miller                   Expires April 26, 2015                [Page 56]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3115,6 +3171,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    algorithm and the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content
    encryption algorithm.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.5.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -3130,10 +3189,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-Miller                   Expires April 26, 2015                [Page 56]
+Miller                   Expires April 26, 2015                [Page 57]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3189,7 +3245,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 57]
+Miller                   Expires April 26, 2015                [Page 58]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3245,7 +3301,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 58]
+Miller                   Expires April 26, 2015                [Page 59]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3301,7 +3357,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 59]
+Miller                   Expires April 26, 2015                [Page 60]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3357,7 +3413,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 60]
+Miller                   Expires April 26, 2015                [Page 61]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3367,6 +3423,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    This example illustrates encrypting content using a previously
    exchanged key directly and the "A128GCM" (AES-GCM) content encryption
    algorithm.
+
+   Note that whitespace is added for readability as described in
+   Section 1.1.
 
 5.6.1.  Input Factors
 
@@ -3406,17 +3465,17 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    The following are generated before encrypting the content:
 
-   o  JWE Protected Header; this example uses the header from
-      Figure 120, encoded as [RFC4648] base64url to produce Figure 121.
 
 
 
 
-
-Miller                   Expires April 26, 2015                [Page 61]
+Miller                   Expires April 26, 2015                [Page 62]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+   o  JWE Protected Header; this example uses the header from
+      Figure 120, encoded as [RFC4648] base64url to produce Figure 121.
 
    {
      "alg": "dir",
@@ -3461,18 +3520,21 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
              Figure 123: Authentication Tag, base64url-encoded
 
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 63]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.6.4.  Output Results
 
    The following compose the resulting JWE object:
 
    o  JWE Protected Header (Figure 121)
-
-
-
-Miller                   Expires April 26, 2015                [Page 62]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Initialization vector/nonce (Figure 119)
 
@@ -3517,18 +3579,21 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
                       Figure 125: JSON Serialization
 
+
+
+Miller                   Expires April 26, 2015                [Page 64]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2
 
    This example illustrates encrypting content using the "A256GCMKW"
    (AES-256-GCM-KeyWrap) key encryption algorithm with the "A128CBC-
    HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
-
-
-Miller                   Expires April 26, 2015                [Page 63]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
+   Note that whitespace is added for readability as described in
+   Section 1.1.
 
 5.7.1.  Input Factors
 
@@ -3570,21 +3635,19 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
            Figure 128: Initialization Vector, base64url-encoded
 
+
+
+Miller                   Expires April 26, 2015                [Page 65]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.7.3.  Encrypting the Key
 
    The following are generated before encrypting the CEK:
 
    o  Initialization vector/nonce for key wrapping; this example uses
       the initialization vector/nonce from Figure 129.
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 64]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    KkYT0GX_2jHlfqN_
 
@@ -3620,6 +3683,21 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  JWE Protected Header; this example uses the header from
       Figure 132, encoded to [RFC4648] base64url as Figure 133.
 
+
+
+
+
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 66]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    {
      "alg": "A256GCMKW",
      "kid": "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d",
@@ -3629,18 +3707,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    }
 
                    Figure 132: JWE Protected Header JSON
-
-
-
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 65]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    eyJhbGciOiJBMjU2R0NNS1ciLCJraWQiOiIxOGVjMDhlMS1iZmE5LTRkOTUtYj
    IwNS0yYjRkZDFkNDMyMWQiLCJ0YWciOiJrZlBkdVZRM1QzSDZ2bmV3dC0ta3N3
@@ -3678,6 +3744,16 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
              Figure 135: Authentication Tag, base64url-encoded
 
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 67]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.7.5.  Output Results
 
    The following compose the resulting JWE object:
@@ -3689,14 +3765,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Initialization vector/nonce (Figure 128)
 
    o  Ciphertext (Figure 134)
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 66]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Authentication tag (Figure 135)
 
@@ -3737,19 +3805,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 67]
+Miller                   Expires April 26, 2015                [Page 68]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3785,6 +3841,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    "A128KW" (AES-128-KeyWrap) key encryption algorithm and the "A128GCM"
    (AES-128-GCM) content encryption algorithm.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.8.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -3802,10 +3861,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-Miller                   Expires April 26, 2015                [Page 68]
+Miller                   Expires April 26, 2015                [Page 69]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3861,7 +3917,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 69]
+Miller                   Expires April 26, 2015                [Page 70]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3917,7 +3973,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 70]
+Miller                   Expires April 26, 2015                [Page 71]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -3973,7 +4029,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 71]
+Miller                   Expires April 26, 2015                [Page 72]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -4006,6 +4062,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    It reuses the AES key, key encryption algorithm, and content
    encryption algorithm from Section 5.8.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.9.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -4021,18 +4080,19 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  "zip" parameter as "DEF".
 
-5.9.2.  Generated Factors
-
-   The following are generated before encrypting:
 
 
 
 
 
-Miller                   Expires April 26, 2015                [Page 72]
+Miller                   Expires April 26, 2015                [Page 73]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+5.9.2.  Generated Factors
+
+   The following are generated before encrypting:
 
    o  Compressed plaintext from the original plaintext content;
       compressing Figure 64 using the DEFLATE [RFC1951] algorithm
@@ -4081,11 +4141,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 73]
+Miller                   Expires April 26, 2015                [Page 74]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -4141,7 +4197,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 74]
+Miller                   Expires April 26, 2015                [Page 75]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -4197,7 +4253,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 75]
+Miller                   Expires April 26, 2015                [Page 76]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -4208,6 +4264,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    authenticated data.  As this example includes an additional top-level
    property not present in the Compact serialization, only the JSON
    serialization is possible.
+
+   Note that whitespace is added for readability as described in
+   Section 1.1.
 
 5.10.1.  Input Factors
 
@@ -4244,19 +4303,23 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    *NOTE* whitespace between JSON values added for readability.
 
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 77]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.10.2.  Generated Factors
 
    The following are generated before encrypting:
 
    o  AES symmetric key as the Content Encryption Key (CEK); this
       example uses the key from Figure 159.
-
-
-
-Miller                   Expires April 26, 2015                [Page 76]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Initialization vector/nonce; this example uses the initialization
       vector/nonce from Figure 160.
@@ -4296,6 +4359,17 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  JWE Protected Header; this example uses the header from
       Figure 163, encoded to [RFC4648] base64url as Figure 164.
 
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 78]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    {
      "alg": "A128KW",
      "kid": "81b20965-8332-43d9-a468-82160ad91ac8",
@@ -4303,16 +4377,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    }
 
                    Figure 163: JWE Protected Header JSON
-
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 77]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    eyJhbGciOiJBMTI4S1ciLCJraWQiOiI4MWIyMDk2NS04MzMyLTQzZDktYTQ2OC
    04MjE2MGFkOTFhYzgiLCJlbmMiOiJBMTI4R0NNIn0
@@ -4355,6 +4419,13 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  JWE Protected Header (Figure 164)
 
+
+
+Miller                   Expires April 26, 2015                [Page 79]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    o  encrypted key (Figure 162)
 
    o  Initialization vector/nonce (Figure 160)
@@ -4362,13 +4433,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Additional authenticated data (Figure 161)
 
    o  Ciphertext (Figure 165)
-
-
-
-Miller                   Expires April 26, 2015                [Page 78]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Authentication tag (Figure 166)
 
@@ -4408,6 +4472,16 @@ Internet-Draft                JOSE Cookbook                 October 2014
    Unprotected Header parameters, only the JSON serialization is
    possible.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
+
+
+Miller                   Expires April 26, 2015                [Page 80]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
 5.11.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -4418,13 +4492,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
       Figure 138.
 
    o  Key encryption algorithm; this example uses "A128KW".
-
-
-
-Miller                   Expires April 26, 2015                [Page 79]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Content encryption algorithm; this example uses "A128GCM".
 
@@ -4462,6 +4529,15 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  JWE Protected Header; this example uses the header from
       Figure 171, encoded to [RFC4648] base64url as Figure 172.
 
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 81]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    {
      "enc": "A128GCM"
    }
@@ -4474,13 +4550,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    Performing the content encryption operation over the Plaintext with
    the following:
-
-
-
-Miller                   Expires April 26, 2015                [Page 80]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  CEK (Figure 168);
 
@@ -4517,6 +4586,14 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  encrypted key (Figure 170)
 
+
+
+
+Miller                   Expires April 26, 2015                [Page 82]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    o  Initialization vector/nonce (Figure 169)
 
    o  Ciphertext (Figure 173)
@@ -4525,18 +4602,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    The following JWE Shared Unprotected Header is generated before
    assembling the output results:
-
-
-
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 81]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    {
      "alg": "A128KW",
@@ -4578,6 +4643,16 @@ Internet-Draft                JOSE Cookbook                 October 2014
    Shared Unprotected Header parameters, only the JSON serialization is
    possible.
 
+
+
+Miller                   Expires April 26, 2015                [Page 83]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.12.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -4586,13 +4661,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  Recipient encryption key; this example uses the key from
       Figure 138.
-
-
-
-Miller                   Expires April 26, 2015                [Page 82]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Key encryption algorithm; this example uses "A128KW".
 
@@ -4630,6 +4698,14 @@ Internet-Draft                JOSE Cookbook                 October 2014
    Performing the content encryption operation over the Plaintext
    (Figure 64) using the following:
 
+
+
+
+Miller                   Expires April 26, 2015                [Page 84]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    o  CEK (Figure 177);
 
    o  Initialization vector/nonce (Figure 178); and
@@ -4641,14 +4717,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Ciphertext from Figure 180.
 
    o  Authenticated data from Figure 181.
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 83]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    qtPIMMaOBRgASL10dNQhOa7Gqrk7Eal1vwht7R4TT1uq-arsVCPaIeFwQfzrSS
    6oEUWbBtxEasE0vC6r7sphyVziMCVJEuRJyoAHFSP3eqQPb4Ic1SDSqyXjw_L3
@@ -4686,25 +4754,17 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  Ciphertext (Figure 180)
 
-   o  Authentication tag (Figure 181)
-
-   The resulting JWE object using the JSON serialization:
 
 
 
-
-
-
-
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 84]
+Miller                   Expires April 26, 2015                [Page 85]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+   o  Authentication tag (Figure 181)
+
+   The resulting JWE object using the JSON serialization:
 
    {
      "recipients": [
@@ -4740,6 +4800,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
    ciphertext; it might not be possible to exactly replicate the results
    in this section.
 
+   Note that whitespace is added for readability as described in
+   Section 1.1.
+
 5.13.1.  Input Factors
 
    The following are supplied before beginning the encryption process:
@@ -4748,19 +4811,18 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    o  Recipient keys; this example uses the following:
 
+
+
+Miller                   Expires April 26, 2015                [Page 86]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
       *  The RSA public key from Figure 65 for the first recipient.
 
       *  The EC public key from Figure 97 for the second recipient.
 
       *  The AES symmetric key from Figure 126 for the third recipient.
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 85]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Key encryption algorithms; this example uses the following:
 
@@ -4805,18 +4867,17 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
          Figure 186: Recipient #1 Encrypted Key, base64url-encoded
 
+
+
+Miller                   Expires April 26, 2015                [Page 87]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    The following are generated after encrypting the CEK for the first
    recipient:
 
    o  Recipient JWE Unprotected Header from Figure 187
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 86]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    {
      "alg": "RSA1_5",
@@ -4851,6 +4912,24 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Ephemeral EC private key on the same curve as the EC public key;
       this example uses the private key from Figure 189.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                   Expires April 26, 2015                [Page 88]
+
+Internet-Draft                JOSE Cookbook                 October 2014
+
+
    {
      "kty": "EC",
      "crv": "P-384",
@@ -4866,13 +4945,6 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    Performing the "ECDH-ES+A256KW" key encryption operation over the CEK
    (Figure 184 with the following:
-
-
-
-Miller                   Expires April 26, 2015                [Page 87]
-
-Internet-Draft                JOSE Cookbook                 October 2014
-
 
    o  Static Elliptic Curve public key (Figure 97).
 
@@ -4909,23 +4981,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 88]
+Miller                   Expires April 26, 2015                [Page 89]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -4981,7 +5037,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 89]
+Miller                   Expires April 26, 2015                [Page 90]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5037,7 +5093,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 90]
+Miller                   Expires April 26, 2015                [Page 91]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5093,7 +5149,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 91]
+Miller                   Expires April 26, 2015                [Page 92]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5149,7 +5205,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 92]
+Miller                   Expires April 26, 2015                [Page 93]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5196,19 +5252,23 @@ Internet-Draft                JOSE Cookbook                 October 2014
    RSAES-OAEP uses random data to generate the ciphertext; it might not
    be possible to exactly replicate the results in this section.
 
-6.1.  Signing Input Factors
-
-   The following are supplied before beginning the signing operation:
-
+   Note that whitespace is added for readability as described in
+   Section 1.1.
 
 
 
 
 
-Miller                   Expires April 26, 2015                [Page 93]
+
+
+Miller                   Expires April 26, 2015                [Page 94]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
+
+6.1.  Signing Input Factors
+
+   The following are supplied before beginning the signing operation:
 
    o  Payload content; this example uses the JSON Web Token (JWT)
       [I-D.ietf-oauth-json-web-token] content from Figure 204, encoded
@@ -5257,11 +5317,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-
-
-
-
-Miller                   Expires April 26, 2015                [Page 94]
+Miller                   Expires April 26, 2015                [Page 95]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5317,7 +5373,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 95]
+Miller                   Expires April 26, 2015                [Page 96]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5373,7 +5429,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 96]
+Miller                   Expires April 26, 2015                [Page 97]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5429,7 +5485,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 97]
+Miller                   Expires April 26, 2015                [Page 98]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5485,7 +5541,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 98]
+Miller                   Expires April 26, 2015                [Page 99]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5541,7 +5597,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015                [Page 99]
+Miller                   Expires April 26, 2015               [Page 100]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5597,7 +5653,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015               [Page 100]
+Miller                   Expires April 26, 2015               [Page 101]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5653,7 +5709,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 
 
-Miller                   Expires April 26, 2015               [Page 101]
+Miller                   Expires April 26, 2015               [Page 102]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5698,18 +5754,18 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
 Appendix A.  Acknowledgements
 
-   All of the examples herein use quotes and character names found in
+   Most of the examples herein use quotes and character names found in
    the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two
    Towers"; and "Return of the King", written by J.  R.  R.  Tolkien.
 
-   Thanks to Richard Barnes and Jim Schaad for providing for their input
-   on the outline for this document.  Thanks to Brian Campbell for
-   reviewing text and verifying most of the examples.
+   Thanks to Richard Barnes, Brian Campbell, Mike Jones, and Jim Schaad
+   for input and review of text.  Thanks to Brian Campbell for verifying
+   examples.
 
 
 
 
-Miller                   Expires April 26, 2015               [Page 102]
+Miller                   Expires April 26, 2015               [Page 103]
 
 Internet-Draft                JOSE Cookbook                 October 2014
 
@@ -5765,4 +5821,4 @@ Author's Address
 
 
 
-Miller                   Expires April 26, 2015               [Page 103]
+Miller                   Expires April 26, 2015               [Page 104]
