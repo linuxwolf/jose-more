@@ -85,7 +85,7 @@ var ops = {
             {
                 key: jose.JWK.asKey({
                     alg: "PBES2-HS512+A156KW",
-                    k:jose.base64url.encode("entrap_o_peter_long_credit_tun", "utf8")
+                    k:jose.base64url.encode("entrap_o–peter_long–credit_tun", "utf8")
                 }),
                 header: {
                     alg: "PBES2-HS512+A256KW",
@@ -392,6 +392,9 @@ var doOp = function(op) {
             var key = op.recipients[idx].key;
             if ((key.get("alg") || "").indexOf("PBES2-") === 0) {
                 key = key.get("k", true);
+                key = key.replace(/[\u0080-\u00ff]/g, function(m) {
+                    return ("\\x" + m.charCodeAt(0).toString(16));
+                });
             } else {
                 key = common.prettify(key.toJSON(true));
             }

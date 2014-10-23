@@ -2585,7 +2585,8 @@ Internet-Draft                JOSE Cookbook                 October 2014
    o  Plaintext content; this example uses the plaintext from Figure 85
       (*NOTE* all whitespace added for readability)
 
-   o  Password; this example uses the password from Figure 86
+   o  Password; this example uses the password from Figure 86 - with the
+      sequence "\xe2\x80\x93" replaced with (U+2013 EN DASH)
 
    o  "alg" parameter of "PBES2-HS512+A256KW"
 
@@ -2619,10 +2620,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
                        Figure 85: Plaintext Content
 
-   entrap_o_peter_long_credit_tun
+   entrap_o\xe2\x80\x93peter_long\xe2\x80\x93credit_tun
 
                             Figure 86: Password
-
 
 
 
@@ -2675,7 +2675,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
 
    produces the following encrypted key:
 
-   pmKVzwf89K3dfkQqbERUTC0F2jGXD6tTQVmtnVpuKUK2J4Xx2RkkLw
+   d3qNhUWfqheyPp4H8sjOWsDYajoej4c5Je6rlUtFPWdgtURtmeDV1g
 
                 Figure 90: Encrypted Key, base64url-encoded
 
@@ -2806,7 +2806,7 @@ Internet-Draft                JOSE Cookbook                 October 2014
    hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
    bmMiOiJBMTI4Q0JDLUhTMjU2In0
    .
-   pmKVzwf89K3dfkQqbERUTC0F2jGXD6tTQVmtnVpuKUK2J4Xx2RkkLw
+   d3qNhUWfqheyPp4H8sjOWsDYajoej4c5Je6rlUtFPWdgtURtmeDV1g
    .
    VBiCzVHNoLiR3F4V82uoTQ
    .

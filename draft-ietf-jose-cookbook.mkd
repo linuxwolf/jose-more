@@ -1705,7 +1705,7 @@ Note that whitespace is added for readability as described in {{intro-convention
 The following are supplied before beginning the encryption process:
 
 * Plaintext content; this example uses the plaintext from {{jwe-pbes2-plaintext}} (**NOTE** all whitespace added for readability)
-* Password; this example uses the password from {{jwe-pbes2-pwd}}
+* Password; this example uses the password from {{jwe-pbes2-pwd}} -- with the sequence "\xe2\x80\x93" replaced with (U+2013 EN DASH)
 * "alg" parameter of "PBES2-HS512+A256KW"
 * "enc" parameter of "A128CBC-HS256"
 
@@ -1739,7 +1739,7 @@ The following are supplied before beginning the encryption process:
 {: #jwe-pbes2-plaintext title="Plaintext Content"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-entrap_o_peter_long_credit_tun
+entrap_o\xe2\x80\x93peter_long\xe2\x80\x93credit_tun
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-pwd title="Password"}
 
@@ -1781,7 +1781,7 @@ Performing the key encryption operation over the CEK ({{jwe-pbes2-cek}})) with t
 produces the following encrypted key:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-pmKVzwf89K3dfkQqbERUTC0F2jGXD6tTQVmtnVpuKUK2J4Xx2RkkLw
+d3qNhUWfqheyPp4H8sjOWsDYajoej4c5Je6rlUtFPWdgtURtmeDV1g
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-encdkey title="Encrypted Key, base64url-encoded"}
 
@@ -1855,7 +1855,7 @@ eyJhbGciOiJQQkVTMi1IUzUxMitBMjU2S1ciLCJwMnMiOiI4UTFTemluYXNSM3
 hjaFl6NlpaY0hBIiwicDJjIjo4MTkyLCJjdHkiOiJqd2stc2V0K2pzb24iLCJl
 bmMiOiJBMTI4Q0JDLUhTMjU2In0
 .
-pmKVzwf89K3dfkQqbERUTC0F2jGXD6tTQVmtnVpuKUK2J4Xx2RkkLw
+d3qNhUWfqheyPp4H8sjOWsDYajoej4c5Je6rlUtFPWdgtURtmeDV1g
 .
 VBiCzVHNoLiR3F4V82uoTQ
 .
