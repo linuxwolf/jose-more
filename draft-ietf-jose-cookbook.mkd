@@ -57,42 +57,92 @@ All of the examples in this document have whitespace added to improve formatting
 
 This document inherits terminology regarding JSON Web Signature (JWS) technology from {{I-D.ietf-jose-json-web-signature}}, terminology regarding JSON Web Encryption (JWE) technology from {{I-D.ietf-jose-json-web-encryption}}, terminology regarding JSON Web Key (JWK) technology from {{I-D.ietf-jose-json-web-key}}, and terminology regarding algorithms from {{I-D.ietf-jose-json-web-algorithms}}.
 
-# JSON Web Signature Examples # {#jws}
+# JSON Web Key Examples # {#jwk}
 
-The following sections demonstrate how to generate various JWS objects.
+The following sections demonstrate how to represent various JWK and JWK-set objects.
 
-All of the succeeding examples use the following payload plaintext, serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some instances " " (U+0020 SPACE) to improve readability:
+## EC Public Key ## {#jwk-ec-public}
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-It\xe2\x80\x99s a dangerous business, Frodo, going out your
-door. You step onto the road, and if you don't keep your feet,
-there\xe2\x80\x99s no knowing where you might be swept off
-to.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-payload title="Payload content plaintext" }
+This example illustrates an Elliptic Curve public key.  This example is the corollary to {{jwk-ec-private-key}}.
 
-The Payload -- with the sequence "\xe2\x80\x99" replaced with (U+2019 RIGHT SINGLE QUOTATION MARK) and line breaks (U+000A LINE FEED) replaced with " " (U+0020 SPACE) -- encoded as UTF-8 then as {{RFC4648}} base64url:
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
-lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
-b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
-UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
+{
+  "kty": "EC",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "sig",
+  "crv": "P-521",
+  "x": "AHKZLLOsCOzz5cY97ewNUajB957y-C-U88c3v13nmGZx6sYl_oJXu9
+      A5RkTKqjqvjyekWF-7ytDyRXYgCF5cj0Kt",
+  "y": "AdymlHvOiLxXkEhayXQnNCvDX4h9htZaCJN34kfmC6pV5OhQHiraVy
+      SsUdaQkAgDPrwQrJmbnX9cwlGfP-HqHZR1"
+}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-payload_b64u title="Payload content, base64url-encoded" }
+{: #jwk-ec-public-key title="Elliptic Curve P-521 Public Key"}
 
+The field "kty" value of "EC" identifies this as an elliptic curve key.  The field "crv" identifies the curve, which is curve P-521 (also known as SECG curve secp521r1) for this example.  The fields "x" and "y" values are the base64url-encoded X and Y coordinates (respectively).
 
-## RSA v1.5 Signature ## {#jws-rsa}
+The values of the fields "x" and "y" decoded are the octets necessary to represent each full coordinate.  For a key over curve P-521, the values of the fields "x" and "y" are 66 octets in length when decoded, padded with leading zero (0x00) octets to reach the expected length.
 
-This example illustrates signing content using the "RS256" (RSASSA-PKCS1-v1_5 with SHA-256) algorithm.
+## EC Private Key ##
 
-### Input Factors ### {#jws-rsa-input}
+This example illustrates an Elliptic Curve private key.  This example is the progenitor to {{jwk-ec-public-key}}.
 
-The following are supplied before beginning the signing operation:
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
-* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* RSA private key; this example uses the key from {{jws-rsa-key}}.
-* "alg" parameter of "RS256".
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "kty": "EC",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "sig",
+  "crv": "P-521",
+  "x": "AHKZLLOsCOzz5cY97ewNUajB957y-C-U88c3v13nmGZx6sYl_oJXu9
+      A5RkTKqjqvjyekWF-7ytDyRXYgCF5cj0Kt",
+  "y": "AdymlHvOiLxXkEhayXQnNCvDX4h9htZaCJN34kfmC6pV5OhQHiraVy
+      SsUdaQkAgDPrwQrJmbnX9cwlGfP-HqHZR1",
+  "d": "AAhRON2r9cqXX1hg-RoI6R1tX5p2rUAYdmpHZoC1XNM56KtscrX6zb
+      KipQrCW9CGZH3T4ubpnoTKLDYJ_fF3_rJt"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwk-ec-private-key title="Elliptic Curve P-521 Private Key"}
+
+The field "kty" value of "EC" identifies this as an elliptic curve key.  The field "crv" identifies the curve, which is curve P-521 (also known as SECG curve secp521r1) for this example.  The fields "x" and "y" values are the base64url-encoded X and Y coordiates (respectively).  The field "d" value is the base64url-encoded private key.
+
+The values of the fields "d", "x", and "y" decoded are the octets necessary to represent the private key or each full coordinate (respectively).  For key over curve "P-521", the values of the "d", "x", and "y" fields are each 66 octets in length when decoded, padded with leading zero (0x00) octets to reach the expected length.
+
+## RSA Public Key ##
+
+This example illustrates an RSA private key. This example is the corollary to {{jwk-rsa-private-key}}.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "kty": "RSA",
+  "kid": "bilbo.baggins@hobbiton.example",
+  "use": "sig",
+  "n": "n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rHVTeT
+      -O-XV2jRojdNhxJWTDvNd7nqQ0VEiZQHz_AJmSCpMaJMRBSFKrKb2wqV
+      wGU_NsYOYL-QtiWN2lbzcEe6XC0dApr5ydQLrHqkHHig3RBordaZ6Aj-
+      oBHqFEHYpPe7Tpe-OfVfHd1E6cS6M1FZcD1NNLYD5lFHpPI9bTwJlsde
+      3uhGqC0ZCuEHg8lhzwOHrtIQbS0FVbb9k3-tVTU4fg_3L_vniUFAKwuC
+      LqKnS2BYwdq_mzSnbLY7h_qixoR7jig3__kRhuaxwUkRz5iaiQkqgc5g
+      HdrNP5zw",
+  "e": "AQAB"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwk-rsa-public-key title="RSA 2048-bit Public Key"}
+
+The field "kty" value of "RSA" identifies this as a RSA key. The fields "n" and "e" values are the modulus and (public) exponent (respectively) using the minimum octets necessary.
+
+For a 2048-bit key, the field "n" value is 256 octets in length when decoded.
+
+## RSA Private Key ##
+
+This example illustrates an RSA private key. This example is the progenitor to {{jwk-rsa-public-key}}.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -136,7 +186,69 @@ The following are supplied before beginning the signing operation:
       z8aaI4"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-rsa-key title="RSA 2048-bit Private Key, in JWK format"}
+{: #jwk-rsa-private-key title="RSA 2048-bit Private Key"}
+
+The field "kty" value of "RSA" identifies this as a RSA key. The fields "n" and "e" values are the base64url-encoded modulus and (public) exponent (respectivitely) using the minimum number of octets necessary.  The field "d" value is the base64url-encoded private exponent using the minimum number of octets necessary.  The fields "p", "q", "dp", "dq", and "qi" are the base64url-encoded additional private information using the minimum number of octets necessary.
+
+For a 2048-bit key, the fields "n" and "d" values are 256 octets in length when decoded.
+
+## Octet Key ##
+
+This example illustrates a symmetric octet key. This example is the progenitor to {{jwk-rsa-public-key}}.
+
+Note that whitespace is added for readability as described in {{intro-conventions}}.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "kty": "oct",
+  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
+  "use": "sig",
+  "alg": "HS256",
+  "k": "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jwk-oct-key title="AES 256-bit symmetric key"}
+
+The field "kty" value of "oct" identifies this as a symmetric key. The field "k" value is the symmetric key.
+
+For "HS256" (HMAC-SHA256), the field "k" value is 32 octets (or more) when decoded.
+
+# JSON Web Signature Examples # {#jws}
+
+The following sections demonstrate how to generate various JWS objects.
+
+All of the succeeding examples use the following payload plaintext, serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some instances " " (U+0020 SPACE) to improve readability:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+It\xe2\x80\x99s a dangerous business, Frodo, going out your
+door. You step onto the road, and if you don't keep your feet,
+there\xe2\x80\x99s no knowing where you might be swept off
+to.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-payload title="Payload content plaintext" }
+
+The Payload -- with the sequence "\xe2\x80\x99" replaced with (U+2019 RIGHT SINGLE QUOTATION MARK) and line breaks (U+000A LINE FEED) replaced with " " (U+0020 SPACE) -- encoded as UTF-8 then as {{RFC4648}} base64url:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
+lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk
+b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
+UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-payload_b64u title="Payload content, base64url-encoded" }
+
+
+## RSA v1.5 Signature ## {#jws-rsa}
+
+This example illustrates signing content using the "RS256" (RSASSA-PKCS1-v1_5 with SHA-256) algorithm.
+
+### Input Factors ### {#jws-rsa-input}
+
+The following are supplied before beginning the signing operation:
+
+* Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
+* RSA private key; this example uses the key from {{jwk-rsa-private-key}}.
+* "alg" parameter of "RS256".
 
 ### Signing Operation #### {#jws-rsa-op}
 
@@ -235,7 +347,7 @@ Note that RSASSA-PSS uses random data to generate the signature; it might not be
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* RSA private key; this example uses the key from {{jws-rsa-key}}.
+* RSA private key; this example uses the key from {{jwk-rsa-private-key}}.
 * "alg" parameter of "PS384".
 
 ### Signing Operation ### {#jws-rsapss-op}
@@ -335,24 +447,8 @@ Note that ECDSA uses random data to generate the signature; it might not be poss
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* EC private key on the curve P-521; this example uses the key from {{jws-ecdsa-key}}.
+* EC private key on the curve P-521; this example uses the key from {{jwk-ec-private-key}}.
 * "alg" parameter of "ES512"
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{
-  "kty": "EC",
-  "kid": "bilbo.baggins@hobbiton.example",
-  "use": "sig",
-  "crv": "P-521",
-  "x": "AHKZLLOsCOzz5cY97ewNUajB957y-C-U88c3v13nmGZx6sYl_oJXu9
-      A5RkTKqjqvjyekWF-7ytDyRXYgCF5cj0Kt",
-  "y": "AdymlHvOiLxXkEhayXQnNCvDX4h9htZaCJN34kfmC6pV5OhQHiraVy
-      SsUdaQkAgDPrwQrJmbnX9cwlGfP-HqHZR1",
-  "d": "AAhRON2r9cqXX1hg-RoI6R1tX5p2rUAYdmpHZoC1XNM56KtscrX6zb
-      KipQrCW9CGZH3T4ubpnoTKLDYJ_fF3_rJt"
-}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-ecdsa-key title="Elliptic Curve P-521 Private Key"}
 
 ### Signing Operation ### {#jws-ecdsa-op}
 
@@ -440,18 +536,8 @@ This example illustrates integrity protecting content using the "HS256" (HMAC-SH
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* HMAC symmetric key; this example uses the key from {{jws-hmac-key}}.
+* HMAC symmetric key; this example uses the key from {{jwk-oct-key}}.
 * "alg" parameter of "HS256".
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{
-  "kty": "oct",
-  "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
-  "use": "sig",
-  "k": "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
-}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-hmac-key title="AES 256-bit symmetric key"}
 
 ### Signing Operation ### {#jws-hmac-op}
 
@@ -533,7 +619,7 @@ This example illustrates a detached signature.  This example is identical others
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* Signing key; this example uses the AES symmetric key from {{jws-hmac-key}}.
+* Signing key; this example uses the AES symmetric key from {{jwk-oct-key}}.
 * Signing algorithm; this example uses "HS256".
 
 ### Signing Operation ### {#jws-detached-op}
@@ -609,7 +695,7 @@ This example illustrates a signature where only certain header parameters are pr
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* Signing key; this example uses the AES symmetric key from {{jws-hmac-key}}.
+* Signing key; this example uses the AES symmetric key from {{jwk-oct-key}}.
 * Signing algorithm; this example uses "HS256".
 
 ### Signing Operation ### {#jws-somefields-op}
@@ -689,7 +775,7 @@ This example illustrates a signature where none of the header parameters are pro
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
-* Signing key; this example uses the AES key from {{jws-hmac-key}}.
+* Signing key; this example uses the AES key from {{jwk-oct-key}}.
 * Signing algorithm; this example uses "HS256"
 
 ### Signing Operation ### {#jws-nofields-op}
@@ -756,9 +842,9 @@ The following are supplied before beginning the signing operation:
 * Payload content; this example uses the content from {{jws-payload}}, encoded using {{RFC4648}} base64url to produce {{jws-payload_b64u}}.
 * Signing keys; this example uses the following:
 
-  + RSA private key from {{jws-rsa-key}} for the first signature
-  + EC private key from {{jws-ecdsa-key}} for the second signature
-  + AES symmetric key from {{jws-hmac-key}} for the third signature
+  + RSA private key from {{jwk-rsa-private-key}} for the first signature
+  + EC private key from {{jwk-ec-private-key}} for the second signature
+  + AES symmetric key from {{jwk-oct-key}} for the third signature
 
 * Signing algorithms; this example uses the following:
 
