@@ -1,6 +1,7 @@
 KRAMDOWN=kramdown-rfc2629
 RFC2TXT=xml2rfc --text
-RFC2HTML=xsltproc --param xml2rfc-toc "'yes'" rfc2629.xslt
+RFC2HTML=xml2rfc --html
+# RFC2HTML=xsltproc --param xml2rfc-toc "'yes'" rfc2629.xslt
 
 SOURCES=draft-ietf-jose-cookbook.mkd
 OBJS=$(SOURCES:.mkd=.xml)
@@ -13,14 +14,14 @@ OUTPUT=$(TXT_OUTPUT) \
 
 all :	$(OUTPUT)
 
-txtdocs : $(TXT_OUTPUT)
+txt : $(TXT_OUTPUT)
 
-htmldocs : $(HTML_OUTPUT)
+html : $(HTML_OUTPUT)
 
-xmldocs : $(OBJS)
+xml : $(OBJS)
 
 %.html : %.xml
-	$(RFC2HTML) $< > $@
+	$(RFC2HTML) $<
 
 %.txt : %.xml
 	$(RFC2TXT) $<
@@ -32,4 +33,4 @@ clean :
 	rm -rf $(OUTPUT) $(OBJS)
 
 
-.PHONY : all txtdocs htmldocs clean
+.PHONY : all xml txt html clean
