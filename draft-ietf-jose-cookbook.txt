@@ -5700,9 +5700,9 @@ Internet-Draft                JOSE Cookbook                 October 2014
 7.  Security Considerations
 
    This document introduces no new security considerations over those
-   stated in [I-D.ietf-jose-json-web-algorithms],
+   stated in [I-D.ietf-jose-json-web-signature],
    [I-D.ietf-jose-json-web-encryption], [I-D.ietf-jose-json-web-key],
-   and [I-D.ietf-jose-json-web-signature].
+   and [I-D.ietf-jose-json-web-algorithms].
 
 
 
