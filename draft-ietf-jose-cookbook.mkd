@@ -310,7 +310,7 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsa-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-rsa-sig-input}}) produces the signature {{jws-rsa-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-rsa-sig-input}}) produces the JWS Signature ({{jws-rsa-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHoxnW2e5CZ5NlKtainoFmK
@@ -320,7 +320,7 @@ W1Kt9eRo4QPocSadnHXFxnt8Is9UzpERV0ePPQdLuW3IS_de3xyIrDaLGdjluP
 xUAhb6L2aXic1U12podGU0KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJushZ41Axf_f
 cIe8u9ipH84ogoree7vjbU5y18kDquDg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-rsa-sig title="Signature, base64url-encoded"}
+{: #jws-rsa-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-rsa-output}
 
@@ -425,7 +425,7 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsapss-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-rsapss-sig-input}}) produces the signature {{jws-rsapss-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-rsapss-sig-input}}) produces the JWS Signature ({{jws-rsapss-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 cu22eBqkYDKgIlTpzDXGvaFfz6WGoz7fUDcfT0kkOy42miAh2qyBzk1xEsnk2I
@@ -435,7 +435,7 @@ e8P_ijQ7p8Vdz0TTrxUeT3lm8d9shnr2lfJT8ImUjvAA2Xez2Mlp8cBE5awDzT
 0qI0n6uiP1aCN_2_jLAeQTlqRHtfa64QQSUmFAAjVKPbByi7xho0uTOcbH510a
 6GYmJUAfmWjwZ6oD4ifKo8DYM-X72Eaw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-rsapss-sig title="Signature, base64url-encoded"}
+{: #jws-rsapss-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-rsapss-output}
 
@@ -540,14 +540,14 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-ecdsa-sig-input}}) produces the signature {{jws-ecdsa-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-ecdsa-sig-input}}) produces the JWS Signature ({{jws-ecdsa-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 AE_R_YZCChjn4791jSQCrdPZCNYqHXCTZH0-JZGYNlaAjP2kqaluUIIUnC9qvb
 u9Plon7KRTzoNEuT4Va2cmL1eJAQy3mtPBu_u_sDDyYjnAMDxXPn7XrT0lw-kv
 AD890jl8e2puQens_IEKBpHABlsbEPX6sFY8OcGDqoRuBomu9xQ2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-ecdsa-sig title="Signature, base64url-encoded"}
+{: #jws-ecdsa-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-ecdsa-output}
 
@@ -644,12 +644,12 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-hmac-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-hmac-sig-input}}) produces the signature {{jws-hmac-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-hmac-sig-input}}) produces the JWS Signature ({{jws-hmac-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-hmac-sig title="Signature, base64url-encoded"}
+{: #jws-hmac-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-hmac-output}
 
@@ -745,12 +745,12 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-detached-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-detached-sig-input}}) produces the signature {{jws-detached-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-detached-sig-input}}) produces the JWS Signature ({{jws-detached-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-detached-sig title="Signature, base64url-encoded"}
+{: #jws-detached-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-detached-output}
 
@@ -841,12 +841,12 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-somefields-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-somefields-sig-input}}) produces the signature {{jws-somefields-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-somefields-sig-input}}) produces the JWS Signature ({{jws-somefields-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 bWUSVaxorn7bEF1djytBd0kHv70Ly5pvbomzMWSOr20
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-somefields-sig title="Signature, base64url-encoded"}
+{: #jws-somefields-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-somefields-output}
 
@@ -922,12 +922,12 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-nofields-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-nofields-sig-input}}) produces the signature {{jws-nofields-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-nofields-sig-input}}) produces the JWS Signature ({{jws-nofields-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 xuLifqLGiblpv9zBpuZczWhNj1gARaLV3UxvxhJxZuk
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-nofields-sig title="Signature, base64url-encoded"}
+{: #jws-nofields-sig title="JWS Signature, base64url-encoded"}
 
 ### Output Results ### {#jws-nofields-output}
 
@@ -1024,7 +1024,7 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-s1-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-multi-s1-sig-input}}) produces the signature {{jws-multi-s1-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-multi-s1-sig-input}}) produces the JWS Signature ({{jws-multi-s1-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MIsjqtVlOpa71KE-Mss8_Nq2YH4FGhiocsqrgi5NvyG53uoimic1tcMdSg-qpt
@@ -1034,7 +1034,7 @@ tKSeAMbhMBdMma622_BG5t4sdbuCHtFjp9iJmkio47AIwqkZV1aIZsv33uPUqB
 BCXbYoQJwt7mxPftHmNlGoOSMxR_3thmXTCm4US-xiNOyhbm8afKK64jU6_TPt
 QHiJeQJxz9G3Tx-083B745_AfYOnlC9w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-multi-s1-sig title="Signature #1, base64url-encoded"}
+{: #jws-multi-s1-sig title="JWS Signature #1, base64url-encoded"}
 
 The following is the assembled first signature serialized as JSON:
 
@@ -1080,14 +1080,14 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-s2-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-multi-s2-sig-input}}) produces the signature {{jws-multi-s2-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-multi-s2-sig-input}}) produces the JWS Signature ({{jws-multi-s2-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ARcVLnaJJaUWG8fG-8t5BREVAuTY8n8YHjwDO1muhcdCoFZFFjfISu0Cdkn9Yb
 dlmi54ho0x924DUz8sK7ZXkhc7AFM8ObLfTvNCrqcI3Jkl2U5IX3utNhODH6v7
 xgy1Qahsn0fyb4zSAkje8bAWz4vIfj5pCMYxxm4fgV3q7ZYhm5eD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-multi-s2-sig title="Signature #2, base64url-encoded"}
+{: #jws-multi-s2-sig title="JWS Signature #2, base64url-encoded"}
 
 The following is the assembled second signature serialized as JSON:
 
@@ -1138,12 +1138,12 @@ UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-multi-s3-sig-input title="JWS Signing Input"}
 
-Performing the signature operation over the JWS Signing Input ({{jws-multi-s3-sig-input}}) produces the signature {{jws-multi-s3-sig}}.
+Performing the signature operation over the JWS Signing Input ({{jws-multi-s3-sig-input}}) produces the JWS Signature ({{jws-multi-s3-sig}}).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-multi-s3-sig title="Signature #3, base64url-encoded"}
+{: #jws-multi-s3-sig title="JWS Signature #3, base64url-encoded"}
 
 The following is the assembled third signature serialized as JSON:
 
@@ -1765,7 +1765,7 @@ VBiCzVHNoLiR3F4V82uoTQ
 The following are generated before encrypting the CEK:
 
 * Salt; this example uses the salt from {{jwe-pbes2-p2s}}.
-* Iteration count; this example uses the interaction count 8192.
+* Iteration count; this example uses the iteration count 8192.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 8Q1SzinasR3xchYz6ZZcHA
@@ -2174,7 +2174,7 @@ Performing the ECDH operation using the static EC public key ({{jwe-ecdh-key}}) 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 hzHdlfQIAEehb8Hrd_mFRhKsKLEzPfshfXs9l6areCc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-ecdh-cek title="Agreed-to Content Encryption Key, base64url-encoded"}
+{: #jwe-ecdh-cek title="Agreed to Content Encryption Key, base64url-encoded"}
 
 ### Encrypting the Content ### {#jwe-ecdh-contentenc}
 
@@ -3087,7 +3087,7 @@ The resulting JWE object using the JSON serialization:
 
 ## Protecting Specific Header Fields ## {#jwe-somefields}
 
-This example illustrates encrypting content where only certain JOSE header parameters are protected.  As this example includes JWE Shared Unprotected Header parameters, only the JSON serialization is possible.
+This example illustrates encrypting content where only certain JOSE header parameters are protected.  As this example includes parameters in the JWE Shared Unprotected Header, only the JSON serialization is possible.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -3221,7 +3221,7 @@ The resulting JWE object using the JSON serialization:
 
 ## Protecting Content Only ## {#jwe-nofields}
 
-This example illustrates encrypting content where none of the JOSE header parameters are protected.  As this example includes only JWE Shared Unprotected Header parameters, only the JSON serialization is possible.
+This example illustrates encrypting content where none of the JOSE header parameters are protected.  As this example includes parameters only in the JWE Shared Unprotected Header, only the JSON serialization is possible.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -3794,7 +3794,7 @@ _W5l5LuUYGMeh6hxQIaIUXf9EwV2JmvTMuZ-vBOWy0Sniy1EFo72CRTvmtrIf5
 AROo5MNliY3KtUxeP-SOmD-LEYwW9SlkohYzMVAZDDOrVbv7KVRHpeYNaK75KE
 QqdCEEkS_rskZS-Qtt_nlegTWh1mEYaA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jw-nested-sig-sig title="Signature, base64url-encoded"}
+{: #jw-nested-sig-sig title="JWS Signature, base64url-encoded"}
 
 ## Signing Output ## {#jw-nested-sig-output}
 
@@ -4006,8 +4006,14 @@ The resulting JWE object using the JSON serialization:
 
 # Security Considerations # {#security}
 
-This document introduces no new security considerations over those stated in {{I-D.ietf-jose-json-web-signature}}, {{I-D.ietf-jose-json-web-encryption}},  {{I-D.ietf-jose-json-web-key}}, and {{I-D.ietf-jose-json-web-algorithms}}.
+This document is designed to provide examples for developers to use in checking their implementations.  As such it does not follow some of the security considerations and recommendations in the core
+documents.  For instance:
 
+* it does not always generate a new CEK value for every encrypted example;
+* it does not always generate a new IV value for every encrypted example; and
+* it does not always generate a new ephemeral key for every ephemeral key example.
+
+For each example, data that is expected to be generated for each signing or encryption operation is isolated to sections titled "Generated Factors".
 
 # IANA Considerations # {#iana}
 
