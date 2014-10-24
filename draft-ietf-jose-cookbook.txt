@@ -10,7 +10,7 @@ Expires: April 27, 2015
 
    Examples of Protecting Content using JavaScript Object Signing and
                            Encryption (JOSE)
-                      draft-ietf-jose-cookbook-04
+                      draft-ietf-jose-cookbook-05
 
 Abstract
 
