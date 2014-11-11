@@ -5946,7 +5946,7 @@ Appendix A.  Acknowledgements
 
    Thanks to Richard Barnes, Brian Campbell, Mike Jones, and Jim Schaad
    for input and review of text.  Thanks to Brian Campbell for verifying
-   examples.
+   Compact Serialization examples.
 
 Author's Address
 

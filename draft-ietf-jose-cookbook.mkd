@@ -4155,4 +4155,4 @@ This document has no actions for IANA.
 
 Most of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
 
-Thanks to Richard Barnes, Brian Campbell, Mike Jones, and Jim Schaad for input and review of text.  Thanks to Brian Campbell for verifying examples.
+Thanks to Richard Barnes, Brian Campbell, Mike Jones, and Jim Schaad for input and review of text.  Thanks to Brian Campbell for verifying Compact Serialization examples.
