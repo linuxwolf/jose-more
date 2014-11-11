@@ -131,7 +131,7 @@ var makeFlattenedJWE = exports.makeFlattenedJWE = function(json) {
   
   var jwe = {};
   ["protected", "unprotected", "header", "encrypted_key", "aad", "iv", "ciphertext", "tag"].forEach(function(k) {
-    if (k in rcpts[0]) {
+    if (!!rcpts[0] && k in rcpts[0]) {
       jwe[k] = rcpts[0][k];
     }
     if (k in json) {
@@ -173,7 +173,7 @@ var makeFlattenedJWS = exports.makeFlattenedJWS = function(json) {
   
   var jws = {};
   ["payload", "protected", "unprotected", "header", "signature"].forEach(function(k) {
-    if (k in sigs[0]) {
+    if (!!sigs[0] && k in sigs[0]) {
       jws[k] = sigs[0][k];
     }
     if (k in json) {

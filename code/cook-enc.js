@@ -29,7 +29,12 @@ var ops = {
             zip: false,
             compact: false,
             contentAlg: "A128CBC-HS256",
-            protect: "*"
+            protect: "*",
+            cek: {
+              kty: "oct",
+              k: "3qyTVhIWt5juqZUCpfRqpvauwB956MEJL2Rt-8qXKSo"
+            },
+            iv: "bbd5sTkYwhAIqfHsx8DayA"
         },
         recipients: [
             {
@@ -103,7 +108,12 @@ var ops = {
             zip: false,
             compact: false,
             contentAlg: "A128GCM",
-            protect: "*"
+            protect: "*",
+            cek: {
+              kty: "oct",
+              k: "Nou2ueKlP70ZXDbq9UrRwg"
+            },
+            iv: "mH-G2zVqgztUtnW_"
         },
         recipients: [
             {
@@ -113,6 +123,13 @@ var ops = {
                 }),
                 header: {
                     alg: "ECDH-ES+A128KW"
+                },
+                epk: {
+                    "kty": "EC",
+                    "crv": "P-384",
+                    "x": "uBo4kHPw6kbjx5l0xowrd_oYzBmaz-GKFZu4xAFFkbYiWgutEK6iuEDsQ6wNdNg3",
+                    "y": "sp3p5SGhZVC2faXumI-e9JU2Mo8KpoYrFDr5yPNVtW4PgEwZOyQTA-JdaY8tb7E0",
+                    "d": "D5H4Y_5PSKZvhfVFbcCYJOtcGZygRgfZkpsBr59Icmmhe9sW6nkZ8WfwhinUfWJg"
                 }
             }
         ],
@@ -124,7 +141,8 @@ var ops = {
             zip: false,
             compact: false,
             contentAlg: "A128CBC-HS256",
-            protect: "*"
+            protect: "*",
+            iv: "yc9N8v5sYyv3iGQT926IUg"
         },
         recipients: [
             {
@@ -134,6 +152,13 @@ var ops = {
                 }),
                 header: {
                     alg: "ECDH-ES"
+                },
+                epk: {
+                    "kty": "EC",
+                    "crv": "P-256",
+                    "x": "mPUKT_bAWGHIhg0TpjjqVsP1rXWQu_vwVOHHtNkdYoA",
+                    "y": "8BQAsImGeAS46fyWw5MhYfGTT0IjBpFw2SS34Dv4Irs",
+                    "d": "AtH35vJsQ9SGjYfOsjUxYXQKrPH3FjZHmEtSKoSN8cM"
                 }
             }
         ],
@@ -166,7 +191,12 @@ var ops = {
             zip: false,
             compact: false,
             contentAlg: "A128CBC-HS256",
-            protect: "*"
+            protect: "*",
+            cek: {
+              kty: "oct",
+              k: "UWxARpat23nL9ReIj4WG3D1ee9I4r-Mv5QLuFXdy_rE"
+            },
+            iv: "gz6NjyEFNm_vm8Gj6FwoFQ"
         },
         recipients: [
             {
@@ -175,7 +205,8 @@ var ops = {
                     kid: "18ec08e1-bfa9-4d95-b205-2b4dd1d4321d"
                 }),
                 header: {
-                    alg: "A256GCMKW"
+                    alg: "A256GCMKW",
+                    iv: "KkYT0GX_2jHlfqN_"
                 }
             }
         ],
@@ -187,7 +218,12 @@ var ops = {
             zip: false,
             compact: false,
             contentAlg: "A128GCM",
-            protect: "*"
+            protect: "*",
+            cek: {
+              kty: "oct",
+              k: "aY5_Ghmk9KxWPBLu_glx1w"
+            },
+            iv: "Qx0pmsDa8KnJc9Jo"
         },
         recipients: [
             {
@@ -208,7 +244,12 @@ var ops = {
             zip: true,
             compact: false,
             contentAlg: "A128GCM",
-            protect: "*"
+            protect: "*",
+            cek: {
+              kty: "oct",
+              k: "hC-MpLZSuwWv8sexS6ydfw"
+            },
+            iv: "p9pUq6XHY0jfEZIl"
         },
         recipients: [
             {
@@ -230,7 +271,12 @@ var ops = {
             compact: false,
             contentAlg: "A128GCM",
             aad: jose.utf8.encode('["vcard",[["version",{},"text","4.0"],["fn",{},"text","Meriadoc Brandybuck"],["n",{},"text",["Brandybuck","Meriadoc","Mr.",""]],["bday",{},"text","TA 2982"],["gender",{},"text","M"]]]'),
-            protect: "*"
+            protect: "*",
+            cek: {
+              kty: "oct",
+              k: "75m1ALsYv10pZTKPWrsqdg"
+            },
+            iv: "veCx9ece2orS7c_N"
         },
         recipients: [
             {
@@ -255,7 +301,12 @@ var ops = {
             fields: {
                 alg: "A128KW",
                 kid: "81b20965-8332-43d9-a468-82160ad91ac8"
-            }
+            },
+            cek: {
+              kty: "oct",
+              k: "WDgEptBmQs9ouUvArz6x6g"
+            },
+            iv: "WgEJsDS9bkoXQ3nR"
         },
         recipients: [
             {
@@ -277,7 +328,12 @@ var ops = {
             fields: {
                 alg: "A128KW",
                 kid: "81b20965-8332-43d9-a468-82160ad91ac8"
-            }
+            },
+            cek: {
+              kty: "oct",
+              k: "KBooAFl30QPV3vkcZlXnzQ"
+            },
+            iv: "YihBoVOGsR1l7jCD"
         },
         recipients: [
             {
@@ -424,6 +480,7 @@ var doOp = function(op) {
 
             var epk = op.recipients[idx].epk;
             if (epk) {
+                epk = jose.JWK.asKey(epk);
                 epk = epk.toJSON(true, ["kid", "use", "alg"]);
 
                 // log it separate
@@ -575,6 +632,10 @@ exec = exec.filter(function(opkey) {
             return Q.resolve();
         }
 
+        if (r.epk) {
+            return Q.resolve();
+        }
+        
         var crv = r.key.get("crv");
         return jose.JWK.createKeyStore().generate("EC", crv).
                then(function(k) {
