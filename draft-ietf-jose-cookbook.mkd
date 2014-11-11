@@ -1,7 +1,7 @@
 ---
 title: Examples of Protecting Content using JavaScript Object Signing and Encryption (JOSE)
 abbrev: JOSE Cookbook
-docname: draft-ietf-jose-cookbook-05
+docname: draft-ietf-jose-cookbook-06
 date:
 category: info
 
@@ -51,7 +51,7 @@ This document separates data that are expected to be input to an implementation 
 
 All instances of binary octet strings are represented using {{RFC4648}} base64url encoding.
 
-Wherever possible, the examples include both the Compact and JSON serializations.
+Wherever possible and unless otherwise noted, the examples include the Compact serialization, JSON General Serialization, and JSON Flattened Serialization.
 
 All of the examples in this document have whitespace added to improve formatting and readability.  Except for JWE plaintext or JWS payload content, whitespace is not part of the cryptographic operations nor the exchange results.
 
@@ -350,7 +350,7 @@ cIe8u9ipH84ogoree7vjbU5y18kDquDg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsa-compact title="Compact Serialization" }
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -374,7 +374,30 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-rsa-json title="JSON Serialization" }
+{: #jws-rsa-json title="JSON General Serialization" }
+
+The resulting JWS object using the JSON Flattened Serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
+  "protected": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbn
+      NAaG9iYml0b24uZXhhbXBsZSJ9",
+  "signature": "MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHoxnW2
+      e5CZ5NlKtainoFmKZopdHM1O2U4mwzJdQx996ivp83xuglII7PNDi84w
+      nB-BDkoBwA78185hX-Es4JIwmDLJK3lfWRa-XtL0RnltuYv746iYTh_q
+      HRD68BNt1uSNCrUCTJDt5aAE6x8wW1Kt9eRo4QPocSadnHXFxnt8Is9U
+      zpERV0ePPQdLuW3IS_de3xyIrDaLGdjluPxUAhb6L2aXic1U12podGU0
+      KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJushZ41Axf_fcIe8u9ipH84ogore
+      e7vjbU5y18kDquDg"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-rsa-json_flat title="JSON Flattened Serialization" }
+
 
 ## RSA-PSS Signature ## {#jws-rsapss}
 
@@ -465,7 +488,7 @@ e8P_ijQ7p8Vdz0TTrxUeT3lm8d9shnr2lfJT8ImUjvAA2Xez2Mlp8cBE5awDzT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-rsapss-compact title="Compact Serialization" }
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -489,7 +512,30 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-rsapss-json title="JSON Serialization" }
+{: #jws-rsapss-json title="JSON General Serialization" }
+
+The resulting JWS object using the JSON Flattened Serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
+  "protected": "eyJhbGciOiJQUzM4NCIsImtpZCI6ImJpbGJvLmJhZ2dpbn
+      NAaG9iYml0b24uZXhhbXBsZSJ9",
+  "signature": "cu22eBqkYDKgIlTpzDXGvaFfz6WGoz7fUDcfT0kkOy42mi
+      Ah2qyBzk1xEsnk2IpN6-tPid6VrklHkqsGqDqHCdP6O8TTB5dDDItllV
+      o6_1OLPpcbUrhiUSMxbbXUvdvWXzg-UD8biiReQFlfz28zGWVsdiNAUf
+      8ZnyPEgVFn442ZdNqiVJRmBqrYRXe8P_ijQ7p8Vdz0TTrxUeT3lm8d9s
+      hnr2lfJT8ImUjvAA2Xez2Mlp8cBE5awDzT0qI0n6uiP1aCN_2_jLAeQT
+      lqRHtfa64QQSUmFAAjVKPbByi7xho0uTOcbH510a6GYmJUAfmWjwZ6oD
+      4ifKo8DYM-X72Eaw"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-rsapss-json_flat title="JSON Flattened Serialization" }
+
 
 ## ECDSA Signature ## {#jws-ecdsa}
 
@@ -574,7 +620,7 @@ AD890jl8e2puQens_IEKBpHABlsbEPX6sFY8OcGDqoRuBomu9xQ2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-ecdsa-compact title="Compact Serialization" }
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -595,7 +641,27 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-ecdsa-json title="JSON Serialization" }
+{: #jws-ecdsa-json title="JSON General Serialization" }
+
+The resulting JWS object using the JSON Flattened Serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
+  "protected": "eyJhbGciOiJFUzUxMiIsImtpZCI6ImJpbGJvLmJhZ2dpbn
+      NAaG9iYml0b24uZXhhbXBsZSJ9",
+  "signature": "AE_R_YZCChjn4791jSQCrdPZCNYqHXCTZH0-JZGYNlaAjP
+      2kqaluUIIUnC9qvbu9Plon7KRTzoNEuT4Va2cmL1eJAQy3mtPBu_u_sD
+      DyYjnAMDxXPn7XrT0lw-kvAD890jl8e2puQens_IEKBpHABlsbEPX6sF
+      Y8OcGDqoRuBomu9xQ2"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-ecdsa-json_flat title="JSON Flattened Serialization" }
+
 
 ## HMAC-SHA2 Integrity Protection ## {#jws-hmac}
 
@@ -674,7 +740,7 @@ s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-hmac-compact title="Compact Serialization" }
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -693,11 +759,28 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-hmac-json title="JSON Serialization" }
+{: #jws-hmac-json title="JSON General Serialization" }
 
-## Detached Signature ## {#jws-detached}
+The resulting JWS object using the JSON Flattened Serialization:
 
-This example illustrates a detached signature.  This example is identical others, except the resulting JWS objects do not include the Payload content.  Instead, the application is expected to locate it elsewhere.  For example, the signature might be in a meta-data section, with the payload being the content.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
+  "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOW
+      ItNDcxYi1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+  "signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-hmac-json_flat title="JSON Flattened Serialization" }
+
+
+## Signature with Detached Content ## {#jws-detached}
+
+This example illustrates a signature with detached content.  This example is identical others, except the resulting JWS objects do not include the Payload field.  Instead, the application is expected to locate it elsewhere.  For example, the signature might be in a meta-data section, with the payload being the content.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -768,9 +851,9 @@ VlZjMxNGJjNzAzNyJ9
 .
 s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-detached-compact title="JSON Serialization" }
+{: #jws-detached-compact title="JSON General Serialization" }
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -784,7 +867,18 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-detached-json title="JSON Serialization" }
+{: #jws-detached-json title="JSON General Serialization" }
+
+The resulting JWS object using the JSON Flattened Serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6IjAxOGMwYWU1LTRkOW
+      ItNDcxYi1iZmQ2LWVlZjMxNGJjNzAzNyJ9",
+  "signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-detached-json_flat title="JSON Flattened Serialization" }
 
 
 ## Protecting Specific Header Fields ## {#jws-somefields}
@@ -857,9 +951,9 @@ The following compose the resulting JWS object:
 * Payload content ({{jws-payload_b64u}})
 * Signature ({{jws-somefields-sig}})
 
-The compact serialization is not presented because it does not support this use case.
+The Compact Serialization is not presented because it does not support this use case.
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -880,7 +974,25 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-somefields-json title="JSON Serialization" }
+{: #jws-somefields-json title="JSON General Serialization" }
+
+The resulting JWS object using the JSON Flattened Serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
+  "protected": "eyJhbGciOiJIUzI1NiJ9",
+  "header": {
+    "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+  },
+  "signature": "bWUSVaxorn7bEF1djytBd0kHv70Ly5pvbomzMWSOr20"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-somefields-json_flat title="JSON Flattened Serialization" }
 
 
 ## Protecting Content Only ## {#jws-nofields}
@@ -937,9 +1049,9 @@ The following compose the resulting JWS object:
 * Payload content ({{jws-payload_b64u}})
 * Signature ({{jws-nofields-sig}})
 
-The compact serialization is not presented because it does not support this use case.
+The Compact Serialization is not presented because it does not support this use case.
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -960,8 +1072,25 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: title="JSON Serialization" }
+{: #jws-nofields-json title="JSON General Serialization" }
 
+The resulting JWS object using the JSON Flattened Serialization:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "payload": "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywg
+      Z29pbmcgb3V0IHlvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9h
+      ZCwgYW5kIGlmIHlvdSBkb24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXi
+      gJlzIG5vIGtub3dpbmcgd2hlcmUgeW91IG1pZ2h0IGJlIHN3ZXB0IG9m
+      ZiB0by4",
+  "header": {
+    "alg": "HS256",
+    "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037"
+  },
+  "signature": "xuLifqLGiblpv9zBpuZczWhNj1gARaLV3UxvxhJxZuk"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{: #jws-nofields-json_flat title="JSON Flattened Serialization" }
 
 ## Multiple Signatures ## {#jws-multi}
 
@@ -1165,9 +1294,9 @@ The following compose the resulting JWS object:
 * Signature #2 JSON ({{jws-multi-s2-sig_sig}})
 * Signature #3 JSON ({{jws-multi-s3-sig_sig}})
 
-The compact serialization is not presented because it does not support this use case.
+The Compact Serialization is not presented because it does not support this use case; the JSON Flattened Serialization is not presented because there is more than one signature.
 
-The resulting JWS object using the JSON serialization:
+The resulting JWS object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -1209,7 +1338,7 @@ The resulting JWS object using the JSON serialization:
   ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jws-multi-json title="JSON Serialization" }
+{: #jws-multi-json title="JSON General Serialization" }
 
 
 # JSON Web Encryption Examples # {#jwe}
@@ -1407,7 +1536,7 @@ kvKuFBXHe5mQr4lqgobAUg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-rsa15-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -1437,7 +1566,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "kvKuFBXHe5mQr4lqgobAUg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-rsa15-json title="JSON Serialization"}
+{: #jwe-rsa15-json title="JSON General Serialization"}
 
 ## Key Encryption using RSA-OAEP with A256GCM ## {#jwe-rsa_oaep}
 
@@ -1656,7 +1785,7 @@ UCGiqJxhBI3IFVdPalHHvA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-rsa_oaep-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -1691,7 +1820,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "UCGiqJxhBI3IFVdPalHHvA"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-rsa_oaep-json title="JSON Serialization"}
+{: #jwe-rsa_oaep-json title="JSON General Serialization"}
 
 
 ## Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 ## {#jwe-pbes2}
@@ -1873,7 +2002,7 @@ zl5tuJYyuvKhjKv6ihbsV_k1hJGPGAxJ6wUpmwC4PTQ2izEm0TuSE8oMKdTw8V
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-pbes2-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -1900,7 +2029,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "0HlwodAhOCILG5SQ2LQ9dg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-pbes2-json title="JSON Serialization"}
+{: #jwe-pbes2-json title="JSON General Serialization"}
 
 
 ## Key Agreement with Key Wrapping using ECDH-ES and AES-KeyWrap with AES-GCM ## {#jwe-ecdh_aeskw}
@@ -2079,7 +2208,7 @@ WuGzxmcreYjpHGJoa17EBg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh_aeskw-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -2106,7 +2235,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "WuGzxmcreYjpHGJoa17EBg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-ecdh_aeskw-json title="JSON Serialization"}
+{: #jwe-ecdh_aeskw-json title="JSON General Serialization"}
 
 
 ## Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2 ## {#jwe-ecdh}
@@ -2266,7 +2395,7 @@ WCCkNa-x4BeB9hIDIfFuhg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-compact title="Compact Serialization"}
 
-the resulting JWE object using the JSON serialization:
+the resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -2288,7 +2417,7 @@ the resulting JWE object using the JSON serialization:
   "tag": "WCCkNa-x4BeB9hIDIfFuhg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-ecdh-json title="JSON Serialization"}
+{: #jwe-ecdh-json title="JSON General Serialization"}
 
 
 ## Direct Encryption using AES-GCM ## {#jwe-dir_gcm}
@@ -2406,7 +2535,7 @@ vbb32Xvllea2OtmHAdccRQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-dir_gcm-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -2423,7 +2552,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "vbb32Xvllea2OtmHAdccRQ"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-dir_gcm-json title="JSON Serialization"}
+{: #jwe-dir_gcm-json title="JSON General Serialization"}
 
 
 ## Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 ## {#jwe-aesgcmkw}
@@ -2587,7 +2716,7 @@ DKW7jrb4WaRSNfbXVPlT5g
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-aesgcmkw-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -2613,7 +2742,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "DKW7jrb4WaRSNfbXVPlT5g"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-aesgcmkw-json title="JSON Serialization"}
+{: #jwe-aesgcmkw-json title="JSON General Serialization"}
 
 
 ## Key Wrap using AES-KeyWrap with AES-GCM ## {#jwe-aeskw}
@@ -2748,7 +2877,7 @@ ER7MWJZ1FBI_NKvn7Zb1Lw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-aeskw-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -2771,7 +2900,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "ER7MWJZ1FBI_NKvn7Zb1Lw"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-aeskw-json title="JSON Serialization"}
+{: #jwe-aeskw-json title="JSON General Serialization"}
 
 
 ## Compressed Content ## {#jwe-compressed}
@@ -2902,7 +3031,7 @@ VILuUwuIxaLVmh5X-T7kmA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-compressed-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -2923,7 +3052,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "VILuUwuIxaLVmh5X-T7kmA"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-compressed-json title="JSON Serialization"}
+{: #jwe-compressed-json title="JSON General Serialization"}
 
 ## Including Additional Authenticated Data ## {#jwe-aad}
 
@@ -3054,7 +3183,7 @@ The following compose the resulting JWE object:
 * Ciphertext ({{jwe-aad-ciphertext}})
 * Authentication tag ({{jwe-aad-tag}})
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -3082,7 +3211,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "vOaH_Rajnpy_3hOtqvZHRA"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-aad-json title="JSON Serialization"}
+{: #jwe-aad-json title="JSON General Serialization"}
 
 
 ## Protecting Specific Header Fields ## {#jwe-somefields}
@@ -3191,7 +3320,7 @@ The following JWE Shared Unprotected Header is generated before assembling the o
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-somefields-unprotected title="JWE Shared Unprotected Header JSON"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -3216,7 +3345,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "fNYLqpUe84KD45lvDiaBAQ"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-somefields-json title="JSON Serialization"}
+{: #jwe-somefields-json title="JSON General Serialization"}
 
 
 ## Protecting Content Only ## {#jwe-nofields}
@@ -3309,7 +3438,7 @@ The following compose the resulting JWE object:
 * Ciphertext ({{jwe-nofields-ciphertext}})
 * Authentication tag ({{jwe-nofields-tag}})
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -3334,7 +3463,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "e2m0Vm7JvjK2VpCKXS-kyg"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-nofields-json title="JSON Serialization"}
+{: #jwe-nofields-json title="JSON General Serialization"}
 
 
 ## Encrypting to Multiple Recipients ## {#jwe-multi}
@@ -3628,7 +3757,7 @@ The following compose the resulting JWE object:
 * Ciphertext ({{jwe-multi-ciphertext}})
 * Authentication tag ({{jwe-multi-tag}})
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -3689,7 +3818,7 @@ The resulting JWE object using the JSON serialization:
   "tag": "BESYyFN7T09KY7i8zKs5_g"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{: #jwe-multi-json title="JSON Serialization"}
+{: #jwe-multi-json title="JSON General Serialization"}
 
 # Nesting Signatures and Encryption # {#jw-nested}
 
@@ -3962,7 +4091,7 @@ KnIKEhN8U-3C9s4gtSpjSw
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jw-nested-enc-compact title="Compact Serialization"}
 
-The resulting JWE object using the JSON serialization:
+The resulting JWE object using the JSON General Serialization:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
