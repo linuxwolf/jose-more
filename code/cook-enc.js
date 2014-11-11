@@ -352,9 +352,10 @@ var doOp = function(op) {
 
     var results = enc.final();
     results = results.then(function(jwe) {
-        var compact = [], json;
-        compact = common.makeCompactJWE(jwe);
+        var compact, json, flattened;
         json = common.prettify(jwe);
+        compact = common.makeCompactJWE(jwe);
+        flattened = common.prettify(common.makeFlattenedJWE(jwe));
 
         console.log("\nExample '%s'", op.name);
         console.log("==============================================================");
@@ -527,6 +528,13 @@ var doOp = function(op) {
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(json);
             console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            if (flattened) {
+              console.log("\nJSON Flattened Serialization:");
+              console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+              console.log(flattened);
+              console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            }
             console.log("==============================================================");
         });
     });

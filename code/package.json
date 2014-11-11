@@ -1,13 +1,13 @@
 {
-    "name": "jose-cookbook",
-    "version": "0.2.0",
-    "repository": {
-        "type":"git",
-        "url":"https://github.com/linuxwolf/jose-more.git"
-    },
-    "dependencies": {
-        "cloneextend": "*",
-        "q": "~0.9",
-        "jose":"git+https://outer-planes.net/git/node-jose.git"
-    }
+  "name": "jose-cookbook",
+  "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linuxwolf/jose-more.git"
+  },
+  "dependencies": {
+    "cloneextend": "*",
+    "jose": "git+https://outer-planes.net/git/node-jose.git",
+    "q": "^0.9.7"
+  }
 }

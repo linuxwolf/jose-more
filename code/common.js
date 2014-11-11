@@ -4,7 +4,8 @@
  * This content is in the public domain.
  */
  
-var jose = require("jose");
+var jose = require("jose"),
+    _ = require("cloneextend");
 
 const LINE_LEN = 62,
       BLANK_LINE = "                                                              ";
@@ -78,6 +79,10 @@ var splitit = exports.splitit = function(str) {
 
 var prettify = exports.prettify = function(input) {
     var str;
+    if (!input) {
+      return null;
+    }
+    
     if (typeof(input) === "string") {
         str = input.trim();
     } else {
@@ -115,6 +120,27 @@ var makeCompactJWE = exports.makeCompactJWE = function(json) {
     
     return jwe;
 }
+var makeFlattenedJWE = exports.makeFlattenedJWE = function(json) {
+  if (typeof(json) === "string") {
+    return null;
+  }
+  var rcpts = json.recipients || [];
+  if (rcpts.length > 1) {
+    return null;
+  }
+  
+  var jwe = {};
+  ["protected", "unprotected", "header", "encrypted_key", "iv", "ciphertext", "tag"].forEach(function(k) {
+    if (k in rcpts[0]) {
+      jwe[k] = rcpts[0][k];
+    }
+    if (k in json) {
+      jwe[k] = json[k];
+    }
+  });
+  
+  return jwe;
+}
 
 var makeCompactJWS = exports.makeCompactJWS = function(json) {
     var jws = [];
@@ -135,4 +161,25 @@ var makeCompactJWS = exports.makeCompactJWS = function(json) {
     }
     
     return jws;
+}
+var makeFlattenedJWS = exports.makeFlattenedJWS = function(json) {
+  if (typeof(json) === "string") {
+    return null;
+  }
+  var sigs = json.signatures || [];
+  if (sigs.length > 1) {
+    return null;
+  }
+  
+  var jws = {};
+  ["payload", "protected", "unprotected", "header", "signature"].forEach(function(k) {
+    if (k in sigs[0]) {
+      jws[k] = sigs[0][k];
+    }
+    if (k in json) {
+      jws[k] = json[k];
+    }
+  });
+  
+  return jws;
 }

@@ -182,9 +182,10 @@ var doOp = function(op) {
         console.log("==============================================================");
 
         
-        var compact, json;
-        compact = common.makeCompactJWS(jws);
+        var compact, json, flattened;
         json = common.prettify(jws);
+        compact = common.makeCompactJWS(jws);
+        flattened = common.prettify(common.makeFlattenedJWS(jws));
         
         var __outputSig = function(idx) {
             var key = op.signers[idx].key;
@@ -258,6 +259,14 @@ var doOp = function(op) {
         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.log(json);
         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        
+        if (flattened) {
+          console.log("\nJSON Flattened Serialization:");
+          console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+          console.log(flattened);
+          console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        
         console.log("==============================================================");
         console.log("\n\n");
     }, function(err) {
