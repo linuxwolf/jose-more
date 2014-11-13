@@ -29,6 +29,18 @@ informative:
     RFC1951:
     RFC4648:
     RFC7095:
+    LOTR-FELLOWSHIP:
+        title: "The Fellowship of the Ring"
+        author:
+            -
+                ins: J. Tolkien
+                name: J. R. R. Tolkien
+            -
+                ins: C. Tolkien
+                name: Christopher Tolkien
+        date: 2009-03
+        seriesinfo:
+            ISBN: 9780061917702
 
 --- abstract
 
@@ -242,7 +254,7 @@ For the content encryption algorithm "A256GCM", the field "k" value is exactly 3
 
 The following sections demonstrate how to generate various JWS objects.
 
-All of the succeeding examples use the following payload plaintext, serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some instances " " (U+0020 SPACE) to improve readability:
+All of the succeeding examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some instances " " (U+0020 SPACE) to improve readability:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 It\xe2\x80\x99s a dangerous business, Frodo, going out your
@@ -1345,7 +1357,7 @@ The resulting JWS object using the JSON General Serialization:
 
 The following sections demonstrate how to generate various JWE objects.
 
-All of the succeeding examples (unless otherwise noted) use the following plaintext content, serialized as UTF-8.  The sequence "\xe2\x80\x93" is substituted for (U+2013 EN DASH), and line breaks (U+000A LINE FEED) replace some instances of " " (U+0020 SPACE) characters to improve formatting:
+All of the succeeding examples (unless otherwise noted) use the following plaintext content (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8.  The sequence "\xe2\x80\x93" is substituted for (U+2013 EN DASH), and line breaks (U+000A LINE FEED) replace some instances of " " (U+0020 SPACE) characters to improve formatting:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 You can trust us to stick with you through thick and
@@ -4452,6 +4464,6 @@ This document has no actions for IANA.
 
 # Acknowledgements
 
-Most of the examples herein use quotes and character names found in the novels "The Hobbit"; "The Fellowship of the Ring"; "The Two Towers"; and "Return of the King", written by J. R. R. Tolkien.
+Most of the examples herein use quotes and character names found in the novel "The Fellowship of the Ring", written by J. R. R. Tolkien.
 
 Thanks to Richard Barnes, Brian Campbell, Mike Jones, and Jim Schaad for input and review of text.  Thanks to Brian Campbell for verifying Compact Serialization examples.
