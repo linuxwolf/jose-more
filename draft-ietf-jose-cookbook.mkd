@@ -1,7 +1,7 @@
 ---
 title: Examples of Protecting Content using JavaScript Object Signing and Encryption (JOSE)
 abbrev: JOSE Cookbook
-docname: draft-ietf-jose-cookbook-06
+docname: draft-ietf-jose-cookbook-07
 date:
 category: info
 
@@ -208,9 +208,9 @@ The field "kty" value of "RSA" identifies this as a RSA key. The fields "n" and 
 
 For a 2048-bit key, the fields "n" and "d" values are 256 octets in length when decoded.
 
-## Octet Key (MAC Computation) ## {#jwk-oct-sig}
+## Symmetric Key (MAC Computation) ## {#jwk-oct-sig}
 
-This example illustrates a symmetric octet key used for computing MACs.
+This example illustrates a symmetric symmetric key used for computing MACs.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -229,9 +229,9 @@ The field "kty" value of "oct" identifies this as a symmetric key. The field "k"
 
 When used for the signing algorithm "HS256" (HMAC-SHA256), the field "k" value is 32 octets (or more) in length when decoded, padded with leading zero (0x00) octets to reach the minimum expected length.
 
-## Octet Key (Encryption) ## {#jwk-oct-enc}
+## Symmetric Key (Encryption) ## {#jwk-oct-enc}
 
-This example illustrates a symmetric octet key used for encryption.
+This example illustrates a symmetric symmetric key used for encryption.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -413,7 +413,7 @@ The resulting JWS object using the JSON Flattened Serialization:
 
 ## RSA-PSS Signature ## {#jws-rsapss}
 
-This example illustrates signing content using the "PS256" (RSASSA-PSS with SHA-256) algorithm.
+This example illustrates signing content using the "PS384" (RSASSA-PSS with SHA-384) algorithm.
 
 Note that RSASSA-PSS uses random data to generate the signature; it might not be possible to exactly replicate the results in this section.
 
@@ -895,7 +895,7 @@ The resulting JWS object using the JSON Flattened Serialization:
 
 ## Protecting Specific Header Fields ## {#jws-somefields}
 
-This example illustrates a signature where only certain header parameters are protected.  Since this example contains both unprotected and protected header parameters, only the JSON serialization is possible.
+This example illustrates a signature where only certain header parameters are protected.  Since this example contains both unprotected and protected header parameters, only the JSON General Serialization and JSON Flattened Serialization are possible.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -1009,7 +1009,7 @@ The resulting JWS object using the JSON Flattened Serialization:
 
 ## Protecting Content Only ## {#jws-nofields}
 
-This example illustrates a signature where none of the header parameters are protected.  Since this example contains only unprotected header parameters, only the JSON serialization is possible.
+This example illustrates a signature where none of the header parameters are protected.  Since this example contains only unprotected header parameters, only the JSON General Serialization and JSON Flattened Serialization are possible.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -1375,6 +1375,8 @@ This example illustrates encrypting content using the "RSA1_5" (RSAES-PKCS1-v1_5
 
 Note that RSAES-PKCS1-v1_5 uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
 
+Note that only the RSA public key is necessary to perform the encryption.  However, the example includes the RSA private key to allow readers to validate the example's output.
+
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-rsa15-input}
@@ -1614,6 +1616,8 @@ The resulting JWE object using the JSON Flattened Serialization:
 This example illustrates encrypting content using the "RSA-OAEP" (RSAES-OAEP) key encryption algorithm and the "A256GCM" (AES-GCM) content encryption algorithm.
 
 Note that RSAES-OAEP uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
+
+Note that only the RSA public key is necessary to perform the encryption.  However, the example includes the RSA private key to allow readers to validate the example's output.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -1900,6 +1904,10 @@ The resulting JWE object using the JSON Flattened Serialization:
 
 The example illustrates encrypting content using the "PBES2-HS512+A256KW" (PBES2 Password-based Encryption using HMAC-SHA-512 and AES-256-KeyWrap) key encryption algorithm with the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
+A common use of password-based encryption is the import/export of keys.  Therefore this example uses a JWK Set for the plaintext content instead of the plaintext from figure 72.
+
+Note that if password-based encryption is used for multiple recipients, it is expected that each recipient use different values for the PBES2 parameters "p2s" and "p2c".
+
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-pbes2-input}
@@ -1976,7 +1984,7 @@ The following are generated before encrypting the CEK:
 
 Performing the key encryption operation over the CEK ({{jwe-pbes2-cek}})) with the following:
 
-* Password ({{jwe-pbes2-pwd}};
+* Password ({{jwe-pbes2-pwd}});
 * Salt ({{jwe-pbes2-p2s}}), encoded as an octet string; and
 * Iteration count (8192)
 
@@ -3436,7 +3444,7 @@ The resulting JWE object using the JSON Flattened Serialization:
 
 ## Protecting Specific Header Fields ## {#jwe-somefields}
 
-This example illustrates encrypting content where only certain JOSE header parameters are protected.  As this example includes parameters in the JWE Shared Unprotected Header, only the JSON serialization is possible.
+This example illustrates encrypting content where only certain JOSE header parameters are protected.  As this example includes parameters in the JWE Shared Unprotected Header, only the JSON General Serialization and JSON Flattened Serialization are possible.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
