@@ -20,14 +20,16 @@ author:
     org: Cisco Systems, Inc.
     email: mamille2@cisco.com
 
-informative:
+normative:
     I-D.ietf-jose-json-web-algorithms:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
     I-D.ietf-oauth-json-web-token:
-    RFC1951:
     RFC4648:
+
+informative:
+    RFC1951:
     RFC7095:
     LOTR-FELLOWSHIP:
         title: "The Fellowship of the Ring"
@@ -67,7 +69,7 @@ Wherever possible and unless otherwise noted, the examples include the Compact s
 
 All of the examples in this document have whitespace added to improve formatting and readability.  Except for JWE plaintext or JWS payload content, whitespace is not part of the cryptographic operations nor the exchange results.
 
-Unless otherwise noted, the JWE plaintext or JWS payload content does include " " (U+0020 SPACE) characters.  Line breaks (U+000A LINE FEED) replace " " (U+0020 SPACE) characters to improve readability but are not present in the JWE plaintext or JWS payload.
+Unless otherwise noted, the JWE plaintext or JWS payload content does include " " (U+0020 SPACE) characters.  Line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) characters to improve readability but are not present in the JWE plaintext or JWS payload.
 
 # Terminology  # {#terms}
 
@@ -254,7 +256,7 @@ For the content encryption algorithm "A256GCM", the field "k" value is exactly 3
 
 The following sections demonstrate how to generate various JWS objects.
 
-All of the succeeding examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some instances " " (U+0020 SPACE) to improve readability:
+All of the succeeding examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) to improve readability:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 It\xe2\x80\x99s a dangerous business, Frodo, going out your
@@ -1357,7 +1359,7 @@ The resulting JWS object using the JSON General Serialization:
 
 The following sections demonstrate how to generate various JWE objects.
 
-All of the succeeding examples (unless otherwise noted) use the following plaintext content (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8.  The sequence "\xe2\x80\x93" is substituted for (U+2013 EN DASH), and line breaks (U+000A LINE FEED) replace some instances of " " (U+0020 SPACE) characters to improve formatting:
+All of the succeeding examples (unless otherwise noted) use the following plaintext content (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8.  The sequence "\xe2\x80\x93" is substituted for (U+2013 EN DASH), and line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) characters to improve formatting:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 You can trust us to stick with you through thick and
