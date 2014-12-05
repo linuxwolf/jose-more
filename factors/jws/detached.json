@@ -7,7 +7,8 @@
       "use": "sig",
       "alg": "HS256",
       "k": "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
-    }
+    },
+    "alg": "HS256"
   },
   "signing": {
     "protected": {
