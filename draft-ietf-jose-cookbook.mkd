@@ -1904,7 +1904,7 @@ The resulting JWE object using the JSON Flattened Serialization:
 
 The example illustrates encrypting content using the "PBES2-HS512+A256KW" (PBES2 Password-based Encryption using HMAC-SHA-512 and AES-256-KeyWrap) key encryption algorithm with the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
-A common use of password-based encryption is the import/export of keys.  Therefore this example uses a JWK Set for the plaintext content instead of the plaintext from figure 72.
+A common use of password-based encryption is the import/export of keys.  Therefore this example uses a JWK Set for the plaintext content instead of the plaintext from {{jwe-plaintext}}.
 
 Note that if password-based encryption is used for multiple recipients, it is expected that each recipient use different values for the PBES2 parameters "p2s" and "p2c".
 
