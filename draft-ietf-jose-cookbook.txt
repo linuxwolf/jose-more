@@ -6475,15 +6475,15 @@ Internet-Draft                JOSE Cookbook                December 2014
               Signature (JWS)", draft-ietf-jose-json-web-signature-37
               (work in progress), November 2014.
 
-   [I-D.ietf-oauth-json-web-token]
-              Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
-              (JWT)", draft-ietf-oauth-json-web-token-31 (work in
-              progress), November 2014.
-
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
 
 9.2.  Informative References
+
+   [I-D.ietf-oauth-json-web-token]
+              Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
+              (JWT)", draft-ietf-oauth-json-web-token-31 (work in
+              progress), November 2014.
 
    [LOTR-FELLOWSHIP]
               Tolkien, J. and C. Tolkien, "The Fellowship of the Ring",

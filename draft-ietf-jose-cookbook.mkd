@@ -25,10 +25,10 @@ normative:
     I-D.ietf-jose-json-web-encryption:
     I-D.ietf-jose-json-web-key:
     I-D.ietf-jose-json-web-signature:
-    I-D.ietf-oauth-json-web-token:
     RFC4648:
 
 informative:
+    I-D.ietf-oauth-json-web-token:
     RFC1951:
     RFC7095:
     LOTR-FELLOWSHIP:
