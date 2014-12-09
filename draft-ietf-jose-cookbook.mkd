@@ -210,11 +210,11 @@ Note that whitespace is added for readability as described in {{intro-convention
 
 The field "kty" value of "RSA" identifies this as a RSA key. The fields "n" and "e" values are the base64url-encoded modulus and (public) exponent (respectively) using the minimum number of octets necessary.  The field "d" value is the base64url-encoded private exponent using the minimum number of octets necessary.  The fields "p", "q", "dp", "dq", and "qi" are the base64url-encoded additional private information using the minimum number of octets necessary.
 
-For a 2048-bit key, the fields "n" and "d" values are 256 octets in length when decoded.
+For a 2048-bit key, the field "n" is 256 octets in length when decoded and the field "d" is not longer than 256 octets in length when decoded. 
 
 ## Symmetric Key (MAC Computation) ## {#jwk-oct-sig}
 
-This example illustrates a symmetric symmetric key used for computing MACs.
+This example illustrates a symmetric key used for computing MACs.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -235,7 +235,7 @@ When used for the signing algorithm "HS256" (HMAC-SHA256), the field "k" value i
 
 ## Symmetric Key (Encryption) ## {#jwk-oct-enc}
 
-This example illustrates a symmetric symmetric key used for encryption.
+This example illustrates a symmetric key used for encryption.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -1379,7 +1379,7 @@ This example illustrates encrypting content using the "RSA1_5" (RSAES-PKCS1-v1_5
 
 Note that RSAES-PKCS1-v1_5 uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
 
-Note that only the RSA public key is necessary to perform the encryption.  However, the example includes the RSA private key to allow readers to validate the example's output.
+Note that only the RSA public key is necessary to perform the encryption.  However, the example includes the RSA private key to allow readers to validate the output.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -1621,7 +1621,7 @@ This example illustrates encrypting content using the "RSA-OAEP" (RSAES-OAEP) ke
 
 Note that RSAES-OAEP uses random data to generate the ciphertext; it might not be possible to exactly replicate the results in this section.
 
-Note that only the RSA public key is necessary to perform the encryption.  However, the example includes the RSA private key to allow readers to validate the example's output.
+Note that only the RSA public key is necessary to perform the encryption.  However, the example includes the RSA private key to allow readers to validate the output.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -1712,7 +1712,7 @@ The following are supplied before beginning the encryption process:
 
 The following are generated before encrypting:
 
-* AES symmetric key as the Content Encryption CEK (CEK); this example uses the key from {{jwe-rsa_oaep-cek}}.
+* AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jwe-rsa_oaep-cek}}.
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jwe-rsa_oaep-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2146,6 +2146,8 @@ The resulting JWE object using the JSON Flattened Serialization:
 
 This example illustrates encrypting content using the "ECDH-ES+A128KW" (Elliptic Curve Diffie-Hellman Ephemeral-Static with AES-128-KeyWrap) key encryption algorithm and the "A128GCM" (AES-GCM) content encryption algorithm.
 
+Note that only the EC public key is necessary to perform the key agreement. However, the example includes the EC private key to allow readers to validate the output.
+
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-ecdh_aeskw-input}
@@ -2376,6 +2378,8 @@ The resulting JWE object using the JSON Flattened Serialization:
 
 This example illustrates encrypting content using the "ECDH-ES" (Elliptic Curve Diffie-Hellman Ephemeral-Static) key agreement algorithm and the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content encryption algorithm.
 
+Note that only the EC public key is necessary to perform the key agreement. However, the example includes the EC private key to allow readers to validate the output.
+
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
 ### Input Factors ### {#jwe-ecdh-input}
@@ -2413,7 +2417,7 @@ yc9N8v5sYyv3iGQT926IUg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-ecdh-iv title="Initialization Vector, base64url-encoded"}
 
-**NOTE**: The Content Encryption Key (CEK) is not randomly generated; instead it is determined using key agreement.
+**NOTE**: The Content Encryption Key (CEK) is not randomly generated; instead it is determined using ECDH-ES key agreement.
 
 ### Key Agreement ### {#jwe-ecdh-enckey}
 
@@ -4118,7 +4122,8 @@ Note that whitespace is added for readability as described in {{intro-convention
 The following are supplied before beginning the signing operation:
 
 * Payload content; this example uses the JSON Web Token (JWT) {{I-D.ietf-oauth-json-web-token}} content from {{jw-nested-sig-payload}}, encoded as {{RFC4648}} base64url to produce {{jw-nested-sig-payload_b64u}}.
-* RSA private key; this example uses the key from {{jw-nested-sig-rsa}}
+* RSA private key; this example uses the key from {{jw-nested-sig-rsa}}.
+* "alg" parameter of "PS256".
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {
@@ -4241,12 +4246,14 @@ The following are supplied before beginning the encryption process:
 
 * Plaintext content; this example uses the content from {{jw-nested-sig-compact}}.
 * RSA public key; this example use the key from {{jwe-rsa_oaep-key}}.
+* "alg" parameter of "RSA-OAEP".
+* "enc" parameter of "A128GCM".
 
 ## Encryption Generated Factors ## {#jw-nested-enc-gen}
 
 The following are generated before encrypting:
 
-* AES symmetric key as the Content Encryption CEK (CEK); this example uses the key from {{jw-nested-enc-cek}}.
+* AES symmetric key as the Content Encryption Key (CEK); this example uses the key from {{jw-nested-enc-cek}}.
 * Initialization vector/nonce; this example uses the initialization vector/nonce from {{jw-nested-enc-iv}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

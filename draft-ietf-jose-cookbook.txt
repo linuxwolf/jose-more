@@ -207,11 +207,11 @@ Internet-Draft                JOSE Cookbook                December 2014
        5.13.7.  Output Results . . . . . . . . . . . . . . . . . . . 105
    6.  Nesting Signatures and Encryption . . . . . . . . . . . . . . 107
      6.1.  Signing Input Factors . . . . . . . . . . . . . . . . . . 107
-     6.2.  Signing Operation . . . . . . . . . . . . . . . . . . . . 108
+     6.2.  Signing Operation . . . . . . . . . . . . . . . . . . . . 109
      6.3.  Signing Output  . . . . . . . . . . . . . . . . . . . . . 109
      6.4.  Encryption Input Factors  . . . . . . . . . . . . . . . . 110
      6.5.  Encryption Generated Factors  . . . . . . . . . . . . . . 110
-     6.6.  Encrypting the Key  . . . . . . . . . . . . . . . . . . . 110
+     6.6.  Encrypting the Key  . . . . . . . . . . . . . . . . . . . 111
      6.7.  Encrypting the Content  . . . . . . . . . . . . . . . . . 111
      6.8.  Encryption Output . . . . . . . . . . . . . . . . . . . . 112
    7.  Security Considerations . . . . . . . . . . . . . . . . . . . 115
@@ -565,13 +565,13 @@ Internet-Draft                JOSE Cookbook                December 2014
    "p", "q", "dp", "dq", and "qi" are the base64url-encoded additional
    private information using the minimum number of octets necessary.
 
-   For a 2048-bit key, the fields "n" and "d" values are 256 octets in
-   length when decoded.
+   For a 2048-bit key, the field "n" is 256 octets in length when
+   decoded and the field "d" is not longer than 256 octets in length
+   when decoded.
 
 3.5.  Symmetric Key (MAC Computation)
 
-   This example illustrates a symmetric symmetric key used for computing
-   MACs.
+   This example illustrates a symmetric key used for computing MACs.
 
    Note that whitespace is added for readability as described in
    Section 1.1.
@@ -595,8 +595,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 3.6.  Symmetric Key (Encryption)
 
-   This example illustrates a symmetric symmetric key used for
-   encryption.
+   This example illustrates a symmetric key used for encryption.
 
    Note that whitespace is added for readability as described in
    Section 1.1.
@@ -610,6 +609,7 @@ Internet-Draft                JOSE Cookbook                December 2014
    }
 
               Figure 6: AES 256-bit symmetric encryption key
+
 
 
 
@@ -2155,7 +2155,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
    Note that only the RSA public key is necessary to perform the
    encryption.  However, the example includes the RSA private key to
-   allow readers to validate the example's output.
+   allow readers to validate the output.
 
    Note that whitespace is added for readability as described in
    Section 1.1.
@@ -2503,7 +2503,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
    Note that only the RSA public key is necessary to perform the
    encryption.  However, the example includes the RSA private key to
-   allow readers to validate the example's output.
+   allow readers to validate the output.
 
    Note that whitespace is added for readability as described in
    Section 1.1.
@@ -2615,7 +2615,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
    The following are generated before encrypting:
 
-   o  AES symmetric key as the Content Encryption CEK (CEK); this
+   o  AES symmetric key as the Content Encryption Key (CEK); this
       example uses the key from Figure 85.
 
    o  Initialization vector/nonce; this example uses the initialization
@@ -3280,6 +3280,10 @@ Internet-Draft                JOSE Cookbook                December 2014
    128-KeyWrap) key encryption algorithm and the "A128GCM" (AES-GCM)
    content encryption algorithm.
 
+   Note that only the EC public key is necessary to perform the key
+   agreement.  However, the example includes the EC private key to allow
+   readers to validate the output.
+
    Note that whitespace is added for readability as described in
    Section 1.1.
 
@@ -3294,10 +3298,6 @@ Internet-Draft                JOSE Cookbook                December 2014
    o  "alg" parameter of "ECDH-ES+A128KW"
 
    o  "enc" parameter of "A128GCM"
-
-
-
-
 
 
 
@@ -3615,6 +3615,10 @@ Internet-Draft                JOSE Cookbook                December 2014
    algorithm and the "A128CBC-HS256" (AES-128-CBC-HMAC-SHA-256) content
    encryption algorithm.
 
+   Note that only the EC public key is necessary to perform the key
+   agreement.  However, the example includes the EC private key to allow
+   readers to validate the output.
+
    Note that whitespace is added for readability as described in
    Section 1.1.
 
@@ -3629,10 +3633,6 @@ Internet-Draft                JOSE Cookbook                December 2014
    o  "alg" parameter of "ECDH-ES"
 
    o  "enc" parameter of "A128CBC-HS256"
-
-
-
-
 
 
 
@@ -3670,7 +3670,7 @@ Internet-Draft                JOSE Cookbook                December 2014
            Figure 121: Initialization Vector, base64url-encoded
 
    *NOTE*: The Content Encryption Key (CEK) is not randomly generated;
-   instead it is determined using key agreement.
+   instead it is determined using ECDH-ES key agreement.
 
 5.5.3.  Key Agreement
 
@@ -5972,7 +5972,9 @@ Internet-Draft                JOSE Cookbook                December 2014
       [I-D.ietf-oauth-json-web-token] content from Figure 222, encoded
       as [RFC4648] base64url to produce Figure 223.
 
-   o  RSA private key; this example uses the key from Figure 224
+   o  RSA private key; this example uses the key from Figure 224.
+
+   o  "alg" parameter of "PS256".
 
    {
      "iss": "hobbiton.example",
@@ -5982,10 +5984,8 @@ Internet-Draft                JOSE Cookbook                December 2014
 
                 Figure 222: Payload content, in JSON format
 
-   eyJpc3MiOiJob2JiaXRvbi5leGFtcGxlIiwiZXhwIjoxMzAwODE5MzgwLCJodH
-   RwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZX0
 
-              Figure 223: Payload content, base64url-encoded
+
 
 
 
@@ -5993,6 +5993,11 @@ Miller                    Expires June 12, 2015               [Page 107]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
+
+   eyJpc3MiOiJob2JiaXRvbi5leGFtcGxlIiwiZXhwIjoxMzAwODE5MzgwLCJodH
+   RwOi8vZXhhbXBsZS5jb20vaXNfcm9vdCI6dHJ1ZX0
+
+              Figure 223: Payload content, base64url-encoded
 
    {
      "kty": "RSA",
@@ -6037,11 +6042,6 @@ Internet-Draft                JOSE Cookbook                December 2014
 
             Figure 224: RSA 2048-bit Private Key, in JWK format
 
-6.2.  Signing Operation
-
-   The following are generated to complete the signing operation:
-
-
 
 
 
@@ -6049,6 +6049,10 @@ Miller                    Expires June 12, 2015               [Page 108]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
+
+6.2.  Signing Operation
+
+   The following are generated to complete the signing operation:
 
    o  JWS Protected Header; this example uses header from Figure 225,
       encoded using [RFC4648] base64url to produce Figure 226.
@@ -6097,10 +6101,6 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-
-
-
-
 Miller                    Expires June 12, 2015               [Page 109]
 
 Internet-Draft                JOSE Cookbook                December 2014
@@ -6128,11 +6128,15 @@ Internet-Draft                JOSE Cookbook                December 2014
 
    o  RSA public key; this example use the key from Figure 84.
 
+   o  "alg" parameter of "RSA-OAEP".
+
+   o  "enc" parameter of "A128GCM".
+
 6.5.  Encryption Generated Factors
 
    The following are generated before encrypting:
 
-   o  AES symmetric key as the Content Encryption CEK (CEK); this
+   o  AES symmetric key as the Content Encryption Key (CEK); this
       example uses the key from Figure 229.
 
    o  Initialization vector/nonce; this example uses the initialization
@@ -6146,10 +6150,6 @@ Internet-Draft                JOSE Cookbook                December 2014
 
            Figure 230: Initialization vector, base64url-encoded
 
-6.6.  Encrypting the Key
-
-   Performing the key encryption operation over the CEK (Figure 229)
-   with the RSA key (Figure 84) produces the following encrypted key:
 
 
 
@@ -6161,6 +6161,11 @@ Miller                    Expires June 12, 2015               [Page 110]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
+
+6.6.  Encrypting the Key
+
+   Performing the key encryption operation over the CEK (Figure 229)
+   with the RSA key (Figure 84) produces the following encrypted key:
 
    a0JHRoITfpX4qRewImjlStn8m3CPxBV1ueYlVhjurCyrBg3I7YhCRYjphDOOS4
    E7rXbr2Fn6NyQq-A-gqT0FXqNjVOGrG-bi13mwy7RoYhjTkBEC6P7sMYMXXx4g
@@ -6206,17 +6211,16 @@ Internet-Draft                JOSE Cookbook                December 2014
 
    o  JWE Protected Header (Figure 233) as authenticated data.
 
-   produces the following:
-
-   o  Ciphertext from Figure 234.
-
-
 
 
 Miller                    Expires June 12, 2015               [Page 111]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
+
+   produces the following:
+
+   o  Ciphertext from Figure 234.
 
    o  Authentication tag from Figure 235.
 
@@ -6253,10 +6257,6 @@ Internet-Draft                JOSE Cookbook                December 2014
    o  Authentication Tag (Figure 235)
 
    The resulting JWE object using the Compact serialization:
-
-
-
-
 
 
 
