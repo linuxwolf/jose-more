@@ -4,8 +4,8 @@
 
 JOSE Working Group                                             M. Miller
 Internet-Draft                                       Cisco Systems, Inc.
-Intended status: Informational                         December 05, 2014
-Expires: June 8, 2015
+Intended status: Informational                         December 09, 2014
+Expires: June 12, 2015
 
 
    Examples of Protecting Content using JavaScript Object Signing and
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 8, 2015.
+   This Internet-Draft will expire on June 12, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Miller                    Expires June 8, 2015                  [Page 1]
+Miller                    Expires June 12, 2015                 [Page 1]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -70,165 +70,165 @@ Table of Contents
      3.1.  EC Public Key . . . . . . . . . . . . . . . . . . . . . .   6
      3.2.  EC Private Key  . . . . . . . . . . . . . . . . . . . . .   7
      3.3.  RSA Public Key  . . . . . . . . . . . . . . . . . . . . .   8
-     3.4.  RSA Private Key . . . . . . . . . . . . . . . . . . . . .   8
-     3.5.  Symmetric Key (MAC Computation) . . . . . . . . . . . . .  10
-     3.6.  Symmetric Key (Encryption)  . . . . . . . . . . . . . . .  10
-   4.  JSON Web Signature Examples . . . . . . . . . . . . . . . . .  11
-     4.1.  RSA v1.5 Signature  . . . . . . . . . . . . . . . . . . .  11
-       4.1.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  12
-       4.1.2.  Signing Operation . . . . . . . . . . . . . . . . . .  12
-       4.1.3.  Output Results  . . . . . . . . . . . . . . . . . . .  13
-     4.2.  RSA-PSS Signature . . . . . . . . . . . . . . . . . . . .  15
-       4.2.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  15
-       4.2.2.  Signing Operation . . . . . . . . . . . . . . . . . .  15
-       4.2.3.  Output Results  . . . . . . . . . . . . . . . . . . .  16
-     4.3.  ECDSA Signature . . . . . . . . . . . . . . . . . . . . .  18
-       4.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  18
-       4.3.2.  Signing Operation . . . . . . . . . . . . . . . . . .  18
-       4.3.3.  Output Results  . . . . . . . . . . . . . . . . . . .  19
-     4.4.  HMAC-SHA2 Integrity Protection  . . . . . . . . . . . . .  21
-       4.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  21
-       4.4.2.  Signing Operation . . . . . . . . . . . . . . . . . .  21
-       4.4.3.  Output Results  . . . . . . . . . . . . . . . . . . .  22
-     4.5.  Signature with Detached Content . . . . . . . . . . . . .  24
-       4.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  24
-       4.5.2.  Signing Operation . . . . . . . . . . . . . . . . . .  24
-       4.5.3.  Output Results  . . . . . . . . . . . . . . . . . . .  25
-     4.6.  Protecting Specific Header Fields . . . . . . . . . . . .  26
-       4.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  26
-       4.6.2.  Signing Operation . . . . . . . . . . . . . . . . . .  27
-       4.6.3.  Output Results  . . . . . . . . . . . . . . . . . . .  28
-     4.7.  Protecting Content Only . . . . . . . . . . . . . . . . .  29
-       4.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  29
-       4.7.2.  Signing Operation . . . . . . . . . . . . . . . . . .  29
-       4.7.3.  Output Results  . . . . . . . . . . . . . . . . . . .  30
-     4.8.  Multiple Signatures . . . . . . . . . . . . . . . . . . .  31
-       4.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  32
-       4.8.2.  First Signing Operation . . . . . . . . . . . . . . .  32
-       4.8.3.  Second Signing Operation  . . . . . . . . . . . . . .  34
+     3.4.  RSA Private Key . . . . . . . . . . . . . . . . . . . . .   9
+     3.5.  Symmetric Key (MAC Computation) . . . . . . . . . . . . .  11
+     3.6.  Symmetric Key (Encryption)  . . . . . . . . . . . . . . .  11
+   4.  JSON Web Signature Examples . . . . . . . . . . . . . . . . .  12
+     4.1.  RSA v1.5 Signature  . . . . . . . . . . . . . . . . . . .  12
+       4.1.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  13
+       4.1.2.  Signing Operation . . . . . . . . . . . . . . . . . .  13
+       4.1.3.  Output Results  . . . . . . . . . . . . . . . . . . .  14
+     4.2.  RSA-PSS Signature . . . . . . . . . . . . . . . . . . . .  16
+       4.2.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  16
+       4.2.2.  Signing Operation . . . . . . . . . . . . . . . . . .  16
+       4.2.3.  Output Results  . . . . . . . . . . . . . . . . . . .  17
+     4.3.  ECDSA Signature . . . . . . . . . . . . . . . . . . . . .  19
+       4.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  19
+       4.3.2.  Signing Operation . . . . . . . . . . . . . . . . . .  19
+       4.3.3.  Output Results  . . . . . . . . . . . . . . . . . . .  20
+     4.4.  HMAC-SHA2 Integrity Protection  . . . . . . . . . . . . .  22
+       4.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  22
+       4.4.2.  Signing Operation . . . . . . . . . . . . . . . . . .  22
+       4.4.3.  Output Results  . . . . . . . . . . . . . . . . . . .  23
+     4.5.  Signature with Detached Content . . . . . . . . . . . . .  25
+       4.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  25
+       4.5.2.  Signing Operation . . . . . . . . . . . . . . . . . .  25
+       4.5.3.  Output Results  . . . . . . . . . . . . . . . . . . .  26
+     4.6.  Protecting Specific Header Fields . . . . . . . . . . . .  27
+       4.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  27
+       4.6.2.  Signing Operation . . . . . . . . . . . . . . . . . .  28
+       4.6.3.  Output Results  . . . . . . . . . . . . . . . . . . .  29
+     4.7.  Protecting Content Only . . . . . . . . . . . . . . . . .  30
+       4.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  30
+       4.7.2.  Signing Operation . . . . . . . . . . . . . . . . . .  30
+       4.7.3.  Output Results  . . . . . . . . . . . . . . . . . . .  31
+     4.8.  Multiple Signatures . . . . . . . . . . . . . . . . . . .  32
+       4.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  33
+       4.8.2.  First Signing Operation . . . . . . . . . . . . . . .  33
+       4.8.3.  Second Signing Operation  . . . . . . . . . . . . . .  35
 
 
 
-Miller                    Expires June 8, 2015                  [Page 2]
+Miller                    Expires June 12, 2015                 [Page 2]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
 
-       4.8.4.  Third Signing Operation . . . . . . . . . . . . . . .  35
-       4.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  36
-   5.  JSON Web Encryption Examples  . . . . . . . . . . . . . . . .  37
-     5.1.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2 . . . . .  38
-       5.1.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  38
-       5.1.2.  Generated Factors . . . . . . . . . . . . . . . . . .  40
-       5.1.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  40
-       5.1.4.  Encrypting the Content  . . . . . . . . . . . . . . .  40
-       5.1.5.  Output Results  . . . . . . . . . . . . . . . . . . .  41
-     5.2.  Key Encryption using RSA-OAEP with A256GCM  . . . . . . .  44
-       5.2.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  44
-       5.2.2.  Generated Factors . . . . . . . . . . . . . . . . . .  46
-       5.2.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  47
-       5.2.4.  Encrypting the Content  . . . . . . . . . . . . . . .  47
-       5.2.5.  Output Results  . . . . . . . . . . . . . . . . . . .  48
-     5.3.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  51
-       5.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  52
-       5.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  53
-       5.3.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  53
-       5.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  54
-       5.3.5.  Output Results  . . . . . . . . . . . . . . . . . . .  55
+       4.8.4.  Third Signing Operation . . . . . . . . . . . . . . .  36
+       4.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  37
+   5.  JSON Web Encryption Examples  . . . . . . . . . . . . . . . .  38
+     5.1.  Key Encryption using RSA v1.5 and AES-HMAC-SHA2 . . . . .  39
+       5.1.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  39
+       5.1.2.  Generated Factors . . . . . . . . . . . . . . . . . .  41
+       5.1.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  41
+       5.1.4.  Encrypting the Content  . . . . . . . . . . . . . . .  41
+       5.1.5.  Output Results  . . . . . . . . . . . . . . . . . . .  42
+     5.2.  Key Encryption using RSA-OAEP with AES-GCM  . . . . . . .  45
+       5.2.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  45
+       5.2.2.  Generated Factors . . . . . . . . . . . . . . . . . .  47
+       5.2.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  48
+       5.2.4.  Encrypting the Content  . . . . . . . . . . . . . . .  48
+       5.2.5.  Output Results  . . . . . . . . . . . . . . . . . . .  49
+     5.3.  Key Wrap using PBES2-AES-KeyWrap with AES-CBC-HMAC-SHA2 .  52
+       5.3.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  53
+       5.3.2.  Generated Factors . . . . . . . . . . . . . . . . . .  54
+       5.3.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  54
+       5.3.4.  Encrypting the Content  . . . . . . . . . . . . . . .  55
+       5.3.5.  Output Results  . . . . . . . . . . . . . . . . . . .  56
      5.4.  Key Agreement with Key Wrapping using ECDH-ES and AES-
-           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  58
-       5.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  58
-       5.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  59
-       5.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  59
-       5.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  60
-       5.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  61
-     5.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  64
-       5.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  64
-       5.5.2.  Generated Factors . . . . . . . . . . . . . . . . . .  65
-       5.5.3.  Key Agreement . . . . . . . . . . . . . . . . . . . .  65
-       5.5.4.  Encrypting the Content  . . . . . . . . . . . . . . .  66
-       5.5.5.  Output Results  . . . . . . . . . . . . . . . . . . .  67
-     5.6.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  69
-       5.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  69
-       5.6.2.  Generated Factors . . . . . . . . . . . . . . . . . .  69
-       5.6.3.  Encrypting the Content  . . . . . . . . . . . . . . .  69
-       5.6.4.  Output Results  . . . . . . . . . . . . . . . . . . .  71
-     5.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  72
-       5.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  72
-       5.7.2.  Generated Factors . . . . . . . . . . . . . . . . . .  73
-       5.7.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  73
-       5.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  74
-       5.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  75
-     5.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  77
-       5.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  77
-       5.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  78
+           KeyWrap with AES-GCM  . . . . . . . . . . . . . . . . . .  59
+       5.4.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  59
+       5.4.2.  Generated Factors . . . . . . . . . . . . . . . . . .  60
+       5.4.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  60
+       5.4.4.  Encrypting the Content  . . . . . . . . . . . . . . .  61
+       5.4.5.  Output Results  . . . . . . . . . . . . . . . . . . .  62
+     5.5.  Key Agreement using ECDH-ES with AES-CBC-HMAC-SHA2  . . .  65
+       5.5.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  65
+       5.5.2.  Generated Factors . . . . . . . . . . . . . . . . . .  66
+       5.5.3.  Key Agreement . . . . . . . . . . . . . . . . . . . .  66
+       5.5.4.  Encrypting the Content  . . . . . . . . . . . . . . .  67
+       5.5.5.  Output Results  . . . . . . . . . . . . . . . . . . .  68
+     5.6.  Direct Encryption using AES-GCM . . . . . . . . . . . . .  70
+       5.6.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  70
+       5.6.2.  Generated Factors . . . . . . . . . . . . . . . . . .  70
+       5.6.3.  Encrypting the Content  . . . . . . . . . . . . . . .  70
+       5.6.4.  Output Results  . . . . . . . . . . . . . . . . . . .  72
+     5.7.  Key Wrap using AES-GCM KeyWrap with AES-CBC-HMAC-SHA2 . .  73
+       5.7.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  73
+       5.7.2.  Generated Factors . . . . . . . . . . . . . . . . . .  74
+       5.7.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  74
+       5.7.4.  Encrypting the Content  . . . . . . . . . . . . . . .  75
+       5.7.5.  Output Results  . . . . . . . . . . . . . . . . . . .  76
+     5.8.  Key Wrap using AES-KeyWrap with AES-GCM . . . . . . . . .  78
+       5.8.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  78
+       5.8.2.  Generated Factors . . . . . . . . . . . . . . . . . .  79
 
 
 
-Miller                    Expires June 8, 2015                  [Page 3]
+Miller                    Expires June 12, 2015                 [Page 3]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
 
-       5.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  78
-       5.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  78
-       5.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  79
-     5.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  81
-       5.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  82
-       5.9.2.  Generated Factors . . . . . . . . . . . . . . . . . .  82
-       5.9.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  83
-       5.9.4.  Encrypting the Content  . . . . . . . . . . . . . . .  83
-       5.9.5.  Output Results  . . . . . . . . . . . . . . . . . . .  84
-     5.10. Including Additional Authenticated Data . . . . . . . . .  85
-       5.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  86
-       5.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  86
-       5.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  87
-       5.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  87
-       5.10.5.  Output Results . . . . . . . . . . . . . . . . . . .  88
-     5.11. Protecting Specific Header Fields . . . . . . . . . . . .  90
-       5.11.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  90
-       5.11.2.  Generated Factors  . . . . . . . . . . . . . . . . .  91
-       5.11.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  91
-       5.11.4.  Encrypting the Content . . . . . . . . . . . . . . .  91
-       5.11.5.  Output Results . . . . . . . . . . . . . . . . . . .  92
-     5.12. Protecting Content Only . . . . . . . . . . . . . . . . .  94
-       5.12.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  94
-       5.12.2.  Generated Factors  . . . . . . . . . . . . . . . . .  94
-       5.12.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  95
-       5.12.4.  Encrypting the Content . . . . . . . . . . . . . . .  95
-       5.12.5.  Output Results . . . . . . . . . . . . . . . . . . .  96
-     5.13. Encrypting to Multiple Recipients . . . . . . . . . . . .  98
-       5.13.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  98
-       5.13.2.  Generated Factors  . . . . . . . . . . . . . . . . .  98
-       5.13.3.  Encrypting the Key to the First Recipient  . . . . .  99
-       5.13.4.  Encrypting the Key to the Second Recipient . . . . . 100
-       5.13.5.  Encrypting the Key to the Third Recipient  . . . . . 102
-       5.13.6.  Encrypting the Content . . . . . . . . . . . . . . . 103
-       5.13.7.  Output Results . . . . . . . . . . . . . . . . . . . 104
-   6.  Nesting Signatures and Encryption . . . . . . . . . . . . . . 106
-     6.1.  Signing Input Factors . . . . . . . . . . . . . . . . . . 106
-     6.2.  Signing Operation . . . . . . . . . . . . . . . . . . . . 107
-     6.3.  Signing Output  . . . . . . . . . . . . . . . . . . . . . 108
-     6.4.  Encryption Input Factors  . . . . . . . . . . . . . . . . 109
-     6.5.  Encryption Generated Factors  . . . . . . . . . . . . . . 109
-     6.6.  Encrypting the Key  . . . . . . . . . . . . . . . . . . . 109
-     6.7.  Encrypting the Content  . . . . . . . . . . . . . . . . . 110
-     6.8.  Encryption Output . . . . . . . . . . . . . . . . . . . . 111
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . . 114
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . 115
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . . 115
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . . 115
+       5.8.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  79
+       5.8.4.  Encrypting the Content  . . . . . . . . . . . . . . .  79
+       5.8.5.  Output Results  . . . . . . . . . . . . . . . . . . .  80
+     5.9.  Compressed Content  . . . . . . . . . . . . . . . . . . .  82
+       5.9.1.  Input Factors . . . . . . . . . . . . . . . . . . . .  83
+       5.9.2.  Generated Factors . . . . . . . . . . . . . . . . . .  83
+       5.9.3.  Encrypting the Key  . . . . . . . . . . . . . . . . .  84
+       5.9.4.  Encrypting the Content  . . . . . . . . . . . . . . .  84
+       5.9.5.  Output Results  . . . . . . . . . . . . . . . . . . .  85
+     5.10. Including Additional Authenticated Data . . . . . . . . .  86
+       5.10.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  87
+       5.10.2.  Generated Factors  . . . . . . . . . . . . . . . . .  87
+       5.10.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  88
+       5.10.4.  Encrypting the Content . . . . . . . . . . . . . . .  88
+       5.10.5.  Output Results . . . . . . . . . . . . . . . . . . .  89
+     5.11. Protecting Specific Header Fields . . . . . . . . . . . .  91
+       5.11.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  91
+       5.11.2.  Generated Factors  . . . . . . . . . . . . . . . . .  92
+       5.11.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  92
+       5.11.4.  Encrypting the Content . . . . . . . . . . . . . . .  92
+       5.11.5.  Output Results . . . . . . . . . . . . . . . . . . .  93
+     5.12. Protecting Content Only . . . . . . . . . . . . . . . . .  95
+       5.12.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  95
+       5.12.2.  Generated Factors  . . . . . . . . . . . . . . . . .  95
+       5.12.3.  Encrypting the Key . . . . . . . . . . . . . . . . .  96
+       5.12.4.  Encrypting the Content . . . . . . . . . . . . . . .  96
+       5.12.5.  Output Results . . . . . . . . . . . . . . . . . . .  97
+     5.13. Encrypting to Multiple Recipients . . . . . . . . . . . .  99
+       5.13.1.  Input Factors  . . . . . . . . . . . . . . . . . . .  99
+       5.13.2.  Generated Factors  . . . . . . . . . . . . . . . . .  99
+       5.13.3.  Encrypting the Key to the First Recipient  . . . . . 100
+       5.13.4.  Encrypting the Key to the Second Recipient . . . . . 101
+       5.13.5.  Encrypting the Key to the Third Recipient  . . . . . 103
+       5.13.6.  Encrypting the Content . . . . . . . . . . . . . . . 104
+       5.13.7.  Output Results . . . . . . . . . . . . . . . . . . . 105
+   6.  Nesting Signatures and Encryption . . . . . . . . . . . . . . 107
+     6.1.  Signing Input Factors . . . . . . . . . . . . . . . . . . 107
+     6.2.  Signing Operation . . . . . . . . . . . . . . . . . . . . 108
+     6.3.  Signing Output  . . . . . . . . . . . . . . . . . . . . . 109
+     6.4.  Encryption Input Factors  . . . . . . . . . . . . . . . . 110
+     6.5.  Encryption Generated Factors  . . . . . . . . . . . . . . 110
+     6.6.  Encrypting the Key  . . . . . . . . . . . . . . . . . . . 110
+     6.7.  Encrypting the Content  . . . . . . . . . . . . . . . . . 111
+     6.8.  Encryption Output . . . . . . . . . . . . . . . . . . . . 112
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . . 115
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . . 116
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . . 116
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . . 116
 
 
 
-Miller                    Expires June 8, 2015                  [Page 4]
+Miller                    Expires June 12, 2015                 [Page 4]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
 
-     9.2.  Informative References  . . . . . . . . . . . . . . . . . 115
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . . 116
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 116
+     9.2.  Informative References  . . . . . . . . . . . . . . . . . 116
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . . 117
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 117
 
 1.  Introduction
 
@@ -254,6 +254,9 @@ Internet-Draft                JOSE Cookbook                December 2014
    examples are then used in the signature or encryption examples that
    follow.
 
+   All of the example contained herein are available in a machine-
+   readable format at https://github.com/ietf-jose/cookbook.
+
 1.1.  Conventions Used in this Document
 
    This document separates data that are expected to be input to an
@@ -269,18 +272,19 @@ Internet-Draft                JOSE Cookbook                December 2014
    All instances of binary octet strings are represented using [RFC4648]
    base64url encoding.
 
-   Wherever possible and unless otherwise noted, the examples include
-   the Compact serialization, JSON General Serialization, and JSON
-   Flattened Serialization.
 
 
 
 
 
-Miller                    Expires June 8, 2015                  [Page 5]
+Miller                    Expires June 12, 2015                 [Page 5]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
+
+   Wherever possible and unless otherwise noted, the examples include
+   the Compact serialization, JSON General Serialization, and JSON
+   Flattened Serialization.
 
    All of the examples in this document have whitespace added to improve
    formatting and readability.  Except for JWE plaintext or JWS payload
@@ -315,6 +319,25 @@ Internet-Draft                JOSE Cookbook                December 2014
    Note that whitespace is added for readability as described in
    Section 1.1.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                    Expires June 12, 2015                 [Page 6]
+
+Internet-Draft                JOSE Cookbook                December 2014
+
+
    {
      "kty": "EC",
      "kid": "bilbo.baggins@hobbiton.example",
@@ -330,14 +353,6 @@ Internet-Draft                JOSE Cookbook                December 2014
 
    The field "kty" value of "EC" identifies this as an elliptic curve
    key.  The field "crv" identifies the curve, which is curve P-521 for
-
-
-
-Miller                    Expires June 8, 2015                  [Page 6]
-
-Internet-Draft                JOSE Cookbook                December 2014
-
-
    this example.  The fields "x" and "y" values are the base64url-
    encoded X and Y coordinates (respectively).
 
@@ -370,6 +385,15 @@ Internet-Draft                JOSE Cookbook                December 2014
 
                 Figure 2: Elliptic Curve P-521 Private Key
 
+
+
+
+
+Miller                    Expires June 12, 2015                 [Page 7]
+
+Internet-Draft                JOSE Cookbook                December 2014
+
+
    The field "kty" value of "EC" identifies this as an elliptic curve
    key.  The field "crv" identifies the curve, which is curve P-521
    (also known as SECG curve secp521r1) for this example.  The fields
@@ -383,16 +407,6 @@ Internet-Draft                JOSE Cookbook                December 2014
    "P-521", the values of the "d", "x", and "y" fields are each exactly
    66 octets in length when decoded, padded with leading zero (0x00)
    octets to reach the expected length.
-
-
-
-
-
-
-Miller                    Expires June 8, 2015                  [Page 7]
-
-Internet-Draft                JOSE Cookbook                December 2014
-
 
 3.3.  RSA Public Key
 
@@ -425,6 +439,17 @@ Internet-Draft                JOSE Cookbook                December 2014
    For a 2048-bit key, the field "n" value is 256 octets in length when
    decoded.
 
+
+
+
+
+
+
+Miller                    Expires June 12, 2015                 [Page 8]
+
+Internet-Draft                JOSE Cookbook                December 2014
+
+
 3.4.  RSA Private Key
 
    This example illustrates an RSA private key.  This example is the
@@ -445,7 +470,38 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                  [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                    Expires June 12, 2015                 [Page 9]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -501,7 +557,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                  [Page 9]
+Miller                    Expires June 12, 2015                [Page 10]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -557,7 +613,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 10]
+Miller                    Expires June 12, 2015                [Page 11]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -613,7 +669,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 11]
+Miller                    Expires June 12, 2015                [Page 12]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -669,7 +725,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 12]
+Miller                    Expires June 12, 2015                [Page 13]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -725,7 +781,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 13]
+Miller                    Expires June 12, 2015                [Page 14]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -781,7 +837,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 14]
+Miller                    Expires June 12, 2015                [Page 15]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -837,7 +893,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 15]
+Miller                    Expires June 12, 2015                [Page 16]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -893,7 +949,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 16]
+Miller                    Expires June 12, 2015                [Page 17]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -949,7 +1005,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 17]
+Miller                    Expires June 12, 2015                [Page 18]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1005,7 +1061,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 18]
+Miller                    Expires June 12, 2015                [Page 19]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1061,7 +1117,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 19]
+Miller                    Expires June 12, 2015                [Page 20]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1117,7 +1173,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 20]
+Miller                    Expires June 12, 2015                [Page 21]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1173,7 +1229,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 21]
+Miller                    Expires June 12, 2015                [Page 22]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1229,7 +1285,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 22]
+Miller                    Expires June 12, 2015                [Page 23]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1285,7 +1341,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 23]
+Miller                    Expires June 12, 2015                [Page 24]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1341,7 +1397,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 24]
+Miller                    Expires June 12, 2015                [Page 25]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1397,7 +1453,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 25]
+Miller                    Expires June 12, 2015                [Page 26]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1453,7 +1509,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 26]
+Miller                    Expires June 12, 2015                [Page 27]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1509,7 +1565,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 27]
+Miller                    Expires June 12, 2015                [Page 28]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1565,7 +1621,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 28]
+Miller                    Expires June 12, 2015                [Page 29]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1621,7 +1677,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 29]
+Miller                    Expires June 12, 2015                [Page 30]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1677,7 +1733,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 30]
+Miller                    Expires June 12, 2015                [Page 31]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1733,7 +1789,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 31]
+Miller                    Expires June 12, 2015                [Page 32]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1789,7 +1845,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 32]
+Miller                    Expires June 12, 2015                [Page 33]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1845,7 +1901,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 33]
+Miller                    Expires June 12, 2015                [Page 34]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1901,7 +1957,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 34]
+Miller                    Expires June 12, 2015                [Page 35]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -1957,7 +2013,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 35]
+Miller                    Expires June 12, 2015                [Page 36]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2013,7 +2069,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 36]
+Miller                    Expires June 12, 2015                [Page 37]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2069,7 +2125,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 37]
+Miller                    Expires June 12, 2015                [Page 38]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2125,7 +2181,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 38]
+Miller                    Expires June 12, 2015                [Page 39]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2181,7 +2237,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 39]
+Miller                    Expires June 12, 2015                [Page 40]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2237,7 +2293,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 40]
+Miller                    Expires June 12, 2015                [Page 41]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2293,7 +2349,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 41]
+Miller                    Expires June 12, 2015                [Page 42]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2349,7 +2405,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 42]
+Miller                    Expires June 12, 2015                [Page 43]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2405,7 +2461,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 43]
+Miller                    Expires June 12, 2015                [Page 44]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2435,7 +2491,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
                   Figure 83: JSON Flattened Serialization
 
-5.2.  Key Encryption using RSA-OAEP with A256GCM
+5.2.  Key Encryption using RSA-OAEP with AES-GCM
 
    This example illustrates encrypting content using the "RSA-OAEP"
    (RSAES-OAEP) key encryption algorithm and the "A256GCM" (AES-GCM)
@@ -2461,7 +2517,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 44]
+Miller                    Expires June 12, 2015                [Page 45]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2517,7 +2573,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 45]
+Miller                    Expires June 12, 2015                [Page 46]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2573,7 +2629,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 46]
+Miller                    Expires June 12, 2015                [Page 47]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2629,7 +2685,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 47]
+Miller                    Expires June 12, 2015                [Page 48]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2685,7 +2741,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 48]
+Miller                    Expires June 12, 2015                [Page 49]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2741,7 +2797,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 49]
+Miller                    Expires June 12, 2015                [Page 50]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2797,7 +2853,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 50]
+Miller                    Expires June 12, 2015                [Page 51]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2853,7 +2909,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 51]
+Miller                    Expires June 12, 2015                [Page 52]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2909,7 +2965,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 52]
+Miller                    Expires June 12, 2015                [Page 53]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -2965,7 +3021,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 53]
+Miller                    Expires June 12, 2015                [Page 54]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3021,7 +3077,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 54]
+Miller                    Expires June 12, 2015                [Page 55]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3077,7 +3133,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 55]
+Miller                    Expires June 12, 2015                [Page 56]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3133,7 +3189,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 56]
+Miller                    Expires June 12, 2015                [Page 57]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3189,7 +3245,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 57]
+Miller                    Expires June 12, 2015                [Page 58]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3245,7 +3301,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 58]
+Miller                    Expires June 12, 2015                [Page 59]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3301,7 +3357,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 59]
+Miller                    Expires June 12, 2015                [Page 60]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3357,7 +3413,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 60]
+Miller                    Expires June 12, 2015                [Page 61]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3413,7 +3469,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 61]
+Miller                    Expires June 12, 2015                [Page 62]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3469,7 +3525,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 62]
+Miller                    Expires June 12, 2015                [Page 63]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3525,7 +3581,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 63]
+Miller                    Expires June 12, 2015                [Page 64]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3581,7 +3637,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 64]
+Miller                    Expires June 12, 2015                [Page 65]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3637,7 +3693,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 65]
+Miller                    Expires June 12, 2015                [Page 66]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3693,7 +3749,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 66]
+Miller                    Expires June 12, 2015                [Page 67]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3749,7 +3805,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 67]
+Miller                    Expires June 12, 2015                [Page 68]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3805,7 +3861,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 68]
+Miller                    Expires June 12, 2015                [Page 69]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3861,7 +3917,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 69]
+Miller                    Expires June 12, 2015                [Page 70]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3917,7 +3973,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 70]
+Miller                    Expires June 12, 2015                [Page 71]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -3973,7 +4029,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 71]
+Miller                    Expires June 12, 2015                [Page 72]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4029,7 +4085,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 72]
+Miller                    Expires June 12, 2015                [Page 73]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4085,7 +4141,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 73]
+Miller                    Expires June 12, 2015                [Page 74]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4141,7 +4197,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 74]
+Miller                    Expires June 12, 2015                [Page 75]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4197,7 +4253,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 75]
+Miller                    Expires June 12, 2015                [Page 76]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4253,7 +4309,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 76]
+Miller                    Expires June 12, 2015                [Page 77]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4309,7 +4365,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 77]
+Miller                    Expires June 12, 2015                [Page 78]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4365,7 +4421,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 78]
+Miller                    Expires June 12, 2015                [Page 79]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4421,7 +4477,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 79]
+Miller                    Expires June 12, 2015                [Page 80]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4477,7 +4533,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 80]
+Miller                    Expires June 12, 2015                [Page 81]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4533,7 +4589,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 81]
+Miller                    Expires June 12, 2015                [Page 82]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4589,7 +4645,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 82]
+Miller                    Expires June 12, 2015                [Page 83]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4645,7 +4701,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 83]
+Miller                    Expires June 12, 2015                [Page 84]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4701,7 +4757,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 84]
+Miller                    Expires June 12, 2015                [Page 85]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4757,7 +4813,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 85]
+Miller                    Expires June 12, 2015                [Page 86]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4813,7 +4869,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 86]
+Miller                    Expires June 12, 2015                [Page 87]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4869,7 +4925,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 87]
+Miller                    Expires June 12, 2015                [Page 88]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4925,7 +4981,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 88]
+Miller                    Expires June 12, 2015                [Page 89]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -4981,7 +5037,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 89]
+Miller                    Expires June 12, 2015                [Page 90]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5037,7 +5093,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 90]
+Miller                    Expires June 12, 2015                [Page 91]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5093,7 +5149,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 91]
+Miller                    Expires June 12, 2015                [Page 92]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5149,7 +5205,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 92]
+Miller                    Expires June 12, 2015                [Page 93]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5205,7 +5261,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 93]
+Miller                    Expires June 12, 2015                [Page 94]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5261,7 +5317,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 94]
+Miller                    Expires June 12, 2015                [Page 95]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5317,7 +5373,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 95]
+Miller                    Expires June 12, 2015                [Page 96]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5373,7 +5429,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 96]
+Miller                    Expires June 12, 2015                [Page 97]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5429,7 +5485,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 97]
+Miller                    Expires June 12, 2015                [Page 98]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5485,7 +5541,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 98]
+Miller                    Expires June 12, 2015                [Page 99]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5541,7 +5597,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                 [Page 99]
+Miller                    Expires June 12, 2015               [Page 100]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5597,7 +5653,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 100]
+Miller                    Expires June 12, 2015               [Page 101]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5653,7 +5709,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 101]
+Miller                    Expires June 12, 2015               [Page 102]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5709,7 +5765,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 102]
+Miller                    Expires June 12, 2015               [Page 103]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5765,7 +5821,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 103]
+Miller                    Expires June 12, 2015               [Page 104]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5821,7 +5877,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 104]
+Miller                    Expires June 12, 2015               [Page 105]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5877,7 +5933,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 105]
+Miller                    Expires June 12, 2015               [Page 106]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5933,7 +5989,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 106]
+Miller                    Expires June 12, 2015               [Page 107]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -5989,7 +6045,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 107]
+Miller                    Expires June 12, 2015               [Page 108]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6045,7 +6101,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 108]
+Miller                    Expires June 12, 2015               [Page 109]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6101,7 +6157,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 109]
+Miller                    Expires June 12, 2015               [Page 110]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6157,7 +6213,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 110]
+Miller                    Expires June 12, 2015               [Page 111]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6213,7 +6269,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 111]
+Miller                    Expires June 12, 2015               [Page 112]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6269,7 +6325,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 112]
+Miller                    Expires June 12, 2015               [Page 113]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6325,7 +6381,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 113]
+Miller                    Expires June 12, 2015               [Page 114]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6381,7 +6437,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 114]
+Miller                    Expires June 12, 2015               [Page 115]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6437,7 +6493,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 
 
-Miller                    Expires June 8, 2015                [Page 115]
+Miller                    Expires June 12, 2015               [Page 116]
 
 Internet-Draft                JOSE Cookbook                December 2014
 
@@ -6493,4 +6549,4 @@ Author's Address
 
 
 
-Miller                    Expires June 8, 2015                [Page 116]
+Miller                    Expires June 12, 2015               [Page 117]
