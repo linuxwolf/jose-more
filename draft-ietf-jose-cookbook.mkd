@@ -127,7 +127,7 @@ Note that whitespace is added for readability as described in {{intro-convention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwk-ec-private-key title="Elliptic Curve P-521 Private Key"}
 
-The field "kty" value of "EC" identifies this as an elliptic curve key.  The field "crv" identifies the curve, which is curve P-521 (also known as SECG curve secp521r1) for this example.  The fields "x" and "y" values are the base64url-encoded X and Y coordiates (respectively).  The field "d" value is the base64url-encoded private key.
+The field "kty" value of "EC" identifies this as an elliptic curve key.  The field "crv" identifies the curve, which is curve P-521 (also known as SECG curve secp521r1) for this example.  The fields "x" and "y" values are the base64url-encoded X and Y coordinates (respectively).  The field "d" value is the base64url-encoded private key.
 
 The values of the fields "d", "x", and "y" decoded are the octets necessary to represent the private key or each full coordinate (respectively) to the order of the curve.  For a key over curve "P-521", the values of the "d", "x", and "y" fields are each exactly 66 octets in length when decoded, padded with leading zero (0x00) octets to reach the expected length.
 
