@@ -83,7 +83,7 @@ The following sections demonstrate how to represent various JWK and JWK-set obje
 
 ## EC Public Key ## {#jwk-ec-public}
 
-This example illustrates an Elliptic Curve public key.  This example is the  public key variant of {{jwk-ec-private-key}}.
+This example illustrates an Elliptic Curve public key.  This example is the  public key corresponding to {{jwk-ec-private-key}}.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -107,7 +107,7 @@ The values of the fields "x" and "y" decoded are the octets necessary to represe
 
 ## EC Private Key ## {#jwk-ec-private}
 
-This example illustrates an Elliptic Curve private key.  This example is the private key variant of {{jwk-ec-public-key}}.
+This example illustrates an Elliptic Curve private key.  This example is the private key corresponding to {{jwk-ec-public-key}}.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -133,7 +133,7 @@ The values of the fields "d", "x", and "y" decoded are the octets necessary to r
 
 ## RSA Public Key ## {#jwk-rsa-public}
 
-This example illustrates an RSA private key. This example is the public key variant of {{jwk-rsa-private-key}}.
+This example illustrates an RSA private key. This example is the public key corresponding to {{jwk-rsa-private-key}}.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
@@ -160,7 +160,7 @@ For a 2048-bit key, the field "n" value is 256 octets in length when decoded.
 
 ## RSA Private Key ## {#jwk-rsa-private}
 
-This example illustrates an RSA private key. This example is the private key variant of {{jwk-rsa-public-key}}.
+This example illustrates an RSA private key. This example is the private key corresponding to {{jwk-rsa-public-key}}.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 
