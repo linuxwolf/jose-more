@@ -258,13 +258,13 @@ For the content encryption algorithm "A256GCM", the field "k" value is exactly 3
 
 The following sections demonstrate how to generate various JWS objects.
 
-All of the succeeding examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) to improve readability:
+All of the succeeding examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The quotations (U+0022 QUOTATION MARK) at the start and end of each line  are added, the sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) to improve readability:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-It\xe2\x80\x99s a dangerous business, Frodo, going out your
-door. You step onto the road, and if you don't keep your feet,
-there\xe2\x80\x99s no knowing where you might be swept off
-to.
+"It\xe2\x80\x99s a dangerous business, Frodo, going out your"
+"door. You step onto the road, and if you don't keep your feet,"
+"there\xe2\x80\x99s no knowing where you might be swept off"
+"to."
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-payload title="Payload content plaintext" }
 
