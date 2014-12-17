@@ -133,7 +133,7 @@ The values of the fields "d", "x", and "y" decoded are the octets necessary to r
 
 ## RSA Public Key ## {#jwk-rsa-public}
 
-This example illustrates an RSA private key. This example is the public key corresponding to {{jwk-rsa-private-key}}.
+This example illustrates an RSA public key. This example is the public key corresponding to {{jwk-rsa-private-key}}.
 
 Note that whitespace is added for readability as described in {{intro-conventions}}.
 

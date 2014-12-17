@@ -410,7 +410,7 @@ Internet-Draft                JOSE Cookbook                December 2014
 
 3.3.  RSA Public Key
 
-   This example illustrates an RSA private key.  This example is the
+   This example illustrates an RSA public key.  This example is the
    public key corresponding to Figure 4.
 
    Note that whitespace is added for readability as described in
