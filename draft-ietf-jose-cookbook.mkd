@@ -258,17 +258,17 @@ For the content encryption algorithm "A256GCM", the field "k" value is exactly 3
 
 The following sections demonstrate how to generate various JWS objects.
 
-All of the succeeding examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) to improve readability:
+All of the signature examples use the following payload plaintext (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8. The payload is presented here as a series of quoted strings that are concatentated to produce the JWS payload. The sequence "\xe2\x80\x99" is substituted for (U+2019 RIGHT SINGLE QUOTATION MARK), and quotation marks (U+0022 QUOTATION MARK) are added for readability but are not present in the JWS payload.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-It\xe2\x80\x99s a dangerous business, Frodo, going out your
-door. You step onto the road, and if you don't keep your feet,
-there\xe2\x80\x99s no knowing where you might be swept off
-to.
+"It\xe2\x80\x99s a dangerous business, Frodo, going out your "
+"door. You step onto the road, and if you don't keep your feet, "
+"there\xe2\x80\x99s no knowing where you might be swept off "
+"to."
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-payload title="Payload content plaintext" }
 
-The Payload -- with the sequence "\xe2\x80\x99" replaced with (U+2019 RIGHT SINGLE QUOTATION MARK) and line breaks (U+000A LINE FEED) replaced with " " (U+0020 SPACE) -- encoded as UTF-8 then as {{RFC4648}} base64url:
+The Payload -- with the sequence "\xe2\x80\x99" replaced with (U+2019 RIGHT SINGLE QUOTATION MARK) and quotations marks (U+0022 QUOTATION MARK) are removed -- encoded as UTF-8 then as {{RFC4648}} base64url:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH
@@ -277,7 +277,6 @@ b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm
 UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jws-payload_b64u title="Payload content, base64url-encoded" }
-
 
 ## RSA v1.5 Signature ## {#jws-rsa}
 
@@ -1361,14 +1360,14 @@ The resulting JWS object using the JSON General Serialization:
 
 The following sections demonstrate how to generate various JWE objects.
 
-All of the succeeding examples (unless otherwise noted) use the following plaintext content (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8.  The sequence "\xe2\x80\x93" is substituted for (U+2013 EN DASH), and line breaks (U+000A LINE FEED) replace some " " (U+0020 SPACE) characters to improve formatting:
+All of the encryption examples (unless otherwise noted) use the following plaintext content (an abridged quote from "The Fellowship of the Ring" {{LOTR-FELLOWSHIP}}), serialized as UTF-8.  The plaintext is presented here as a series of quoted strings that are concatenated to produce the JWE plaintext.  The sequence "\xe2\x80\x93" is substituted for (U+2013 EN DASH), and quotation marks (U+0022 QUOTATION MARK) are added for readability but are not present in the JWE plaintext.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-You can trust us to stick with you through thick and
-thin\xe2\x80\x93to the bitter end. And you can trust us to
-keep any secret of yours\xe2\x80\x93closer than you keep it
-yourself. But you cannot trust us to let you face trouble
-alone, and go off without a word. We are your friends, Frodo.
+"You can trust us to stick with you through thick and "
+"thin\xe2\x80\x93to the bitter end. And you can trust us to "
+"keep any secret of yours\xe2\x80\x93closer than you keep it "
+"yourself. But you cannot trust us to let you face trouble "
+"alone, and go off without a word. We are your friends, Frodo."
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {: #jwe-plaintext title="Plaintext content" }
 
